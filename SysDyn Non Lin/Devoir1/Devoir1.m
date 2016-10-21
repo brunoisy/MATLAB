@@ -7,7 +7,7 @@ v = -w^2*x;
 
 figure
 hold on
-title('champ vecteur')
+title('champ de vecteurs')
 quiver(x,y,u,v);
 saveas(gcf,'Images/champ_vecteur.jpg');
 
@@ -16,7 +16,7 @@ saveas(gcf,'Images/champ_vecteur.jpg');
 
 n = 10000;
 h = 0.01;
-t = 0:0.01:100;
+t = 0:h:n*h;
 A = [0, 1; -w^2, 0];
 F = @(X) A*X;
 
@@ -63,7 +63,7 @@ x2bis = Xbis(2,:);
 
 figure
 hold on
-title('orbites avec symplectique');
+title('orbites avec Euler symplectique');
 plot(x1,x2);
 plot(x1bis,x2bis);
 saveas(gcf,'Images/orbites_symp.jpg');
