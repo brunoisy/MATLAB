@@ -2,6 +2,7 @@ function [sigma] = naturalCubicSplines(x, y)
 % This function returns sigma, the values of the second derivatives of the
 % natural cubic splines at interpolation points (x,y). It supposes that the
 % x are equidistant
+% (this method comes from the book, not the addenda)
 
 h = x(2)-x(1);
 n = length(x)-2;
