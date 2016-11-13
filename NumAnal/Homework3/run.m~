@@ -1,0 +1,32 @@
+% Q1 no plot? Q1.1 n+1 -> n+2 plutôt?
+
+f = @(x) 1/(1+30*x^2);
+n = 10;
+x = linspace(-1,1,n+2)';
+h = x(2)-x(1);
+
+
+y = arrayfun(f,x);
+sigma = naturalCubicSplines(x,y); %not convention from guidelines (g, gamma) but cleaner!
+%alpha = (y(2:end) - 1/6*sigma(2:end)*h^2)/h;
+%beta  = (y(1:end-1) - 1/6*sigma(1:end-1)*h^2)/h;
+
+
+epsilon = -0.1 + 0.2*rand(n+2,1);
+yTilde = y + epsilon;
+sigmaTilde = naturalCubicSplines(x,yTilde);
+alphaTilde = (y(2:end) - 1/6*sigmaTilde(2:end)*h^2)/h;
+betaTilde  = (y(1:end-1) - 1/6*sigmaTilde(1:end-1)*h^2)/h;
+
+    function y = s2(x)
+        i = ceil((x+1)*(n+2); 
+
+    end
+    
+%%% Plot
+X = linspace(-1,1,10*n);
+Y = arrayfun(f,X);
+plot(X,Y); % function f
+
+plot(x, yTilde); % noisy Data
+
