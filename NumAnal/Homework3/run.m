@@ -19,8 +19,8 @@
 % Yspline = arrayfun(splineFun,X);
 % plot(X,Yspline);
 % legend('f = 1/(1+30x^3)','interpolation points','natural cubic splines')
-% 
-% 
+
+
 % %%%%% Q1.2
 % epsilon = -0.05 + 0.1*rand(n+2,1); % noise from uniform distribution on -0.05 0.05
 % y2 = y + epsilon;
@@ -58,12 +58,12 @@
 % norm(gamma)
 
 
-% % %%%%% Q2.2
+% %%%%% Q2.2
 % load('hw3_datasets.mat')
 % x = input.dataset2.x';
 % y = input.dataset2.y';
 % alpha = 0.01;
-% tMax = 10;
+% tMax = 5;
 % [g, gamma, W] = algorithm1(x, y, alpha, tMax);
 % 
 % figure

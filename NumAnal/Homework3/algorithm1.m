@@ -19,8 +19,9 @@ R(n+1:n+1:n*n) = 1/6*h(2:end-1);
 
 W = speye(n+2); % problem with weights
 for k = 1:tMax
-    gamma = (R + alpha*(Q'*Q))\(Q'*sqrt(W)*y);
-    g = y - diag(1./sqrt(diag(W)))*alpha*Q*gamma;
+    g = (W + alpha*Q*inv(R)*Q')\(W*y);
     W = diag(1./abs(y-g));
+end
+gamma = R\Q'*g;
 end
 
