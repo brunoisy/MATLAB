@@ -6,20 +6,15 @@ function [g, gamma] = ncsInterpol(x, y)
 n = length(x)-2;
 h = x(2:end) - x(1:end-1);
 
-Q = zeros(n+2,n);
-for i = 2:n+1
-    Q(i-1,i-1) = 1/h(i-1);
-    Q(i,i-1)   = -1/h(i-1) -1/h(i);
-    Q(i+1,i-1) = 1/h(i);
-end
+Q = sparse(n+2,n);
+Q(1:n+3:(n+2)*n) = 1./h(1:end-1);
+Q(2:n+3:(n+2)*n) = -1./h(1:end-1)-1./h(2:end);
+Q(3:n+3:(n+2)*n) = 1./h(1:end-1);
 
-R = zeros(n,n);
-R(1,1) = 1/3*(h(1)+h(2));
-for i=2:n;
-    R(i,i)   = 1/3*(h(i)+h(i+1));
-    R(i-1,i) = 1/6*h(i);
-    R(i,i-1) = 1/6*h(i);
-end
+R = sparse(n,n);
+R(1:n+1:n*n)   = 1/3*(h(1:end-1)+h(2:end));
+R(2:n+1:n*n)   = 1/6*h(2:end-1);
+R(n+1:n+1:n*n) = 1/6*h(2:end-1);
 
 g = y(2:end-1);
 gamma = R\(Q'*y);

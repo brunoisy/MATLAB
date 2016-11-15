@@ -1,30 +1,26 @@
 function [g, gamma, W] = algorithm1(t, y, alpha, tMax)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+% This function returns the value-second derivative representation of the
+% natural cubic splines approximating the points (x,y), using Iterative 
+% Reweighted Least Squares 
 
 n = length(t)-2;
-h = t(2:end) - t(1:end-1);% length = m
+h = t(2:end) - t(1:end-1);
 
 Q = sparse(n+2,n);
-for i = 2:n+1 % problem indexation des h P6 addenda (i->i-1) A VERIFIER!
-    Q(i-1,i-1) = 1/h(i-1);
-    Q(i,i-1)   = -1/h(i-1) -1/h(i);
-    Q(i+1,i-1) = 1/h(i);
-end
+Q(1:n+3:(n+2)*n) = 1./h(1:end-1);
+Q(2:n+3:(n+2)*n) = -1./h(1:end-1)-1./h(2:end);
+Q(3:n+3:(n+2)*n) = 1./h(1:end-1);
 
 R = sparse(n,n);
-R(1,1) = 1/3*(h(1)+h(2));
-for i=2:n;
-    R(i,i)   = 1/3*(h(i)+h(i+1));
-    R(i-1,i) = 1/6*h(i);
-    R(i,i-1) = 1/6*h(i);
-end
+R(1:n+1:n*n)   = 1/3*(h(1:end-1)+h(2:end));
+R(2:n+1:n*n)   = 1/6*h(2:end-1);
+R(n+1:n+1:n*n) = 1/6*h(2:end-1);
 
 
 W = speye(n+2); % problem with weights
 for k = 1:tMax
     gamma = (R + alpha*(Q'*Q))\(Q'*sqrt(W)*y);
-    g = y - inv(sqrt(W))*alpha*Q*gamma;
+    g = y - diag(1./sqrt(diag(W)))*alpha*Q*gamma;
     W = diag(1./abs(y-g));
 end
 

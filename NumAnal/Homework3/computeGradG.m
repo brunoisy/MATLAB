@@ -1,5 +1,6 @@
 function gradG = computeGradG(x,y,xStar,epsilon)
-% computes gradient of g
+% computes gradient of g, the natural cubic spline interpolating (x,y), at
+% point xStar
 
 n = length(x)-2;
 gradG = zeros(1,n);

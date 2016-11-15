@@ -1,8 +1,8 @@
 function splineFun = makeSplineFun(x, y, gamma)
-% This function returns a function handle funS2, which is the
-% naturalCubicSpline of the interpolation points (x,y), when sigma contains
-% the values of the second derivatives at these interpolation points.
-% (this approach of writting things (with alpha and beta) comes from the
+% This function returns a function handle splineFun, which is the
+% natural cubic spline interpolating the points (x,y), when sigma contains
+% the values of the second derivatives of splineFun at these interpolation points.
+% (this approach of implementation (with alpha and beta) comes from the
 % book, P299)
 
 n = length(x)-2;

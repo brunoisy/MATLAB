@@ -1,26 +1,24 @@
-function [s, sigma] = Reinsch(x, y, alpha)
-
+function [g, gamma] = Reinsch(x, y, alpha)
+% natural cubic spline approximation
+% This function returns the value-second derivative representation of the
+% natural cubic splines approximating the points (x,y) with rougness
+% penalty alpha, using Reinsch algorithm
 
 n = length(x)-2;
-h = x(2:end) - x(1:end-1);% length = m
+h = x(2:end) - x(1:end-1);
 
 Q = sparse(n+2,n);
-for i = 2:n+1 % problem indexation des h P6 addenda (i->i-1) A VERIFIER!
-    Q(i-1,i-1) = 1/h(i-1);
-    Q(i,i-1)   = -1/h(i-1) -1/h(i);
-    Q(i+1,i-1) = 1/h(i);
-end
+Q(1:n+3:(n+2)*n) = 1./h(1:end-1);
+Q(2:n+3:(n+2)*n) = -1./h(1:end-1)-1./h(2:end);
+Q(3:n+3:(n+2)*n) = 1./h(1:end-1);
 
 R = sparse(n,n);
-R(1,1) = 1/3*(h(1)+h(2));
-for i=2:n;
-    R(i,i)   = 1/3*(h(i)+h(i+1));
-    R(i-1,i) = 1/6*h(i);
-    R(i,i-1) = 1/6*h(i);
-end
+R(1:n+1:n*n)   = 1/3*(h(1:end-1)+h(2:end));
+R(2:n+1:n*n)   = 1/6*h(2:end-1);
+R(n+1:n+1:n*n) = 1/6*h(2:end-1);
 
     
-sigma = (R + alpha*(Q'*Q))\(Q'*y);
-s = y - alpha*Q*sigma;
+gamma = (R + alpha*(Q'*Q))\(Q'*y);
+g = y - alpha*Q*gamma;
 end
 
