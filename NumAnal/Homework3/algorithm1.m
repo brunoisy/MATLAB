@@ -17,11 +17,12 @@ R(2:n+1:n*n)   = 1/6*h(2:end-1);
 R(n+1:n+1:n*n) = 1/6*h(2:end-1);
 
 
-W = speye(n+2); % problem with weights
+W = speye(n+2);
 for k = 1:tMax
-    g = (W + alpha*Q*inv(R)*Q')\(W*y);
+    invW = diag(1./diag(W));
+    gamma = (R+alpha*Q'*invW*Q)\(Q'*y);
+    g  = y - alpha*invW*Q*gamma;
     W = diag(1./abs(y-g));
 end
-gamma = R\Q'*g;
 end
 
