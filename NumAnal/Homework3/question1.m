@@ -46,4 +46,4 @@ legend('f = 1/(1+30x^2)','noisy observations','g_n')
 epsilon = 0.01;
 xStar = x(2)+(x(3)-x(2))/2;
 gradG = computeGradG(x,y,xStar,epsilon);
-norm(gradG);
+normGradG = norm(gradG);

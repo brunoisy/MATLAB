@@ -1,0 +1,23 @@
+lambda = -1;
+f1 = @(x1,x2) lambda*x1+x2^2;
+f2 = @(x1,x2) lambda*x2+x1^2; % f = [f1; f2]
+plotChamp(f1,f2,-.5,.5,10,-.5,.5,10)
+
+
+lambda = -1;
+f1 = @(x1,x2) lambda*x1+3*x2^2;
+f2 = @(x1,x2) lambda*x2; % f = [f1; f2]
+plotChamp(f1,f2,-.5,.5,20,-.5,.5,20)
+
+
+[x1, x2] = meshgrid(-0.5:.05:0.5, -0.5:.05:0.5);
+u = arrayfun(f1,x1,x2);
+v = arrayfun(f2,x1,x2);
+
+figure
+hold on
+title('champ de vecteurs')
+quiver(x1,x2,u,v);
+% f est un noeud stable dégénéré (sur?)
+
+%Remarque : noeud stable et etoile stable très proches (suffit de rajouter terme quadratique !)

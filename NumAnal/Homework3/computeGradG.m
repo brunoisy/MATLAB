@@ -10,11 +10,11 @@ for i = 2:n+1
     yTilde1(i) = yTilde1(i) + epsilon;
     yTilde2 = y;
     yTilde2(i) = yTilde2(i) - epsilon;
-    sigmaTilde1 = ncsInterpol(x,yTilde1);
-    splineFun1 = makeSplineFun(x,yTilde1,sigmaTilde1);
+    [~, gammaTilde1] = ncsInterpol(x,yTilde1);
+    splineFun1 = makeSplineFun(x,yTilde1,gammaTilde1);
     
-    sigmaTilde2 = ncsInterpol(x,yTilde2);
-    splineFun2= makeSplineFun(x,yTilde2,sigmaTilde2);
+    [~, gammaTilde2] = ncsInterpol(x,yTilde2);
+    splineFun2= makeSplineFun(x,yTilde2,gammaTilde2);
     
     gradG(i-1) = (splineFun1(xStar)-splineFun2(xStar))/(2*epsilon);
 end
