@@ -19,4 +19,3 @@ R(n+1:n+1:n*n) = 1/6*h(2:end-1);
 g = y(2:end-1);
 gamma = R\(Q'*y);
 end
-

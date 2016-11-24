@@ -21,5 +21,3 @@ for alpha =[0.001 0.1 1]
     plot(X,Yspline)
     title(sprintf('alpha = %.3f',alpha))
 end
-
-

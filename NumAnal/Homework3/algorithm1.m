@@ -25,4 +25,3 @@ for k = 1:tMax
     W = diag(1./abs(y-g));
 end
 end
-
