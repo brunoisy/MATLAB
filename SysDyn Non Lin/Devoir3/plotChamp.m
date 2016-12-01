@@ -10,7 +10,7 @@ v = arrayfun(f2,x1,x2);
 
 figure
 hold on
-title('champ de vecteurs et trajectoires','Fontsize',16)
+title('Portrait de phase','Fontsize',16)
 xlabel('x_1','FontSize',14)
 ylabel('x_2','FontSize',14)
 
