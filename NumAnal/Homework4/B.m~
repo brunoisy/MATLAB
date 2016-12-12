@@ -1,0 +1,11 @@
+function y = B(N, x)
+%B Summary of this function goes here
+%   Detailed explanation goes here
+
+if(
+B1 = @(x) x^3/6;
+B2 = @(x) (-3*x^3+3*x^2+3*x+1)/6;
+B3 = @(x) (3*x^3-6*x^2+5)/6;
+B4 = @(x) (1-x)^3/6;
+end
+
