@@ -1,5 +1,5 @@
-x1Range = linspace(-2, 2);
-x2Range = linspace(-2, 2);
+x1Range = linspace(-10, 10);
+x2Range = linspace(-10, 10);
 [x1, x2] = meshgrid(x1Range, x2Range);
 
 y = zeros(100,100);
