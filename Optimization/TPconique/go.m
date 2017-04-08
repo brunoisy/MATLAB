@@ -10,10 +10,10 @@ set2 = Iris2{2};
 % plotpoints(set1,set2,h,c);
 % pause;
 % 
-% [h,c]=marginsep(set1, set2);
-% plotpoints(set1,set2,h,c);
-% pause;
-
-E=ellisep(set1, set2);
-plotpoints(set1,set2,E);
+[h,c]=marginsep(set1, set2);
+plotpoints(set1,set2,h,c);
 pause;
+
+% E=ellisep(set1, set2);
+% plotpoints(set1,set2,E);
+% pause;
