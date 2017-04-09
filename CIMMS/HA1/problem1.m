@@ -14,13 +14,9 @@ psi_w = [psi_w_tild,zeros(3,1); zeros(3,1),psi_w_tild];
 % generating driving commands
 Zvalues = [0,3.5,0,0,-3.5; 0,0,3.5,-3.5,0]; % each column is one possible command
 Z = zeros(2,m);
-ind = randi(5);
-Z(:,1) = Zvalues(:,ind);
+Z(:,1) = datasample(Zvalues', 1);
 for n=1:m-1
-    w = ones(1,5);
-    w(ind) = 16;
-    ind = randsample(5, 1, true, w);
-    Z(:,n+1) = Zvalues(:,ind);
+    Z(:,n+1) = datasample([Zvalues, Z(:,n)]', 1, 'Weights', [1 1 1 1 1 15]);
 end
 
 % generating random accelerations
