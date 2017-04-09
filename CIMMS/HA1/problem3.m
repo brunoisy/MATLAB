@@ -3,14 +3,14 @@ load('stations')
 rng(3)
 
 N = 50; % #particles
-m = 100;
+m = 2;
 
 X = drawInitPart(N);
 w = weighPart(X);
 
 tau1 = zeros(1,m);
 tau2 = zeros(2,m);
-for n=1:m
+for n=1:m-1
     X = updatePart(X);
     w = weighPart(X);
     
