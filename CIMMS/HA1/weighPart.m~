@@ -1,0 +1,38 @@
+function [w] = weighPart(X, y)
+s = size(X);
+N = s(2);
+
+
+load('stations')
+v = 90;
+eta = 3;
+zeta = 1.5;
+
+% w = zeros(1,N);
+
+
+
+mu = zeros(6,N);
+for l=1:6
+    x = [X(1,:);X(4,:)];
+    A = x-repmat(pos_vec(:,l),1,N);
+    norms = sqrt(A(1,:).^2+A(2,:).^2);
+    mu(l,:) = v-10*eta*log10(norms);
+end
+B = repmat(y,1,N)-mu;
+w = 1/sqrt(2*pi*zeta)*exp(-1/2*zeta^(-1)*(B(1,:).^2+B(2,:).^2));
+
+
+% for i=1:N
+%     for l=1:6
+%         x = [X(1,i);X(4,i)];
+%         mu(l,i) = v-10*eta*log10(norm(x-pos_vec(:,l)));
+%     end
+%     sigmaInv = eye(6)*zeta^(-1);
+%     w(i) = 1/(sqrt(2*pi*zeta))*e^(-1/2*(y-mu(:,i))'*sigmaInv*(y-mu(:,i)));
+% end
+
+
+
+end
+
