@@ -1,4 +1,3 @@
-clc, clear all, close all
 load('RSSI-measurements')
 load('stations')
 rng(3)
@@ -41,25 +40,21 @@ for n=1:m
 end
 
 
-% plot
+% final trajectory
 X1 = X(1,:);
 X2 = X(4,:);
 
-figure
-plot(X1,X2)
-xlabel('x1');
-ylabel('x2');
+
 
 
 
 %%%%%%%%%%%%%%%%%%%
 
-
+% TESTING SIS
 v = 90;
 eta = 3;
 zeta = 1.5;
 
-% TESTING sequential monte carlo
 % generating observations
 Ytest = zeros(6,m);
 for n=1:m
@@ -69,22 +64,30 @@ for n=1:m
 end
 
 % checking predictions
-N = 1000; % #particles
+N = 10000; % #particles
 
 X = drawInitPart(N);
 w = p(X, Ytest(:,1));
 
 tau1 = zeros(1,m);
 tau2 = zeros(1,m);
+tau1(1) = sum(X(1,:).*w)/sum(w);
+tau2(1) = sum(X(4,:).*w)/sum(w);
 
 
 for n=2:m
     X = updatePart(X);
     w = w.*p(X, Ytest(:,n));
     
-    tau1(n) = sum(X(1,:).*w)/sum(w); %n=1?
+    tau1(n) = sum(X(1,:).*w)/sum(w);
     tau2(n) = sum(X(4,:).*w)/sum(w);
 end
+
+
+% Plotting
+figure
 hold on
-plot(tau1,tau2,'g*')
-%plot(OneTrajx,OneTrajy,'g*')
+plot(X1,X2) % true trajectory
+plot(tau1,tau2,'g*') % estimated trajectory
+xlabel('x1');
+ylabel('x2');

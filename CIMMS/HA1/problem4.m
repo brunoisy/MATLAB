@@ -2,29 +2,31 @@ load('RSSI-measurements')
 load('stations')
 rng(3)
 
-N = 1000; % #particles
+N = 10000; % #particles
 m = 100;
 
 X = drawInitPart(N);
-w = p(X, Y(:,1));
 
-allWeights = zeros(m,N);
-allWeights(1,:) = w;
+w = p(X, Y(:,1));
 
 tau1 = zeros(1,m);
 tau2 = zeros(1,m);
+
 tau1(1) = sum(X(1,:).*w)/sum(w);
 tau2(1) = sum(X(4,:).*w)/sum(w);
 
-
-for n=2:m
+for n=1:m-1    
+    %updating
     X = updatePart(X);
-    w = w.*p(X, Y(:,n));
+    w = p(X, Y(:,n+1));
     
-    tau1(n) = sum(X(1,:).*w)/sum(w);
-    tau2(n) = sum(X(4,:).*w)/sum(w);
+    %estimation
+    tau1(n+1) = sum(X(1,:).*w)/sum(w);
+    tau2(n+1) = sum(X(4,:).*w)/sum(w);
     
-    allWeights(n,:) = w;
+    %resampling
+    inds = randsample(N,N,true,w);
+    X = X(:,inds);
 end
 
 % Plotting
@@ -36,15 +38,4 @@ xlabel('x1');
 ylabel('x2');
 legend('estimated trajectory', 'stations')
 
-
-% histogram of importance weights
-figure
-histogram(log10(allWeights(1,:)))
-
-figure
-histogram(log10(allWeights(10,:)))
-
-figure
-histogram(log10(allWeights(100,:)))
-
-% efficient sample size?
+  

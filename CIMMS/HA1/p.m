@@ -17,10 +17,11 @@ for l=1:6
 end
 B = repmat(y,1,N)-mu;
 C = zeros(1,N);
+
 for l=1:6
     C = C + B(l,:).^2;
 end
-w = 1/sqrt(2*pi*zeta)*exp(-1/2*zeta^(-1)*C);
 
+w = exp(-1/2*zeta^(-2)*C); %we drop the constant, only the relative weights are important
 end
 
