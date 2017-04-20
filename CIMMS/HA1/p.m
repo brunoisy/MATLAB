@@ -1,12 +1,13 @@
-function [w] = p(part, y)
-
-s = size(part);
-N = s(2);
+function [w] = p(part, y, sigma)
 
 load('stations')
+if(nargin<3)
+    sigma = 1.5;
+end
 v = 90;
 eta = 3;
-zeta = 1.5;
+s = size(part);
+N = s(2);
 
 mu = zeros(6,N);
 for l=1:6
@@ -15,13 +16,13 @@ for l=1:6
     norms = sqrt(A(1,:).^2+A(2,:).^2);
     mu(l,:) = v-10*eta*log10(norms);
 end
+
 B = repmat(y,1,N)-mu;
 C = zeros(1,N);
-
 for l=1:6
     C = C + B(l,:).^2;
 end
 
-w = exp(-1/2*zeta^(-2)*C); %we drop the constant, only the relative weights are important
+w = exp(-1/2*sigma^(-2)*C); %we drop the constant, only the relative weights are important
 end
 

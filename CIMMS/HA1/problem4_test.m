@@ -2,7 +2,7 @@ load('RSSI-measurements')
 load('stations')
 rng(3)
 
-m = 100;
+m = 500;
 delta = 0.5;
 alpha = 0.6;
 phi_tild = [1,delta,delta^2/2; 0,1,delta; 0,0,alpha];
@@ -76,6 +76,7 @@ tau2 = zeros(1,m);
 tau1(1) = sum(X(1,:).*w)/sum(w);
 tau2(1) = sum(X(4,:).*w)/sum(w);
 
+
 for n=1:m-1
     %updating
     X = updatePart(X);
@@ -89,6 +90,7 @@ for n=1:m-1
     inds = randsample(N,N,true,w);
     X = X(:,inds);
 end
+
 
 
 % Plotting

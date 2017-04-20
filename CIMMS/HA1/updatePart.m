@@ -13,7 +13,7 @@ psi_w = [psi_w_tild,zeros(3,1); zeros(3,1),psi_w_tild];
 Zvalues = [0,3.5,0,0,-3.5; 0,0,3.5,-3.5,0];
 sigmaW = 0.5;
 
-newX = zeros(size(X));
+newX = X;
 N = length(X(1,:));
 
 newX(1:6,:) = phi*X(1:6,:) + psi_z*X(7:8,:) + psi_w*randn(2,N)*sigmaW;

@@ -3,7 +3,7 @@ load('stations')
 rng(3)
 
 N = 10000; % #particles
-m = 100;
+m = length(Y(1,:));
 
 X = drawInitPart(N);
 
