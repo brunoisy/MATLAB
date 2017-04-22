@@ -39,26 +39,26 @@ ylabel('$x_2$','FontSize',16,'Interpreter','latex');
 lgd = legend('estimated trajectory', 'stations');
 lgd.FontSize = 12;
 
-% % Importance Weights Histogram
-% edges = -18:0.1:0;
-% figure
-% subplot(4,1,1)
-% histogram(log10(allWeights(1,:)),edges)
-% title('n=1')
-% ylabel('# of particles')
-% 
-% subplot(4,1,2)
-% histogram(log10(allWeights(5,:)),edges)
-% title('n=5')
-% 
-% subplot(4,1,3)
-% histogram(log10(allWeights(10,:)),edges)
-% title('n=10')
-% 
-% subplot(4,1,4)
-% histogram(log10(allWeights(15,:)),edges)
-% title('n=15')
-% xlabel('Importance Weights (base 10 logarithm)')
+% Importance Weights Histogram
+edges = -18:0.1:0;
+figure
+subplot(4,1,1)
+histogram(log10(allWeights(1,:)),edges)
+title('n=1')
+ylabel('# of particles')
+
+subplot(4,1,2)
+histogram(log10(allWeights(5,:)),edges)
+title('n=5')
+
+subplot(4,1,3)
+histogram(log10(allWeights(10,:)),edges)
+title('n=10')
+
+subplot(4,1,4)
+histogram(log10(allWeights(15,:)),edges)
+title('n=15')
+xlabel('Importance Weights (base 10 logarithm)')
 
 % Efficient Sample Size
 n = [1 5 10 15 20 25 30 35 40 45 50 75 100 125 150 175 200];
