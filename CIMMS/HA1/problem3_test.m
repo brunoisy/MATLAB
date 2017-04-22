@@ -1,5 +1,5 @@
-load('RSSI-measurements')
-load('stations')
+load('Data/RSSI-measurements')
+load('Data/stations')
 rng(3)
 
 m = 500;
@@ -84,10 +84,15 @@ for n=2:m
     tau2(n) = sum(X(4,:).*w)/sum(w);
 end
 
+
 % Plotting
+% Trajectory
 figure
 hold on
-plot(X1,X2) % true trajectory
-plot(tau1,tau2,'g*') % estimated trajectory
-xlabel('x1');
-ylabel('x2');
+title('estimated trajectory of the target using SIS','FontSize',14)
+plot(tau1,tau2,'*') % estimated trajectory
+plot(pos_vec(1,:),pos_vec(2,:), 'or','MarkerFaceColor','r') % stations
+xlabel('$x_1$','FontSize',16,'Interpreter','latex');
+ylabel('$x_2$','FontSize',16,'Interpreter','latex');
+lgd = legend('estimated trajectory', 'stations');
+lgd.FontSize = 12;

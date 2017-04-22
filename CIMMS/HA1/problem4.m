@@ -1,5 +1,5 @@
-load('RSSI-measurements')
-load('stations')
+load('Data/RSSI-measurements')
+load('Data/stations')
 rng(3)
 
 N = 10000; % #particles
@@ -30,12 +30,15 @@ for n=1:m-1
 end
 
 % Plotting
+% Trajectory
 figure
 hold on
-plot(tau1,tau2,'g*') % estimated trajectory
-plot(pos_vec(1,:),pos_vec(2,:), 'o') % stations
-xlabel('x1');
-ylabel('x2');
-legend('estimated trajectory', 'stations')
+title('estimated trajectory of the target using SISR','FontSize',14)
+plot(tau1,tau2,'*') % estimated trajectory
+plot(pos_vec(1,:),pos_vec(2,:), 'or','MarkerFaceColor','r') % stations
+xlabel('$x_1$','FontSize',16,'Interpreter','latex');
+ylabel('$x_2$','FontSize',16,'Interpreter','latex');
+lgd = legend('estimated trajectory', 'stations');
+lgd.FontSize = 12;
 
   
