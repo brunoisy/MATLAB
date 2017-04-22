@@ -1,14 +1,14 @@
 load('Data/RSSI-measurements-unknown-sigma')
 load('Data/stations')
-%rng(3)
+rng(3)
 
-N = 20000; % #particles
+N = 1000; % #particles
 m = length(Y(1,:));
 
 X = drawInitPart(N);
 
 k = 20; % number of sigmas we will test
-sigmas = linspace(1.5,3,k);
+sigmas = linspace(1,10,k);
 logLike = zeros(1,k); %not normalized
 
 for i = 1:k;
@@ -24,7 +24,7 @@ for i = 1:k;
         inds = randsample(N,N,true,w);
         X = X(:,inds);
         
-        %estimation of l_m^N
+        %estimation of log(cn)
         logLike(i) = logLike(i) + log(mean(w));    
     end
 end

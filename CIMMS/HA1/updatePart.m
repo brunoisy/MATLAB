@@ -1,4 +1,4 @@
-function [newX ] = updatePart( X)
+function [newX ] = updatePart(X)
 
 
 delta = 0.5;

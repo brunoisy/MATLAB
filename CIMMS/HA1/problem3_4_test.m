@@ -86,7 +86,7 @@ end
 % Trajectory
 figure
 hold on
-title('estimated trajectory of the targets','FontSize',14)
+title('estimated trajectory of the target','FontSize',14)
 plot(pos_vec(1,:),pos_vec(2,:), 'or','MarkerFaceColor','r') % stations
 plot(tau1,tau2,'*') % estimated trajectory using SIS
 xlabel('$x_1$','FontSize',16,'Interpreter','latex');
