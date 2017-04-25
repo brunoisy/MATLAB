@@ -1,4 +1,7 @@
 function [newX ] = updatePart(X)
+% in  : X is an 8xN matrix where each column represents a particle
+% out : newX is an 8xN matrix where each column represents a particle drawn
+% from the transition density
 
 
 delta = 0.5;

@@ -1,4 +1,8 @@
-function [w] = p(part, y, sigma)
+function [w] = p(X, y, sigma)
+% in : X is an 8xN matrix where each column represents a particle,
+%      y is a 8x1 vector representing an observation
+%      sigma is standard deviation of the noise on the observation
+% out : w is a 1xN vecor containing the likelihoods p(y|part) of each particle
 
 load('stations')
 if(nargin<3)
@@ -7,12 +11,12 @@ end
 
 v = 90;
 eta = 3;
-s = size(part);
+s = size(X);
 N = s(2);
 
 mu = zeros(6,N);
 for l=1:6
-    x = [part(1,:);part(4,:)];
+    x = [X(1,:);X(4,:)];
     A = x-repmat(pos_vec(:,l),1,N);
     norms = sqrt(A(1,:).^2+A(2,:).^2);
     mu(l,:) = v-10*eta*log10(norms);
