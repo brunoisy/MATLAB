@@ -1,3 +1,4 @@
+addpath('Data')
 load('Data/RSSI-measurements-unknown-sigma')
 load('Data/stations')
 rng(3)
@@ -30,7 +31,8 @@ for i = 1:k;
 end
 
 [~, indmax] = max(logLike);
-sigmamax = sigmas(indmax);
+sigmamax = sigmas(indmax)
+
 % figure
 % plot(sigmas,logLike./m) normalize log-likelihood
 

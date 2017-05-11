@@ -43,6 +43,11 @@ X1 = X(1,:);
 X2 = X(4,:);
 
 figure
-plot(X1,X2)
-xlabel('x1');
-ylabel('x2');
+hold on
+title('random trajectory for m=100')
+plot(X1(1,1),X2(1,1),'*b')
+plot(X1(1,end),X2(1,end),'*r')
+plot(X1,X2,'k')
+xlabel('$x_1$','FontSize',16,'Interpreter','latex');
+ylabel('$x_2$','FontSize',16,'Interpreter','latex');
+legend('Startpoint','Endpoint')

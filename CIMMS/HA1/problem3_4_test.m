@@ -1,3 +1,4 @@
+addpath('Data')
 load('Data/RSSI-measurements')
 load('Data/stations')
 rng(3)

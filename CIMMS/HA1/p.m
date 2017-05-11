@@ -27,7 +27,10 @@ C = zeros(1,N);
 for l=1:6
     C = C + B(l,:).^2;
 end
-w = sigma^(-6)*exp(-1/2*sigma^(-2)*C); %we drop the constant, only the relative weights are important
-%w = (2*pi)^(-3)*sigma^(-6)*exp(-1/2*sigma^(-2)*C);
+if(nargin<3)
+    w = exp(-1/2*sigma^(-2)*C);%we drop the constant, only the relative weights are important
+else
+    w = sigma^(-6)*exp(-1/2*sigma^(-2)*C); 
+end
 end
 
