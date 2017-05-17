@@ -4,9 +4,9 @@ function [beta,mu] = est_gumbel(data)
 % CALL: [beta,mu] = wgumbfit(data) 
 
 %make sure it is a vector
-data=data(:); 
+data = data(:); 
 
-start=6^(1/2)/pi*std(data); % Moment estimate of scale parameter a
+start = 6^(1/2)/pi*std(data); % Moment estimate of scale parameter a
 beta = fzero(@(x) wgumbafit(x,data),start,optimset);
 mu = -beta*log(mean(exp(-data/beta)));
 
