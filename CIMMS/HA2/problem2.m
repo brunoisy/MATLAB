@@ -1,5 +1,4 @@
 %PROBLEM 2
-clc,close all,clear all
 load('atlantic')
 %a) F^-1(u;mu,beta)=mu-beta(ln(-ln(u)))
 
@@ -58,7 +57,7 @@ end
 
 delta = sort(hundred_boot-hundred_est);
 
-Onesided_CI = [hundred_est - delta(ceil(alpha*B)),0]
+Onesided_CI = [0,hundred_est - delta(ceil(alpha*B))]
 
 
 
