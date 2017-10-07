@@ -9,11 +9,11 @@ comma2point_overwrite('curves_LmrP_proteoliposomes/good/curve_1.txt')% change co
 fileID = fopen('curves_LmrP_proteoliposomes/good/curve_1.txt');
 C = textscan(fileID, '%f %f');
 fclose(fileID);
-dist = C{1}/10^15;
-force = C{2}/10^15;%scaling factor
+dist = C{1}/10^16;
+force = C{2}/10^16;%scaling factor
 figure
 hold on
-plot(10^9*dist,10^12*force,'.')
+plot(dist,force,'.')
 
 
 %%% first step is to find local minimas of the FD profile. 
@@ -37,7 +37,7 @@ for i=1+hi:length(force)-hi
     end
 end
 
-plot(10^9*locmax(1,:),10^12*locmax(2,:),'*')
+plot(locmax(1,:),locmax(2,:),'*')
 
 Lc = zeros(1,maxmin);
 for i = 2:maxmin % starting at 2 'cause first min is always bad
@@ -56,10 +56,9 @@ end
 
 
 for i=1:maxmin
-    X = linspace(0,Lc(i)*95/100,1000);
+    X = linspace(0,Lc(i)*95/100,100);
     F = fd_curve(Lc(i),X);
-    plot(10^9*X,10^12*F);
-    xlabel('Distance (nm)');
-    ylabel('Force (pN)');
+    plot(X,F);
+    xlegend('Distance mete')
+    ylegend
 end
-legend('data','minima')
