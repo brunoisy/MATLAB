@@ -1,19 +1,20 @@
+global kb T lp
+
 kb = 1.38064852e-23;
-T = 294; % 21°C
-lp = 0.36; % persistence length
+T = 294;% 21°C
+aa = 2*10^-9;% length of an amino acid
+lp = 0.36*aa;%*0.7
 
 
 addpath('helpers')
-comma2point_overwrite('curves_LmrP_proteoliposomes/good/curve_1.txt')% change commas to points
+comma2point_overwrite('curves_LmrP_proteoliposomes/good/curve_2.txt')% change commas to points
 
-fileID = fopen('curves_LmrP_proteoliposomes/good/curve_1.txt');
+fileID = fopen('curves_LmrP_proteoliposomes/good/curve_2.txt');
 C = textscan(fileID, '%f %f');
 fclose(fileID);
-dist = C{1}/10^15;
-force = C{2}/10^15;%scaling factor
-figure
-hold on
-plot(10^9*dist,10^12*force,'.')
+dist = C{1}/10^15;% scaling factor
+force = C{2}/10^18;% 10^15 for curve 1?
+
 
 
 %%% first step is to find local minimas of the FD profile. 
@@ -37,20 +38,28 @@ for i=1+hi:length(force)-hi
     end
 end
 
-plot(10^9*locmax(1,:),10^12*locmax(2,:),'*')
+
+% we compensate for offset
+dist = dist-locmax(1,1);%better to subtract mean
+locmax(1,:) = locmax(1,:)-locmax(1,1);
+
+figure
+hold on
+plot(10^9*dist,10^12*force,'.')
+plot(10^9*locmax(1,2:end),10^12*locmax(2,2:end),'*')
+legend('data','minima')
+
 
 Lc = zeros(1,maxmin);
 for i = 2:maxmin % starting at 2 'cause first min is always bad
     Xi = locmax(1,i);
     Fi = locmax(2,i);
 
-%     A = 4*Fi*lp/T;
-%     p = [A, 2*Xi*(3*kb-A), -Xi^2*(9*kb-A), 4*Xi^3*kb];
     A = 4*Fi*lp/T/kb;
     p = [A, 2*Xi*(3-A), -Xi^2*(9-A), 4*Xi^3];
     thisroots = roots(p);
     thisroots = thisroots(thisroots>0);
-    Lc(i) = real(thisroots(1));%danger (usually 2 conjugate roots i.e same)
+    Lc(i) = real(thisroots(1));
 end
 
 
@@ -62,4 +71,3 @@ for i=1:maxmin
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
 end
-legend('data','minima')
