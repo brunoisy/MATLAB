@@ -17,7 +17,7 @@ force = Text{2}/10^18;% 10^15 for curve 1?
 
 
 
-%%% first step is to find local minimas of the FD profile.
+%%% first step is to find local minimas of the FD profile. 
 %%% We will assume those determine the position of a crest
 
 maxmin = 9;%(max # of maxmin local minimas)
@@ -54,7 +54,7 @@ Lc = zeros(1,maxmin);
 for i = 2:maxmin % starting at 2 'cause first min is always bad
     Xi = locmin(1,i);
     Fi = locmin(2,i);
-    
+
     A = 4*Fi/C;
     p = [A, 2*Xi*(3-A), -Xi^2*(9-A), 4*Xi^3];
     thisroots = roots(p);
@@ -68,7 +68,6 @@ for i=1:maxmin
     X = linspace(0,Lc(i)*95/100,1000);
     F = fd_curve(Lc(i),X);
     plot(10^9*X,10^12*F);
-    title('FD curves fit to minimas')
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
 end
@@ -77,31 +76,21 @@ end
 
 
 
-Lfit = Lc; % L's according to least square fit, prior is = Lc
+Lfit = Lc;
 
 figure
 hold on
 for i=2:maxmin % for each valid minima
-    % We select the points that are between this minima and the previous
-    % one, and fit a FD curve with min least squares
-    if i==2
-        Xs = dist(dist(dist <= locmin(1,i))>locmin(1,i-1)); %carefull, locmin looses some info!!
-        Fs = force(dist(dist <= locmin(1,i))>locmin(1,i-1));
-    else
-        Xs = dist(dist(dist <= locmin(1,i))>Lfit(1,i-1)); %carefull, locmin looses some info!!
-        Fs = force(dist(dist <= locmin(1,i))>Lfit(1,i-1));
-    end
-    
-    
-    
-    %    ft = fittype('fd_curve(a,x)');
-    %    F = fit(Xs,Fs,ft,'StartPoint',locmin(1,i));
-    options = optimset('MaxFunEvals',2000,'MaxIter',2000);
-    Lfit(i) = fminsearch(@(x) square_error(x, Xs, Fs),Lfit(i),options);
-    plot(10^9*Xs, 10^12*Fs,'.'); %initial datapoints
-    X = linspace(0,Lfit(i)*95/100,1000);
-    plot(10^9*X, 10^12*fd_curve(Lfit(i),X)); %least square fit
-    title('FD curves fit to least squares')
-    xlabel('Distance (nm)');
+   % We select the points that are between this minima and the previous
+   % one, and fit a FD curve with min least squares
+   Xs = dist(dist(dist <= locmin(1,i))>locmin(1,i-1));
+   Fs = force(dist(dist <= locmin(1,i))>locmin(1,i-1));
+   
+%    ft = fittype('fd_curve(a,x)');
+%    F = fit(Xs,Fs,ft,'StartPoint',locmin(1,i));
+   L = fminsearch(@(x) square_error(x, Xs, Fs),locmin(1,i));
+   plot(10^9*Xs, 10^12*Fs,'.'); %initial datapoints
+   plot(10^9*Xs, 10^12*fd_curve(L,Xs)); %least square fit
+   xlabel('Distance (nm)');
     ylabel('Force (pN)');
 end
