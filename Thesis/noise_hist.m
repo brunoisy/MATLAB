@@ -2,14 +2,11 @@ global kb T lp C
 
 kb = 1.38064852e-23;
 T = 294;% 21°C
-aa = 2*10^-9;% length of an amino acid
-lp = 0.36*aa;%*0.7
+lp = 0.36*10^-9;
 C = kb*T/lp;
 
-addpath('helpers')
-comma2point_overwrite('curves_LmrP_proteoliposomes/good/curve_2.txt')% change commas to points
 
-fileID = fopen('curves_LmrP_proteoliposomes/good/curve_2.txt');
+fileID = fopen('curves_LmrP_proteoliposomes/bad/curve_2.txt');
 Text = textscan(fileID, '%f %f');
 fclose(fileID);
 dist = Text{1}/10^15;% scaling factor
@@ -84,20 +81,15 @@ hold on
 for i=2:maxmin % for each valid minima
     % We select the points that are between this minima and the previous
     % one, and fit a FD curve with min least squares
-    if i==2
-        Xs = dist(dist(dist <= locmin(1,i))>locmin(1,i-1)); %carefull, locmin looses some info!!
-        Fs = force(dist(dist <= locmin(1,i))>locmin(1,i-1));
-    else
-        Xs = dist(dist(dist <= locmin(1,i))>Lfit(1,i-1)); %carefull, locmin looses some info!!
-        Fs = force(dist(dist <= locmin(1,i))>Lfit(1,i-1));
-    end
+    Xs = dist(dist(dist <= locmin(1,i))>Lfit(1,i-1)); %carefull, locmin looses some info!!
+    Fs = force(dist(dist <= locmin(1,i))>Lfit(1,i-1));
     
     
+    Fx = @(Lc,x) -C*(1./(4*(1-x/Lc).^2)-1/4+x/Lc);
+    %options = optimoptions('lsqcurvefit','FunctionTolerance',10^-10);
+    %options = optimset('MaxFunctionEvaluations',500);
+    Lfit(i) = lsqcurvefit(Fx, Lfit(i), Xs, Fs);
     
-    %    ft = fittype('fd_curve(a,x)');
-    %    F = fit(Xs,Fs,ft,'StartPoint',locmin(1,i));
-    options = optimset('MaxFunEvals',2000,'MaxIter',2000);
-    Lfit(i) = fminsearch(@(x) square_error(x, Xs, Fs),Lfit(i),options);
     plot(10^9*Xs, 10^12*Fs,'.'); %initial datapoints
     X = linspace(0,Lfit(i)*95/100,1000);
     plot(10^9*X, 10^12*fd_curve(Lfit(i),X)); %least square fit
