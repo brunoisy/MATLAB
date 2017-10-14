@@ -1,14 +1,14 @@
-% Warning: /curves_LmrP_proteoliposomes/good/curve1 has forces of order
-% 10^-15 instead of 10^-18
+directory = 'data_2/';% ../ not working, put back in main dir
+%'../data_1/good/';
+%'../data_1/bad/';
 
-directory = '../diverse_data/';
-%'../curves_LmrP_proteoliposomes/good/';
-%'../curves_LmrP_proteoliposomes/bad/';
-%
 files = dir(directory);
 files = files([files.isdir]==false);
 
 filenames = {files(:).name};
 for i = 1:length(filenames)
-    comma2point_overwrite(strcat(directory,filenames{i}))% change commas to points
+%     oldname = strcat(directory,filenames{i});
+%     newname = strcat(directory,'curve_',int2str(i),'.txt');
+%     movefile(oldname, newname);
+    comma2point_overwrite(newname)% change commas to points
 end
