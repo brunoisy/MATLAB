@@ -1,16 +1,19 @@
-global kb T lp C
 
-kb = 1.38064852e-23;
-T = 294;% 21°C
-lp = 0.36*10^-9;
-C = kb*T/lp;
-
+% format_files;
 
 fileID = fopen('curves_LmrP_proteoliposomes/bad/curve_2.txt');
 Text = textscan(fileID, '%f %f');
 fclose(fileID);
 dist = Text{1}/10^15;% scaling factor
 force = Text{2}/10^18;% 10^15 for curve 1?
+
+
+global kb T lp C
+
+kb = 1.38064852e-23;
+T = 294;% 21°C
+lp = 0.36*10^-9;
+C = kb*T/lp;
 
 
 

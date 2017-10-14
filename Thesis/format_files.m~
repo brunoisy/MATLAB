@@ -1,5 +1,0 @@
-addpath('helpers')
-
-
-Goodfiles = dir('cur')
-comma2point_overwrite('curves_LmrP_proteoliposomes/bad/curve_2.txt')% change commas to points
