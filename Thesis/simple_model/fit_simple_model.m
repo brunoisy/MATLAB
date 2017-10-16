@@ -6,14 +6,7 @@ C  = kb*T/lp;
 
 
 for filenumber = 1
-    upfolder = fileparts(pwd);
-    filename = fullfile('data_model',strcat('curve_',int2str(filenumber),'.txt'));
-    fileID = fopen(filename);
-    Text = textscan(fileID, '%f %f');
-    fclose(fileID);
-    
-    dist = Text{1}'*10^-9;
-    force = Text{2}'*10^-12;
+    load(strcat('data/MAT/data_model/curve_',int2str(filenumber),'.mat'));
     
     
     %%% first step is to find local minimas of the FD profile.

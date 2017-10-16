@@ -14,24 +14,21 @@ n = 1024;
 maxf = 150*10^-12;
 sigmaNoise = 5*10^-12;
 
-X = linspace(0, maxLength, n);
-F = zeros(1,n);
+dist = linspace(0, maxLength, n);
+force = zeros(1,n);
 
 % generate forces from basic model
 for i = 1:n
-    F(i) = model_fun(Lc, X(i), maxf);
+    force(i) = model_fun(Lc, dist(i), maxf);
 end
 
 % add noise
-F = F + sigmaNoise*randn(1,n);
+force = force + sigmaNoise*randn(1,n);
 
-figure
-plot(10^9*X, 10^12*F, '.'); 
-title('FD profile')
-xlabel('Distance (nm)');
-ylabel('Force (pN)');
+% figure
+% plot(10^9*X, 10^12*F, '.'); 
+% title('FD profile')
+% xlabel('Distance (nm)');
+% ylabel('Force (pN)');
 
-fileID = fopen('data_model/curve_1.txt','w+');
-fprintf(fileID,'%f\t%f\n', [10^9*X;10^12*F]);
-fclose(fileID);
-
+save('data/MAT/data_model/curve_1.mat','dist', 'force')
