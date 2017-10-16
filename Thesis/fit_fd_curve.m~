@@ -102,7 +102,7 @@ for filenumber = 1
         legend('points considered', 'curve')
         
         
-        Noise = (fd_curve(Lc(i),Xcrest)-Fcrest);
+        Noise = abs(fd_curve(Lc(i),Xcrest)-Fcrest);
         
         subplot(1,2,2)
         hold on

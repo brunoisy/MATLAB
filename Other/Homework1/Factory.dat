@@ -1,0 +1,58 @@
+set allProducts := 1 2 3 4 5 6 7;
+set months := January February March April May June;
+set machines := Grinder VerticalDrill HorizontalDrill Borer Planer;
+
+
+param nMachines := Grinder         4
+				   VerticalDrill   2
+				   HorizontalDrill 3
+				   Borer           1
+				   Planer          1;
+				   
+
+param time :              1    2    3    4    5    6    7 :=
+	Grinder              0.5  0.7   0    0   0.3  0.2  0.5
+	VerticalDrill        0.1  0.2   0   0.3   0   0.6   0
+	HorizontalDrill      0.2   0   0.8   0    0    0   0.6 
+	Borer                0.05 0.03  0   0.07 0.1   0   0.08
+	Planer                0    0   0.01  0   0.05  0   0.05;
+	
+	
+param profit := 1 10
+				2  6
+				3  8
+				4  4
+				5 11
+				6  9
+				7  3;
+	
+	
+param maintenance : Grinder VerticalDrill HorizontalDrill Borer Planer :=
+	January         	1         0             0          0      0
+	February            0         0             2          0      0
+	March               0         0             0          1      0
+	April               0         1             0          0      0
+	May                 1         1             0          0      0
+	June                0         0             1          0      0;
+	
+	
+param demand :      1    2    3    4    5    6    7  :=
+	January		  500 1000	300  300  800  200  100	
+	February      600  500  200    0  400  300  150
+	March         300  600    0    0  500  400  100
+	April         200  300  400  500  200    0  100
+	May             0  100  500  100 1000  300    0
+	June          500  500  100  300 1100  500   60;
+
+
+param storageCapacity := 100;
+param storageUnitCost := 0.5;
+param finalStorage := 50;
+
+
+set days := monday tuesday wednesday thursday friday saturday;
+set weeks := 1 2 3 4;
+param nShifts := 2; 
+param hoursAshift := 8;
+	
+	

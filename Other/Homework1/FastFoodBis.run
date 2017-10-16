@@ -1,0 +1,7 @@
+reset;
+model FastFoodBis.mod;
+data FastFoodBis.dat;
+option solver gurobi;
+solve;
+display products;
+display cost;

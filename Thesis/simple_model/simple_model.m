@@ -8,11 +8,11 @@ lp = 0.36*10^-9;
 C  = kb*T/lp;
 
 
-Lc = [33, 50, 92, 107, 130, 151]*10^-9; % Example of possible model parameters
+Lc = [72]*10^-9;%[33, 50, 92, 107, 130, 151]*10^-9; % Example of possible model parameters
 maxLength = 200*10^-9;
 n = 1024;
 maxf = 150*10^-12;
-sigmaNoise = 15*10^-12;
+sigmaNoise = 5*10^-12;
 
 X = linspace(0, maxLength, n);
 F = zeros(1,n);
@@ -32,6 +32,6 @@ xlabel('Distance (nm)');
 ylabel('Force (pN)');
 
 fileID = fopen('data_model/curve_1.txt','w+');
-fprintf(fileID,'%f\t%f\n', [X*10^9;F*10^12]);
+fprintf(fileID,'%f\t%f\n', [10^9*X;10^12*F]);
 fclose(fileID);
 

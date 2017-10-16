@@ -1,0 +1,116 @@
+set allProducts := BigMac RoyalDeluxe RoyalBacon RoyalCheese DoubleCheeseburger Hamburger Cheeseburger
+	McChicken ChickenMcNuggets_4 ChickenMcNuggets_6 ChickenMcNuggets_9 ChickenMcNuggets_20 McFish FiletOFish
+	CroqueMcDo McWrapPouletBacon McWrapPouletPoivre PtitWrapRanch PtitItalien FritePetite FriteMoyenne
+	FriteGrande DeluxePotatoesMoyenne DeluxePotatoesGrande PtiteSalade PtitesTomates CocaCola CocaColaLight
+	CocaColaZero Sprite FantaOrange	IceTeaPeche MinuteMaid Evian Badoit SaladeCaesar SaladePateMozzarella
+	SaladePDT;
+	
+set burgers := BigMac RoyalDeluxe RoyalBacon RoyalCheese DoubleCheeseburger Hamburger Cheeseburger
+	McChicken ChickenMcNuggets_4 ChickenMcNuggets_6 ChickenMcNuggets_9 ChickenMcNuggets_20 McFish FiletOFish
+	CroqueMcDo McWrapPouletBacon McWrapPouletPoivre PtitWrapRanch PtitItalien;
+	
+set frites := FritePetite FriteMoyenne FriteGrande DeluxePotatoesMoyenne DeluxePotatoesGrande;
+
+set salades := PtiteSalade PtitesTomates SaladeCaesar SaladePateMozzarella SaladePDT;
+
+set boissons := CocaCola CocaColaLight CocaColaZero Sprite FantaOrange	IceTeaPeche MinuteMaid Evian Badoit;
+
+set nutriments := EnergieKcal MatGrasses AcGrasSatures Glucides FibresAlim Proteines Sels;
+
+param valNutr: 				EnergieKcal MatGrasses AcGrasSatures Glucides FibresAlim Proteines Sels :=
+BigMac						510			26		   10			 41		  3			 27		  2.2
+RoyalDeluxe					545			32		   11			 32		  3			 31		  1.6
+RoyalBacon					505			26		   12			 34		  2			 33		  1.6
+RoyalCheese					530			28		   14			 36		  3			 32		  2.3
+DoubleCheeseburger			450			24		   12			 31		  2			 27		  2.2
+Hamburger					255			9		   4			 30		  2			 13		  1.3
+Cheeseburger				305			13		   6			 30		  2			 16		  1.6
+McChicken					475			22		   3			 45		  3			 23		  1.8
+ChickenMcNuggets_4			175			9		   1			 12		  1			 11		  0.8
+ChickenMcNuggets_6			270			14		   2			 19		  1			 17		  1.2
+ChickenMcNuggets_9			395			20		   3			 28		  2			 25		  1.8
+ChickenMcNuggets_20			895			45		   6			 62		  5			 55		  4
+McFish						275			7		   1			 39		  2			 13		  1.5
+FiletOFish					320			13		   3			 36		  2			 14		  1.5
+CroqueMcDo					260			10		   6			 27		  2			 14		  1.7
+McWrapPouletBacon			605			31		   7			 53		  3			 27		  1.9
+McWrapPouletPoivre			645			34		   8			 54		  4			 29		  2.5
+PtitWrapRanch				320			16		   3			 29		  2			 14		  1
+PtitItalien					350			17		   7			 30		  2			 18		  1
+FritePetite					240			12		   1			 29		  3			 3		  0.4
+FriteMoyenne				340			17		   2			 41		  4			 4		  0.5
+FriteGrande					445			22		   2			 54		  6			 5		  0.7
+DeluxePotatoesMoyenne		215			10		   1			 27		  3			 3		  1.3
+DeluxePotatoesGrande		310			14		   2			 39		  4			 5		  1.8
+PtiteSalade					75			6		   1			 4		  1			 1 		  0.7
+PtitesTomates				10			1		   0			 2		  1			 0 		  0.1
+CocaCola					170			0		   0			 42		  0			 0 		  0
+CocaColaLight				0			0		   0			 0		  0			 0		  0
+CocaColaZero				0			0		   0			 0		  0			 0		  0
+Sprite						145			0		   0			 36		  0			 0		  0
+FantaOrange					155			0		   0			 38		  0			 0		  0
+IceTeaPeche					105			0		   0			 26		  0			 0		  0
+MinuteMaid					140			0		   0			 33		  0			 2		  0
+Evian						0			0		   0			 0		  0			 0		  0
+Badoit						0			0		   0			 0		  0			 0		  0
+SaladeCaesar				180			9		   5			 6		  2			 20		  1.7
+SaladePateMozzarella		510			25		   7			 47		  5			 22		  1.9
+SaladePDT					215			4		   1			 28		  5			 13		  2.7  ;
+
+param prix :=
+BigMac						4.35
+RoyalDeluxe					4.3
+RoyalBacon					4.3
+RoyalCheese					4.5
+DoubleCheeseburger			3.05
+Hamburger					1.9
+Cheeseburger				2.3
+McChicken					4.3
+ChickenMcNuggets_4			3.2
+ChickenMcNuggets_6			4.15
+ChickenMcNuggets_9			5.35
+ChickenMcNuggets_20			9.8
+McFish						3.4
+FiletOFish					3.75
+CroqueMcDo					2.4
+McWrapPouletBacon			4.75
+McWrapPouletPoivre			4.75
+PtitWrapRanch				2
+PtitItalien					2
+FritePetite					2
+FriteMoyenne				2.7
+FriteGrande					2.9
+DeluxePotatoesMoyenne		2.7
+DeluxePotatoesGrande		2.9
+PtiteSalade					2.75
+PtitesTomates				1.65
+CocaCola					2.5
+CocaColaLight				2.5
+CocaColaZero				2.5
+Sprite						2.5
+FantaOrange					2.5
+IceTeaPeche					2.5
+MinuteMaid					2.5
+Evian						2.1
+Badoit						2.1
+SaladeCaesar				2.75
+SaladePateMozzarella		6.1
+SaladePDT					6.1   ;
+
+param lowerBound :=
+EnergieKcal		1800
+MatGrasses		58.5
+AcGrasSatures	0
+Glucides		270
+FibresAlim		22.5
+Proteines		45
+Sels			3.06  ;
+
+param upperBound :=
+EnergieKcal		2200
+MatGrasses		71.5
+AcGrasSatures	20
+Glucides		330
+FibresAlim		27.5
+Proteines		55
+Sels			3.74  ;
