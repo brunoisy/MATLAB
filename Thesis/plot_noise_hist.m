@@ -79,7 +79,7 @@ for filenumber = 1
     for i=2:nmin
         Xcrest  =  dist((dist>maxs(1,i-1)) & (dist < mins(1,i)));
         Fcrest  = force((dist>maxs(1,i-1)) & (dist < mins(1,i)));
-        X = linspace(0,Lc(i)*95/100,1000);
+        X = linspace(0,Lc(i)*90/100,1000);
         F = fd_curve(Lc(i),X);
         
         figure
