@@ -2,11 +2,11 @@ directory = 'data/MAT/data_2/';
 %directory = 'data/MAT/data_1/good/';
 %directory = 'data/MAT/data_1/bad/';
 
-global C
 kb = 1.38064852e-23;
-T  = 294;% 21°C
+T  = 294;
 lp = 0.36*10^-9;
 C  = kb*T/lp;
+fd = @(Lc, x) -C*(1./(4*(1-x./Lc).^2)-1/4+x./Lc);
 
 
 
@@ -18,42 +18,16 @@ for filenumber = [1]
     %%% first step is to find local minimas of the FD profile.
     %%% We will assume those determine the position of a crest
     
-    nmin = 0;% # of minimas found
     maxmin = 7;
-    mins = zeros(2, maxmin);
-    hi = 20;% size of half comparison interval...
-    fthresh = -25*10^-12;% max value of force for a candidate to be considered a minima
-    for i=1+hi:length(force)-hi
-        if ( (force(i) < min([force(i-hi:i-1),force(i+1:i+hi)])) && (force(i) < fthresh))
-            nmin = nmin+1;
-            mins(:,nmin) = [dist(i); force(i)];
-            if(nmin >= maxmin)
-                break
-            end
-        end
-    end
-    mins = mins(:,2:nmin);% starting at 2 'cause first min is always bad
-    nmin = nmin-1;
+    mins = find_min(dist, force, maxmin);
+    nmin = length(mins);
     
-    
-    %%%%%%
-    
-    nmax = 0;% # of maximas found
     maxmax = 100;
-    maxs = zeros(2, maxmax);
-    hi = 30;% size of half comparison interval...
-    for i=1+hi:length(force)-hi
-        if ( (force(i) > max([force(i-hi:i-1),force(i+1:i+hi)])))
-            nmax = nmax+1;
-            maxs(:,nmax) = [dist(i); force(i)];
-        end
-    end
-    maxs = maxs(:,1:nmax);
+    maxs = find_max(dist, force, maxmax);
+    nmax = length(maxs);
+    
     
     %%%%%%
-    
-    
-    
     
     figure(1)
     subplot(1,2,1)
@@ -83,7 +57,7 @@ for filenumber = [1]
     
     for i = 1:nmin
         X = linspace(0,Lc(i)*95/100,1000);
-        F = fd_curve(Lc(i),X);
+        F = fd(Lc(i), X);
         plot(10^9*X,10^12*F);
         title('FD curves fit to minimas')
         
@@ -117,32 +91,32 @@ for filenumber = [1]
         
         
         
-%         Fx = @(Lc,x) -10^12*C*(1./(4*(1-x/Lc).^2)-1/4+x/Lc);% 10^12 because we work in pN!
-%         Lfit(i) = lsqcurvefit(Fx, 10^9*Lfit(i), 10^9*Xs, 10^12*Fs)/10^9;
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%         
-%         %%% second step is to use these curves as starting point and use minimum
-%         
-%         plot(10^9*Xs, 10^12*Fs,'.'); %initial datapoints
-%         X = linspace(0,Lfit(i)*95/100,1000);
-%         plot(10^9*X, 10^12*fd_curve(Lfit(i),X)); %least square fit
-%         title('FD curves fit to least squares')
-%         xlabel('Distance (nm)');
-%         ylabel('Force (pN)');
+        %         Fx = @(Lc,x) -10^12*C*(1./(4*(1-x/Lc).^2)-1/4+x/Lc);% 10^12 because we work in pN!
+        %         Lfit(i) = lsqcurvefit(Fx, 10^9*Lfit(i), 10^9*Xs, 10^12*Fs)/10^9;
+        % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %
+        %         %%% second step is to use these curves as starting point and use minimum
+        %
+        %         plot(10^9*Xs, 10^12*Fs,'.'); %initial datapoints
+        %         X = linspace(0,Lfit(i)*95/100,1000);
+        %         plot(10^9*X, 10^12*fd_curve(Lfit(i),X)); %least square fit
+        %         title('FD curves fit to least squares')
+        %         xlabel('Distance (nm)');
+        %         ylabel('Force (pN)');
         
         
         Fx = @(x0Lc, x) -10^12*C*(1./(4*(1-(x-x0Lc(1))/(x0Lc(2)-x0Lc(1))).^2)-1/4+(x-x0Lc(1))/(x0Lc(2)-x0Lc(1)));% 10^12 because we work in pN!
         Params = lsqcurvefit(Fx, [0, 10^9*Lfit(i)], 10^9*Xs, 10^12*Fs)/10^9;
         x0(i) = Params(1);
         Lfit(i) = Params(2);
-
+        
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
         %%% second step is to use these curves as starting point and use minimum
         
         plot(10^9*Xs, 10^12*Fs,'.'); %initial datapoints
         X = linspace(0,(Lfit(i)-x0(i))*95/100,1000);
-        plot(10^9*(X+x0(i)), 10^12*fd_curve(Lfit(i)-x0(i),X)); %least square fit
+        plot(10^9*(X+x0(i)), 10^12*fd(Lfit(i)-x0(i),X)); %least square fit
         title('FD curves fit to least squares')
         xlabel('Distance (nm)');
         ylabel('Force (pN)');

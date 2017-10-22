@@ -1,7 +1,6 @@
 filename = 'data/MAT/data_2/curve_1.mat';
 load(filename)
 
-global C
 kb = 1.38064852e-23;
 T  = 294;% 21°C
 lp = 0.36*10^-9;
@@ -57,7 +56,7 @@ end
 
 for i = 1:nmin
     X = linspace(0,Lc(i)*95/100,1000);
-    F = fd_curve(Lc(i),X);
+    F = fd(Lc(i),X);
     plot(10^9*X,10^12*F);
 end
 
@@ -89,6 +88,6 @@ end
 
 for i = 1:nmin
     X = linspace(0,Lc(i)*95/100,1000);
-    F = fd_curve(Lc(i),X);
+    F = fd(Lc(i),X);
     plot(10^9*(X+sum(Lc(1:i-1))),10^12*F);
 end

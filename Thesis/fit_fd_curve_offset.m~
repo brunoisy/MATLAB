@@ -6,7 +6,7 @@ T  = 294;
 lp = 0.36*10^-9;
 C  = kb*T/lp;
 
-xlimits = [-10, 200];
+xlimits = [0, 200];
 ylimits = [-100, 50];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -61,16 +61,17 @@ end
 %%%%%% curves, apply least-square-fit to get a better estimate of Lc,
 %%%%%% and iterate
 
-x0 = 0;% initial guess for offset
-
+Lcupd = Lc; 
+x0upd = 0;
 %%% We select all the points that we will try to fit
 thresh = 10*10^-12;
-[Xsel, Fsel] = select_points(dist, force, x0, Lc, thresh);
+[Xsel, Fsel] = select_points(dist, force, x0upd, Lc, thresh);
 
-% %%% we need to convert to pN/nm and back
-% x0Lc = lsqcurvefit(@(x0Lc,x)10^12*multi_fd(x0Lc,x), [x0, Lc], 10^9*Xsel, 10^12*Fsel)/10^9;
-% x0 = x0Lc(1);
-% Lc = x0Lc(2:end);
+%%% our initial guess for the offset x0 is 0
+%%% we need to convert to pN/nm and back
+x0Lc = lsqcurvefit(@(x0Lc,x)10^12*multi_fd(x0Lc,x), [0, Lc], 10^9*Xsel, 10^12*Fsel)/10^9;
+x0 = x0Lc(1);
+Lc = x0Lc(2:end);
 
 %%% Plot of the selected datapoints, and the estimated FD curves
 subplot(1,2,2)
@@ -83,8 +84,7 @@ ylabel('Force (pN)');
 
 plot(10^9*Xsel, 10^12*Fsel,'.'); % selected datapoints
 
-Xfit = linspace(x0,Lfit(end),5000);
-Ffit = multi_fd([x0, Lfit],Xfit);
-
-plot(10^9*Xfit, 10^12*Ffit,'.'); % least square fit
+Xfit = linspace(0,(Lfit(end)-x0),5000);
+Ffit = multi_fd(Lfit-x0,Xfit);
+plot(10^9*(Xfit+x0), 10^12*Ffit); % least square fit
 
