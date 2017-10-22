@@ -1,5 +1,5 @@
 directory = 'data/MAT/data_2/';
-%directory = 'data/MAT/data_1/good/';%8-9 très proches, 7 bizarre
+%directory = 'data/MAT/data_1/good/';
 %directory = 'data/MAT/data_1/bad/';
 
 global C
@@ -19,7 +19,7 @@ for filenumber = [1]
     %%% We will assume those determine the position of a crest
     
     nmin = 0;% # of minimas found
-    maxmin = 6;
+    maxmin = 7;
     mins = zeros(2, maxmin);
     hi = 20;% size of half comparison interval...
     fthresh = -25*10^-12;% max value of force for a candidate to be considered a minima
@@ -41,7 +41,7 @@ for filenumber = [1]
     nmax = 0;% # of maximas found
     maxmax = 100;
     maxs = zeros(2, maxmax);
-    hi = 20;% size of half comparison interval...
+    hi = 30;% size of half comparison interval...
     for i=1+hi:length(force)-hi
         if ( (force(i) > max([force(i-hi:i-1),force(i+1:i+hi)])))
             nmax = nmax+1;
@@ -55,7 +55,7 @@ for filenumber = [1]
     
     
     
-    figure
+    figure(1)
     subplot(1,2,1)
     hold on
     plot(10^9*dist,10^12*force,'.')
@@ -108,24 +108,41 @@ for filenumber = [1]
         % We select the points that are between this minima and the previous
         % one, and fit a FD curve with min least squares
         if (i==1)
-            Xs = dist(dist(dist <= mins(1,i))>maxs(1,1)); %carefull, mins looses some info!! buct Lc(1,i) takes outliers
-            Fs = force(dist(dist <= mins(1,i))>maxs(1,1));
+            Xs = dist(dist(dist <= mins(1,i))>=maxs(1,1)); %carefull, mins looses some info!! buct Lc(1,i) takes outliers
+            Fs = force(dist(dist <= mins(1,i))>=maxs(1,1));
         else
-            Xs = dist(dist(dist <= mins(1,i))>maxs(1,i)); %carefull, mins looses some info!!
-            Fs = force(dist(dist <= mins(1,i))>maxs(1,i));
+            Xs = dist(dist(dist <= mins(1,i))>=maxs(1,i)); %carefull, mins looses some info!!
+            Fs = force(dist(dist <= mins(1,i))>=maxs(1,i));
         end
         
         
         
-        Fx = @(Lc,x) -10^12*C*(1./(4*(1-x/Lc).^2)-1/4+x/Lc);% 10^12 because we work in pN!
-        Lfit(i) = lsqcurvefit(Fx, 10^9*Lfit(i), 10^9*Xs, 10^12*Fs)/10^9;
+%         Fx = @(Lc,x) -10^12*C*(1./(4*(1-x/Lc).^2)-1/4+x/Lc);% 10^12 because we work in pN!
+%         Lfit(i) = lsqcurvefit(Fx, 10^9*Lfit(i), 10^9*Xs, 10^12*Fs)/10^9;
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%         
+%         %%% second step is to use these curves as starting point and use minimum
+%         
+%         plot(10^9*Xs, 10^12*Fs,'.'); %initial datapoints
+%         X = linspace(0,Lfit(i)*95/100,1000);
+%         plot(10^9*X, 10^12*fd_curve(Lfit(i),X)); %least square fit
+%         title('FD curves fit to least squares')
+%         xlabel('Distance (nm)');
+%         ylabel('Force (pN)');
+        
+        
+        Fx = @(x0Lc, x) -10^12*C*(1./(4*(1-(x-x0Lc(1))/(x0Lc(2)-x0Lc(1))).^2)-1/4+(x-x0Lc(1))/(x0Lc(2)-x0Lc(1)));% 10^12 because we work in pN!
+        Params = lsqcurvefit(Fx, [0, 10^9*Lfit(i)], 10^9*Xs, 10^12*Fs)/10^9;
+        x0(i) = Params(1);
+        Lfit(i) = Params(2);
+
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
         %%% second step is to use these curves as starting point and use minimum
         
         plot(10^9*Xs, 10^12*Fs,'.'); %initial datapoints
-        X = linspace(0,Lfit(i)*95/100,1000);
-        plot(10^9*X, 10^12*fd_curve(Lfit(i),X)); %least square fit
+        X = linspace(0,(Lfit(i)-x0(i))*95/100,1000);
+        plot(10^9*(X+x0(i)), 10^12*fd_curve(Lfit(i)-x0(i),X)); %least square fit
         title('FD curves fit to least squares')
         xlabel('Distance (nm)');
         ylabel('Force (pN)');
