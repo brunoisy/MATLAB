@@ -1,20 +1,39 @@
-function [ f ] = model_fun(Lc, x, maxf )
+function [ F ] = model_fun(X, x0, Lc, fmax)
 
-global C
+n = length(X);
+padding = sum(X<x0);
+% Xcut = Lc-5*10^-9;
+% 
 
-if (x < max(Lc))
-    LcSup = Lc(Lc>x);
-    f = -C*(1./(4*(1-x/min(LcSup)).^2)-1/4+x/min(LcSup));
-    if (abs(f) > maxf) % unrealistically strong force
-        if(length(LcSup)>1)
-            f = -C*(1./(4*(1-x/min(LcSup(2:end))).^2)-1/4+x/min(LcSup(2:end)));
-        else
-            f = 0;
+% F = zeros(1,n-padding);
+% for i=1:length(Lc)
+%     if i==1
+%         F(0<=X & X<Xcut(i)) = fd(Lc(i), X(0<=X & X<Xcut(i)));
+%     else
+%         F(Xcut(i-1)<=X & X <Xcut(i)) = fd(Lc(i), X(Xcut(i-1)<=X & X <Xcut(i)));
+%     end
+% %     plop = find(F<-fmax);
+% %     if ~isempty(plop)
+% %         j = plop(1)
+% %         Lc(i) = X(j);
+% %         F(X>X(j)) = zeros(1,length(F(X>X(j))));
+% %     end
+% end
+% 
+% F = [zeros(1,padding), F];
+F = zeros(1,n-padding);
+for i = 1:(n-padding)
+    if  X(i) < Lc(end)
+        LcSup = Lc(Lc>X(i));
+        F(i) = fd(LcSup(1), X(i));
+        if(F(i) < -fmax)
+            if length(LcSup) >1
+                F(i) = fd(LcSup(2), X(i));
+            else
+                F(i) = 0;
+            end
         end
     end
-else
-    f = 0;
 end
-
+F = [zeros(1,padding), F];
 end
-

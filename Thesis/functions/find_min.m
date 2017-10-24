@@ -18,6 +18,6 @@ for i=1+hi:length(force)-hi
         end
     end
 end
-mins = mins(:,2:nmin);% starting at 2 'cause first min is always bad
+%mins = mins(:,2:nmin);% starting at 2 'cause first min is always bad !!!
 end
 

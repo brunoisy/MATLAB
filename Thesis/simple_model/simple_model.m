@@ -1,34 +1,30 @@
 % this model generates data following a simple molecule model
 rng(3)
 
-global C
 kb = 1.38064852e-23;
 T  = 294;% 21°C
 lp = 0.36*10^-9;
 C  = kb*T/lp;
 
+x0 = 10*10^-9;%very high value! to test offset detection
+Lc = [33, 50, 92, 107, 130, 151]*10^-9; % Example of possible model parameters
 
-Lc = [72]*10^-9;%[33, 50, 92, 107, 130, 151]*10^-9; % Example of possible model parameters
 maxLength = 200*10^-9;
 n = 1024;
-maxf = 150*10^-12;
-sigmaNoise = 5*10^-12;
+fmax = 130*10^-12;
+sigmaNoise = 0;%5*10^-12;
 
 dist = linspace(0, maxLength, n);
-force = zeros(1,n);
+force = model_fun(dist, x0, Lc, fmax);
 
-% generate forces from basic model
-for i = 1:n
-    force(i) = model_fun(Lc, dist(i), maxf);
-end
 
 % add noise
 force = force + sigmaNoise*randn(1,n);
 
-% figure
-% plot(10^9*X, 10^12*F, '.'); 
-% title('FD profile')
-% xlabel('Distance (nm)');
-% ylabel('Force (pN)');
+figure
+plot(10^9*dist, 10^12*force, '.'); 
+title('FD profile')
+xlabel('Distance (nm)');
+ylabel('Force (pN)');
 
-save('data/MAT/data_model/curve_1.mat','dist', 'force')
+save('data/MAT/data_model/curve_2.mat','dist', 'force')

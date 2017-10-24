@@ -1,3 +1,4 @@
+addpath('functions')
 filename = 'data/MAT/data_2/curve_1.mat';
 load(filename)
 
@@ -10,22 +11,9 @@ C  = kb*T/lp;
 %%% first step is to find local minimas of the FD profile.
 %%% We will assume those determine the position of a crest
 
-nmin = 0;% # of minimas found
 maxmin = 6;
-mins = zeros(2, maxmin);
-hi = 20;% size of half comparison interval...
-fthresh = -25*10^-12;% max value of force for a candidate to be considered a minima
-for i=1+hi:length(force)-hi
-    if ( (force(i) < min([force(i-hi:i-1),force(i+1:i+hi)])) && (force(i) < fthresh))
-        nmin = nmin+1;
-        mins(:,nmin) = [dist(i); force(i)];
-        if(nmin >= maxmin)
-            break
-        end
-    end
-end
-mins = mins(:,2:nmin);% starting at 2 'cause first min is always bad
-nmin = nmin-1;
+mins = find_min(dist, force, maxmin);
+nmin = length(mins);
 
 
 figure
