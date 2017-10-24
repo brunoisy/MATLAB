@@ -3,14 +3,14 @@ function [ mins ] = find_min(dist, force, maxmin, fthresh)
 %   Detailed explanation goes here
 
 if(nargin <4)
-    fthresh = -25*10^-12;% max value of force for a candidate to be considered a minima
+    fthresh = 25*10^-12;% min abs value of force for a candidate to be considered a minima
 end
 nmin = 0;% # of minimas found
 mins = zeros(2, maxmin);
 hi = 20;% size of half comparison interval...
 
 for i=1+hi:length(force)-hi
-    if ( (force(i) < min([force(i-hi:i-1),force(i+1:i+hi)])) && (force(i) < fthresh))
+    if ( (force(i) < min([force(i-hi:i-1),force(i+1:i+hi)])) && (force(i) < -fthresh))
         nmin = nmin+1;
         mins(:,nmin) = [dist(i); force(i)];
         if(nmin >= maxmin)

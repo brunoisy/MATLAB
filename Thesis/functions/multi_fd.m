@@ -6,6 +6,7 @@ x0 = x0Lc(1);
 Lc = x0Lc(2:end);
 
 X = X-x0;
+Xlast = Xlast-x0;
 F = zeros(1,length(X));
 
 for i = 1:length(Lc)
