@@ -4,7 +4,7 @@ function [ goodmins ] = find_min(dist, force)
 
 nmin = 0;% # of minimas found
 mins = zeros(2, length(dist));
-hi = 20;% size of half comparison interval...
+hi = 40;% size of half comparison interval...
 
 % We find candidate minimas by comparing points to their 2*hi neighbors
 % ! danger, risk of missing first minima
@@ -21,7 +21,7 @@ end
 % and remove the minimas that are unsufficiently far from the
 % mean (according to the variance)
 
-k = 3;
+k = 4;
 thresh = mean(force(end-50:end))-k*std(force(end-50:end));
 
 goodmins = zeros(2,nmin);

@@ -1,5 +1,5 @@
 addpath('functions')
-filename = 'data/MAT/data_2/curve_1.mat';
+filename = 'data/MAT/data_2/curve_3.mat';
 %filename = 'data/MAT/data_model/curve_3.mat';
 load(filename)
 
@@ -27,7 +27,7 @@ nmin   = length(mins);
 %%% We find the FD curves going through the minimas, parametrized by Lc
 Lc = zeros(1,nmin);
 for i = 1:nmin
-    xmin = mins(1,i)-x0;%because we want to find Lc wrt x0
+    xmin = mins(1,i)-x0;% because we want to find Lc wrt x0
     fmin = mins(2,i);
     
     A = 4*fmin/C;
@@ -37,6 +37,8 @@ for i = 1:nmin
     
     Lc(i) = real(thisroots(1));
 end
+
+
 
 figure
 subplot(1,k+1,1)
@@ -73,7 +75,7 @@ end
 thresh = 10*10^-12;%
 
 
-for j=1:k
+for j = 1:k
     %%% We select all the points that we will try to fit
     [Xsel, Fsel, Xfirst, Xlast] = select_points(dist, force, x0, Lc, thresh, x1);
     
