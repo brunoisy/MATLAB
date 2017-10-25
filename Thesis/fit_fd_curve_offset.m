@@ -1,6 +1,6 @@
 addpath('functions')
 filename = 'data/MAT/data_2/curve_1.mat';
-%filename = 'data/MAT/data_model/curve_2.mat';
+%filename = 'data/MAT/data_model/curve_3.mat';
 load(filename)
 
 kb = 1.38064852e-23;
@@ -9,9 +9,9 @@ lp = 0.36*10^-9;
 C  = kb*T/lp;
 
 xlimits = [-10, 200];
-ylimits = [-150, 25];%[-100, 50];
+ylimits = [-150, 25];
 
-x0 = min(dist(force<0))% from physical reality, this is our best guess of the value of x0
+x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
 k = 2;% number of iterations of lsq/selection
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -19,8 +19,7 @@ k = 2;% number of iterations of lsq/selection
 %%%%%% First step : find local minimas of the FD profile.
 %%%%%% These will help us estimate the position of the crest
 %%%%%% The first estimations are the FD curves going through the minima
-maxmin = 6;
-mins   = find_min(dist, force, maxmin);
+mins   = find_min(dist, force);
 x1     = mins(1,1);
 mins   = mins(:,2:end); %We neglect the first minimum, which is always 'bad'
 nmin   = length(mins);
@@ -115,6 +114,7 @@ for j=1:k
             Ffit = fd(Lc(i), Xfit);
             plot(10^9*(Xfit+x0), 10^12*Ffit,'r'); % least square fit
         end
+        % %%% plot to initial curves for comparison
         %         Xfit = linspace(0,firstLc(i),1000);
         %         Ffit = fd(firstLc(i), Xfit);
         %         plot(10^9*Xfit,10^12*Ffit,'k');

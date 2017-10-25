@@ -1,23 +1,38 @@
-function [ mins ] = find_min(dist, force, maxmin, fthresh)
+function [ goodmins ] = find_min(dist, force)
 %FINDMIN Summary of this function goes here
 %   Detailed explanation goes here
 
-if(nargin <4)
-    fthresh = 25*10^-12;% min abs value of force for a candidate to be considered a minima
-end
 nmin = 0;% # of minimas found
-mins = zeros(2, maxmin);
+mins = zeros(2, length(dist));
 hi = 20;% size of half comparison interval...
 
+% We find candidate minimas by comparing points to their 2*hi neighbors
+% ! danger, risk of missing first minima
 for i=1+hi:length(force)-hi
-    if ( (force(i) < min([force(i-hi:i-1),force(i+1:i+hi)])) && (force(i) < -fthresh))
+    if force(i) < min([force(i-hi:i-1),force(i+1:i+hi)])
         nmin = nmin+1;
         mins(:,nmin) = [dist(i); force(i)];
-        if(nmin >= maxmin)
-            break
-        end
     end
 end
-%mins = mins(:,2:nmin);% starting at 2 'cause first min is always bad !!!
+
+% We know try to remove the 'noisy' minimas
+% We compute the std on the last 50 points
+% (assumption : those do not represent an  unfolding event)
+% and remove the minimas that are unsufficiently far from the
+% mean (according to the variance)
+
+k = 3;
+thresh = mean(force(end-50:end))-k*std(force(end-50:end));
+
+goodmins = zeros(2,nmin);
+ngoodmins = 0;
+for i = 1:nmin
+    if (mins(2,i) < thresh)
+        ngoodmins = ngoodmins+1;
+        goodmins(:,ngoodmins) = mins(:,i);
+    end
 end
 
+goodmins = goodmins(:,1:ngoodmins);
+
+end

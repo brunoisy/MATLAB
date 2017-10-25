@@ -12,7 +12,7 @@ Lc = [33, 50, 92, 107, 130, 151]*10^-9; % Example of possible model parameters
 maxLength = 200*10^-9;
 n = 1024;
 fmax = 130*10^-12;
-sigmaNoise = 0;%5*10^-12;
+sigmaNoise = 5*10^-12;
 
 dist = linspace(0, maxLength, n);
 force = model_fun(dist, x0, Lc, fmax);
@@ -27,4 +27,4 @@ title('FD profile')
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
 
-save('data/MAT/data_model/curve_2.mat','dist', 'force')
+save('data/MAT/data_model/curve_3.mat','dist', 'force')
