@@ -11,21 +11,22 @@ C  = kb*T/lp;
 xlimits = [-10, 200];
 ylimits = [-150, 25];
 
-x0 = [0, 3, 6, 9, 12]*10^-9;
-k = length(x0)+1;
+x0 = [0, 5, 10, 15]*10^-9;
+k = length(x0);
 error = zeros(1,length(x0));
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%% First step : find local minimas of the FD profile.
+%%%%%% These will help us estimate the position of the crest
+%%%%%% The first estimations are the FD curves going through the minima
+mins   = find_min(dist, force);
+x1     = mins(1,1);
+mins   = mins(:,2:end); %We neglect the first minimum, which is always 'bad'
+nmin   = length(mins);
+
 figure
-for j = 1:length(x0)
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-    %%%%%% First step : find local minimas of the FD profile.
-    %%%%%% These will help us estimate the position of the crest
-    %%%%%% The first estimations are the FD curves going through the minima
-    mins   = find_min(dist, force);
-    x1     = mins(1,1);
-    mins   = mins(:,2:end); %We neglect the first minimum, which is always 'bad'
-    nmin   = length(mins);
-    
+for j = 1:k
     %%% We find the FD curves going through the minimas, parametrized by Lc
     Lc = zeros(1,nmin);
     for i = 1:nmin
@@ -39,7 +40,7 @@ for j = 1:length(x0)
         
         Lc(i) = real(thisroots(1));
     end
-    
+    firstLc = Lc;
     
     
     
@@ -55,9 +56,9 @@ for j = 1:length(x0)
     [Xsel, Fsel, Xfirst, Xlast] = select_points(dist, force, x0(j), Lc, thresh, x1);
     
     
-    %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
-    Lc = lsqcurvefit(@(Lc,x)10^12*multi_fd([x0(j), Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
-    error(j) = sqrt(sum((Fsel - multi_fd([x0(j), Lc],Xsel,10^9*Xlast)).^2));
+    %%% to do lsqfit, we need to convert to pN/nm and back (solves scaling issues)
+    Lc = lsqcurvefit(@(Lc,x)10^12*multi_fd([10^9*x0(j), Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
+    error(j) = sum((Fsel - multi_fd([x0(j), Lc],Xsel,Xlast)).^2)/length(Xsel);%mean quadratic error
     
     
     %%% Plot of the selected datapoints, and the estimated FD curves
@@ -74,26 +75,22 @@ for j = 1:length(x0)
     legend('origin','offset')
     
     for i=1:length(Xlast)
+        X = 10^9*Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
+        Y = 10^12*Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
+        Xfit = linspace(0,Lc(i),1000);
+        Ffit = fd(Lc(i), Xfit);
+        
         if(mod(i,2) == 0)
-            X = 10^9*Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
-            Y = 10^12*Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
             plot(X, Y,'.b');
-            Xfit = linspace(0,Lc(i),1000);
-            Ffit = fd(Lc(i), Xfit);
             plot(10^9*(Xfit+x0(j)), 10^12*Ffit,'b'); % least square fit
-            
         else
-            X = 10^9*Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
-            Y = 10^12*Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
             plot(X, Y,'.r');
-            Xfit = linspace(0,Lc(i),1000);
-            Ffit = fd(Lc(i), Xfit);
             plot(10^9*(Xfit+x0(j)), 10^12*Ffit,'r'); % least square fit
         end
-        % %%% plot to initial curves for comparison
-        %         Xfit = linspace(0,firstLc(i),1000);
-        %         Ffit = fd(firstLc(i), Xfit);
-        %         plot(10^9*Xfit,10^12*Ffit,'k');
+        %         %%% plot to initial curves for comparison
+        %                 Xfit = linspace(0,firstLc(i),1000);
+        %                 Ffit = fd(firstLc(i), Xfit);
+        %                 plot(10^9*(Xfit+x0(j)),10^12*Ffit,'k');
     end
 end
 error

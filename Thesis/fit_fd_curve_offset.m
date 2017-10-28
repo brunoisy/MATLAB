@@ -1,5 +1,5 @@
 addpath('functions')
-filename = 'data/MAT/data_2/curve_3.mat';
+filename = 'data/MAT/data_2/curve_1.mat';
 %filename = 'data/MAT/data_model/curve_3.mat';
 load(filename)
 
@@ -12,7 +12,7 @@ xlimits = [-10, 200];
 ylimits = [-150, 25];
 
 x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
-k = 2;% number of iterations of lsq/selection
+k = 1;% number of iterations of lsq/selection
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -84,7 +84,7 @@ for j = 1:k
     x0Lc = lsqcurvefit(@(x0Lc,x)10^12*multi_fd(x0Lc,x,10^9*Xlast), 10^9*[x0, Lc], 10^9*Xsel, 10^12*Fsel)/10^9;
     x0 = x0Lc(1);
     Lc = x0Lc(2:end);
-    
+        
     
     %%% Plot of the selected datapoints, and the estimated FD curves
     subplot(1,k+1,j+1)
@@ -100,25 +100,21 @@ for j = 1:k
     legend('origin','offset')
     
     for i=1:length(Xlast)
+        X = 10^9*Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
+        Y = 10^12*Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
+        Xfit = linspace(0,Lc(i),1000);
+        Ffit = fd(Lc(i), Xfit);
         if(mod(i,2) == 0)
-            X = 10^9*Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
-            Y = 10^12*Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
             plot(X, Y,'.b');
-            Xfit = linspace(0,Lc(i),1000);
-            Ffit = fd(Lc(i), Xfit);
             plot(10^9*(Xfit+x0), 10^12*Ffit,'b'); % least square fit
-            
         else
-            X = 10^9*Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
-            Y = 10^12*Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
             plot(X, Y,'.r');
-            Xfit = linspace(0,Lc(i),1000);
-            Ffit = fd(Lc(i), Xfit);
             plot(10^9*(Xfit+x0), 10^12*Ffit,'r'); % least square fit
         end
-        % %%% plot to initial curves for comparison
-        %         Xfit = linspace(0,firstLc(i),1000);
-        %         Ffit = fd(firstLc(i), Xfit);
-        %         plot(10^9*Xfit,10^12*Ffit,'k');
+        %         %%% plot to initial curves for comparison
+        %                 Xfit = linspace(0,firstLc(i),1000);
+        %                 Ffit = fd(firstLc(i), Xfit);
+        %                 plot(10^9*(Xfit+x0(j)),10^12*Ffit,'k');
     end
+    x0
 end

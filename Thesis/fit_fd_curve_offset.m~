@@ -12,7 +12,7 @@ xlimits = [-10, 200];
 ylimits = [-150, 25];
 
 x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
-k = 1;% number of iterations of lsq/selection
+k = 2;% number of iterations of lsq/selection
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -81,9 +81,10 @@ for j = 1:k
     
     
     %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
-    Lc = lsqcurvefit(@(Lc,x)10^12*multi_fd([10^9*x0,Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
-   
-        
+    x0Lc = lsqcurvefit(@(x0Lc,x)10^12*multi_fd(x0Lc,x,10^9*Xlast), 10^9*[x0, Lc], 10^9*Xsel, 10^12*Fsel)/10^9;
+    x0 = x0Lc(1);
+    Lc = x0Lc(2:end);
+    
     
     %%% Plot of the selected datapoints, and the estimated FD curves
     subplot(1,k+1,j+1)
@@ -115,5 +116,4 @@ for j = 1:k
         %                 Ffit = fd(firstLc(i), Xfit);
         %                 plot(10^9*(Xfit+x0(j)),10^12*Ffit,'k');
     end
-    
 end
