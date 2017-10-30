@@ -117,7 +117,7 @@ end
 
 
 figure
-for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
+for filenumber = [1,2][1,2,3,5,6,10,12,13,14,16,18]
     filename = strcat(directory,'curve_',int2str(filenumber),'.mat');
     load(filename)
     %%% Plot of the data
@@ -145,7 +145,7 @@ for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
 end
 
 
-for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
+for filenumber = [1,2]%[1,2,3,5,6,10,12,13,14,16,18]
     filename = strcat(directory,'curve_',int2str(filenumber),'.mat');
     load(filename)
     %%% Plot of the data
@@ -159,5 +159,5 @@ for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
     ylim(ylimits);
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
-    plot(10^9*(dist+x0),10^12*force,'.');
+    plot(10^9*(dist-x0),10^12*force,'.');
 end

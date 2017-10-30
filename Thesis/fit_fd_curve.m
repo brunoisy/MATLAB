@@ -1,5 +1,5 @@
 addpath('functions')
-filename = 'data/MAT/data_2/curve_10.mat';
+filename = 'data/MAT/data_2/curve_2.mat';
 %filename = 'data/MAT/data_model/curve_3.mat';
 load(filename)
 
