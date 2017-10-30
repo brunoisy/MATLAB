@@ -1,5 +1,5 @@
 addpath('functions')
-filename = 'data/MAT/data_2/curve_1.mat';
+filename = 'data/MAT/data_2/curve_10.mat';
 %filename = 'data/MAT/data_model/curve_3.mat';
 load(filename)
 
@@ -12,7 +12,7 @@ xlimits = [-10, 200];
 ylimits = [-150, 25];
 
 x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
-k = 1;% number of iterations of lsq/selection
+k = 2;% number of iterations of lsq/selection
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -38,6 +38,7 @@ for i = 1:nmin
     Lc(i) = real(thisroots(1));
 end
 
+Lc = mergeLc(Lc);
 
 
 figure
@@ -59,7 +60,7 @@ plot(10^9*mins(1,1:end),10^12*mins(2,1:end),'*')
 legend('origin','offset','data','minima')
 
 %%% Plot of the estimated FD curves
-for i = 1:nmin
+for i = 1:length(Lc)
     Xfit = linspace(0,Lc(i),1000);
     Ffit = fd(Lc(i), Xfit);
     plot(10^9*(Xfit+x0),10^12*Ffit);
@@ -82,8 +83,8 @@ for j = 1:k
     
     %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
     Lc = lsqcurvefit(@(Lc,x)10^12*multi_fd([10^9*x0,Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
-   
-        
+    [Lc, Xfirst, Xlast] = mergeLc(Lc,Xfirst,Xlast);
+    
     
     %%% Plot of the selected datapoints, and the estimated FD curves
     subplot(1,k+1,j+1)
@@ -98,7 +99,7 @@ for j = 1:k
     plot(x0*10^9,0,'o')
     legend('origin','offset')
     
-    for i=1:length(Xlast)
+    for i=1:length(Lc)
         X = 10^9*Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
         Y = 10^12*Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
         Xfit = linspace(0,Lc(i),1000);

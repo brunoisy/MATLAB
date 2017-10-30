@@ -11,7 +11,7 @@ C  = kb*T/lp;
 xlimits = [-10, 200];
 ylimits = [-150, 25];
 
-x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
+x0 = min(dist(force<0))% from physical reality, this is our best guess of the value of x0
 k = 1;% number of iterations of lsq/selection
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

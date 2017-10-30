@@ -1,5 +1,5 @@
 addpath('functions')
-filename = 'data/MAT/data_2/curve_1.mat';
+filename = 'data/MAT/data_2/curve_5.mat';
 %filename = 'data/MAT/data_model/curve_3.mat';
 load(filename)
 
@@ -37,6 +37,8 @@ for i = 1:nmin
     
     Lc(i) = real(thisroots(1));
 end
+
+Lc = merge(Lc);
 
 
 
@@ -81,10 +83,9 @@ for j = 1:k
     
     
     %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
-    x0Lc = lsqcurvefit(@(x0Lc,x)10^12*multi_fd(x0Lc,x,10^9*Xlast), 10^9*[x0, Lc], 10^9*Xsel, 10^12*Fsel)/10^9;
-    x0 = x0Lc(1);
-    Lc = x0Lc(2:end);
-    
+    Lc = lsqcurvefit(@(Lc,x)10^12*multi_fd([10^9*x0,Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
+    Lc = mergeLc(Lc)
+        
     
     %%% Plot of the selected datapoints, and the estimated FD curves
     subplot(1,k+1,j+1)
@@ -116,4 +117,5 @@ for j = 1:k
         %                 Ffit = fd(firstLc(i), Xfit);
         %                 plot(10^9*(Xfit+x0(j)),10^12*Ffit,'k');
     end
+    
 end

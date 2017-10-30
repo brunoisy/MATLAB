@@ -33,15 +33,13 @@ for i = 1:nmin
     end
 end
 
-% thresh = 5*10^-9;
-% % we merge 2 similar minimas by taking their average
-% for i = 1:ngoodmins
-%    if goodmins(1,i+1) - goodmins(1,i) < thresh
-%       goodmins(:,i) = (goodmins(:,i+1)+goodmins(:,i))./2;
-%       goodmins(:,i+1:end-1) = goodmins(:,i+2,end);%UGLYUGLYUGLY
-%       ngoodmins = ngoodmins-1;
-%    end
-% end
+thresh = 5*10^-9;
+% we merge 2 similar minimas by taking their average
+for i = 1:goodmins
+   if goodmins(i+1) - goodmins(i) < thresh
+      go 
+   end
+end
 
 goodmins = goodmins(:,1:ngoodmins);
 
