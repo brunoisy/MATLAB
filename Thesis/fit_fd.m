@@ -1,49 +1,34 @@
-addpath('functions')
-filename = 'data/MAT/data_2/curve_2.mat';
-%filename = 'data/MAT/data_model/curve_3.mat';
+function [] = fit_fd(filename, k, offset)
+% k is the number of lsq+selection steps to apply
+% if offset==true, we apply lsq offset optimization
+
+global C
 load(filename)
 
-kb = 1.38064852e-23;
-T  = 294;
-lp = 0.36*10^-9;
-C  = kb*T/lp;
-
-xlimits = [-10, 200];
+xlimits = [-10, 200];% plotting limits
 ylimits = [-150, 25];
 
 x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
-k = 2;% number of iterations of lsq/selection
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%% First step : find local minimas of the FD profile.
-%%%%%% These will help us estimate the position of the crest
-%%%%%% The first estimations are the FD curves going through the minima
+%%% First step : find local minimas of the FD profile.
+%%% These will help us estimate the position of the crest
+%%% The first estimations are the FD curves going through the minima
 mins   = find_min(dist, force);
-x1     = mins(1,1);
-mins   = mins(:,2:end); %We neglect the first minimum, which is always 'bad'
-nmin   = length(mins);
-
-%%% We find the FD curves going through the minimas, parametrized by Lc
-Lc = zeros(1,nmin);
-for i = 1:nmin
-    xmin = mins(1,i)-x0;% because we want to find Lc wrt x0
-    fmin = mins(2,i);
-    
-    A = 4*fmin/C;
-    p = [A, 2*xmin*(3-A), -xmin^2*(9-A), 4*xmin^3];
-    thisroots = roots(p);
-    thisroots = thisroots(thisroots>0);
-    
-    Lc(i) = real(thisroots(1));
-end
-
-Lc = mergeLc(Lc);
+x1     = mins(1,1);% We will neglect the points <x1
+mins   = mins(:,2:end);% We neglect the first minimum, which is always 'bad'
 
 
+%%% We find the FD curves going through the minimas, parametrized by Lc,
+%%% and merge Lc's that are too close
+Lc = merge_Lc(find_Lc(mins, x0));
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Plot
 figure
 subplot(1,k+1,1)
-
 %%% Plot of the data
 hold on
 title('FD curves fit to minimas')
@@ -67,13 +52,15 @@ for i = 1:length(Lc)
 end
 %firstLc = Lc; (memorized for plot)
 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%% We can now select points that likely belong to the found Fd
-%%%%%% curves, apply least-square-fit to get a better estimate of Lc,
-%%%%%% and iterate
+%%% We can now select points that likely belong to the found Fd
+%%% curves, apply least-square-fit to get a better estimate of Lc,
+%%% and iterate
 
-thresh = 10*10^-12;%
+thresh = 10*10^-12;% selection threshold
 
 
 for j = 1:k
@@ -82,14 +69,24 @@ for j = 1:k
     
     
     %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
-    Lc = lsqcurvefit(@(Lc,x)10^12*multi_fd([10^9*x0,Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
-    [Lc, Xfirst, Xlast] = mergeLc(Lc,Xfirst,Xlast);
+    if(offset == true)
+        x0Lc = lsqcurvefit(@(x0Lc,x)10^12*fd_multi(x0Lc,x,10^9*Xlast), 10^9*[x0, Lc], 10^9*Xsel, 10^12*Fsel)/10^9;
+        x0 = x0Lc(1);
+        Lc = x0Lc(2:end);
+    else
+        Lc = lsqcurvefit(@(Lc,x)10^12*fd_multi([10^9*x0,Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
+    end
+    [Lc, Xfirst, Xlast] = merge_Lc(Lc,Xfirst,Xlast);
     
     
     %%% Plot of the selected datapoints, and the estimated FD curves
     subplot(1,k+1,j+1)
     hold on
-    title('FD curves fit to minimum lsq with offset')
+    if(offset == true)
+        title('FD curves fit to minimum lsq with free offset')
+    else
+        title('FD curves fit to minimum lsq')
+    end
     xlim(xlimits);
     ylim(ylimits);
     xlabel('Distance (nm)');
@@ -117,4 +114,5 @@ for j = 1:k
         %                 plot(10^9*(Xfit+x0(j)),10^12*Ffit,'k');
     end
     
+end
 end

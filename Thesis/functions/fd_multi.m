@@ -1,4 +1,4 @@
-function [ F ] = multi_fd(x0Lc, X, Xlast)
+function [ F ] = fd_multi(x0Lc, X, Xlast)
 % make third arg optional
 
 

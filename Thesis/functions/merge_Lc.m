@@ -1,4 +1,4 @@
-function [Lc, Xfirst, Xlast] = mergeLc(Lc,Xfirst, Xlast)
+function [Lc, Xfirst, Xlast] = merge_Lc(Lc,Xfirst, Xlast)
 %MERGELC Summary of this function goes here
 %   Detailed explanation goes here
 nmin = length(Lc);

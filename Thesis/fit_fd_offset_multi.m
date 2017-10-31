@@ -19,7 +19,7 @@ ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
 
-for filenumber = 1:2%[1,2,3,5,6,10,12,13,14,16,18]
+for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
     filename = strcat(directory,'curve_',int2str(filenumber),'.mat');
     load(filename)
     
@@ -75,15 +75,16 @@ for filenumber = 1:2%[1,2,3,5,6,10,12,13,14,16,18]
         
         
         %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
-        x0Lc = lsqcurvefit(@(x0Lc,x)10^12*multi_fd(x0Lc,x,10^9*Xlast), 10^9*[x0, Lc], 10^9*Xsel, 10^12*Fsel)/10^9;
+        x0Lc = lsqcurvefit(@(x0Lc,x)10^12*fd_multi(x0Lc,x,10^9*Xlast), 10^9*[x0, Lc], 10^9*Xsel, 10^12*Fsel)/10^9;
         x0 = x0Lc(1);
         Lc = x0Lc(2:end);
         Lc = mergeLc(Lc);
     end
     
     %%% Plot of the selected datapoints, and the estimated FD curves
+    filenumber
     x0
-    Lc
+    
     
     plot(0,0,'o')
     plot(x0*10^9,0,'o')

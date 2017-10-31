@@ -11,7 +11,7 @@ xlimits = [-10, 200];
 ylimits = [-150, 25];
 
 Lcs = zeros(10,18);%instead of zeros to avoid bad clustering
-for filenumber = [1:18]%19 is problematic
+for filenumber = 1:18%19 is problematic
     filename = strcat(directory,'curve_',int2str(filenumber),'.mat');
     load(filename)
     
@@ -29,19 +29,8 @@ for filenumber = [1:18]%19 is problematic
     nmin   = length(mins);
     
     %%% We find the FD curves going through the minimas, parametrized by Lc
-    Lc = zeros(1,nmin);
-    for i = 1:nmin
-        xmin = mins(1,i)-x0;% because we want to find Lc wrt x0
-        fmin = mins(2,i);
-        
-        A = 4*fmin/C;
-        p = [A, 2*xmin*(3-A), -xmin^2*(9-A), 4*xmin^3];
-        thisroots = roots(p);
-        thisroots = thisroots(thisroots>0);
-        
-        Lc(i) = real(thisroots(1));
-    end
-    Lc = mergeLc(Lc);
+    Lc = merge_Lc(find_Lc(mins, x0));
+
     
     
     
@@ -61,7 +50,7 @@ for filenumber = [1:18]%19 is problematic
         
         
         %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
-        Lc = lsqcurvefit(@(Lc,x)10^12*multi_fd([10^9*x0,Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
+        Lc = lsqcurvefit(@(Lc,x)10^12*fd_multi([10^9*x0,Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
         [Lc, Xfirst, Xlast] = mergeLc(Lc,Xfirst,Xlast);
     end
     
@@ -117,13 +106,13 @@ end
 
 
 figure
-for filenumber = [1,2][1,2,3,5,6,10,12,13,14,16,18]
+for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
     filename = strcat(directory,'curve_',int2str(filenumber),'.mat');
     load(filename)
     %%% Plot of the data
     x0 = min(dist(force<0));
     
-    subplot(1,2,1)
+    subplot(1,3,1)
     hold on
     title('FD curves fit to minimas')
     xlim(xlimits);
@@ -133,7 +122,7 @@ for filenumber = [1,2][1,2,3,5,6,10,12,13,14,16,18]
     plot(10^9*(dist-x0),10^12*force,'.');
     
     if (filenumber ==1)
-        subplot(1,2,2)
+        subplot(1,3,2)
         hold on
         title('FD curves fit to minimas')
         xlim(xlimits);
@@ -145,19 +134,18 @@ for filenumber = [1,2][1,2,3,5,6,10,12,13,14,16,18]
 end
 
 
-for filenumber = [1,2]%[1,2,3,5,6,10,12,13,14,16,18]
+for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
     filename = strcat(directory,'curve_',int2str(filenumber),'.mat');
     load(filename)
     %%% Plot of the data
-    filenumber
-    x0 = 1/5*sum(Lcs(:,1)-Lcs(:,filenumber))
+    x0 = 1/5*sum(Lcs(:,1)-Lcs(:,filenumber));
     
-    subplot(1,2,2)
+    subplot(1,3,2)
     hold on
     title('FD curves fit to minimas')
     xlim(xlimits);
     ylim(ylimits);
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
-    plot(10^9*(dist-x0),10^12*force,'.');
+    plot(10^9*(dist+x0),10^12*force,'.');
 end
