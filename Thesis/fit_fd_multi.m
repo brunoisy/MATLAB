@@ -51,7 +51,7 @@ for filenumber = 1:18%19 is problematic
         
         %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
         Lc = lsqcurvefit(@(Lc,x)10^12*fd_multi([10^9*x0,Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
-        [Lc, Xfirst, Xlast] = mergeLc(Lc,Xfirst,Xlast);
+        [Lc, Xfirst, Xlast] = merge_Lc(Lc,Xfirst,Xlast);
     end
     
 %     %%% Plot of the selected datapoints, and the estimated FD curves

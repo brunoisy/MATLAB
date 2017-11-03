@@ -8,13 +8,13 @@ global C
 C  = kb*T/lp;
 
 
-filename = 'data/MAT/data_2/curve_2.mat';
+filename = 'data/MAT/data_2/curve_1.mat';
 %filename = 'data/MAT/data_model/curve_3.mat';
-fit_fd(filename, 2, false)
+fit_fd(filename, 1, true)
 
-filename = 'data/MAT/data_2/curve_18.mat';
-fit_fd(filename, 2, true)
-
+% filename = 'data/MAT/data_2/curve_18.mat';
+% fit_fd(filename, 2, true)
+% 
 
 
 

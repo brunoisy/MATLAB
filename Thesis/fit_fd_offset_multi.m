@@ -51,7 +51,7 @@ for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
         
         Lc(i) = real(thisroots(1));
     end
-    Lc = mergeLc(Lc);
+    Lc = merge_Lc(find_Lc(mins, x0));
     
     
     
@@ -76,9 +76,9 @@ for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
         
         %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
         x0Lc = lsqcurvefit(@(x0Lc,x)10^12*fd_multi(x0Lc,x,10^9*Xlast), 10^9*[x0, Lc], 10^9*Xsel, 10^12*Fsel)/10^9;
-        x0 = x0Lc(1);
-        Lc = x0Lc(2:end);
-        Lc = mergeLc(Lc);
+        x0   = x0Lc(1);
+        Lc   = x0Lc(2:end);
+        [Lc, Xfirst, Xlast] = merge_Lc(Lc,Xfirst,Xlast);
     end
     
     %%% Plot of the selected datapoints, and the estimated FD curves

@@ -1,0 +1,11 @@
+filename = 'data/MAT/data_2/curve_1.mat';
+load(filename)
+
+x = [distance; force];
+%%% 1 - We attempt to fit an FD curve to the first crestLc = lsqcurvefit(@(Lc,x)10^12*fd_multi([10^9*x0,Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
+s = 
+[M, inliers] = ransac(x, @fittingfn, @distfn, @degenfn, s, t, feedback, ...
+    maxDataTrials, maxTrials);
+
+% note, distfn should be somewhat different for
+% first crest

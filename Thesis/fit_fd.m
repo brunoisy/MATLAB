@@ -29,7 +29,7 @@ Lc = merge_Lc(find_Lc(mins, x0));
 %%% Plot
 figure
 subplot(1,k+1,1)
-%%% Plot of the data
+
 hold on
 title('FD curves fit to minimas')
 xlim(xlimits);
@@ -37,12 +37,8 @@ ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
 
-plot(0,0,'o')
-plot(x0*10^9,0,'o')
 plot(10^9*dist,10^12*force,'.')
 plot(10^9*mins(1,1:end),10^12*mins(2,1:end),'*')
-
-legend('origin','offset','data','minima')
 
 %%% Plot of the estimated FD curves
 for i = 1:length(Lc)
@@ -82,6 +78,10 @@ for j = 1:k
     %%% Plot of the selected datapoints, and the estimated FD curves
     subplot(1,k+1,j+1)
     hold on
+    plot(0,0,'o')
+    plot(10^9*x0,0,'o')
+    legend('origin','offset')
+
     if(offset == true)
         title('FD curves fit to minimum lsq with free offset')
     else
@@ -91,10 +91,6 @@ for j = 1:k
     ylim(ylimits);
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
-    
-    plot(0,0,'o')
-    plot(x0*10^9,0,'o')
-    legend('origin','offset')
     
     for i=1:length(Lc)
         X = 10^9*Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
