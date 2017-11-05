@@ -4,7 +4,7 @@ function [Lc] = fittingfn(XF)
 X = XF(1,:);
 F = XF(2,:);
 
-Lc = 50*10^-9;
+Lc = find_Lc(XF(:,end),0);%We intitalize Lc at value for last point
 Lc = lsqcurvefit(@(Lc,x)10^12*fd(Lc,x), 10^9*Lc, 10^9*X, 10^12*F)/10^9;
 if(200*10^-9 < Lc)
     Lc = [];

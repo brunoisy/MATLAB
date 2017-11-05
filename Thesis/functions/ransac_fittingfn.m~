@@ -1,6 +1,0 @@
-function [Lc] = ransac_fittingfn(x)
-%finds the Fd curve with the lsq error on x
-
-
-end
-

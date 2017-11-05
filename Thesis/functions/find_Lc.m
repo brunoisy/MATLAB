@@ -6,8 +6,10 @@ T  = 294;% 21°C
 lp = 0.36*10^-9;
 C  = kb*T/lp;
 
-Lc = zeros(1,length(mins));
-for i = 1:length(mins)
+minsize = size(mins);
+minlength = minsize(2);
+Lc = zeros(1,minlength);
+for i = 1:minlength
     xmin = mins(1,i)-x0;% because we want to find Lc wrt x0
     fmin = mins(2,i);
     A = 4*fmin/C;
