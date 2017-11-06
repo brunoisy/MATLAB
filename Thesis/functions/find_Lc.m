@@ -3,7 +3,7 @@ function [Lc] = find_Lc(mins, x0)
 %   Detailed explanation goes here
 kb = 1.38064852e-23;
 T  = 294;% 21°C
-lp = 0.36*10^-9;
+lp = 0.36;
 C  = kb*T/lp;
 
 minsize = size(mins);

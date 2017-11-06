@@ -8,7 +8,7 @@ if(nargin == 1)
 end
 
 % We merge Lc's that are too similar
-thresh = 10*10^-9;
+thresh = 10;
 for i = 1:nmin-1
     if(i<=nmin-1)%very ugly, but necessary (good be better though)
         if (Lc(i+1)-Lc(i))<thresh

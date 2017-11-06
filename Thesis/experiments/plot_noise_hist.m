@@ -3,7 +3,7 @@ load(filename)
 
 kb = 1.38064852e-23;
 T  = 294;% 21°C
-lp = 0.36*10^-9;
+lp = 0.36;
 C  = kb*T/lp;
 
 
@@ -12,13 +12,13 @@ C  = kb*T/lp;
 %%% We will assume those determine the position of a crest
 
 maxmin = 100;
-    mins = find_min(dist, force, maxmin);
-    nmin = length(mins);
+mins = find_min(dist, force, maxmin);
+nmin = length(mins);
 
 
- maxmax = 100;
-    maxs = find_max(dist, force, maxmax);
-    nmax = length(maxs);
+maxmax = 100;
+maxs = find_max(dist, force, maxmax);
+nmax = length(maxs);
 
 
 
@@ -45,20 +45,20 @@ for i=1:nmin
     Fcrest  = force((dist>maxs(1,i)) & (dist < mins(1,i)));
     X = linspace(0,Lc(i)*90/100,1000);
     F = fd(Lc(i),X);
-    noise = (fd(Lc(i),Xcrest)-Fcrest); 
-
+    noise = (fd(Lc(i),Xcrest)-Fcrest);
+    
     figure
     subplot(1,2,1)
     hold on
-    plot(10^9*Xcrest,10^12*Fcrest,'.');
-    plot(10^9*X,10^12*F);
+    plot(Xcrest,Fcrest,'.');
+    plot(X,F);
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
     legend('points considered', 'curve')
     
     subplot(1,2,2)
     hold on
-    hist(noise) 
+    hist(noise)
 end
 
 

@@ -37,14 +37,14 @@ ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
 
-plot(10^9*dist,10^12*force,'.')
-plot(10^9*mins(1,1:end),10^12*mins(2,1:end),'*')
+plot(dist, force,'.')
+plot(mins(1,1:end), mins(2,1:end),'*')
 
 %%% Plot of the estimated FD curves
 for i = 1:length(Lc)
     Xfit = linspace(0,Lc(i),1000);
     Ffit = fd(Lc(i), Xfit);
-    plot(10^9*(Xfit+x0),10^12*Ffit);
+    plot((Xfit+x0), Ffit);
 end
 %firstLc = Lc; (memorized for plot)
 
@@ -56,7 +56,7 @@ end
 %%% curves, apply least-square-fit to get a better estimate of Lc,
 %%% and iterate
 
-thresh = 10*10^-12;% selection threshold
+thresh = 10;% selection threshold
 
 
 for j = 1:k
@@ -66,11 +66,11 @@ for j = 1:k
     
     %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
     if(offset == true)
-        x0Lc = lsqcurvefit(@(x0Lc,x)10^12*fd_multi(x0Lc,x,10^9*Xlast), 10^9*[x0, Lc], 10^9*Xsel, 10^12*Fsel)/10^9;
+        x0Lc = lsqcurvefit(@(x0Lc,x) fd_multi(x0Lc,x,Xlast), [x0, Lc], Xsel,  Fsel);
         x0 = x0Lc(1);
         Lc = x0Lc(2:end);
     else
-        Lc = lsqcurvefit(@(Lc,x)10^12*fd_multi([10^9*x0,Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
+        Lc = lsqcurvefit(@(Lc,x) fd_multi([x0,Lc],x,Xlast), Lc, Xsel,  Fsel);
     end
     [Lc, Xfirst, Xlast] = merge_Lc(Lc,Xfirst,Xlast);
     
@@ -79,7 +79,7 @@ for j = 1:k
     subplot(1,k+1,j+1)
     hold on
     plot(0,0,'o')
-    plot(10^9*x0,0,'o')
+    plot(x0,0,'o')
     legend('origin','offset')
 
     if(offset == true)
@@ -93,21 +93,21 @@ for j = 1:k
     ylabel('Force (pN)');
     
     for i=1:length(Lc)
-        X = 10^9*Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
-        Y = 10^12*Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
+        X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
+        Y =  Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
         Xfit = linspace(0,Lc(i),1000);
         Ffit = fd(Lc(i), Xfit);
         if(mod(i,2) == 0)
             plot(X, Y,'.b');
-            plot(10^9*(Xfit+x0), 10^12*Ffit,'b'); % least square fit
+            plot((Xfit+x0),  Ffit,'b'); % least square fit
         else
             plot(X, Y,'.r');
-            plot(10^9*(Xfit+x0), 10^12*Ffit,'r'); % least square fit
+            plot((Xfit+x0),  Ffit,'r'); % least square fit
         end
         %         %%% plot to initial curves for comparison
         %                 Xfit = linspace(0,firstLc(i),1000);
         %                 Ffit = fd(firstLc(i), Xfit);
-        %                 plot(10^9*(Xfit+x0(j)),10^12*Ffit,'k');
+        %                 plot((Xfit+x0(j)), Ffit,'k');
     end
     
 end

@@ -3,7 +3,7 @@ addpath('functions')
 
 kb = 1.38064852e-23;
 T  = 294;
-lp = 0.36*10^-9;
+lp = 0.36;
 global C
 C  = kb*T/lp;
 

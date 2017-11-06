@@ -7,7 +7,7 @@ ylimits = [-150, 25];
 
 kb = 1.38064852e-23;
 T  = 294;% 21°C
-lp = 0.36*10^-9;
+lp = 0.36;
 C  = kb*T/lp;
 
 x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
@@ -25,8 +25,8 @@ subplot(1,3,1)
 hold on
 xlim(xlimits);
 ylim(ylimits);
-plot(10^9*dist,10^12*force,'.')
-plot(10^9*mins(1,1:end),10^12*mins(2,1:end),'*')
+plot(dist,force,'.')
+plot(mins(1,1:end),mins(2,1:end),'*')
 legend('data','minima')
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
@@ -70,8 +70,8 @@ subplot(1,3,2)
 hold on
 xlim(xlimits);
 ylim(ylimits);
-plot(10^9*dist,10^12*force,'.')
-plot(10^9*mins(1,1:end),10^12*mins(2,1:end),'*')
+plot(dist,force,'.')
+plot(mins(1,1:end),mins(2,1:end),'*')
 legend('data','minima')
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
@@ -80,7 +80,7 @@ title('FD curves parallel simpified')
 for i = 1:length(mins)
     X = linspace(0,Lc(i)*95/100,1000);
     F = fd(Lc(i),X);
-    plot(10^9*(X+x0),10^12*F);
+    plot((X+x0),F);
 end
 
 

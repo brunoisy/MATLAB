@@ -5,13 +5,13 @@ load(filename)
 
 kb = 1.38064852e-23;
 T  = 294;
-lp = 0.36*10^-9;
+lp = 0.36;
 C  = kb*T/lp;
 
 xlimits = [-10, 200];
 ylimits = [-150, 25];
 
-x0 = [0, 2, 4, 6, 8, 10, 12, 14]*10^-9;
+x0 = [0, 2, 4, 6, 8, 10, 12, 14];
 %x0 = [-6, -4, -2, 0, 2, 4, 6]*10^-9;
 
 k = length(x0);
@@ -52,14 +52,14 @@ for j = 1:k
     %%%%%% curves, apply least-square-fit to get a better estimate of Lc,
     %%%%%% and iterate
     
-    thresh = 10*10^-12;%
+    thresh = 10;%
     
     %%% We select all the points that we will try to fit
     [Xsel, Fsel, Xfirst, Xlast] = select_points(dist, force, x0(j), Lc, thresh, x1);
     
     
     %%% to do lsqfit, we need to convert to pN/nm and back (solves scaling issues)
-    Lc = lsqcurvefit(@(Lc,x)10^12*multi_fd([10^9*x0(j), Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
+    Lc = lsqcurvefit(@(Lc,x)multi_fd([x0(j), Lc],x,Xlast), Lc, Xsel, Fsel);
     error(j) = sum((Fsel - multi_fd([x0(j), Lc],Xsel,Xlast)).^2)/length(Xsel);%mean quadratic error
     
     
@@ -73,21 +73,21 @@ for j = 1:k
     ylabel('Force (pN)');
     
     plot(0,0,'o')
-    plot(x0(j)*10^9,0,'o')
+    plot(x0(j),0,'o')
     legend('origin','offset')
     
     for i=1:length(Xlast)
-        X = 10^9*Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
-        Y = 10^12*Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
+        X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
+        Y = Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
         Xfit = linspace(0,Lc(i),1000);
         Ffit = fd(Lc(i), Xfit);
         
         if(mod(i,2) == 0)
             plot(X, Y,'.b');
-            plot(10^9*(Xfit+x0(j)), 10^12*Ffit,'b'); % least square fit
+            plot(Xfit+x0(j), Ffit,'b'); % least square fit
         else
             plot(X, Y,'.r');
-            plot(10^9*(Xfit+x0(j)), 10^12*Ffit,'r'); % least square fit
+            plot(Xfit+x0(j), Ffit,'r'); % least square fit
         end
         %         %%% plot to initial curves for comparison
         %                 Xfit = linspace(0,firstLc(i),1000);

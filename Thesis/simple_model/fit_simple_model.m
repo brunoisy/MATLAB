@@ -1,7 +1,7 @@
 global C
 kb = 1.38064852e-23;
 T  = 294;% 21°C
-lp = 0.36*10^-9;
+lp = 0.36;
 C  = kb*T/lp;
 
 
@@ -29,8 +29,8 @@ for filenumber = 1
     
     figure
     hold on
-    plot(10^9*dist,10^12*force,'.')
-    plot(10^9*mins(1,1:end),10^12*mins(2,1:end),'*')
+    plot(dist,force,'.')
+    plot(mins(1,1:end),mins(2,1:end),'*')
     legend('data','minima')
     
     Lc = zeros(1,nmin);
@@ -48,7 +48,7 @@ for filenumber = 1
     for i=1:nmin
         X = linspace(0,Lc(i)*95/100,1000);
         F = fd_curve(Lc(i),X);
-        plot(10^9*X,10^12*F);
+        plot(X,F);
         title('FD curves fit to minimas')
         xlabel('Distance (nm)');
         ylabel('Force (pN)');
@@ -84,9 +84,9 @@ for i = 1:nmin
     
     %%% second step is to use these curves as starting point and use minimum
     
-    plot(10^9*Xs, 10^12*Fs,'.'); %initial datapoints
+    plot(Xs, Fs,'.'); %initial datapoints
     X = linspace(0,Lfit(i)*95/100,1000);
-    plot(10^9*X, 10^12*fd_curve(Lfit(i),X)); %least square fit
+    plot(X, fd_curve(Lfit(i),X)); %least square fit
     title('FD curves fit to least squares')
     xlabel('Distance (nm)');
     ylabel('Force (pN)');

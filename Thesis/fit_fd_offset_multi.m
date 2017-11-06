@@ -4,7 +4,7 @@ directory = 'data/MAT/data_2/';
 
 kb = 1.38064852e-23;
 T  = 294;
-lp = 0.36*10^-9;
+lp = 0.36;
 C  = kb*T/lp;
 
 xlimits = [-10, 200];
@@ -66,7 +66,7 @@ for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
     %%%%%% curves, apply least-square-fit to get a better estimate of Lc,
     %%%%%% and iterate
     
-    thresh = 10*10^-12;%
+    thresh = 10;%
     
     
     for j = 1:k
@@ -74,8 +74,7 @@ for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
         [Xsel, Fsel, Xfirst, Xlast] = select_points(dist, force, x0, Lc, thresh, x1);
         
         
-        %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
-        x0Lc = lsqcurvefit(@(x0Lc,x)10^12*fd_multi(x0Lc,x,10^9*Xlast), 10^9*[x0, Lc], 10^9*Xsel, 10^12*Fsel)/10^9;
+        x0Lc = lsqcurvefit(@(x0Lc,x)fd_multi(x0Lc,x,Xlast), [x0, Lc], Xsel, Fsel);
         x0   = x0Lc(1);
         Lc   = x0Lc(2:end);
         [Lc, Xfirst, Xlast] = merge_Lc(Lc,Xfirst,Xlast);
@@ -87,8 +86,8 @@ for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
     
     
     plot(0,0,'o')
-    plot(x0*10^9,0,'o')
+    plot(x0,0,'o')
     legend('origin','offset')
-    plot(10^9*(dist+x0),10^12*force,'.')
+    plot(dist+x0,force,'.')
     
 end

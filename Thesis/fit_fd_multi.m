@@ -4,7 +4,7 @@ directory = 'data/MAT/data_2/';
 
 kb = 1.38064852e-23;
 T  = 294;
-lp = 0.36*10^-9;
+lp = 0.36;
 C  = kb*T/lp;
 
 xlimits = [-10, 200];
@@ -41,7 +41,7 @@ for filenumber = 1:18%19 is problematic
     %%%%%% curves, apply least-square-fit to get a better estimate of Lc,
     %%%%%% and iterate
     
-    thresh = 10*10^-12;%
+    thresh = 10;%pN
     
     
     for j = 1:k
@@ -50,7 +50,7 @@ for filenumber = 1:18%19 is problematic
         
         
         %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
-        Lc = lsqcurvefit(@(Lc,x)10^12*fd_multi([10^9*x0,Lc],x,10^9*Xlast), 10^9*Lc, 10^9*Xsel, 10^12*Fsel)/10^9;
+        Lc = lsqcurvefit(@(Lc,x)fd_multi([x0,Lc],x,Xlast), Lc, Xsel, Fsel);
         [Lc, Xfirst, Xlast] = merge_Lc(Lc,Xfirst,Xlast);
     end
     
@@ -119,7 +119,7 @@ for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
     ylim(ylimits);
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
-    plot(10^9*(dist-x0),10^12*force,'.');
+    plot((dist-x0),force,'.');
     
     if (filenumber ==1)
         subplot(1,3,2)
@@ -129,7 +129,7 @@ for filenumber = [1,2,3,5,6,10,12,13,14,16,18]
         ylim(ylimits);
         xlabel('Distance (nm)');
         ylabel('Force (pN)');
-        plot(10^9*dist,10^12*force,'.');
+        plot(dist,force,'.');
     end
 end
 
