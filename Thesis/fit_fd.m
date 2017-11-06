@@ -6,7 +6,7 @@ global C
 load(filename)
 
 xlimits = [-10, 200];% plotting limits
-ylimits = [-150, 25];
+ylimits = [-200, 25];%[-150, 25];
 
 x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
 

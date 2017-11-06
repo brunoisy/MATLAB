@@ -118,8 +118,6 @@
 % June     2009 - Argument 'MaxTrials' corrected to 'maxTrials'!
 % January  2013 - Separate code path for Octave no longer needed
 
-
-
 function [M, inliers] = ransac(x, fittingfn, distfn, degenfn, s, t, feedback, ...
                                maxDataTrials, maxTrials)
 
@@ -194,7 +192,7 @@ function [M, inliers] = ransac(x, fittingfn, distfn, degenfn, s, t, feedback, ..
         % Find the number of inliers to this model.
         ninliers = length(inliers);
         
-        while ninliers > bestscore    % Largest set of inliers so far...
+        if ninliers > bestscore    % Largest set of inliers so far...
             bestscore = ninliers;  % Record data for this model
             bestinliers = inliers;
             bestM = M;

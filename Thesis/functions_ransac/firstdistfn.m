@@ -1,4 +1,4 @@
-function [inliers, Lc] = distfn(Lc, x, thresh)
+function [inliers, Lc] = firstdistfn(Lc, x, thresh)
 %DISTFN Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -13,14 +13,21 @@ F = x(2,:);
 inliers = 1:length(X);
 inliers = inliers(X < Lc & abs(F-fd(Lc, X)) < thresh);%inliers(X < Lc & F < fd(Lc, X)+thresh);%
 
+
+j = 0;
 for i = 1:length(inliers)
-    if inliers(i) ~= i
-        if i==1
-            inliers = [];
+    if i+j ~= inliers(i)
+        if j==0
+            j = inliers(i)-i;
         else
-            inliers = inliers(1:i-1);
+            if i==1
+                inliers = [];
+            else
+                inliers = inliers(1:i-1);
+            end
+            break
         end
-        break
     end
 end
+
 end

@@ -120,7 +120,11 @@
 
 
 
-function [M, inliers] = ransac(x, fittingfn, distfn, degenfn, s, t, feedback, ...
+
+%%% Modified by Bruno in the following ways :
+%%% the first point is always selected as part of ...
+
+function [M, inliers] = ransac(x, fittingfn, distfn, degenfn, s, thresh, feedback, ...
     maxDataTrials, maxTrials)
 
 % Test number of parameters
@@ -132,15 +136,13 @@ if nargin < 7; feedback = 0;        end;
 
 [rows, npts] = size(x);
 
-p = 0.99;         % Desired probability of choosing at least one sample
-% free from outliers (probably should be a parameter)
 
 bestM = NaN;      % Sentinel value allowing detection of solution failure.
 trialcount = 0;
 bestscore =  0;
 N = 1;            % Dummy initialisation for number of trials.
 
-while 1
+while true
     
     % Select at random s datapoints to form a trial model, M.
     % In selecting these points we have to check that they are not in
@@ -151,10 +153,11 @@ while 1
         % Generate s random indicies in the range 1..npts
         % (If you do not have the statistics toolbox with randsample(),
         % use the function RANDOMSAMPLE from my webpage)
-        if ~exist('randsample', 'file')
-            ind = randomsample(npts, s);
+        if s==1
+            ind = 1;
         else
-            ind = randsample(npts, s);
+            ind = [1; randsample(npts, s-1)];
+            
         end
         
         % Test that these points are not a degenerate configuration.
@@ -183,37 +186,28 @@ while 1
         end
     end
     
+    
+    
+    
     % Once we are out here we should have some kind of model...
     % Evaluate distances between points and model returning the indices
     % of elements in x that are inliers.  Additionally, if M is a cell
     % array of possible models 'distfn' will return the model that has
     % the most inliers.  After this call M will be a non-cell object
     % representing only one model.
-    [inliers, M] = feval(distfn, M, x, t);
+    [inliers, M] = feval(distfn, M, x, thresh);
     
     % Find the number of inliers to this model.
     ninliers = length(inliers);
     
-%     while ninliers > bestscore% Modified by Bruno (iterative)
-%         M = feval(fittingfn, x(:,inliers));% Added by Bruno
-     if ninliers > bestscore
-        
+    while ninliers > bestscore% Modified by Bruno (iterative)
         bestscore = ninliers;% Record data for this model
         bestinliers = inliers;
         bestM = M;
         
-%         % Update estimate of N, the number of trials to ensure we pick,
-%         % with probability p, a data set with no outliers.
-%         fracinliers =  ninliers/npts;
-%         pNoOutliers = 1 -  fracinliers^s;
-%         pNoOutliers = max(eps, pNoOutliers);  % Avoid division by -Inf
-%         pNoOutliers = min(1-eps, pNoOutliers);% Avoid division by 0.
-%         N = log(1-p)/log(pNoOutliers); 
-        % This is ill-advised in our case : there will always be outliers!
-        % we aren't trying to fit a whole model
-        
-%         [inliers, M] = feval(distfn, M, x, t);% Added by Bruno
-%         ninliers = length(inliers);% Added by Bruno
+        M = feval(fittingfn, x(:,inliers));% Added by Bruno
+        [inliers, M] = feval(distfn, M, x, thresh);% Added by Bruno
+        ninliers = length(inliers);% Added by Bruno
     end
     
     trialcount = trialcount+1;
@@ -235,7 +229,6 @@ if feedback, fprintf('\n'); end
 if ~isnan(bestM)   % We got a solution
     M = bestM;
     inliers = bestinliers;
-    %M = feval(fittingfn, x(:,inliers));% fittingfn(x(:,inliers));
 else
     M = [];
     inliers = [];
