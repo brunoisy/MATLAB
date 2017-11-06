@@ -1,10 +1,7 @@
 filename = strcat('data/MAT/data_2/curve_1.mat');
 load(filename)
 
-kb = 1.38064852e-23;
-T  = 294;% 21°C
-lp = 0.36;
-C  = kb*T/lp;
+load('constants.mat')
 
 
 

@@ -2,7 +2,7 @@ function [] = fit_fd(filename, k, offset)
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
 
-global C
+load('constants.mat')
 load(filename)
 
 xlimits = [-10, 200];% plotting limits

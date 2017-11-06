@@ -1,10 +1,7 @@
 function [Lc] = find_Lc(mins, x0)
 %FIND_LC Summary of this function goes here
 %   Detailed explanation goes here
-kb = 1.38064852e-23;
-T  = 294;% 21°C
-lp = 0.36;
-C  = kb*T/lp;
+load('constants.mat')
 
 minsize = size(mins);
 minlength = minsize(2);

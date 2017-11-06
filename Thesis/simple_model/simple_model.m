@@ -1,10 +1,7 @@
 % this model generates data following a simple molecule model
 rng(3)
 
-kb = 1.38064852e-23;
-T  = 294;% 21°C
-lp = 0.36;
-C  = kb*T/lp;
+load('constants.mat')
 
 x0 = 10;%very high value! to test offset detection
 Lc = [33, 50, 92, 107, 130, 151]; % Example of possible model parameters

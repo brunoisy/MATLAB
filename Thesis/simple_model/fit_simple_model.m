@@ -1,8 +1,4 @@
-global C
-kb = 1.38064852e-23;
-T  = 294;% 21°C
-lp = 0.36;
-C  = kb*T/lp;
+load('constants.mat')
 
 
 for filenumber = 1

@@ -3,10 +3,8 @@ filename = 'data/MAT/data_2/curve_1.mat';
 %filename = 'data/MAT/data_model/curve_3.mat';
 load(filename)
 
-kb = 1.38064852e-23;
-T  = 294;
-lp = 0.36;
-C  = kb*T/lp;
+load('constants.mat')
+
 
 xlimits = [-10, 200];
 ylimits = [-150, 25];

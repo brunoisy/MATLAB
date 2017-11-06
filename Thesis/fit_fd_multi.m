@@ -2,10 +2,7 @@ directory = 'data/MAT/data_2/';
 %directory = 'data/MAT/data_1/good/';
 %directory = 'data/MAT/data_1/bad/';
 
-kb = 1.38064852e-23;
-T  = 294;
-lp = 0.36;
-C  = kb*T/lp;
+load('constants.mat')
 
 xlimits = [-10, 200];
 ylimits = [-150, 25];

@@ -5,10 +5,8 @@ load(filename)
 xlimits = [-10, 200];
 ylimits = [-150, 25];
 
-kb = 1.38064852e-23;
-T  = 294;% 21°C
-lp = 0.36;
-C  = kb*T/lp;
+load('constants.mat')
+
 
 x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
 

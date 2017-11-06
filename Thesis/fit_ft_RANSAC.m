@@ -43,7 +43,7 @@ xlabel('Distance (nm)');
 ylabel('Force (pN)');
 
 thresh = 10;
-[~, inliers] = ransac(x, @linefittingfn, @linedistfn, @degenfn, 3, thresh, 1, 1000, 1000);
+[~, inliers] = ransac(x, @linefittingfn, @linedistfn, @degenfn, 3, thresh, 1, 1000, 100);
 xinliers = x(:,inliers);
 
 
@@ -61,6 +61,28 @@ xlim(xlimits);
 ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
+
+
+thresh = 10;
+[~, inliers] = ransac(x, @linefittingfn, @linedistfn, @degenfn, 3, thresh, 1, 1000, 100);
+xinliers = x(:,inliers);
+
+
+subplot(1,2,2)
+hold on 
+plot(xinliers(1,:), xinliers(2,:),'.')
+ab = polyfit(xinliers(1,:), xinliers(2,:), 1);
+a = ab(1);
+b = ab(2);
+X = linspace(xinliers(1,1),xinliers(1,end));
+F = a*X+b;
+plot(X,F)
+
+xlim(xlimits);
+ylim(ylimits);
+xlabel('Distance (nm)');
+ylabel('Force (pN)');
+
 % 
 % subplot(1,2,2)
 % hold on
