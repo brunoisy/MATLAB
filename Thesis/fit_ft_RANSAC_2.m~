@@ -1,0 +1,55 @@
+addpath('functions')
+addpath('functions_ransac')
+
+filename = 'data/MAT/data_2/curve_1.mat';
+load(filename)
+
+x = [dist; force]; 
+%x = x(:, 211:end); %simplification of problem !!
+
+
+s = 3;
+allinliers = {};
+startinliers = 0;
+
+for i=1%:4%1:5% to change!!
+    thresh = 20;
+    [~,inliers] = ransac(x(:,startinliers+1:end), @fittingfn, @distfn_2, @degenfn, s, thresh, 1, 1000, 100);
+    allinliers{1,i} = startinliers + inliers;
+    startinliers = startinliers + inliers(end);
+end
+
+%%%% Plot
+xlimits = [-10, 200];
+ylimits = [-150, 400];
+figure
+subplot(1,2,1)
+hold on
+plot(x(1,:), x(2,:),'.')
+xlim(xlimits);
+ylim(ylimits);
+xlabel('Distance (nm)');
+ylabel('Force (pN)');
+
+
+
+
+subplot(1,2,2)
+hold on
+xlim(xlimits);
+ylim(ylimits);
+xlabel('Distance (nm)');
+ylabel('Force (pN)');
+
+
+for i = 1
+    xinliers = x(:,allinliers{1,i});
+    plot(xinliers(1,:), xinliers(2,:),'.')
+    
+    Lc = fittingfn(xinliers);
+    X = linspace(0,Lc);
+    F = fd(Lc, X);
+    plot(X,F)
+
+end
+
