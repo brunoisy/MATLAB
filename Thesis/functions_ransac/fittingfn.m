@@ -4,12 +4,12 @@ function [Lc] = fittingfn(XF)
 X = XF(1,:);
 F = XF(2,:);
 
-Lc = find_Lc(XF(:,end),0);%We intitalize Lc at value for last point
-Lc = lsqcurvefit(@fd, Lc, X, F);
-if(200 < Lc)
-    Lc = [];
+if length(X) == 1 % for speed
+    Lc = find_Lc(XF, 0);
+else
+    Lc = 200;
+    Lc = lsqcurvefit(@fd, Lc, X, F);
 end
-
 
 end
 

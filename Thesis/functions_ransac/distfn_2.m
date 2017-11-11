@@ -2,33 +2,20 @@ function [inliers, Lc] = distfn_2(Lc, x, thresh)
 %DISTFN Summary of this function goes here
 %   Detailed explanation goes here
 
-if isempty(x)
-    print('empty x!')
+if isempty(x) || isempty(Lc)
+    'empty x!'
     inliers = [];
     return
 end
 X = x(1,:);
 F = x(2,:);
 
-% Xadmiss = X(X < Lc);
-% Fadmiss = F(F < Lc);
-%
-% %%% we need to enforce some measure of temporal consistency!
-% approx_error = abs(Fadmiss-fd(Lc, Xadmiss));
-% inliers = zeros(1, length(Xadmiss));
-% j = 0;
-% for i = 1:length(Xadmiss)
-%     if (approx_error(i) < thresh)
-% end
-% inliers = inliers(1,1:j);
-
 
 error = abs(F-fd(Lc, X));
 inliers = 1:length(X);
-inliers = inliers(X < Lc & error < thresh);%inliers(X < Lc & F < fd(Lc, X)+thresh);%
+inliers = inliers(X < Lc & error < thresh);
 
-% We enforce temporal consistency %take longest interval instead of first?
-% ??
+% We enforce temporal consistency 
 for i = 1:length(inliers)
     if inliers(i) ~= inliers(1)-1+i
         inliers = inliers(1:i-1);
@@ -36,11 +23,12 @@ for i = 1:length(inliers)
     end
 end
 
+
 % We remove outliers from limits of inlier interval by applying more
 % stringent test
 start = 1;
 for i = 1:length(inliers)
-    if(error(inliers(i))< thresh/3)
+    if(error(inliers(i)) < thresh/5)
         inliers = inliers(start:end);
         break
     else
@@ -50,7 +38,7 @@ end
 
 stop = length(inliers);
 for i = length(inliers):-1:i
-    if(error(inliers(i))< thresh/3)
+    if(error(inliers(i))< thresh/5)
         inliers = inliers(1:stop);
         break
     else
@@ -58,26 +46,9 @@ for i = length(inliers):-1:i
     end
 end
 
-
-
-% % We enforce temporal consistency, and apply more stringent test at start to avoid taking in outliers
-% in_start = 1;
-% start = 1;
-% stop = length(inliers);
-% for i = 1:length(inliers)
-%     if in_start
-%         if(abs(F(inliers(i))-fd(Lc,X(inliers(i)))) < thresh/2)
-%             in_start = 0;
-%         else
-%             start = start+1;
-%         end
-%     end
-%     if inliers(i) ~= inliers(1)-1+i
-%         stop = i-1;
-%         break
-%     end
-% end
-inliers = inliers(start:stop);
-
+% We impose the last point to be lower than the first
+if ~isempty(inliers) && F(inliers(1)) < F(inliers(end))
+    inliers = [];
+end
 
 end

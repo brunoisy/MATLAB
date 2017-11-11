@@ -125,11 +125,12 @@
 %%% the first point is always selected as part of ...
 
 function [M, inliers] = ransac(x, fittingfn, distfn, degenfn, s, thresh, feedback, ...
-    maxDataTrials, maxTrials, firstPoint)
+    maxDataTrials, maxTrials, firstPoint, lastPoint)
 
 % Test number of parameters
-error ( nargchk ( 6, 10, nargin ) );
+error ( nargchk ( 6, 11, nargin ) );
 
+if nargin < 11; lastPoint = false;  end;
 if nargin < 10; firstPoint = false;  end;
 if nargin < 9; maxTrials = 1000;    end;
 if nargin < 8; maxDataTrials = 100; end;
@@ -160,8 +161,10 @@ while true
         %             ind = [1; randsample(npts, s-1)];
         %
         %         end
-        if firstPoint
-            ind = [2; randsample(npts, s-2)];
+        if lastPoint
+            ind = [npts; randsample(npts, s-1)];
+        elseif firstPoint
+            ind = [1; randsample(npts, s-1)];
         else
             ind = randsample(npts, s);
         end
@@ -216,6 +219,8 @@ while true
         ninliers = length(inliers);% Added by Bruno
     end
     
+    
+    
     trialcount = trialcount+1;
     if feedback
         fprintf('trial %d out of %d         \r',trialcount, maxTrials);
@@ -236,7 +241,7 @@ if ~isnan(bestM)   % We got a solution
     M = bestM;
     inliers = bestinliers;
 else
-    M = []; 
+    M = [];
     inliers = [];
     warning('ransac was unable to find a useful solution');
 end

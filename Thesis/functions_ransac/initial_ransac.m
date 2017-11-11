@@ -118,7 +118,7 @@
 % June     2009 - Argument 'MaxTrials' corrected to 'maxTrials'!
 % January  2013 - Separate code path for Octave no longer needed
 
-function [M, inliers] = ransac(x, fittingfn, distfn, degenfn, s, t, feedback, ...
+function [M, inliers] = initial_ransac(x, fittingfn, distfn, degenfn, s, t, feedback, ...
                                maxDataTrials, maxTrials)
 
     % Test number of parameters

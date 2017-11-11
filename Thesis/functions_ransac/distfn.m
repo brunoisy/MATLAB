@@ -11,7 +11,7 @@ X = x(1,:);
 F = x(2,:);
 
 inliers = 1:length(X);
-inliers = inliers(X < Lc & abs(F-fd(Lc, X)) < thresh);%inliers(X < Lc & F < fd(Lc, X)+thresh);%
+inliers = inliers(X < Lc & abs(F-fd(Lc, X)) < thresh);
 
 for i = 1:length(inliers)
     if inliers(i) ~= i
