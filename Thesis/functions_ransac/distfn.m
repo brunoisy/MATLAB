@@ -15,7 +15,7 @@ error = abs(F-fd(Lc, X));
 inliers = 1:length(X);
 inliers = inliers(X < Lc & error < thresh);
 
-% We enforce temporal consistency 
+% We enforce strict temporal consistency 
 for i = 1:length(inliers)
     if inliers(i) ~= inliers(1)-1+i
         inliers = inliers(1:i-1);
