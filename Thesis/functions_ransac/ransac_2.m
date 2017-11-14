@@ -139,7 +139,7 @@ if nargin < 7; feedback = 0;        end;
 
 bestLc = NaN;      % Sentinel value allowing detection of solution failure.
 trialcount = 0;
-minscore =  15;  % We need at least inliers to consider a model valid
+minscore =  10;  % We need at least inliers to consider a model valid
 besterror = Inf;
 
 while true
@@ -148,7 +148,8 @@ while true
     if firstPoint
         ind = [1; randsample(npts, s-1)];
     else
-        ind = randsample(npts, s); % skew distribution toward first points?
+        %ind = randsample(npts, s); % skew distribution toward first points?
+        ind = min(poissrnd(30), npts);
     end
     Lc = feval(fittingfn, x(:,ind));
     
@@ -164,14 +165,10 @@ while true
     % representing only one model.
     [inliers, Lc, error] = feval(distfn, Lc, x, thresh);
     
-    
-    
     % Find the number of inliers to this model.
     ninliers = length(inliers);
     
-    while ninliers > minscore && error < besterror
-
-        
+    while ninliers > minscore && error < besterror %will never iterate more than twice
         bestinliers = inliers;
         bestLc = Lc;
         besterror = error;

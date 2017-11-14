@@ -19,13 +19,16 @@ inliers = 1:length(Xin);
 
 %%% cut off outliers at end
 for i = max(length(Xin(Xin<=upbd)),1):length(Xin)
-    if abs(Fin(i)-fd(Lc,Xin(i))) > thresh
+    if Fin(i)-fd(Lc,Xin(i)) > thresh
         inliers = inliers(Xin < Xin(i));
         break
     end
 end
-error = mean((F(inliers)-fd(Lc, X(inliers))).^2);
-
+if isempty(inliers)
+    error = Inf;
+else
+    error = mean((F(inliers)-fd(Lc, X(inliers))).^2);
+end
 
 % %%% cut off outliers at start
 % for i = 1:length(Xin(Xin<=lobd))
@@ -35,7 +38,7 @@ error = mean((F(inliers)-fd(Lc, X(inliers))).^2);
 %     end
 % end
 % if i == length(Xin(Xin<=lobd))
-%    inliers = inliers(lobd < Xin); 
+%    inliers = inliers(lobd < Xin);
 % end
 
 
