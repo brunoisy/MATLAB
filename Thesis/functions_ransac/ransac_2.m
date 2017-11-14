@@ -139,58 +139,19 @@ if nargin < 7; feedback = 0;        end;
 
 bestLc = NaN;      % Sentinel value allowing detection of solution failure.
 trialcount = 0;
-minscore =  15;  % We need at least inliers to consider a model valid 
+minscore =  15;  % We need at least inliers to consider a model valid
 besterror = Inf;
 
 while true
     
-    % Select at random s datapoints to form a trial model, Lc.
-    % In selecting these points we have to check that they are not in
-    % a degenerate configuration.
-    degenerate = 1;
-    count = 1;
-    while degenerate
-        % Generate s random indicies in the range 1..npts
-        % (If you do not have the statistics toolbox with randsample(),
-        % use the function RANDOLcSALcPLE from my webpage)
-        %         if s==1
-        %             ind = 1;
-        %         else
-        %             ind = [1; randsample(npts, s-1)];
-        %
-        %         end
-
-        if firstPoint
-            ind = [1; randsample(npts, s-1)];
-        else
-            ind = randsample(npts, s);
-        end
-        
-        % Test that these points are not a degenerate configuration.
-        degenerate = feval(degenfn, x(:,ind));
-        
-        if ~degenerate
-            % Fit model to this random selection of data points.
-            % Note that Lc may represent a set of models that fit the data in
-            % this case Lc will be a cell array of models
-            Lc = feval(fittingfn, x(:,ind));
-            
-            % Depending on your problem it might be that the only way you
-            % can determine whether a data set is degenerate or not is to
-            % try to fit a model and see if it succeeds.  If it fails we
-            % reset degenerate to true.
-            if isempty(Lc)
-                degenerate = 1;
-            end
-        end
-        
-        % Safeguard against being stuck in this loop forever
-        count = count + 1;
-        if count > maxDataTrials
-            warning('Unable to select a nondegenerate data set');
-            break
-        end
+    
+    if firstPoint
+        ind = [1; randsample(npts, s-1)];
+    else
+        ind = randsample(npts, s); % skew distribution toward first points?
     end
+    Lc = feval(fittingfn, x(:,ind));
+    
     
     
     
@@ -203,10 +164,14 @@ while true
     % representing only one model.
     [inliers, Lc, error] = feval(distfn, Lc, x, thresh);
     
+    
+    
     % Find the number of inliers to this model.
     ninliers = length(inliers);
     
     while ninliers > minscore && error < besterror
+
+        
         bestinliers = inliers;
         bestLc = Lc;
         besterror = error;
