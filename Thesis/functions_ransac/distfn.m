@@ -9,7 +9,7 @@ if isempty(x) || isempty(Lc)%usefull??
 end
 
 
-upbd = 0.7*Lc;
+upbd = 0.8*Lc;
 
 X = x(1,:);
 F = x(2,:);

@@ -121,7 +121,7 @@
 
 
 
-%%% Lcodified by Bruno in the following ways :
+%%% Modified by Bruno in the following ways :
 %%% the first point is always selected as part of ...
 
 function [Lc, inliers] = ransac_2(x, fittingfn, distfn, degenfn, s, thresh, feedback, ...
@@ -169,7 +169,8 @@ while true
     % Find the number of inliers to this model.
     ninliers = length(inliers);
     
-    while ninliers > minscore && error < ninliers/length(bestinliers)*besterror %will never iterate more than twice
+    while ninliers > minscore && error < besterror%error < ninliers/length(bestinliers)*besterror 
+        %will never iterate more than twice
         bestinliers = inliers;
         bestLc = Lc;
         besterror = error;

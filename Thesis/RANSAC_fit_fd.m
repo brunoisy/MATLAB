@@ -1,14 +1,8 @@
-addpath('functions')
-addpath('functions_ransac')
-
-filename = 'data/MAT/data_2/curve_1.mat';
-%filename = 'data/MAT/data_1/good/curve_2.mat';
+function [] = RANSAC_fit_fd(filename)
 
 load(filename)
 x = [dist; force];
 %x = preprocess(x);
-
-index = 1:length(x);
 free = true(1,length(x));
 
 maxLc = 220;
@@ -43,7 +37,7 @@ for i = 1:maxnLc
     inliers         = start_ind+inliers;
     allinliers{2+i} = inliers;
     start_ind       = inliers(end);
-
+    
     free(1:start_ind) = false(1,start_ind);
     
     Lc(i) = fittingfn(x(:,inliers));
@@ -112,3 +106,4 @@ for i = 1:nLc
     plot(X,F)
 end
 
+end
