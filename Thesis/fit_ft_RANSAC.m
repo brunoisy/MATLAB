@@ -24,7 +24,7 @@ allinliers{1,1} = inliers;
 startinliers = startinliers + inliers(end);
 
 
-%%% 1 - We fit a horizontal line to the last points, to get rid of end
+%%% 2 - We fit a horizontal line to the last points, to get rid of end
 %%% noise
 thresh = 20;
 [~, inliers] = ransac(x(:,startinliers:end), @linefittingfn, @linedistfn_2, @degenfn, 5, thresh, 1, 10, 200, false, true);
