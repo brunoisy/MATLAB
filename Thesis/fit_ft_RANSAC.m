@@ -1,62 +1,61 @@
 addpath('functions')
 addpath('functions_ransac')
 
-filename = 'data/MAT/data_2/curve_8.mat';
+filename = 'data/MAT/data_2/curve_1.mat';
 %filename = 'data/MAT/data_1/good/curve_2.mat';
 
 load(filename)
-%
-% force = force(dist>0);
-% dist = dist(dist>0);
-% dist = dist - dist(1);
 x = [dist; force];
+%x = preprocess(x);
 
-s = 3;
-allinliers = {};
-startinliers = 1;
+index = 1:length(x);
+free = true(1,length(x));
+
+maxLc = 220;
+maxnLc = 10;
+Lc = zeros(1,maxnLc);
+allinliers = cell(1,maxnLc);
 
 
-
-%%% 1 - We fit a first line to the profile, to get rid of approaching phase
+%%% 1 - We fit two line to the profile, to get rid of approaching phase
 thresh = 8;
-[~, inliers] = ransac(x(:,startinliers:end), @linefittingfn, @linedistfn, @degenfn, 3, thresh, 1, 10, 200, true);
-allinliers{1,1} = inliers;
-startinliers = startinliers + inliers(end);
+[~, inliers]  = ransac(x(:,free), @linefittingfn, @linedistfn, @degenfn, 2, thresh, 1, 10, 50, true);
+allinliers{1} = inliers;
+start_ind     = inliers(end);
+free(1:start_ind) = false(1,start_ind);
+
+thresh = 2;
+[~, inliers]  = ransac(x(:,free), @linefittingfn, @linedistfn, @degenfn, 2, thresh, 1, 10, 50, true);
+inliers       = start_ind+inliers;
+allinliers{2} = inliers;
+start_ind     = inliers(end);
+free(1:start_ind) = false(1,start_ind);
 
 
-%%% 2 - We fit a horizontal line to the last points, to get rid of end
-%%% noise
-thresh = 20;
-[~, inliers] = ransac(x(:,startinliers:end), @linefittingfn, @linedistfn_2, @degenfn, 5, thresh, 1, 10, 200, false, true);
-allinliers{1,2} = startinliers-1 + inliers;
-stopinliers = startinliers-1 + inliers(1);
-
-
-%%% 3 - We attempt to fit an FD curve to the different crests
-Lc = zeros(1,10);
-ncrest = 0;
-thresh = 20;
-while ncrest < 10
-    if startinliers >= stopinliers 
+%%% 2 - We attempt to fit an FD curve to the different crests
+thresh = 15;
+for i = 1:maxnLc
+    if ~any(free)
+        nLc = i-1;
         break
     end
+    [~,inliers]     = ransac_2(x(:,free), @fittingfn, @distfn, @degenfn, 1, thresh, 1, 10, 30);
+    inliers         = start_ind+inliers;
+    allinliers{2+i} = inliers;
+    start_ind       = inliers(end);
+
+    free(1:start_ind) = false(1,start_ind);
     
-    [~,inliers] = ransac(x(:,startinliers:stopinliers-1), @fittingfn, @distfn, @degenfn, 1, thresh, 1, 10, 200);
-    if isempty(inliers)
-        break
-    elseif length(inliers) < 10
-        startinliers = startinliers + inliers(end);
-    else
-        Lc(ncrest+1) = fittingfn(x(:,startinliers-1 + inliers));
-        allinliers{1,3+ncrest} = startinliers-1 + inliers;
-        startinliers = startinliers + inliers(end);
-        ncrest = ncrest+1;
+    Lc(i) = fittingfn(x(:,inliers));
+    if Lc(i) > maxLc
+        nLc = i-1;
+        break;
     end
 end
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -82,10 +81,9 @@ xlim(xlimits);
 ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
-title('Approximated FD curves using RANSAC');
+title('approximated FD curves using RANSAC');
 
-
-xinliers = x(:,allinliers{1,1});
+xinliers = x(:,allinliers{1});
 plot(xinliers(1,:), xinliers(2,:),'.')
 ab = polyfit(xinliers(1,:), xinliers(2,:), 1);
 a = ab(1);
@@ -95,8 +93,7 @@ F = a*X+b;
 plot(X,F)
 
 
-
-xinliers = x(:,allinliers{1,2});
+xinliers = x(:,allinliers{2});
 plot(xinliers(1,:), xinliers(2,:),'.')
 ab = polyfit(xinliers(1,:), xinliers(2,:), 1);
 a = ab(1);
@@ -106,9 +103,8 @@ F = a*X+b;
 plot(X,F)
 
 
-
-for i = 1:ncrest
-    xinliers = x(:,allinliers{1,2+i});
+for i = 1:nLc
+    xinliers = x(:,allinliers{2+i});
     plot(xinliers(1,:), xinliers(2,:),'.')
     
     X = linspace(0,Lc(i));

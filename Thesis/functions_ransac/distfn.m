@@ -1,54 +1,45 @@
-function [inliers, Lc] = distfn(Lc, x, thresh)
+function [inliers, Lc, error] = distfn(Lc, x, thresh)
 %DISTFN Summary of this function goes here
 %   Detailed explanation goes here
 
-if isempty(x) || isempty(Lc)
+if isempty(x) || isempty(Lc)%usefull??
     'empty x!'
     inliers = [];
     return
 end
+
+
+upbd = 0.7*Lc;
+
 X = x(1,:);
 F = x(2,:);
+Xin = X(X < Lc);
+Fin = F(X < Lc);
+inliers = 1:length(Xin);
 
-
-error = abs(F-fd(Lc, X));
-inliers = 1:length(X);
-inliers = inliers(X < Lc & error < thresh);
-
-% We enforce strict temporal consistency 
-for i = 1:length(inliers)
-    if inliers(i) ~= inliers(1)-1+i
-        inliers = inliers(1:i-1);
+%%% cut off outliers at end
+for i = max(length(Xin(Xin<=upbd)),1):length(Xin)
+    if Fin(i)-fd(Lc,Xin(i)) > thresh
+        inliers = inliers(Xin < Xin(i));
         break
     end
 end
-
-
-% We remove outliers from limits of inlier interval by applying more
-% stringent test
-start = 1;
-for i = 1:length(inliers)
-    if(error(inliers(i)) < thresh/5)
-        inliers = inliers(start:end);
-        break
-    else
-        start = start+1;
-    end
+if isempty(inliers)
+    error = Inf;
+else
+    error = mean((F(inliers)-fd(Lc, X(inliers))).^2);
 end
 
-stop = length(inliers);
-for i = length(inliers):-1:i
-    if(error(inliers(i))< thresh/5)
-        inliers = inliers(1:stop);
-        break
-    else
-        stop = stop-1;
-    end
-end
+% %%% cut off outliers at start
+% for i = 1:length(Xin(Xin<=lobd))
+%     if abs(Fin(i)-fd(Lc,Xin(i))) < thresh
+%         inliers = inliers(Xin(i) <= Xin);
+%         break
+%     end
+% end
+% if i == length(Xin(Xin<=lobd))
+%    inliers = inliers(lobd < Xin);
+% end
 
-% We impose the last point to be lower than the first
-if ~isempty(inliers) && F(inliers(1)) < F(inliers(end))
-    inliers = [];
-end
 
 end

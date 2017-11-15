@@ -147,7 +147,7 @@ while true
     
     
     if firstPoint
-        ind = [1; possonrnd(10,1,s-1)];
+        ind = [1; poissrnd(10,1,s-1)];
     else
         %ind = randsample(npts, s); % skew distribution toward first points?
         ind = min(poissrnd(30), npts);

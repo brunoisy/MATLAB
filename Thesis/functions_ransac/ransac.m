@@ -164,7 +164,7 @@ while true
         if lastPoint
             ind = [npts; randsample(npts, s-1)];
         elseif firstPoint
-            ind = [1; randsample(npts, s-1)];
+            ind = [1; poissrnd(10,1,s-1)];
         else
             ind = randsample(npts, s);
         end
