@@ -26,16 +26,16 @@ for filenumber = 9:10%[1,2,3,5,6,10,12,13,14,16,18]
 %     saveas(gcf, strcat('images/LSQ fit/data_1/bad/curve_',int2str(filenumber),'.jpg'));
     
      RANSAC_fit_fd(filename, xlimits, ylimits)
-%     saveas(gcf, strcat('images/RANSAC/data_2/curve_',int2str(filenumber),'.fig'));
-%     saveas(gcf, strcat('images/RANSAC/data_2/curve_',int2str(filenumber)),'epsc');
-%     saveas(gcf, strcat('images/RANSAC/data_2/curve_',int2str(filenumber),'.jpg'));
+%     saveas(gcf, strcat('images/ransac/data_2/curve_',int2str(filenumber),'.fig'));
+%     saveas(gcf, strcat('images/ransac/data_2/curve_',int2str(filenumber)),'epsc');
+%     saveas(gcf, strcat('images/ransac/data_2/curve_',int2str(filenumber),'.jpg'));
 
-    saveas(gcf, strcat('images/RANSAC/data_1/good/curve_',int2str(filenumber),'.fig'));
-    saveas(gcf, strcat('images/RANSAC/data_1/good/curve_',int2str(filenumber)),'epsc');
-    saveas(gcf, strcat('images/RANSAC/data_1/good/curve_',int2str(filenumber),'.jpg'));
+    saveas(gcf, strcat('images/ransac/data_1/good/curve_',int2str(filenumber),'.fig'));
+    saveas(gcf, strcat('images/ransac/data_1/good/curve_',int2str(filenumber)),'epsc');
+    saveas(gcf, strcat('images/ransac/data_1/good/curve_',int2str(filenumber),'.jpg'));
     
-%     saveas(gcf, strcat('images/RANSAC/data_1/bad/curve_',int2str(filenumber),'.fig'));
-%     saveas(gcf, strcat('images/RANSAC/data_1/bad/curve_',int2str(filenumber)),'epsc');
-%     saveas(gcf, strcat('images/RANSAC/data_1/bad/curve_',int2str(filenumber),'.jpg'));
+%     saveas(gcf, strcat('images/ransac/data_1/bad/curve_',int2str(filenumber),'.fig'));
+%     saveas(gcf, strcat('images/ransac/data_1/bad/curve_',int2str(filenumber)),'epsc');
+%     saveas(gcf, strcat('images/ransac/data_1/bad/curve_',int2str(filenumber),'.jpg'));
     close
 end

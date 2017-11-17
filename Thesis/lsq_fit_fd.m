@@ -1,14 +1,12 @@
-function [] = lsq_fit_fd(filename, k, offset)
+function [] = lsq_fit_fd(filename, xlimits, ylimits, k, offset)
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
 
 load('constants.mat')
 load(filename)
 
-xlimits = [-10, 200];% plotting limits
-ylimits = [-200, 25];%[-150, 25];
-
-x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
+x0 = 0;
+%x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -31,7 +29,7 @@ figure
 subplot(1,k+1,1)
 
 hold on
-title('FD curves fit to minimas')
+title('FD profile fit to minima')
 xlim(xlimits);
 ylim(ylimits);
 xlabel('Distance (nm)');
@@ -78,32 +76,37 @@ for j = 1:k
     %%% Plot of the selected datapoints, and the estimated FD curves
     subplot(1,k+1,j+1)
     hold on
-    plot(0,0,'o')
-    plot(x0,0,'o')
-    legend('origin','offset')
-
+%     plot(0,0,'o')
+%     plot(x0,0,'o')
+%     legend('origin','offset')
+    
     if(offset == true)
-        title('FD curves fit to minimum lsq with free offset')
+        title('FD profile fit to minimum lsq with free offset')
     else
-        title('FD curves fit to minimum lsq')
+        title('FD profile fit to minimum lsq')
     end
     xlim(xlimits);
     ylim(ylimits);
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
     
+    colors = ['.y', '.m', '.c', '.r', '.g', '.b', '.k'];
     for i=1:length(Lc)
         X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
         Y =  Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
         Xfit = linspace(0,Lc(i),1000);
         Ffit = fd(Lc(i), Xfit);
-        if(mod(i,2) == 0)
-            plot(X, Y,'.b');
-            plot((Xfit+x0),  Ffit,'b'); % least square fit
-        else
-            plot(X, Y,'.r');
-            plot((Xfit+x0),  Ffit,'r'); % least square fit
-        end
+        if 
+        plot(X, Y, '.');
+        %plot((Xfit+x0),  Ffit);
+        %         if(mod(i,2) == 0)
+        %             plot(X, Y,'.b');
+        %             plot((Xfit+x0),  Ffit,'b'); % least square fit
+        %         else
+        %             plot(X, Y,'.r');
+        %             plot((Xfit+x0),  Ffit,'r'); % least square fit
+        %         end
+        
         %         %%% plot to initial curves for comparison
         %                 Xfit = linspace(0,firstLc(i),1000);
         %                 Ffit = fd(firstLc(i), Xfit);

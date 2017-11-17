@@ -1,4 +1,4 @@
-function [] = RANSAC_fit_fd(filename)
+function [] = RANSAC_fit_fd(filename, xlimits, ylimits)
 
 load(filename)
 x = [dist; force];
@@ -6,28 +6,23 @@ x = [dist; force];
 free = true(1,length(x));
 
 maxLc = 220;
-maxnLc = 10;
+maxnLc = 15;
+nLc = 0;
 Lc = zeros(1,maxnLc);
-allinliers = cell(1,maxnLc);
+allinliers = cell(1,maxnLc+1);
 
 
 %%% 1 - We fit two line to the profile, to get rid of approaching phase
-thresh = 8;
+thresh = 10;
 [~, inliers]  = ransac(x(:,free), @linefittingfn, @linedistfn, @degenfn, 2, thresh, 1, 10, 50, true);
 allinliers{1} = inliers;
 start_ind     = inliers(end);
 free(1:start_ind) = false(1,start_ind);
 
-thresh = 2;
-[~, inliers]  = ransac(x(:,free), @linefittingfn, @linedistfn, @degenfn, 2, thresh, 1, 10, 50, true);
-inliers       = start_ind+inliers;
-allinliers{2} = inliers;
-start_ind     = inliers(end);
-free(1:start_ind) = false(1,start_ind);
 
 
 %%% 2 - We attempt to fit an FD curve to the different crests
-thresh = 15;
+thresh = 20;
 for i = 1:maxnLc
     if ~any(free)
         nLc = i-1;
@@ -35,7 +30,7 @@ for i = 1:maxnLc
     end
     [~,inliers]     = ransac_2(x(:,free), @fittingfn, @distfn, @degenfn, 1, thresh, 1, 10, 30);
     inliers         = start_ind+inliers;
-    allinliers{2+i} = inliers;
+    allinliers{1+i} = inliers;
     start_ind       = inliers(end);
     
     free(1:start_ind) = false(1,start_ind);
@@ -54,10 +49,8 @@ end
 
 
 %%%% Plot
-xlimits = [-10, 200];
-ylimits = [-150, 200];
-
 figure
+
 subplot(1,2,1)
 hold on
 xlim(xlimits);
@@ -75,7 +68,7 @@ xlim(xlimits);
 ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
-title('approximated FD curves using RANSAC');
+title('approximated FD profile using RANSAC');
 
 xinliers = x(:,allinliers{1});
 plot(xinliers(1,:), xinliers(2,:),'.')
@@ -87,23 +80,15 @@ F = a*X+b;
 plot(X,F)
 
 
-xinliers = x(:,allinliers{2});
-plot(xinliers(1,:), xinliers(2,:),'.')
-ab = polyfit(xinliers(1,:), xinliers(2,:), 1);
-a = ab(1);
-b = ab(2);
-X = linspace(min(xinliers(1,:)'),max(xinliers(1,:)'));
-F = a*X+b;
-plot(X,F)
-
 
 for i = 1:nLc
-    xinliers = x(:,allinliers{2+i});
+    xinliers = x(:,allinliers{1+i});
     plot(xinliers(1,:), xinliers(2,:),'.')
     
     X = linspace(0,Lc(i));
     F = fd(Lc(i), X);
     plot(X,F)
 end
+
 
 end

@@ -2,20 +2,15 @@ function [inliers, Lc, error] = distfn(Lc, x, thresh)
 %DISTFN Summary of this function goes here
 %   Detailed explanation goes here
 
-if isempty(x) || isempty(Lc)%usefull??
-    'empty x!'
-    inliers = [];
-    return
-end
 
-
-upbd = 0.8*Lc;
 
 X = x(1,:);
 F = x(2,:);
 Xin = X(X < Lc);
 Fin = F(X < Lc);
 inliers = 1:length(Xin);
+[~, ind] = min(Fin);
+upbd = min(X(ind), 0.8*Lc);%X(ind)
 
 %%% cut off outliers at end
 for i = max(length(Xin(Xin<=upbd)),1):length(Xin)
@@ -29,17 +24,5 @@ if isempty(inliers)
 else
     error = mean((F(inliers)-fd(Lc, X(inliers))).^2);
 end
-
-% %%% cut off outliers at start
-% for i = 1:length(Xin(Xin<=lobd))
-%     if abs(Fin(i)-fd(Lc,Xin(i))) < thresh
-%         inliers = inliers(Xin(i) <= Xin);
-%         break
-%     end
-% end
-% if i == length(Xin(Xin<=lobd))
-%    inliers = inliers(lobd < Xin);
-% end
-
 
 end

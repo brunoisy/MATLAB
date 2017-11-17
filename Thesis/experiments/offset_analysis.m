@@ -57,8 +57,8 @@ for j = 1:k
     
     
     %%% to do lsqfit, we need to convert to pN/nm and back (solves scaling issues)
-    Lc = lsqcurvefit(@(Lc,x)multi_fd([x0(j), Lc],x,Xlast), Lc, Xsel, Fsel);
-    error(j) = sum((Fsel - multi_fd([x0(j), Lc],Xsel,Xlast)).^2)/length(Xsel);%mean quadratic error
+    Lc = lsqcurvefit(@(Lc,x)fd_multi([x0(j), Lc],x,Xlast), Lc, Xsel, Fsel);
+    error(j) = sum((Fsel - fd_multi([x0(j), Lc],Xsel,Xlast)).^2)/length(Xsel);%mean quadratic error
     
     
     %%% Plot of the selected datapoints, and the estimated FD curves

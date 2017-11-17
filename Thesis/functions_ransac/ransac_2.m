@@ -143,15 +143,17 @@ minscore =  10;  % We need at least inliers to consider a model valid
 besterror = Inf;
 bestinliers = [];
 
-while true
+
+inds = poissrnd(30,1,maxTrials);%randsample(npts,maxTrials);
+
+
+for i=1:maxTrials
+    ind = min(inds(i), npts);%inds(i);
     
     
-    if firstPoint
-        ind = [1; poissrnd(10,1,s-1)];
-    else
-        %ind = randsample(npts, s); % skew distribution toward first points?
-        ind = min(poissrnd(30), npts);
-    end
+    %ind = randsample(npts, s); % skew distribution toward first points?
+   
+    
     Lc = feval(fittingfn, x(:,ind));
     
     
@@ -169,7 +171,7 @@ while true
     % Find the number of inliers to this model.
     ninliers = length(inliers);
     
-    while ninliers > minscore && error < besterror%error < ninliers/length(bestinliers)*besterror 
+    while ninliers > minscore && error < besterror
         %will never iterate more than twice
         bestinliers = inliers;
         bestLc = Lc;
@@ -187,13 +189,6 @@ while true
         fprintf('trial %d out of %d         \r',trialcount, maxTrials);
     end
     
-    % Safeguard against being stuck in this loop forever
-    if trialcount > maxTrials
-        warning( ...
-            sprintf('ransac reached the maximum number of %d trials',...
-            maxTrials));
-        break
-    end
 end
 
 if feedback, fprintf('\n'); end
