@@ -1,7 +1,7 @@
 addpath('functions')
 addpath('functions_ransac')
 
-filename = 'data/MAT/data_2/curve_6.mat';
+filename = 'data/MAT/data_2/curve_4.mat';
 %filename = 'data/MAT/data_model/curve_3.mat';
 %lsq_fit_fd(filename, 1, true)
 xlimits = [-10, 200];

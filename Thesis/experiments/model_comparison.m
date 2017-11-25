@@ -6,9 +6,7 @@ xlimits = [-10, 200];
 ylimits = [-150, 25];
 
 load('constants.mat')
-
-
-x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
+x0=0;
 
 
 %%% first step is to find local minimas of the FD profile.
@@ -34,21 +32,23 @@ title('FD profile - series model')
 %%%%%%%%%%%%%%%%%%%%% We fit FD curves assuming origin is the previous
 %%%%%%%%%%%%%%%%%%%%% breaking point
 
+
 Lc = zeros(1,length(mins)); % Lc represent lengths of intervals now !!
 for i = 1:length(mins)
     if i==1
-        Xi = mins(1,i);
+        xmin = mins(1,1);% because we want to find Lc wrt x0
     else
-        Xi = mins(1,i)-mins(1,i-1);
+        xmin = mins(1,i)-mins(1,i-1);
     end
-    Fi = mins(2,i);
-    
-    A = 4*Fi/C;
-    p = [A, 2*Xi*(3-A), -Xi^2*(9-A), 4*Xi^3];
+    fmin = mins(2,i);
+    A = 4*fmin/C;
+    p = [A, 2*xmin*(3-A), -xmin^2*(9-A), 4*xmin^3];
     thisroots = roots(p);
     thisroots = thisroots(thisroots>0);
+    
     Lc(i) = real(thisroots(1));
 end
+
 
 for i = 1:length(mins)
     X = linspace(0,Lc(i),1000);
@@ -100,7 +100,7 @@ plot(mins(1,1:end),mins(2,1:end),'*')
 legend('data','minima')
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
-title('FD profile - ****')
+title('FD profile - series model with encrage points')
 
 for i = 1:length(mins)
     X = linspace(0,Lc(i),1000);

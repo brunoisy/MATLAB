@@ -162,7 +162,7 @@ while true
         %
         %         end
         if lastPoint
-            ind = [npts; randsample(npts, s-1)];
+            ind = [randsample(npts, s-1), npts];%poissrnd? be careful of bounds
         elseif firstPoint
             ind = [1; poissrnd(10,1,s-1)];
         else
@@ -209,14 +209,14 @@ while true
     % Find the number of inliers to this model.
     ninliers = length(inliers);
     
-    while ninliers > bestscore% Modified by Bruno (iterative)
+    if ninliers > bestscore% Modified by Bruno (iterative)
         bestscore = ninliers;% Record data for this model
         bestinliers = inliers;
         bestM = M;
         
-        M = feval(fittingfn, x(:,inliers));% Added by Bruno
-        [inliers, M] = feval(distfn, M, x, thresh);% Added by Bruno
-        ninliers = length(inliers);% Added by Bruno
+%         M = feval(fittingfn, x(:,inliers));% Added by Bruno
+%         [inliers, M] = feval(distfn, M, x, thresh);% Added by Bruno
+%         ninliers = length(inliers);% Added by Bruno
     end
     
     

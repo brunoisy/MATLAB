@@ -1,4 +1,4 @@
-function [inliers, Lc, error] = distfn(Lc, x, thresh)
+function [inliers, Lc, error] = distfn_2(Lc, x, thresh)
 %DISTFN Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -14,17 +14,23 @@ upbd = X(ind);%min(X(ind), 0.8*Lc);%
 
 %%% cut off outliers at end
 for i = max(length(Xin(Xin<=upbd)),1):length(Xin)
-    if Fin(i)-Fin(ind) > thresh %Fin(i)-fd(Lc,Xin(i)) > thresh
+    if abs(Xin(i)-fd_inv(Lc,Fin(i))) > thresh
         inliers = inliers(Xin < Xin(i));
         break
     end
 end
-
+% %%% cut off outliers at end
+% for i = max(length(Xin(Xin<=upbd)),1):(length(Xin)-3)
+%     if Fin(i) < Fin(ind)-thresh
+%         inliers = inliers(Xin < Xin(i));
+%         break
+%     end
+% end
 
 if isempty(inliers)
     error = Inf;
 else
-    error = mean((F(inliers)-fd(Lc, X(inliers))).^2);
+    error = mean((X(inliers)-fd_inv(Lc, F(inliers))).^2);
 end
 
 end
