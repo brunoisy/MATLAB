@@ -148,17 +148,8 @@ inds = poissrnd(30,1,maxTrials);%randsample(npts,maxTrials);
 
 
 for i=1:maxTrials
-    ind = min(inds(i), npts);%inds(i);
-    
-    
-    %ind = randsample(npts, s); % skew distribution toward first points?
-   
-    
+    ind = min(inds(i), npts);%inds(i);    
     Lc = feval(fittingfn, x(:,ind));
-    
-    
-    
-    
     
     % Once we are out here we should have some kind of model...
     % Evaluate distances between points and model returning the indices

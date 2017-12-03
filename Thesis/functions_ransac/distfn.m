@@ -9,13 +9,29 @@ F = x(2,:);
 Xin = X(X < Lc);
 Fin = F(X < Lc);
 inliers = 1:length(Xin);
-[~, ind] = min(Fin);
-upbd = X(ind);%min(X(ind), 0.8*Lc);%
+
+% temporality!?
+% FXin = fd(Lc, Xin);
+% % on cherche le plus grand ensemble de points consécutifs tels que 
+% % le dernier point est à gauche de la courbe
+% % on cherche donc d'abord le plus grand point à gauche de la courbe
+% cand = Xin(Fin<FXin);
+% if isempty(cand)
+%     inliers =[];
+%     error=Inf;
+%     return
+% end
+% lastCand = max(cand);
+% [~, ind] = min(Fin(Xin<lastCand));
+FXin = fd(Lc, Xin);
+[~, ind] = min(Fin(Fin-FXin<50));
+%might be problematic if we loose some first points (bad indexing)
+
 
 %%% cut off outliers at end
-for i = max(length(Xin(Xin<=upbd)),1):length(Xin)
+for i = ind:length(Xin)
     if Fin(i)-Fin(ind) > thresh %Fin(i)-fd(Lc,Xin(i)) > thresh
-        inliers = inliers(Xin < Xin(i));
+        inliers = 1:i-1;
         break
     end
 end
