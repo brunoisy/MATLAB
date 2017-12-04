@@ -162,7 +162,7 @@ while true
         %
         %         end
         if lastPoint
-            ind = [randsample(npts, s-1), npts];%poissrnd? be careful of bounds
+            ind = [randsample(npts, s-1)', npts];%poissrnd? be careful of bounds
         elseif firstPoint
             ind = [1; poissrnd(10,1,s-1)];
         else

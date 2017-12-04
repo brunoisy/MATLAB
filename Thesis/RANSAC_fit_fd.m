@@ -1,13 +1,8 @@
-% filename = 'data/MAT/data_2/curve_3.mat';
-% %4-6-9-16-21
-% xlimits = [-10, 200];
-% ylimits = [-150, 200];
-
 function [] = RANSAC_fit_fd(filename, xlimits, ylimits)
 
 load(filename)
 x = [dist; force];
-%x = preprocess(x);
+% x = preprocess(x);
 free = true(1,length(x));
 
 maxLc = 220;
@@ -110,12 +105,6 @@ title('approximated FD profile using RANSAC');
 
 xinliers = x(:,allinliers{1});
 plot(xinliers(1,:), xinliers(2,:),'.')
-% ab = polyfit(xinliers(1,:), xinliers(2,:), 1);
-% a = ab(1);
-% b = ab(2);
-% X = linspace(min(xinliers(1,:)'),max(xinliers(1,:)'));
-% F = a*X+b;
-% plot(X,F)
 
 
 
