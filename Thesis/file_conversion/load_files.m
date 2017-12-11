@@ -1,29 +1,31 @@
-%subdirectory = 'data_2/';
-% subdirectory = 'data_1/good/';
- subdirectory = 'data_1/bad/';
+subdirectory = 'LmrP single-NTA membrane/';
+% subdirectory = 'LmrP single-NTA nanodiscs/';
 
-directory = strcat('data/text/',subdirectory);
+k = 0;
+% subsubdirectories = {'tip1','tip2','tip3','tip4','tip5'};
+subsubdirectories = {'tip1','tip2','tip3'};
 
-files = dir(directory);
-files = files([files.isdir]==false);
-
-filenames = {files(:).name};
-for i = 1:length(filenames)
-    filename = strcat(directory,'curve_',int2str(i),'.txt');
+for i = 1:length(subsubdirectories)
+    subsubdirectory = subsubdirectories{i};
+    directory = strcat('data/text/',subdirectory,subsubdirectory);
     
-    %         oldname = strcat(directory,filenames{i});
-    %         movefile(oldname, filename);
+    files = dir(directory);
+    files = files([files.isdir]==false);
     
-    comma2point_overwrite(filename)% change commas to points
-    
-    
-    fileID = fopen(filename);
-    Text = textscan(fileID, '%f %f');
-    fclose(fileID);
-    
-%     dist = Text{1}'; % distance in nm
-%     force = Text{2}'; % force in pN
-        dist = Text{1}'/10^6; % distance in nm
-        force = Text{2}'/10^6; % force in pN
-    save(strcat('data/MAT/',subdirectory,'curve_',int2str(i),'.mat'),'dist','force');
+    filenames = {files(:).name};
+    for j =1:length(filenames)
+        filename = strcat(directory,'/',filenames{j});
+        k = k + 1;
+        comma2point_overwrite(filename)
+        
+        fileID = fopen(filename);
+        fgetl(fileID);
+        Text = textscan(fileID, '%f %f');
+        fclose(fileID);
+        
+        dist = Text{1}'; % distance in nm
+        force = Text{2}'; % force in pN
+%         save(strcat('data/MAT/data_3/curve_',int2str(k),'.mat'),'dist','force');
+        save(strcat('data/MAT/data_4/curve_',int2str(k),'.mat'),'dist','force');
+    end
 end

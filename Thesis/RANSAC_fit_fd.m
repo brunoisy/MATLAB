@@ -1,4 +1,4 @@
-function [] = RANSAC_fit_fd(filename, xlimits, ylimits)
+function [Lc] = RANSAC_fit_fd(filename, xlimits, ylimits)
 
 load(filename)
 x = [dist; force];
@@ -13,6 +13,7 @@ allinliers = cell(1,maxnLc+1);
 
 
 %%% 1 - We select all points of approching phase
+start_ind = 1;
 thresh = 20;
 for i = 1:length(dist)-3
     if force(i+3) - force(i) > thresh
@@ -76,8 +77,8 @@ end
 allinl = 1:length(x);
 allinliers{1} = [allinliers{1},allinliers{nLc+2},allinl(free)];
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Lc = Lc(1:nLc);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 

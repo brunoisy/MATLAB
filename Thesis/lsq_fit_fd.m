@@ -96,8 +96,8 @@ for j = 1:k
         Y =  Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
         Xfit = linspace(0,Lc(i),1000);
         Ffit = fd(Lc(i), Xfit);
-        if 
-        plot(X, Y, '.');
+%         if 
+%         plot(X, Y, '.');
         %plot((Xfit+x0),  Ffit);
         %         if(mod(i,2) == 0)
         %             plot(X, Y,'.b');

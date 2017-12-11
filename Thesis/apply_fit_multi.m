@@ -1,17 +1,22 @@
 addpath('functions')
 addpath('functions_ransac')
 
-directory = 'data/MAT/data_2/';
-xlimits = [-10, 180];
-ylimits = [-180, 100];
+% directory = 'data/MAT/data_2/';
+% directory = 'data/MAT/data_3/';
+directory = 'data/MAT/data_4/';
+
+
+xlimits = [-10, 200];
+ylimits = [-150, 20];
 
 % directory = 'data/MAT/data_1/good/';
 % directory = 'data/MAT/data_1/bad/';
 % xlimits = [-10, 150];
 % ylimits = [-250, 100];
 
-for filenumber = 1:10%[1,2,3,5,6,10,12,13,14,16,18]
+for filenumber = 1:10%271
      filename = strcat(directory,'curve_',int2str(filenumber),'.mat');
+     
 %    lsq_fit_fd(filename, xlimits, ylimits, 1, false)
 %     saveas(gcf, strcat('images/LSQ fit/data_2/curve_',int2str(filenumber),'.fig'));
 %     saveas(gcf, strcat('images/LSQ fit/data_2/curve_',int2str(filenumber)),'epsc');

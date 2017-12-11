@@ -1,4 +1,4 @@
-load('data/MAT/data_2/curve_1.mat');
+load('data/MAT/data_2/curve_23.mat');
 
 figure
 hold on
@@ -6,7 +6,13 @@ xlimits = [-10, 200];
 ylimits = [-150, 200];
 xlim(xlimits);
 ylim(ylimits);
-colors = ['.y', '.m', '.c', '.r', '.g','.b','.k'];
+n = 20;
+colors = cell(1,n);
+for i=1:n
+   colors{i} = (i-1)/n*ones(1,3); 
+end
+% colors = ['.y', '.m', '.c', '.r', '.g','.b','.k'];
+
 for i = 1:length(dist)
-    plot(dist(i), force(i), colors(mod(i, 7)+1))
+    plot(dist(i), force(i),'.','Color', colors{mod(i, n)+1})
 end
