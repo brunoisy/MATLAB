@@ -1,5 +1,5 @@
-subdirectory = 'LmrP single-NTA membrane/';
-% subdirectory = 'LmrP single-NTA nanodiscs/';
+% subdirectory = 'LmrP single-NTA membrane/';
+subdirectory = 'LmrP single-NTA nanodiscs/';
 
 k = 0;
 % subsubdirectories = {'tip1','tip2','tip3','tip4','tip5'};

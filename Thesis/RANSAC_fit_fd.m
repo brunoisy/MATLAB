@@ -14,9 +14,9 @@ allinliers = cell(1,maxnLc+1);
 
 %%% 1 - We select all points of approching phase
 start_ind = 1;
-thresh = 20;
+thr = 20;
 for i = 1:length(dist)-3
-    if force(i+3) - force(i) > thresh
+    if force(i+3) - force(i) > thr
         allinliers{1} = 1:i+2;
         start_ind = i+2;
         free(1:start_ind) = false(1,start_ind);    
