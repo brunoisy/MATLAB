@@ -13,14 +13,13 @@ x0 = 0;
 %%% First step : find local minimas of the FD profile.
 %%% These will help us estimate the position of the crest
 %%% The first estimations are the FD curves going through the minima
-mins   = find_min(dist, force);
-x1     = mins(1,1);% We will neglect the points <x1
-mins   = mins(:,2:end);% We neglect the first minimum, which is always 'bad'
+mins   = find_min(dist, force)
+
 
 
 %%% We find the FD curves going through the minimas, parametrized by Lc,
 %%% and merge Lc's that are too close
-Lc = merge_Lc(find_Lc(mins, x0));
+Lc = merge_Lc(find_Lc(mins, x0))
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -59,7 +58,7 @@ thresh = 10;% selection threshold
 
 for j = 1:k
     %%% We select all the points that we will try to fit
-    [Xsel, Fsel, Xfirst, Xlast] = select_points(dist, force, x0, Lc, thresh, x1);
+    [Xsel, Fsel, Xfirst, Xlast] = select_points(dist, force, x0, Lc, thresh);
     
     
     %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)

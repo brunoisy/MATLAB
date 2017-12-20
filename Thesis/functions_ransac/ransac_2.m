@@ -76,7 +76,7 @@
 % outliers is set at 0.99.  You will need to edit the code should you wish to
 % change this (it should probably be a parameter)
 %
-% For an example of the use of this function see RANSACFITHOLcOGRAPHY or
+% For an example of the use of this function see RANSACFITHOMOGRAPHY or
 % RANSACFITPLANE
 
 % References:
@@ -84,7 +84,7 @@
 %    for model fitting with applications to image analysis and automated
 %    cartography". Comm. Assoc. Comp, Lcach., Vol 24, No 6, pp 381-395, 1981
 %
-%    Richard Hartley and Andrew Zisserman. "Lcultiple View Geometry in
+%    Richard Hartley and Andrew Zisserman. "Multiple View Geometry in
 %    Computer Vision". pp 101-113. Cambridge University Press, 2001
 
 % Copyright (c) 2003-2013 Peter Kovesi

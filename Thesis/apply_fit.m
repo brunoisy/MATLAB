@@ -1,7 +1,7 @@
 addpath('functions')
 addpath('functions_ransac')
 
-filename = 'data/MAT/data_4/curve_1.mat';
+filename = 'data/MAT_clean/data_2/curve_1.mat';
 xlimits = [-10, 200];
 ylimits = [-150, 20];
 % filename = 'data/MAT/data_1/curve_1.mat';
@@ -9,5 +9,5 @@ ylimits = [-150, 20];
 % ylimits = [-250, 100];
 
 
-%lsq_fit_fd(filename, xlimits, ylimits, 1, true)
-RANSAC_fit_fd(filename, xlimits, ylimits)
+lsq_fit_fd(filename, xlimits, ylimits, 1, true)
+% RANSAC_fit_fd(filename, xlimits, ylimits)

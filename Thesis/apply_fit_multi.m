@@ -6,9 +6,9 @@ addpath('functions_ransac')
 % xlimits = [-10, 150];
 % ylimits = [-250, 100];
 
-% directory = 'data/MAT/data_2/';
-% xlimits = [-10, 200];
-% ylimits = [-150, 20];
+directory = 'data/MAT_clean/data_2/';
+xlimits = [-10, 200];
+ylimits = [-150, 20];
 
 % directory = 'data/MAT/data_3/';
 % xlimits = [-10, 200];
@@ -18,14 +18,14 @@ addpath('functions_ransac')
 % directory = 'data/MAT/data_4/';
 % xlimits = [-10, 200];
 % ylimits = [-200, 50];
+% 
+% directory = 'data/MAT/data_5/';
+% xlimits = [-10, 150];
+% ylimits = [-250, 20];
 
-directory = 'data/MAT/data_5/';
-xlimits = [-10, 150];
-ylimits = [-250, 20];
 
 
-
-for filenumber =8
+for filenumber = 1
      filename = strcat(directory,'curve_',int2str(filenumber),'.mat');
 %      load(filename)
 %      figure

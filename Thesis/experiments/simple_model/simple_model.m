@@ -38,6 +38,6 @@ for i = 1:nCrest
 end
 plot(dist(Xunfold(nCrest) < dist), force(Xunfold(nCrest) < dist),'.','Color',colors(nCrest+1,:))
 lgd = legend('FD points', 'X_{unfold}^i', 'L_c^i');
-set(gca,'FontSize',18)
-set(lgd,'FontSize',18)
-set(tit,'FontSize',22);%doesn't work? not for eps?
+set(gca,'FontSize',22)
+set(lgd,'FontSize',25)
+set(tit,'FontSize',25);%doesn't work? not for eps?
