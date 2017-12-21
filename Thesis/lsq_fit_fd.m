@@ -6,20 +6,17 @@ load('constants.mat')
 load(filename)
 
 x0 = 0;
-%x0 = min(dist(force<0));% from physical reality, this is our best guess of the value of x0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%% First step : find local minimas of the FD profile.
 %%% These will help us estimate the position of the crest
 %%% The first estimations are the FD curves going through the minima
-mins   = find_min(dist, force)
-
-
+mins   = find_min(dist, force);
 
 %%% We find the FD curves going through the minimas, parametrized by Lc,
 %%% and merge Lc's that are too close
-Lc = merge_Lc(find_Lc(mins, x0))
+Lc = merge_Lc(find_Lc(mins, x0));
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -43,7 +40,6 @@ for i = 1:length(Lc)
     Ffit = fd(Lc(i), Xfit);
     plot((Xfit+x0), Ffit);
 end
-%firstLc = Lc; (memorized for plot)
 
 
 
@@ -58,18 +54,18 @@ thresh = 10;% selection threshold
 
 for j = 1:k
     %%% We select all the points that we will try to fit
-    [Xsel, Fsel, Xfirst, Xlast] = select_points(dist, force, x0, Lc, thresh);
+    [Xsel, Fsel, Xfirst, Xunfold] = select_points(dist, force, x0, Lc, thresh);
     
     
     %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
     if(offset == true)
-        x0Lc = lsqcurvefit(@(x0Lc,x) fd_multi(x0Lc,x,Xlast), [x0, Lc], Xsel,  Fsel);
+        x0Lc = lsqcurvefit(@(x0Lc,x) fd_multi(x0Lc,x,Xunfold), [x0, Lc], Xsel,  Fsel);
         x0 = x0Lc(1);
         Lc = x0Lc(2:end);
     else
-        Lc = lsqcurvefit(@(Lc,x) fd_multi([x0,Lc],x,Xlast), Lc, Xsel,  Fsel);
+        Lc = lsqcurvefit(@(Lc,x) fd_multi([x0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
     end
-    [Lc, Xfirst, Xlast] = merge_Lc(Lc,Xfirst,Xlast);
+    [Lc, Xfirst, Xunfold] = merge_Lc(Lc,Xfirst,Xunfold);
     
     
     %%% Plot of the selected datapoints, and the estimated FD curves
@@ -89,12 +85,13 @@ for j = 1:k
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
     
-    colors = ['.y', '.m', '.c', '.r', '.g', '.b', '.k'];
     for i=1:length(Lc)
-        X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
-        Y =  Fsel(Xfirst(i)<=Xsel & Xsel<=Xlast(i));
+        X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
+        F =  Fsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
         Xfit = linspace(0,Lc(i),1000);
         Ffit = fd(Lc(i), Xfit);
+        plot(X,F,'.');
+        plot(Xfit,Ffit);
 %         if 
 %         plot(X, Y, '.');
         %plot((Xfit+x0),  Ffit);

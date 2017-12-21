@@ -9,5 +9,5 @@ ylimits = [-150, 20];
 % ylimits = [-250, 100];
 
 
-lsq_fit_fd(filename, xlimits, ylimits, 1, true)
+lsq_fit_fd(filename, xlimits, ylimits, 1, false)
 % RANSAC_fit_fd(filename, xlimits, ylimits)
