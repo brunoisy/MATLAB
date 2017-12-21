@@ -1,4 +1,4 @@
-load('data/MAT/data_2/curve_23.mat');
+load('data/MAT_clean/data_2/curve_2.mat');
 
 figure
 hold on
@@ -9,7 +9,7 @@ ylim(ylimits);
 n = 20;
 colors = cell(1,n);
 for i=1:n
-   colors{i} = (i-1)/n*ones(1,3); 
+   colors{i} = (i-1)/(n+3)*ones(1,3); 
 end
 % colors = ['.y', '.m', '.c', '.r', '.g','.b','.k'];
 

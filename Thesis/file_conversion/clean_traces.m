@@ -1,14 +1,16 @@
-ndir = 4;
+ndir = 5;
 
 dir = strcat('data/MAT/data_',int2str(ndir),'/');
 newdir = strcat('data/MAT_clean/data_',int2str(ndir),'/');
 
 % xlimits = [-10, 200];
 % ylimits = [-150, 20];
-xlimits = [-10, 200];
-ylimits = [-200, 50];
+% xlimits = [-10, 200];
+% ylimits = [-200, 50];
+% xlimits = [-10, 150];
+% ylimits = [-250, 20];
 
-for filenumber = 136:271
+for filenumber = 1:170
     filename = strcat(dir,'curve_',int2str(filenumber),'.mat');
     load(filename)
     % x = preprocess(x);%??
@@ -61,7 +63,7 @@ for filenumber = 136:271
         end
     end
         
-%     
+    
 %     subplot(1,2,2)
 %     hold on
 %     xlim(xlimits)

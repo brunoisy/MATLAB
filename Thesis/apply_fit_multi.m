@@ -25,7 +25,7 @@ ylimits = [-150, 20];
 
 
 
-for filenumber = 1
+for filenumber = 1:10
      filename = strcat(directory,'curve_',int2str(filenumber),'.mat');
 %      load(filename)
 %      figure

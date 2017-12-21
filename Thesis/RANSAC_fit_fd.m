@@ -14,7 +14,7 @@ start_ind = 1;
 
 
 %%%  We attempt to fit an FD curve to the different crests
-thresh = 22;
+thresh = 10;
 for i = 1:maxnLc
     if ~any(free)
         nLc = i-1;
