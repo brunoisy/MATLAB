@@ -25,7 +25,7 @@ ylimits = [-150, 20];
 
 
 
-for filenumber = 1:10
+for filenumber = 1:5
      filename = strcat(directory,'curve_',int2str(filenumber),'.mat');
 %      load(filename)
 %      figure
@@ -36,11 +36,11 @@ for filenumber = 1:10
 %      saveas(gcf, strcat('images/data_4/curve_',int2str(filenumber),'.jpg'));
 %      close
      
-      RANSAC_fit_fd(filename, xlimits, ylimits)
+%       RANSAC_fit_fd(filename, xlimits, ylimits)
 %      saveas(gcf, strcat('images/data_4/curve_',int2str(filenumber),'.jpg'));
 %      close
      
-%    lsq_fit_fd(filename, xlimits, ylimits, 1, false)
+   lsq_fit_fd(filename, xlimits, ylimits, 1, false)
 %     saveas(gcf, strcat('images/LSQ fit/data_2/curve_',int2str(filenumber),'.fig'));
 %     saveas(gcf, strcat('images/LSQ fit/data_2/curve_',int2str(filenumber)),'epsc');
 %     saveas(gcf, strcat('images/LSQ fit/data_2/curve_',int2str(filenumber),'.jpg'));

@@ -1,9 +1,16 @@
-function [] = lsq_fit_fd(filename, xlimits, ylimits, k, offset)
+function Lc = lsq_fit_fd(filename, xlimits, ylimits, k, offset, drawplot)
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
 
 load('constants.mat')
 load(filename)
+
+if nargin < 6
+    drawplot = true; end
+if nargin < 5
+    offset = false; end
+if nargin < 4
+    k=1; end
 
 x0 = 0;
 
@@ -21,24 +28,26 @@ Lc = merge_Lc(find_Lc(mins, x0));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Plot
-figure
-subplot(1,k+1,1)
+if drawplot
+    figure
+    subplot(1,k+1,1)
 
-hold on
-title('FD profile fit to minima')
-xlim(xlimits);
-ylim(ylimits);
-xlabel('Distance (nm)');
-ylabel('Force (pN)');
+    hold on
+    title('FD profile fit to minima')
+    xlim(xlimits);
+    ylim(ylimits);
+    xlabel('Distance (nm)');
+    ylabel('Force (pN)');
 
-plot(dist, force,'.')
-plot(mins(1,1:end), mins(2,1:end),'*')
+    plot(dist, force,'.')
+    plot(mins(1,1:end), mins(2,1:end),'*')
 
-%%% Plot of the estimated FD curves
-for i = 1:length(Lc)
-    Xfit = linspace(0,Lc(i),1000);
-    Ffit = fd(Lc(i), Xfit);
-    plot((Xfit+x0), Ffit);
+    %%% Plot of the estimated FD curves
+    for i = 1:length(Lc)
+        Xfit = linspace(0,Lc(i),1000);
+        Ffit = fd(Lc(i), Xfit);
+        plot((Xfit+x0), Ffit);
+    end
 end
 
 
@@ -68,46 +77,32 @@ for j = 1:k
     [Lc, Xfirst, Xunfold] = merge_Lc(Lc,Xfirst,Xunfold);
     
     
-    %%% Plot of the selected datapoints, and the estimated FD curves
-    subplot(1,k+1,j+1)
-    hold on
-%     plot(0,0,'o')
-%     plot(x0,0,'o')
-%     legend('origin','offset')
-    
-    if(offset == true)
-        title('FD profile fit to minimum lsq with free offset')
-    else
-        title('FD profile fit to minimum lsq')
+    if drawplot
+        %%% Plot of the selected datapoints, and the estimated FD curves
+        subplot(1,k+1,j+1)
+        hold on
+    %     plot(0,0,'o')
+    %     plot(x0,0,'o')
+    %     legend('origin','offset')
+
+        if(offset == true)
+            title('FD profile fit to minimum lsq with free offset')
+        else
+            title('FD profile fit to minimum lsq')
+        end
+        xlim(xlimits);
+        ylim(ylimits);
+        xlabel('Distance (nm)');
+        ylabel('Force (pN)');
+
+        for i=1:length(Lc)
+            X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
+            F =  Fsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
+            Xfit = linspace(0,Lc(i),1000);
+            Ffit = fd(Lc(i), Xfit);
+            plot(X,F,'.');
+            plot(Xfit,Ffit);
+        end
     end
-    xlim(xlimits);
-    ylim(ylimits);
-    xlabel('Distance (nm)');
-    ylabel('Force (pN)');
-    
-    for i=1:length(Lc)
-        X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
-        F =  Fsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
-        Xfit = linspace(0,Lc(i),1000);
-        Ffit = fd(Lc(i), Xfit);
-        plot(X,F,'.');
-        plot(Xfit,Ffit);
-%         if 
-%         plot(X, Y, '.');
-        %plot((Xfit+x0),  Ffit);
-        %         if(mod(i,2) == 0)
-        %             plot(X, Y,'.b');
-        %             plot((Xfit+x0),  Ffit,'b'); % least square fit
-        %         else
-        %             plot(X, Y,'.r');
-        %             plot((Xfit+x0),  Ffit,'r'); % least square fit
-        %         end
-        
-        %         %%% plot to initial curves for comparison
-        %                 Xfit = linspace(0,firstLc(i),1000);
-        %                 Ffit = fd(firstLc(i), Xfit);
-        %                 plot((Xfit+x0(j)), Ffit,'k');
-    end
-    
 end
 end

@@ -1,4 +1,4 @@
-load('data/MAT_clean/data_2/curve_2.mat');
+load('data/MAT_clean/data_2/curve_6.mat');
 
 figure
 hold on
