@@ -7,7 +7,7 @@ Lc = [33, 50, 92, 130, 164]; % Example of possible model parameters
 Xunfold = [28, 40, 77, 105, 133];%0.85*Lcs;
 nCrest = length(Lc);
 
-maxDist = 200;
+maxDist = 180;
 n = 1024;
 sigmaNoise = 5;
 
@@ -39,5 +39,5 @@ end
 plot(dist(Xunfold(nCrest) < dist), force(Xunfold(nCrest) < dist),'.','Color',colors(nCrest+1,:))
 lgd = legend('FD points', 'X_{unfold}^i', 'L_c^i');
 set(gca,'FontSize',22)
-set(lgd,'FontSize',25)
-set(tit,'FontSize',25);%doesn't work? not for eps?
+% set(lgd,'FontSize',25)
+% set(tit,'FontSize',25);%doesn't work? not for eps?

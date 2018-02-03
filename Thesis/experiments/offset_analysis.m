@@ -53,7 +53,7 @@ for j = 1:k
     thresh = 10;%
     
     %%% We select all the points that we will try to fit
-    [Xsel, Fsel, Xfirst, Xlast] = select_points(dist, force, x0(j), Lc, thresh, x1);
+    [Xsel, Fsel, Xfirst, Xlast] = select_points(dist, force, x0(j), Lc, thresh);
     
     
     %%% to do lsqfit, we need to convert to pN/nm and back (solves scaling issues)

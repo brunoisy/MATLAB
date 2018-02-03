@@ -100,7 +100,7 @@ for j = 1:k
             Xfit = linspace(0,Lc(i),1000);
             Ffit = fd(Lc(i), Xfit);
             plot(X,F,'.');
-            plot(Xfit+x0,Ffit);
+            plot(Xfit,Ffit);
         end
     end
 end

@@ -1,4 +1,4 @@
-ndir = 5;
+ndir = 2;
 
 dir = strcat('data/MAT/data_',int2str(ndir),'/');
 newdir = strcat('data/MAT_clean/data_',int2str(ndir),'/');
