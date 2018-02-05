@@ -2,11 +2,11 @@
 %
 % Usage:
 %
-% [M, inliers] = ransac(x, fittingfn, distfn, degenfn s, t, feedback, ...
+% [Lc, inliers] = ransac(x, fittingfn, distfn, degenfn s, t, feedback, ...
 %                       maxDataTrials, maxTrials)
 %
 % Arguments:
-%     x         - Data sets to which we are seeking to fit a model M
+%     x         - Data sets to which we are seeking to fit a model Lc
 %                 It is assumed that x is of size [d x Npts]
 %                 where d is the dimensionality of the data and Npts is
 %                 the number of data points.
@@ -14,26 +14,26 @@
 %     fittingfn - Handle to a function that fits a model to s
 %                 data from x.  It is assumed that the function is of the
 %                 form:
-%                    M = fittingfn(x)
+%                    Lc = fittingfn(x)
 %                 Note it is possible that the fitting function can return
 %                 multiple models (for example up to 3 fundamental matrices
 %                 can be fitted to 7 matched points).  In this case it is
 %                 assumed that the fitting function returns a cell array of
 %                 models.
-%                 If this function cannot fit a model it should return M as
+%                 If this function cannot fit a model it should return Lc as
 %                 an empty matrix.
 %
 %     distfn    - Handle to a function that evaluates the
 %                 distances from the model to data x.
 %                 It is assumed that the function is of the form:
-%                    [inliers, M] = distfn(M, x, t)
+%                    [inliers, Lc] = distfn(Lc, x, t)
 %                 This function must evaluate the distances between points
 %                 and the model returning the indices of elements in x that
 %                 are inliers, that is, the points that are within distance
-%                 't' of the model.  Additionally, if M is a cell array of
+%                 't' of the model.  Additionally, if Lc is a cell array of
 %                 possible models 'distfn' will return the model that has the
 %                 most inliers.  If there is only one model this function
-%                 must still copy the model to the output.  After this call M
+%                 must still copy the model to the output.  After this call Lc
 %                 will be a non-cell object representing only one model.
 %
 %     degenfn   - Handle to a function that determines whether a
@@ -58,18 +58,18 @@
 %                 estimated total number of trials required is printed out at
 %                 each step.  Defaults to 0.
 %
-%     maxDataTrials - Maximum number of attempts to select a non-degenerate
+%     maxDataTrials - Lcaximum number of attempts to select a non-degenerate
 %                     data set. This parameter is optional and defaults to 100.
 %
-%     maxTrials - Maximum number of iterations. This parameter is optional and
+%     maxTrials - Lcaximum number of iterations. This parameter is optional and
 %                 defaults to 1000.
 %
 % Returns:
-%     M         - The model having the greatest number of inliers.
+%     Lc         - The model having the greatest number of inliers.
 %     inliers   - An array of indices of the elements of x that were
 %                 the inliers for the best model.
 %
-% If no solution could be found M and inliers are both returned as empty
+% If no solution could be found Lc and inliers are both returned as empty
 % matrices and a warning reported.
 %
 % Note that the desired probability of choosing at least one sample free from
@@ -80,9 +80,9 @@
 % RANSACFITPLANE
 
 % References:
-%    M.A. Fishler and  R.C. Boles. "Random sample concensus: A paradigm
+%    Lc.A. Fishler and  R.C. Boles. "Random sample concensus: A paradigm
 %    for model fitting with applications to image analysis and automated
-%    cartography". Comm. Assoc. Comp, Mach., Vol 24, No 6, pp 381-395, 1981
+%    cartography". Comm. Assoc. Comp, Lcach., Vol 24, No 6, pp 381-395, 1981
 %
 %    Richard Hartley and Andrew Zisserman. "Multiple View Geometry in
 %    Computer Vision". pp 101-113. Cambridge University Press, 2001
@@ -102,7 +102,7 @@
 %
 % The Software is provided "as is", without warranty of any kind.
 %
-% May      2003 - Original version
+% Lcay      2003 - Original version
 % February 2004 - Tidied up.
 % August   2005 - Specification of distfn changed to allow model fitter to
 %                 return multiple models from which the best must be selected
@@ -115,7 +115,7 @@
 % August   2008 - 'feedback' parameter restored to argument list and other
 %                 breaks in code introduced in last update fixed.
 % December 2008 - Octave compatibility mods
-% June     2009 - Argument 'MaxTrials' corrected to 'maxTrials'!
+% June     2009 - Argument 'LcaxTrials' corrected to 'maxTrials'!
 % January  2013 - Separate code path for Octave no longer needed
 
 
@@ -124,99 +124,49 @@
 %%% Modified by Bruno in the following ways :
 %%% the first point is always selected as part of ...
 
-function [M, inliers] = ransac(x, fittingfn, distfn, degenfn, s, thresh, feedback, ...
-    maxDataTrials, maxTrials, firstPoint, lastPoint)
+function [Lc, inliers] = ransac(x, fittingfn, distfn, thresh, feedback, maxTrials)
 
-% Test number of parameters
-error ( nargchk ( 6, 11, nargin ) );
 
-if nargin < 11; lastPoint = false;  end;
-if nargin < 10; firstPoint = false;  end;
-if nargin < 9; maxTrials = 1000;    end;
-if nargin < 8; maxDataTrials = 100; end;
+if nargin < 8; maxTrials = 1000;    end;
 if nargin < 7; feedback = 0;        end;
 
-[rows, npts] = size(x);
+[~, npts] = size(x);
 
 
-bestM = NaN;      % Sentinel value allowing detection of solution failure.
+bestLc = NaN;  % Sentinel value allowing detection of solution failure.
 trialcount = 0;
-bestscore =  0;
-N = 1;            % Dummy initialisation for number of trials.
+minscore =  10;  % We need at least 10 inliers for a model to be valid
+besterror = Inf;
+bestinliers = [];
 
-while true
-    
-    % Select at random s datapoints to form a trial model, M.
-    % In selecting these points we have to check that they are not in
-    % a degenerate configuration.
-    degenerate = 1;
-    count = 1;
-    while degenerate
-        % Generate s random indicies in the range 1..npts
-        % (If you do not have the statistics toolbox with randsample(),
-        % use the function RANDOMSAMPLE from my webpage)
-        %         if s==1
-        %             ind = 1;
-        %         else
-        %             ind = [1; randsample(npts, s-1)];
-        %
-        %         end
-        if lastPoint
-            ind = [randsample(npts, s-1)', npts];%poissrnd? be careful of bounds
-        elseif firstPoint
-            ind = [1; poissrnd(10,1,s-1)];
-        else
-            ind = randsample(npts, s);
-        end
-        
-        % Test that these points are not a degenerate configuration.
-        degenerate = feval(degenfn, x(:,ind));
-        
-        if ~degenerate
-            % Fit model to this random selection of data points.
-            % Note that M may represent a set of models that fit the data in
-            % this case M will be a cell array of models
-            M = feval(fittingfn, x(:,ind));
-            
-            % Depending on your problem it might be that the only way you
-            % can determine whether a data set is degenerate or not is to
-            % try to fit a model and see if it succeeds.  If it fails we
-            % reset degenerate to true.
-            if isempty(M)
-                degenerate = 1;
-            end
-        end
-        
-        % Safeguard against being stuck in this loop forever
-        count = count + 1;
-        if count > maxDataTrials
-            warning('Unable to select a nondegenerate data set');
-            break
-        end
-    end
-    
-    
-    
+
+inds = poissrnd(30,1,maxTrials);%randsample(npts,maxTrials);
+
+
+for i=1:maxTrials
+    ind = min(inds(i), npts);%inds(i);    
+    Lc = feval(fittingfn, x(:,ind));
     
     % Once we are out here we should have some kind of model...
     % Evaluate distances between points and model returning the indices
-    % of elements in x that are inliers.  Additionally, if M is a cell
+    % of elements in x that are inliers.  Additionally, if Lc is a cell
     % array of possible models 'distfn' will return the model that has
-    % the most inliers.  After this call M will be a non-cell object
+    % the most inliers.  After this call Lc will be a non-cell object
     % representing only one model.
-    [inliers, M] = feval(distfn, M, x, thresh);
+    [inliers, Lc, error] = feval(distfn, Lc, x, thresh);
     
     % Find the number of inliers to this model.
     ninliers = length(inliers);
     
-    if ninliers > bestscore% Modified by Bruno (iterative)
-        bestscore = ninliers;% Record data for this model
+    while ninliers > minscore && error < besterror
+        %will never iterate more than twice
         bestinliers = inliers;
-        bestM = M;
+        bestLc = Lc;
+        besterror = error;
         
-%         M = feval(fittingfn, x(:,inliers));% Added by Bruno
-%         [inliers, M] = feval(distfn, M, x, thresh);% Added by Bruno
-%         ninliers = length(inliers);% Added by Bruno
+        Lc = feval(fittingfn, x(:,inliers));% Added by Bruno
+        [inliers, Lc, error] = feval(distfn, Lc, x, thresh);% Added by Bruno
+        ninliers = length(inliers);% Added by Bruno
     end
     
     
@@ -226,22 +176,15 @@ while true
         fprintf('trial %d out of %d         \r',trialcount, maxTrials);
     end
     
-    % Safeguard against being stuck in this loop forever
-    if trialcount > maxTrials
-        warning( ...
-            sprintf('ransac reached the maximum number of %d trials',...
-            maxTrials));
-        break
-    end
 end
 
 if feedback, fprintf('\n'); end
 
-if ~isnan(bestM)   % We got a solution
-    M = bestM;
+if ~isnan(bestLc)   % We got a solution
+    Lc = bestLc;
     inliers = bestinliers;
 else
-    M = [];
+    Lc = [];
     inliers = [];
     warning('ransac was unable to find a useful solution');
 end

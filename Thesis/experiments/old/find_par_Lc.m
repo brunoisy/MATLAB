@@ -1,6 +1,5 @@
 function [Lc] = find_par_Lc(mins, x0)
-%FIND_LC Summary of this function goes here
-%   Detailed explanation goes here
+%FIND_LC for pure parallel model
 load('constants.mat')
 
 Lc = zeros(1,length(mins));

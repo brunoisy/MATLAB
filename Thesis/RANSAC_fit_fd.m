@@ -24,9 +24,7 @@ for i = 1:maxnLc
         nLc = i-1;
         break
     end
-%     free(1:start_ind+10) = false;
-%     start_ind = start_ind+11;
-    [~,inliers]     = ransac_2(x(:,free), @fittingfn, @distfn, @degenfn, 1, thresh, 1, 10, 30);
+    [~,inliers]     = ransac(x(:,free), @fittingfn, @distfn, thresh, true, 30);
     inliers         = start_ind+inliers;
     if isempty(inliers)
         nLc = i-1;

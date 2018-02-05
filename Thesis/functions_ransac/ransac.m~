@@ -124,22 +124,18 @@
 %%% Modified by Bruno in the following ways :
 %%% the first point is always selected as part of ...
 
-function [Lc, inliers] = ransac_2(x, fittingfn, distfn, degenfn, s, thresh, feedback, ...
-    maxDataTrials, maxTrials, firstPoint)
+function [Lc, inliers] = ransac(x, fittingfn, distfn, thresh, feedback, maxTrials)
 
 
-
-if nargin < 10; firstPoint = false;  end;
-if nargin < 9; maxTrials = 1000;    end;
-if nargin < 8; maxDataTrials = 100; end;
+if nargin < 8; maxTrials = 1000;    end;
 if nargin < 7; feedback = 0;        end;
 
 [~, npts] = size(x);
 
 
-bestLc = NaN;      % Sentinel value allowing detection of solution failure.
+bestLc = NaN;  % Sentinel value allowing detection of solution failure.
 trialcount = 0;
-minscore =  10;  % We need at least inliers to consider a model valid
+minscore =  10;  % We need at least 10 inliers for a model to be valid
 besterror = Inf;
 bestinliers = [];
 

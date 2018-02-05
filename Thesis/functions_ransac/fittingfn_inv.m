@@ -1,4 +1,4 @@
-function [Lc] = fittingfn_2(XF)
+function [Lc] = fittingfn_inv(XF)
 %finds the Fd curve with the lsq error on x
 
 X = XF(1,:);
