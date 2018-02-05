@@ -25,7 +25,7 @@ ylimits = [-150, 20];
 
 
 
-for filenumber = 1:5
+for filenumber = 1:23
      filename = strcat(directory,'curve_',int2str(filenumber),'.mat');
 %      load(filename)
 %      figure
@@ -40,7 +40,7 @@ for filenumber = 1:5
 %      saveas(gcf, strcat('images/data_4/curve_',int2str(filenumber),'.jpg'));
 %      close
      
-   lsq_fit_fd(filename, xlimits, ylimits, 1, false)
+%    lsq_fit_fd(filename, xlimits, ylimits, 1, false)
 %     saveas(gcf, strcat('images/LSQ fit/data_2/curve_',int2str(filenumber),'.fig'));
 %     saveas(gcf, strcat('images/LSQ fit/data_2/curve_',int2str(filenumber)),'epsc');
 %     saveas(gcf, strcat('images/LSQ fit/data_2/curve_',int2str(filenumber),'.jpg'));
@@ -53,10 +53,10 @@ for filenumber = 1:5
 %     saveas(gcf, strcat('images/LSQ fit/data_1/bad/curve_',int2str(filenumber)),'epsc');
 %     saveas(gcf, strcat('images/LSQ fit/data_1/bad/curve_',int2str(filenumber),'.jpg'));
     
-%      RANSAC_fit_fd(filename, xlimits, ylimits)
-%     saveas(gcf, strcat('images/RANSAC/data_2/curve_',int2str(filenumber),'.fig'));
-%     saveas(gcf, strcat('images/RANSAC/data_2/curve_',int2str(filenumber)),'epsc');
-%     saveas(gcf, strcat('images/RANSAC/data_2/curve_',int2str(filenumber),'.jpg'));
+     RANSAC_fit_fd(filename, xlimits, ylimits)
+%      saveas(gcf, strcat('images/RANSAC/data_2/curve_',int2str(filenumber),'.fig'));
+%      saveas(gcf, strcat('images/RANSAC/data_2/curve_',int2str(filenumber)),'epsc');
+     saveas(gcf, strcat('images/RANSAC/data_2/curve_',int2str(filenumber),'.jpg'));
 % 
 %     saveas(gcf, strcat('images/RANSAC/data_1/good/curve_',int2str(filenumber),'.fig'));
 %     saveas(gcf, strcat('images/RANSAC/data_1/good/curve_',int2str(filenumber)),'epsc');
@@ -65,5 +65,5 @@ for filenumber = 1:5
 %     saveas(gcf, strcat('images/RANSAC/data_1/bad/curve_',int2str(filenumber),'.fig'));
 %     saveas(gcf, strcat('images/RANSAC/data_1/bad/curve_',int2str(filenumber)),'epsc');
 %     saveas(gcf, strcat('images/RANSAC/data_1/bad/curve_',int2str(filenumber),'.jpg'));
-%      close
+     close
 end

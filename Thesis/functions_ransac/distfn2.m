@@ -1,4 +1,4 @@
-function [inliers, Lc, error] = distfn(Lc, x, thresh)
+function [inliers, Lc, error] = distfn2(Lc, x, thresh)
 %DISTFN Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -18,14 +18,6 @@ for i = length(Fin):-1:1
 end
 inliers = 1:stop;
 
-[~, ind] = min(Fin(inliers));
-%%% cut off outliers at end
-for i = ind:length(Xin)
-    if Fin(i) > Fin(ind) + thresh 
-        inliers = 1:i-1;
-        break
-    end
-end
 
 if isempty(inliers)
     error = Inf;

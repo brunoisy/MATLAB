@@ -4,7 +4,7 @@ function [Lc] = fittingfn(XF)
 X = XF(1,:);
 F = XF(2,:);
 
-if length(X) == 1 % for speed
+if length(X) == 1 % for speed (faster to solve polynomial)
     Lc = find_Lc(XF, 0);
 else
     Lc = 400;

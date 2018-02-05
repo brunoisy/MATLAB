@@ -24,7 +24,7 @@ for i = 1:maxnLc
         nLc = i-1;
         break
     end
-    [~,inliers]     = ransac(x(:,free), @fittingfn, @distfn, thresh, true, 30);
+    [~,inliers]     = ransac(x(:,free), @fittingfn, @distfn, thresh, true, 100);
     inliers         = start_ind+inliers;
     if isempty(inliers)
         nLc = i-1;
@@ -41,7 +41,7 @@ for i = 1:maxnLc
         break;
     end
     
-    for j = start_ind:length(dist)-10
+    for j = start_ind:length(dist)-10 % gets rid of outliers
         if force(j) - force(j+10) > 0
             start_ind = j;
             free(1:start_ind) = false(1,start_ind);
