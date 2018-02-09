@@ -1,4 +1,4 @@
-function [Lc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit_fd(force, dist, k, offset)
+function [Lc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit_fd(dist, force, k, offset)
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
 

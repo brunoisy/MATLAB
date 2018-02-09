@@ -9,7 +9,6 @@ F = x(2,:);
 Xin = X(X < Lc);
 Fin = F(X < Lc);
 FXin_up = fd(Lc+25,Xin);
-stop = 1;
 for i = length(Fin):-1:1
    if Fin(i) < FXin_up(i)
        stop = i;

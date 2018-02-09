@@ -1,4 +1,4 @@
-function Lc = RANSAC_fit_fd(filename, xlimits, ylimits, drawplot)
+function Lc = RANSAC_fit_fd_old(filename, xlimits, ylimits, drawplot)
 
 if nargin < 4
     drawplot = true;
