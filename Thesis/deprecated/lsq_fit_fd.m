@@ -65,8 +65,6 @@ for j = 1:k
     %%% We select all the points that we will try to fit
     [Xsel, Fsel, Xfirst, Xunfold] = select_points(dist, force, x0, Lc, thresh);
     
-    
-    %%% to do lsqfit, we need to convert to pN/nm and back (scaling issues)
     if offset == true
         x0Lc = lsqcurvefit(@(x0Lc,x) fd_multi(x0Lc,x,Xunfold), [x0, Lc], Xsel,  Fsel);
         x0 = x0Lc(1);
