@@ -1,12 +1,8 @@
 addpath('functions')
 addpath('functions_ransac')
 
-% % default limits
-xlimits = [-10, 150];
-ylimits = [-250, 50];
-
-% subdir = 'data_1/good/';
-% filenumbers = 1:9;
+subdir = 'data_1/good/';
+filenumbers = 1:9;
 
 % subdir = 'data_1/bad/';
 % filenumbers = 1:10;
@@ -20,13 +16,15 @@ ylimits = [-250, 50];
 % filenumbers = 1:135;
 
 % subdir = 'data_4/';
-% filenumbers = 136:159,163:257]
+% filenumbers = 136:271;
 
-subdir = 'data_5/';
-filenumbers = 1:170;
+% subdir = 'data_5/';
+% filenumbers = 1:170;
 
 
-
+% default limits
+xlimits = [-10, 150];
+ylimits = [-250, 50];
 
 dir = strcat('data/MAT_clean/',subdir);
 
@@ -63,11 +61,11 @@ for filenumber = filenumbers
     for i=1:length(Lc)
         X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
         F =  Fsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
-        plot(X,F,'.','Color',colors(mod(i,7)+1,:));
+        plot(X,F,'.','Color',colors(i,:));
                 
         Xfit = linspace(0,Lc(i),1000);
         Ffit = fd(Lc(i), Xfit);
-        plot(Xfit,Ffit,'Color',colors(mod(i,7)+1,:));
+        plot(Xfit,Ffit,'Color',colors(i,:));
     end
     
     
@@ -83,11 +81,11 @@ for filenumber = filenumbers
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
     for i=1:length(Lc)
-        plot(dist(allInliers{i}), force(allInliers{i}),'.','Color',colors(mod(i,7)+1,:))
+        plot(dist(allInliers{i}), force(allInliers{i}),'.','Color',colors(i,:))
         
         Xfit = linspace(0,Lc(i),1000);
         Ffit = fd(Lc(i), Xfit);
-        plot(Xfit,Ffit,'Color',colors(mod(i,7)+1,:));
+        plot(Xfit,Ffit,'Color',colors(i,:));
     end
     
     
@@ -95,5 +93,5 @@ for filenumber = filenumbers
     %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(filenumber),'.fig'));
     %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(filenumber)),'epsc');
     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(filenumber),'.jpg'));
-    close
+%     close
 end

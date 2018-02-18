@@ -6,25 +6,23 @@ function [Xsel, Fsel, Xfirst, Xunfold] = select_points(X, F, x0, Lc, thresh)
 
 Xfirst = zeros(1, length(Lc));
 Xunfold = zeros(1, length(Lc));
-
+Xsel = [];
+Fsel = [];
 for i = 1:length(Lc)
     if(i==1)
         admissX = X(x0<X & X<x0+Lc(i));
         admissF = F(x0<X & X<x0+Lc(i));
-        admissX = admissX(abs(admissF-fd(Lc(i), admissX-x0))<thresh);% add if isempty(admissX)... for robustness? (problem when 2 Lc curves collapse)
-        Xfirst(i) = admissX(1);
-        Xunfold(i) = admissX(end);
-        Xsel = X(Xfirst(i)<=X & X<Xunfold(i));
-        Fsel = F(Xfirst(i)<=X & X<Xunfold(i));
     else
         admissX = X(Xunfold(i-1)<X & X<x0+Lc(i));
         admissF = F(Xunfold(i-1)<X & X<x0+Lc(i));
-        admissX = admissX(abs(admissF-fd(Lc(i), admissX-x0))<thresh); 
+    end
+    admissX = admissX(abs(admissF-fd(Lc(i), admissX-x0))<thresh);
+    if ~isempty(admissX)
         Xfirst(i) = admissX(1);
         Xunfold(i) = admissX(end);
         Xsel = [Xsel, X(Xfirst(i)<=X & X<Xunfold(i))];
         Fsel = [Fsel, F(Xfirst(i)<=X & X<Xunfold(i))];
-    end 
+    end
 end
 end
 
