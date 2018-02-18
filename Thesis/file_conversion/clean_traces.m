@@ -1,28 +1,15 @@
-ndir = 2;
+% ndir = 2;
+% 
+% dir = strcat('data/MAT/data_',int2str(ndir),'/');
+% newdir = strcat('data/MAT_clean/data_',int2str(ndir),'/');
+dir = 'data/MAT/data_3/';
+newdir = 'data/MAT_clean/data_3/';
 
-dir = strcat('data/MAT/data_',int2str(ndir),'/');
-newdir = strcat('data/MAT_clean/data_',int2str(ndir),'/');
 
-% xlimits = [-10, 200];
-% ylimits = [-150, 20];
-% xlimits = [-10, 200];
-% ylimits = [-200, 50];
-% xlimits = [-10, 150];
-% ylimits = [-250, 20];
 
-for filenumber = 1:170
+for filenumber = 1:135
     filename = strcat(dir,'curve_',int2str(filenumber),'.mat');
     load(filename)
-    % x = preprocess(x);%??
-    
-    
-%     figure
-%     subplot(1,2,1)
-%     hold on
-%     xlim(xlimits)
-%     ylim(ylimits)
-%     plot(dist,force,'.')
- 
 
     %%% 1 - We remove all points from start phase
     start_ind = 1;
@@ -61,14 +48,6 @@ for filenumber = 1:170
             force = force(1:i+max_strikes-1);
             break
         end
-    end
-        
-    
-%     subplot(1,2,2)
-%     hold on
-%     xlim(xlimits)
-%     ylim(ylimits)
-%     plot(dist,force,'.')
-%     
+    end  
     save(strcat(newdir,'/curve_',int2str(filenumber),'.mat'),'dist','force');
 end
