@@ -14,7 +14,11 @@ for i = 1:minlength
     thisroots = roots(p);
     thisroots = thisroots(thisroots>0);
     
-    Lc(i) = real(thisroots(1));
+    if isempty(thisroots)
+        Lc(i) = 0;
+    else
+        Lc(i) = real(thisroots(1));
+    end
 end
 
 end

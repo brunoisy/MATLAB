@@ -1,4 +1,4 @@
-function [inliers, Lc, error] = distfn(Lc, x, thresh)
+function [inliers, error] = distfn(Lc, x, thresh)
 %DISTFN Summary of this function goes here
 %   Detailed explanation goes here
 

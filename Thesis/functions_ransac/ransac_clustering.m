@@ -103,28 +103,26 @@
 % The Software is provided "as is", without warranty of any kind.
 
 
-function [Lc, inliers] = ransac(x, fittingfn, distfn, thresh, feedback, maxTrials)
+
+
+function [Lc_mean, inliers] = ransac_clustering(Lcs, fittingfn, distfn, s, thresh, feedback, maxTrials)
 
 
 if nargin < 8; maxTrials = 1000;    end;
 if nargin < 7; feedback = 0;        end;
 
-[~, npts] = size(x);
+[~, npts] = size(Lcs);
 
 
 bestLc = NaN;  % Sentinel value allowing detection of solution failure.
 trialcount = 0;
-minscore =  10;  % We need at least 10 inliers for a model to be valid
 besterror = Inf;
 bestinliers = [];
 
 
-inds = poissrnd(30,1,maxTrials);%randsample(npts,maxTrials);
-
-
 for i=1:maxTrials
-    ind = min(inds(i), npts);%inds(i);    
-    Lc = feval(fittingfn, x(:,ind));
+    ind = randsample(npts, s);
+    Lc_mean = feval(fittingfn, Lcs(:,ind));
     
     % Once we are out here we should have some kind of model...
     % Evaluate distances between points and model returning the indices
@@ -132,19 +130,18 @@ for i=1:maxTrials
     % array of possible models 'distfn' will return the model that has
     % the most inliers.  After this call Lc will be a non-cell object
     % representing only one model.
-    [inliers, error] = feval(distfn, Lc, x, thresh);
+    inliers = feval(distfn, Lc_mean, Lcs, thresh);
     
     % Find the number of inliers to this model.
     ninliers = length(inliers);
     
-    while ninliers > minscore && error < besterror
+    while ninliers > minscore
         %will never iterate more than twice
         bestinliers = inliers;
-        bestLc = Lc;
-        besterror = error;
+        bestLc = Lc_mean;
         
-        Lc = feval(fittingfn, x(:,inliers));% Added by Bruno
-        [inliers, error] = feval(distfn, Lc, x, thresh);% Added by Bruno
+        Lc_mean = feval(fittingfn, Lcs(:,inliers));% Added by Bruno
+        inliers = feval(distfn, Lc_mean, Lcs, thresh);% Added by Bruno
         ninliers = length(inliers);% Added by Bruno
     end
     
@@ -160,11 +157,10 @@ end
 if feedback, fprintf('\n'); end
 
 if ~isnan(bestLc)   % We got a solution
-    Lc = bestLc;
+    Lc_mean = bestLc;
     inliers = bestinliers;
 else
-    Lc = [];
+    Lc_mean = [];
     inliers = [];
     warning('ransac was unable to find a useful solution');
 end
-

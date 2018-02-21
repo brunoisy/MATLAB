@@ -19,22 +19,22 @@ ylimits = [-250, 50];
 % subdir = 'data_3/';
 % filenumbers = 1:135;
 
-% subdir = 'data_4/';
-% filenumbers = 136:159,163:257]
+subdir = 'data_4/';
+filenumbers = 136%136:271;
 
-subdir = 'data_5/';
-filenumbers = 1:170;
+% subdir = 'data_5/';
+% filenumbers = 1:170;
 
 
 
 
 dir = strcat('data/MAT_clean/',subdir);
+colors = get(gca, 'colororder');
 
 for filenumber = filenumbers
     filename = strcat(dir,'curve_',int2str(filenumber),'.mat');
     load(filename)
-    colors = get(gca, 'colororder');
-
+    
     
     %%% Plot the initial points
     figure
@@ -64,7 +64,7 @@ for filenumber = filenumbers
         X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
         F =  Fsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
         plot(X,F,'.','Color',colors(mod(i,7)+1,:));
-                
+        
         Xfit = linspace(0,Lc(i),1000);
         Ffit = fd(Lc(i), Xfit);
         plot(Xfit,Ffit,'Color',colors(mod(i,7)+1,:));
@@ -94,6 +94,6 @@ for filenumber = filenumbers
     %%% Save Plots
     %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(filenumber),'.fig'));
     %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(filenumber)),'epsc');
-    saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(filenumber),'.jpg'));
-    close
+    %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(filenumber),'.jpg'));
+    %     close
 end

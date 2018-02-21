@@ -101,9 +101,27 @@
 % all copies or substantial portions of the Software.
 %
 % The Software is provided "as is", without warranty of any kind.
+%
+% Lcay      2003 - Original version
+% February 2004 - Tidied up.
+% August   2005 - Specification of distfn changed to allow model fitter to
+%                 return multiple models from which the best must be selected
+% Sept     2006 - Random selection of data points changed to ensure duplicate
+%                 points are not selected.
+% February 2007 - Jordi Ferrer: Arranged warning printout.
+%                               Allow maximum trials as optional parameters.
+%                               Patch the problem when non-generated data
+%                               set is not given in the first iteration.
+% August   2008 - 'feedback' parameter restored to argument list and other
+%                 breaks in code introduced in last update fixed.
+% December 2008 - Octave compatibility mods
+% June     2009 - Argument 'LcaxTrials' corrected to 'maxTrials'!
+% January  2013 - Separate code path for Octave no longer needed
 
 
-function [Lc, inliers] = ransac(x, fittingfn, distfn, thresh, feedback, maxTrials)
+
+
+function [mean_Lc, inliers] = ransac_clustering(Lcs_, fittingfn, distfn, thresh, feedback, maxTrials)
 
 
 if nargin < 8; maxTrials = 1000;    end;
@@ -114,17 +132,16 @@ if nargin < 7; feedback = 0;        end;
 
 bestLc = NaN;  % Sentinel value allowing detection of solution failure.
 trialcount = 0;
-minscore =  10;  % We need at least 10 inliers for a model to be valid
 besterror = Inf;
 bestinliers = [];
 
 
-inds = poissrnd(30,1,maxTrials);%randsample(npts,maxTrials);
+inds = randsample(npts,maxTrials);
 
 
 for i=1:maxTrials
-    ind = min(inds(i), npts);%inds(i);    
-    Lc = feval(fittingfn, x(:,ind));
+    ind = inds(i);    
+    mean_Lc = feval(fittingfn, x(:,ind));
     
     % Once we are out here we should have some kind of model...
     % Evaluate distances between points and model returning the indices
@@ -132,7 +149,7 @@ for i=1:maxTrials
     % array of possible models 'distfn' will return the model that has
     % the most inliers.  After this call Lc will be a non-cell object
     % representing only one model.
-    [inliers, error] = feval(distfn, Lc, x, thresh);
+    [inliers, mean_Lc, error] = feval(distfn, mean_Lc, x, thresh);
     
     % Find the number of inliers to this model.
     ninliers = length(inliers);
@@ -140,11 +157,11 @@ for i=1:maxTrials
     while ninliers > minscore && error < besterror
         %will never iterate more than twice
         bestinliers = inliers;
-        bestLc = Lc;
+        bestLc = mean_Lc;
         besterror = error;
         
-        Lc = feval(fittingfn, x(:,inliers));% Added by Bruno
-        [inliers, error] = feval(distfn, Lc, x, thresh);% Added by Bruno
+        mean_Lc = feval(fittingfn, x(:,inliers));% Added by Bruno
+        [inliers, mean_Lc, error] = feval(distfn, mean_Lc, x, thresh);% Added by Bruno
         ninliers = length(inliers);% Added by Bruno
     end
     
@@ -160,11 +177,10 @@ end
 if feedback, fprintf('\n'); end
 
 if ~isnan(bestLc)   % We got a solution
-    Lc = bestLc;
+    mean_Lc = bestLc;
     inliers = bestinliers;
 else
-    Lc = [];
+    mean_Lc = [];
     inliers = [];
     warning('ransac was unable to find a useful solution');
 end
-
