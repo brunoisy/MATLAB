@@ -106,8 +106,8 @@
 function [Lc, inliers] = ransac(x, fittingfn, distfn, thresh, feedback, maxTrials)
 
 
-if nargin < 8; maxTrials = 1000;    end;
-if nargin < 7; feedback = 0;        end;
+if nargin < 6; maxTrials = 1000;    end;
+if nargin < 5; feedback = true;        end;
 
 [~, npts] = size(x);
 

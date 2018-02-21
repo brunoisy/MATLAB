@@ -105,18 +105,18 @@
 
 
 
-function [Lc_mean, inliers] = ransac_clustering(Lcs, fittingfn, distfn, s, thresh, feedback, maxTrials)
+function inliers = ransac_clustering(Lcs, fittingfn, distfn, s, thresh, feedback, maxTrials)
 
 
-if nargin < 8; maxTrials = 1000;    end;
-if nargin < 7; feedback = 0;        end;
+if nargin < 7; maxTrials = 1000;    end;
+if nargin < 6; feedback = true;        end;
 
 [~, npts] = size(Lcs);
 
 
 bestLc = NaN;  % Sentinel value allowing detection of solution failure.
 trialcount = 0;
-besterror = Inf;
+bestscore = 0;
 bestinliers = [];
 
 
@@ -135,10 +135,11 @@ for i=1:maxTrials
     % Find the number of inliers to this model.
     ninliers = length(inliers);
     
-    while ninliers > minscore
+    while ninliers > bestscore
         %will never iterate more than twice
         bestinliers = inliers;
         bestLc = Lc_mean;
+        bestscore = ninliers;
         
         Lc_mean = feval(fittingfn, Lcs(:,inliers));% Added by Bruno
         inliers = feval(distfn, Lc_mean, Lcs, thresh);% Added by Bruno
@@ -157,10 +158,8 @@ end
 if feedback, fprintf('\n'); end
 
 if ~isnan(bestLc)   % We got a solution
-    Lc_mean = bestLc;
     inliers = bestinliers;
 else
-    Lc_mean = [];
     inliers = [];
     warning('ransac was unable to find a useful solution');
 end
