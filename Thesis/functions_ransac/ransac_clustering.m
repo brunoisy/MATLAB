@@ -130,7 +130,7 @@ for i=1:maxTrials
     % array of possible models 'distfn' will return the model that has
     % the most inliers.  After this call Lc will be a non-cell object
     % representing only one model.
-    inliers = feval(distfn, Lc_mean, Lcs, thresh);
+    [inliers,~] = feval(distfn, Lc_mean, Lcs, thresh);
     
     % Find the number of inliers to this model.
     ninliers = length(inliers);
@@ -142,7 +142,7 @@ for i=1:maxTrials
         bestscore = ninliers;
         
         Lc_mean = feval(fittingfn, Lcs(:,inliers));% Added by Bruno
-        inliers = feval(distfn, Lc_mean, Lcs, thresh);% Added by Bruno
+        [inliers,~] = feval(distfn, Lc_mean, Lcs, thresh);% Added by Bruno
         ninliers = length(inliers);% Added by Bruno
     end
     
