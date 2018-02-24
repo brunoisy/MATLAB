@@ -1,29 +1,29 @@
-addpath('functions')
-addpath('functions_ransac')
+addpath('LSQ fit')
+addpath('RANSAC fit')
 
 % % default limits
 xlimits = [-10, 150];
 ylimits = [-250, 50];
 
-% subdir = 'data_1/good/';
-% filenumbers = 1:9;
+subdir = 'data_1/good/';
+tracenumbers = 1:9;
 
-% subdir = 'data_1/bad/';
-% filenumbers = 1:10;
+subdir = 'data_1/bad/';
+tracenumbers = 1:10;
 
-% subdir = 'data_2/';
-% xlimits = [-10, 200];
-% ylimits = [-150, 20];
-% filenumbers = 1:23;
+subdir = 'data_2/';
+xlimits = [-10, 200];
+ylimits = [-150, 20];
+tracenumbers = 1:23;
 
-% subdir = 'data_3/';
-% filenumbers = 1:135;
+subdir = 'data_3/';
+tracenumbers = 1:135;
 
 subdir = 'data_4/';
-filenumbers = 136%136:271;
+tracenumbers = 136%136:271;
 
-% subdir = 'data_5/';
-% filenumbers = 1:170;
+subdir = 'data_5/';
+tracenumbers = 1:170;
 
 
 
@@ -31,9 +31,9 @@ filenumbers = 136%136:271;
 dir = strcat('data/MAT_clean/',subdir);
 colors = get(gca, 'colororder');
 
-for filenumber = filenumbers
-    filename = strcat(dir,'curve_',int2str(filenumber),'.mat');
-    load(filename)
+for tracenumber = tracenumbers
+    trace = strcat(dir,'curve_',int2str(tracenumber),'.mat');
+    load(trace)
     
     
     %%% Plot the initial points

@@ -1,4 +1,4 @@
-addpath('functions')
+addpath('LSQ fit')
 filename = 'data/MAT/data_2/curve_1.mat';
 load(filename)
 

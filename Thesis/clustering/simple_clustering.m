@@ -1,6 +1,6 @@
 load('constants.mat')
-addpath('functions')
-addpath('functions_ransac')
+addpath('LSQ fit')
+addpath('RANSAC fit')
 
 directory = 'data/MAT_clean/data_4/';
 trace_numbers = 136:271;
@@ -90,41 +90,21 @@ for n = 3:6
     inliers = ransac_clustering(Lcs_cluster,@fittingfn_clustering,@distfn_clustering,3,thresh,true,20);
     Lc = mean(Lcs_cluster(:,inliers),2);
     [inliers,deltas] = distfn_clustering(Lc, Lcs_cluster, thresh);
-
-    %
-    %     subplot(1,4,n-2)
-    %     hold on
-    %     xlim(xlimits);
-    %     ylim(ylimits);
-    %     xlabel('Distance (nm)');
-    %     ylabel('Force (pN)');
-    %     for i=1:n
-    %         Xfit = linspace(0,Lc(i),1000);
-    %         Ffit = fd(Lc(i), Xfit);
-    %         plot(Xfit,Ffit,'Color',colors(mod(i,7)+1,:));
-    %     end
     
-    figure
+    
+    subplot(1,4,n-2)
     hold on
-    title(strcat('clustered FD profile for n =',int2str(n)))
-    
     xlim(xlimits);
     ylim(ylimits);
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
-    for i=1:length(Lc)
+    for i=1:n
         Xfit = linspace(0,Lc(i),1000);
         Ffit = fd(Lc(i), Xfit);
         plot(Xfit,Ffit,'Color',colors(mod(i,7)+1,:));
     end
     
-    ok_trace_numbers = trace_numbers(Lcs_lengths == n);% select all traces with the right Lc length
-    for i = 1:length(inliers)
-        trace_number = ok_trace_numbers(inliers(i));
-        trace = strcat(directory,'curve_',int2str(trace_number),'.mat');
-        load(trace)
-        plot(dist+deltas(i), force,'.')
-    end
+    
 end
 
 

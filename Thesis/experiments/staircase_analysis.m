@@ -1,5 +1,5 @@
-addpath('functions')
-addpath('functions_ransac')
+addpath('LSQ fit')
+addpath('RANSAC fit')
 
 xlimits = [-10, 150];
 ylimits = [-250, 50];

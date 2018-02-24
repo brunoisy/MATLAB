@@ -1,23 +1,23 @@
-addpath('functions')
-addpath('functions_ransac')
+addpath('LSQ fit')
+addpath('RANSAC fit')
 
 % subdir = 'data_1/good/';
-% filenumbers = 1:9;
-
+% tracenumbers = 1:9;
+% 
 % subdir = 'data_1/bad/';
-% filenumbers = 1:10;
-
+% tracenumbers = 1:10;
+% 
 % subdir = 'data_2/';
-% filenumbers = 1:23;
-
+% tracenumbers = 1:23;
+% 
 % subdir = 'data_3/';
-% filenumbers = 1:135;
-
+% tracenumbers = 1:135;
+% 
 % subdir = 'data_4/';
-% filenumbers = 136:271;
+% tracenumbers = 136:271;
 
 subdir = 'data_5/';
-filenumbers = 1:170;
+tracenumbers = 1:170;
 
 xlimits = [-10, 200];
 ylimits = [-250, 50];
@@ -25,9 +25,9 @@ ylimits = [-250, 50];
 dir1 = strcat('data/MAT/',subdir);
 dir2 = strcat('data/MAT_clean/',subdir);
 
-for filenumber = filenumbers
-    filename = strcat(dir1,'curve_',int2str(filenumber),'.mat');
-    load(filename)
+for tracenumber = tracenumbers
+    trace = strcat(dir1,'curve_',int2str(tracenumber),'.mat');
+    load(trace)
     
     %%% Plot the initial points
     figure
@@ -41,8 +41,8 @@ for filenumber = filenumbers
     ylabel('Force (pN)');
     plot(dist, force,'.')
     
-    filename = strcat(dir2,'curve_',int2str(filenumber),'.mat');
-    load(filename)
+    trace = strcat(dir2,'curve_',int2str(tracenumber),'.mat');
+    load(trace)
     colors = get(gca, 'colororder');
 
     
@@ -58,6 +58,6 @@ for filenumber = filenumbers
     plot(dist, force,'.')
     
     %%% Save Plot
-    saveas(gcf, strcat('images/Trace cleaning/',subdir,'curve_',int2str(filenumber),'.jpg'));
+    saveas(gcf, strcat('images/Trace cleaning/',subdir,'curve_',int2str(tracenumber),'.jpg'));
     close
 end
