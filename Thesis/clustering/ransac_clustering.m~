@@ -105,7 +105,7 @@
 
 
 
-function [meanLc, inliers, deltas] = ransac_clustering(Lcs, fittingfn, distfn, s, thresh, feedback, maxTrials)
+function [Lc_mean, inliers, deltas] = ransac_clustering(Lcs, fittingfn, distfn, s, thresh, feedback, maxTrials)
 
 
 if nargin < 7; maxTrials = 1000;    end;
@@ -113,14 +113,17 @@ if nargin < 6; feedback = true;        end;
 
 [~, npts] = size(Lcs);
 
+
+bestLc = NaN;  % Sentinel value allowing detection of solution failure.
 trialcount = 0;
 bestscore = 0;
 bestinliers = [];
+bestdeltas = [];
 
 
 for i=1:maxTrials
     ind = randsample(npts, s);
-    meanLc = feval(fittingfn, Lcs(:,ind));
+    Lc_mean = feval(fittingfn, Lcs(:,ind));
     
     % Once we are out here we should have some kind of model...
     % Evaluate distances between points and model returning the indices
@@ -128,18 +131,23 @@ for i=1:maxTrials
     % array of possible models 'distfn' will return the model that has
     % the most inliers.  After this call Lc will be a non-cell object
     % representing only one model.
-    inliers = feval(distfn, meanLc, Lcs, thresh);
-    meanLc = feval(fittingfn, Lcs(:,inliers));
+    [inliers,deltas] = feval(distfn, Lc_mean, Lcs, thresh);
+    Lc_mean = feval(fittingfn, Lcs(:,inliers));
     ninliers = length(inliers);
     
     while ninliers > bestscore
         %will never iterate more than twice
         bestinliers = inliers;
+        bestLc = Lc_mean;
         bestscore = ninliers;
+        bestdeltas = deltas;
         
-        inliers = feval(distfn, meanLc, Lcs, thresh);
+        [inliers,deltas] = feval(distfn, Lc_mean, Lcs, thresh);
+        Lc_mean = feval(fittingfn, Lcs(:,inliers));
         ninliers = length(inliers);
     end
+    
+    
     
     trialcount = trialcount+1;
     if feedback
@@ -150,10 +158,10 @@ end
 
 if feedback, fprintf('\n'); end
 
-if bestscore ~= 0   % We got a solution
+if ~isnan(bestLc)   % We got a solution
     inliers = bestinliers;
-    meanLc = feval(fittingfn, Lcs(:,inliers));
-    deltas = get_deltas(meanLc, Lcs(:,inliers));
+    deltas = bestdeltas;
+    Lc_mean = best_
 else
     inliers = [];
     warning('ransac was unable to find a useful solution');

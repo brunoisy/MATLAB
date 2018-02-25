@@ -1,9 +1,9 @@
 load('constants.mat')
 addpath('LSQ fit')
 
-subdir = 'data_4';
+subdir = 'data_3';
 directory = strcat('data/MAT_clean/',subdir,'/');
-tracenumbers = 136:271;% [136:187,201:271];
+tracenumbers = 1:135;
 
 Lcs = cell(1, length(tracenumbers));
 Lcs_lengths = zeros(1,length(tracenumbers));
