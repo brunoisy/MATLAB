@@ -5,7 +5,7 @@ function [Lc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit_fd(dist, force, k, offset)
 if nargin < 4
     offset = false; end
 if nargin < 3
-    k = 1; end
+    k = 2; end
 
 
 x0 = 0;

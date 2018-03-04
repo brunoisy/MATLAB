@@ -1,14 +1,20 @@
 % ndir = 2;
-% 
+%
 % dir = strcat('data/MAT/data_',int2str(ndir),'/');
 % newdir = strcat('data/MAT_clean/data_',int2str(ndir),'/');
-dir = 'data/MAT/data_3/';
-newdir = 'data/MAT_clean/data_3/';
+dir1 = 'data/MAT/data_4/';
+newdir = 'data/MAT_clean/data_4/';
 
+% files = dir(dir1);
+% files = files([files.isdir]==false);
+% filenames = {files(:).name};
+% 
+% for j =1:length(filenames)
+%     filename = strcat(dir1,'/',filenames{j});
+%     load(filename)
 
-
-for filenumber = 1:135
-    filename = strcat(dir,'curve_',int2str(filenumber),'.mat');
+for filenumber = 1:119
+    filename = strcat(dir1,'curve_',int2str(filenumber),'.mat');
     load(filename)
 
     %%% 1 - We remove all points from start phase
@@ -48,6 +54,9 @@ for filenumber = 1:135
             force = force(1:i+max_strikes-1);
             break
         end
-    end  
-    save(strcat(newdir,'/curve_',int2str(filenumber),'.mat'),'dist','force');
+    end
+        save(strcat(newdir,'/curve_',int2str(filenumber),'.mat'),'dist','force');
+%     name = filenames{j};
+%     name = name(1:end-4);
+%     save(strcat('data/MAT_clean/data_6/',name,'.mat'),'dist','force');
 end

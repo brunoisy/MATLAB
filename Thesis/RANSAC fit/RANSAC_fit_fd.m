@@ -8,7 +8,7 @@ maxnLc = 15;
 nLc = 0;
 Lc = zeros(1,maxnLc);
 allInliers = cell(1,maxnLc);
-start_ind = 1;
+start_ind = 0;
 
 
 %%%  We attempt to fit an FD curve to the different crests
@@ -28,7 +28,6 @@ for i = 1:maxnLc
     start_ind       = inliers(end);
     
     free(1:start_ind) = false(1,start_ind);
-    
     Lc(i) = fittingfn(x(:,inliers));
     if Lc(i) > maxLc
         nLc = i-1;

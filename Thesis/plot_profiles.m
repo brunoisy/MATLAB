@@ -5,25 +5,25 @@ addpath('RANSAC fit')
 xlimits = [-10, 150];
 ylimits = [-250, 50];
 
-subdir = 'data_1/good/';
-tracenumbers = 1:9;
-
-subdir = 'data_1/bad/';
-tracenumbers = 1:10;
-
-subdir = 'data_2/';
-xlimits = [-10, 200];
-ylimits = [-150, 20];
-tracenumbers = 1:23;
-
-subdir = 'data_3/';
-tracenumbers = 1:135;
+% subdir = 'data_1/good/';
+% tracenumbers = 1:9;
+% 
+% subdir = 'data_1/bad/';
+% tracenumbers = 1:10;
+% 
+% subdir = 'data_2/';
+% xlimits = [-10, 200];
+% ylimits = [-150, 20];
+% tracenumbers = 1:23;
+% 
+% subdir = 'data_3/';
+% tracenumbers = 1:135;
 
 subdir = 'data_4/';
-tracenumbers = 136%136:271;
+tracenumbers = 1:119;
 
-subdir = 'data_5/';
-tracenumbers = 1:170;
+% subdir = 'data_5/';
+% tracenumbers = 1:170;
 
 
 
@@ -31,7 +31,7 @@ tracenumbers = 1:170;
 dir = strcat('data/MAT_clean/',subdir);
 colors = get(gca, 'colororder');
 
-for tracenumber = tracenumbers
+for tracenumber =   tracenumbers
     trace = strcat(dir,'curve_',int2str(tracenumber),'.mat');
     load(trace)
     
@@ -92,8 +92,8 @@ for tracenumber = tracenumbers
     
     
     %%% Save Plots
-    %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(filenumber),'.fig'));
-    %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(filenumber)),'epsc');
-    %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(filenumber),'.jpg'));
-    %     close
+    %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(tracenumber),'.fig'));
+    %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(tracenumber)),'epsc');
+        saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(tracenumber),'.jpg'));
+%         close
 end

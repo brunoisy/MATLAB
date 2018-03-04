@@ -105,16 +105,17 @@
 
 
 
-function [meanLc, inliers, deltas] = ransac_clustering(Lcs, fittingfn, distfn, s, thresh, feedback, maxTrials)
+function [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs, fittingfn, distfn, s, thresh, prop_inliers, feedback, maxTrials)
 
 
-if nargin < 7; maxTrials = 1000;    end;
-if nargin < 6; feedback = true;        end;
+if nargin < 8; maxTrials = 1000;    end;
+if nargin < 7; feedback = true;        end;
 
 [~, npts] = size(Lcs);
 
+mininliers = ceil(npts*prop_inliers);% this is the minimum number of inliers for a model to be considered reliable
 trialcount = 0;
-bestscore = 0;
+bestMSE = 0;
 bestinliers = [];
 
 
@@ -122,23 +123,14 @@ for i=1:maxTrials
     ind = randsample(npts, s);
     meanLc = feval(fittingfn, Lcs(:,ind));
     
-    % Once we are out here we should have some kind of model...
-    % Evaluate distances between points and model returning the indices
-    % of elements in x that are inliers.  Additionally, if Lc is a cell
-    % array of possible models 'distfn' will return the model that has
-    % the most inliers.  After this call Lc will be a non-cell object
-    % representing only one model.
     inliers = feval(distfn, meanLc, Lcs, thresh);
     meanLc = feval(fittingfn, Lcs(:,inliers));
+    [~, MSE] = allign(meanLc, Lcs(:,inliers));
     ninliers = length(inliers);
-    
-    while ninliers > bestscore
-        %will never iterate more than twice
+
+    if ninliers > mininliers && MSE > bestMSE
         bestinliers = inliers;
-        bestscore = ninliers;
-        
-        inliers = feval(distfn, meanLc, Lcs, thresh);
-        ninliers = length(inliers);
+        bestMSE = MSE;
     end
     
     trialcount = trialcount+1;
@@ -150,11 +142,14 @@ end
 
 if feedback, fprintf('\n'); end
 
-if bestscore ~= 0   % We got a solution
+if bestMSE ~= 0   % We got a solution
     inliers = bestinliers;
     meanLc = feval(fittingfn, Lcs(:,inliers));
-    deltas = get_deltas(meanLc, Lcs(:,inliers));
+    [deltas, MSE] = allign(meanLc, Lcs(:,inliers));
 else
     inliers = [];
+    meanLc = 0;
+    deltas = 0;
+    MSE = 0;
     warning('ransac was unable to find a useful solution');
 end

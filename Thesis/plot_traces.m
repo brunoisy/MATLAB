@@ -16,8 +16,8 @@ addpath('RANSAC fit')
 % subdir = 'data_4/';
 % tracenumbers = 136:271;
 
-subdir = 'data_5/';
-tracenumbers = 1:170;
+subdir = 'data_4/';
+tracenumbers = 1:119;
 
 xlimits = [-10, 200];
 ylimits = [-250, 50];
@@ -58,6 +58,6 @@ for tracenumber = tracenumbers
     plot(dist, force,'.')
     
     %%% Save Plot
-    saveas(gcf, strcat('images/Trace cleaning/',subdir,'curve_',int2str(tracenumber),'.jpg'));
+    saveas(gcf, strcat('images/trace cleaning/',subdir,'curve_',int2str(tracenumber),'.jpg'));
     close
 end
