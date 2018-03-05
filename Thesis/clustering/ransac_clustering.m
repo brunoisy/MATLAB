@@ -105,37 +105,35 @@
 
 
 
-function [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs, fittingfn, distfn, s, thresh, prop_inliers, feedback, maxTrials)
+function [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs, fittingfn, distfn, thresh, prop_inliers, feedback)
 
 
-if nargin < 8; maxTrials = 1000;    end;
-if nargin < 7; feedback = true;        end;
+if nargin < 6; feedback = true;        end;
 
 [~, npts] = size(Lcs);
 
 mininliers = ceil(npts*prop_inliers);% this is the minimum number of inliers for a model to be considered reliable
 trialcount = 0;
-bestMSE = 0;
+bestMSE = Inf;
 bestinliers = [];
 
 
-for i=1:maxTrials
-    ind = randsample(npts, s);
-    meanLc = feval(fittingfn, Lcs(:,ind));
+for ind = 1:npts
+    meanLc = Lcs(:,ind);
     
     inliers = feval(distfn, meanLc, Lcs, thresh);
     meanLc = feval(fittingfn, Lcs(:,inliers));
     [~, MSE] = allign(meanLc, Lcs(:,inliers));
     ninliers = length(inliers);
 
-    if ninliers > mininliers && MSE > bestMSE
+    if ninliers > mininliers && MSE < bestMSE
         bestinliers = inliers;
         bestMSE = MSE;
     end
     
     trialcount = trialcount+1;
     if feedback
-        fprintf('trial %d out of %d         \r',trialcount, maxTrials);
+        fprintf('trial %d out of %d         \r',trialcount, npts);
     end
     
 end

@@ -9,19 +9,14 @@ directory = 'data_4';
 load(strcat('data/FD profiles/',directory,'.mat'))
 tracenumbers = 1:length(Lcs_lengths(1,:));
 % histogram(Lcs_lengths)
+threshs = 2000*ones(1,4);
+prop_inliers = 0.20;
 
 %%% clustering with RANSAC
-threshs = [15, 30, 15, 30];
-
-% 15*ones(2,4);%[20,30,50,60;100,100,100,100];%40*ones(2,4); %MSE tresh
-% threshs(1,3) = 80;
-% threshs(2,3) = 80;
-% prop_inliers = [0.10, 0.10];
-prop_inliers = 0.20;
 figure
 hold on
 colors = get(gca, 'colororder');
-for n = 3:6
+for n = 3%3:6
     for subcluster = 1%1:2 % number of subclusters to find
         if subcluster==1
             Lcs_cluster = cell2mat(Lcs(Lcs_lengths == n)')';
@@ -31,11 +26,11 @@ for n = 3:6
             Lcs_cluster = Lcs_cluster(:,outliers);
         end
         
-        [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs_cluster,@fittingfn_clustering,@distfn_clustering,3,threshs(subcluster,n-2),prop_inliers(subcluster),true,100);
+        [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs_cluster,@fittingfn_clustering,@distfn_clustering,3,threshs(subcluster,n-2),prop_inliers(subcluster),true,200);
         
         %%% Plotting
 %         subplot(1,2,subcluster)
-        subplot(2,2,n-2)
+%         subplot(2,2,n-2)
 %         subplot(1,3,n-3)
         hold on
         title(strcat('clustered FD profile for n = ',int2str(n)))
@@ -63,6 +58,6 @@ for n = 3:6
         end
         
         true_prop_inliers = length(inliers)/sum(Lcs_lengths == n);
-        text(120,0,strcat('proportion of inliers : ', in))
+        text(100,0,strcat('prop. inliers :', num2str(true_prop_inliers)));
     end
 end

@@ -10,7 +10,7 @@ load(strcat('data/FD profiles/',directory,'.mat'))
 tracenumbers = 1:length(Lcs_lengths(1,:));
 % histogram(Lcs_lengths)
 
-%%% clustering with RANSAC
+%% clustering with RANSAC
 threshs = [70, 70, 70, 70];
 % prop_inliers = [0.10, 0.10];
 prop_inliers = 0.20;
@@ -27,7 +27,7 @@ for n = 3:6
             Lcs_cluster = Lcs_cluster(:,outliers);
         end
         
-        [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs_cluster,@fittingfn_clustering,@distfn_clustering,3,threshs(subcluster,n-2),prop_inliers(subcluster),true,200);
+        [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs_cluster,@fittingfn_clustering,@distfn_clustering,threshs(subcluster,n-2),prop_inliers(subcluster),true);
         
         %%% Plotting
 %         subplot(1,2,subcluster)
