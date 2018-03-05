@@ -123,7 +123,7 @@ for ind = 1:npts
     
     inliers = feval(distfn, meanLc, Lcs, thresh);
     meanLc = feval(fittingfn, Lcs(:,inliers));
-    [~, MSE] = allign(meanLc, Lcs(:,inliers));
+    [~, MSE,~] = allign(meanLc, Lcs(:,inliers));
     ninliers = length(inliers);
 
     if ninliers > mininliers && MSE < bestMSE
@@ -135,7 +135,6 @@ for ind = 1:npts
     if feedback
         fprintf('trial %d out of %d         \r',trialcount, npts);
     end
-    
 end
 
 if feedback, fprintf('\n'); end
@@ -143,7 +142,7 @@ if feedback, fprintf('\n'); end
 if bestMSE ~= 0   % We got a solution
     inliers = bestinliers;
     meanLc = feval(fittingfn, Lcs(:,inliers));
-    [deltas, MSE] = allign(meanLc, Lcs(:,inliers));
+    [deltas, MSE,~] = allign(meanLc, Lcs(:,inliers));
 else
     inliers = [];
     meanLc = 0;
