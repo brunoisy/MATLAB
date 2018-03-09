@@ -1,6 +1,3 @@
-addpath('LSQ fit')
-addpath('RANSAC fit')
-
 % subdir = 'data_1/good/';
 % tracenumbers = 1:9;
 % 

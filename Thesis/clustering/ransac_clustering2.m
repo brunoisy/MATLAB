@@ -112,7 +112,7 @@ if nargin < 6; feedback = true;        end;
 
 [~, npts] = size(Lcs);
 
-ninliers = round(npts*prop_inliers)% this is the EXACT number of inliers we want our model to have
+ninliers = round(npts*prop_inliers);% this is the EXACT number of inliers we want our model to have
 trialcount = 0;
 bestMSE = Inf;
 bestinliers = [];
@@ -126,6 +126,7 @@ for ind = 1:npts
     [~, ~, SEs] = allign(meanLc, Lcs);
     [~,I] = sort(SEs);
     inliers = I(1:ninliers);
+    meanLc = feval(fittingfn, Lcs(:,inliers));
     [~, MSE, ~] = allign(meanLc, Lcs(:,inliers));
 
     if MSE < bestMSE

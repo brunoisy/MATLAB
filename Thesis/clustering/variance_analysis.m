@@ -7,7 +7,7 @@ directory = 'data_4';
 load(strcat('data/FD profiles/',directory,'.mat'))
 
 %%% clustering with RANSAC
-n = 6;
+n = 5;
 Lcs_cluster = cell2mat(Lcs(Lcs_lengths == n)')';
 props_inliers = (1:length(Lcs_cluster(1,:)))/length(Lcs_cluster(1,:));
 

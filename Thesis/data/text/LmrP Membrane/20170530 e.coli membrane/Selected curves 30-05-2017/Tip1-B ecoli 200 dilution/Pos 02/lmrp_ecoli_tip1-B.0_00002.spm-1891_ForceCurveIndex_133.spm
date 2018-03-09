@@ -1,0 +1,1047 @@
+\*Force file list
+\Version: 0x09200200
+\Date: 11:37:46 AM Tue May 30 2017
+\Start context: FOL
+\Data length: 80960
+\*Equipment list
+\Description: MultiMode 8
+\Microscope: MultiMode 8
+\Extender: None
+\Torsion: No
+\Vision: uEye UI148xLE-C #1
+\Scanner file: 10336jvlr.scn
+\*Scanner list
+\Scanner type: AFM
+\Serial Number: 10336JVLR
+\Piezo size: J
+\File name: 10336jvlr.scn
+\Motor sensitivity factor: 4.22
+\Retracted offset der: 8
+\Extended offset der: 13
+\Allow rotation: Allow
+\Piezo cal: 440
+\X sensitivity: 240.168
+\X derate: 0.298481
+\X mag: 1
+\X mag1: 0.7
+\X arg: 3
+\Orthogonality: 0.0122173
+\Y sensitivity: 236.796
+\Y derate: 0.3816
+\Y mag: 0.75
+\Y mag1: 0.7
+\Y arg: 3
+\X slow sensitivity: 249.76
+\X slow derate: 0.396
+\Y fast sensitivity: 244.812
+\Y fast derate: 0.2777
+\X slow-fast coupling: 0.735994
+\X slow-fast coupling derating: 0.000573635
+\Y slow-fast coupling: 0.791966
+\Y slow-fast coupling derating: 0.0006524
+\Fast cal freq: 5.00801
+\Slow cal freq: 9.78127
+\Xs-Yf coupling: 0.123182
+\Xs-Yf coupling derating: 5.78075e-005
+\Ys-Xf coupling: 0.263392
+\Ys-Xf coupling derating: 0.000312281
+\X offset sens: 371.5
+\Y offset sens: 367
+\ClosedLoop x igain: 8
+\ClosedLoop y igain: 8
+\@Sens. Zsens: V 12.90000 nm/V
+\@Sens. CurrentSens: V 10.00000 nA/V
+\@Sens. SECPMSens: V 100.0000 mV/V
+\@Sens. Xsensor: V 1.000000 
+\@Sens. Ysensor: V 1.000000 
+\*Ciao scan list
+\Parameter select: Main
+\Operating mode: Force Volume
+\Tip Scanned Distance: 4.11135e+006
+\Tip Frame Count: 439
+\Scan Size: 5000 nm
+\X Offset: 30000 nm
+\Y Offset: 30000 nm
+\SPM Zoom X Offset: 0 nm
+\SPM Zoom Y Offset: 0 nm
+\SPM Zoom Applied X Offset: 0 nm
+\SPM Zoom Applied Y Offset: 0 nm
+\Live SPM Zoom Mode: No
+\Rotate Ang.: 0
+\Stage X: 0
+\Stage Y: 0
+\Stage Z: 0
+\Stage Optics: 0
+\X round: 0
+\Tip Offset X: 0
+\Tip Offset Y: 0
+\NanoTrack X Offset Set: 0
+\NanoTrack Y Offset Set: 0
+\NanoTrack X Offset Actual: 0
+\NanoTrack Y Offset Actual: 0
+\Samps/line: 32
+\Lines: 32
+\Y disable: Enabled
+\Aspect Ratio: 1:1
+\Bidirectional Scan: Disabled
+\Scan line shift: 0
+\Scan Rate: 0.992442
+\Dark Lift Delay: 300
+\Tip Velocity: 9.92442
+\Zoom in at Constant: Tip Velocity
+\XY Move Tip Pos: Surface
+\Minimum scan rate: 0.1
+\Lift rate: 4
+\X drift: 0
+\Y drift: 0
+\Step XY size: 300
+\Cycles: 10
+\Step XY period: 0.005
+\Step size: 3
+\Units: Metric
+\Setpoint Units: Volts
+\Clear Buffer for new Scan Area: No
+\Color table: 2
+\Scope dualtrace: Dual
+\Auto X Sep: 0
+\Auto Y Sep: 0
+\Auto pattern: Linear
+\Auto number: 2
+\Capture direction: Up
+\Capture prelines: 50
+\Engage Setpoint: 0.85
+\Min int. gain: 10
+\Parameter Update Retract: Disabled
+\Parameter Update FB: On
+\Capture mode : Continuous
+\Captured Automatically: 0
+\Gain Normalization: None
+\Gain Factor: 1
+\Initial Setpoint: 30
+\Potential Feedback: Off
+\Potential Feedback Inter: Off
+\Frequency Feedback: Off
+\Frequency Feedback Inter: Off
+\Potential Type: Off
+\Potential Type Inter: Off
+\Freq. Control: Automatic
+\Freq. Control Inter: Automatic
+\Drive feedback: Disabled
+\Drive time: 0
+\Drive setpoint: 1
+\Drive gain: 80
+\Start size: 13199.8 nm
+\Pass 2 size: 10000 nm
+\Pass 3 size: 5000 nm
+\Pass 4 size: 2000 nm
+\Feature scan angle: 0
+\Feature Scan rate: 1
+\Feature step size: 0.138889
+\Feature setpoint: 0.8
+\Feature threshold: 2000
+\Pass delay: 5
+\Z offset: 0
+\Z tolerance: 3237.22
+\Engage X offset: 0 nm
+\Engage Y offset: 0 nm
+\Engage step size: 0.138889
+\Engage Z sens.: 12.5
+\Engage Z avg.: 10
+\Engage Z delay: 0.5
+\Height engage: Disabled
+\Extended Current sens: 1 pA/V
+\PF Extended Current sens: 100 pA/V
+\Bias limit: 12 V
+\AFM Current Sensitivity: 1 nA/V
+\SECPM sens: 100 mV/V
+\Current range: 200 nA
+\Generic amp sens: 1 V/A
+\Z Range: 11.3144
+\Strip chart : Disabled
+\Strip Chart Rate: 500
+\Strip Chart Size: 100
+\XY Closed Loop: Off
+\OptoXY Do Linear: Off
+\Z Closed Loop: Off
+\Analog2 High Voltage: 0
+\Analog22 High Voltage: 0
+\Output 1 Data Type: Off
+\Output 2 Data Type: Off
+\Meter display ctrl.: Hidden
+\Meter Display Mode: Vertical/Horiz
+\Stop motor: Disabled
+\Display level: 127
+\XY Feedback Control: Off
+\Show Thermal Tune Button: Both
+\Show HSDC Button: Both
+\Show Point & Shoot Button: Both
+\Show Potential Controls: Neither
+\Show Frame Rate Control: Hidden
+\Show Repulsion Time Indicator: Hidden
+\Petri Dish Vacuum: Disabled
+\Enable Optical Image Dewarping: Off
+\Z Sensor Correction: Disabled
+\XY Drift Correction: Disabled
+\Torsional Freq: 950
+\Torsional Q: 1000
+\Sample Rate: 10
+\Sample Points: 128
+\Cycles to Average: 32
+\Harmonics To Correct: 1
+\Max Harmonics: 20
+\Force Data Points: 64
+\Calculation Period: 60
+\Interaction Time: 0.24
+\Invert Torsional: Yes
+\Invert Vertical: Yes
+\Unload Fit Region: 0.7
+\Lift Height: 35.2796
+\Sync Distance: 137.833
+\Sync Distance New: 0
+\Sync Distance QNM: 137.833
+\Peak Force Engage Amplitude: 150
+\Peak Force Engage Setpoint: 0.15
+\Top Fit Region: 0.3
+\Peak Force Amplitude: 100
+\QNM Calibration: DefaultByZ
+\Adhesion Algorithm: Threshold Crossing
+\Adhesion Fit %: 0.1
+\Cursor A: 0
+\Cursor B: 200
+\Live Cell Background Removal: Off
+\Dynamic Sync Distance: Off
+\Force Filter: Off
+\Signal/Noise Threshold: 2
+\Cutoff Modulus: 0.3
+\Auto Sync Distance: On
+\Auto Sync Distance QNM: On
+\Fluid Cell: No
+\Medium: Fluid
+\Deformation Fit Region: 0.98
+\Tip Radius: 10
+\Sample Poisson's Ratio: 0.3
+\Tip Half Angle: 0.314159
+\Include Adhesion Force: Yes
+\Min Force Fit Boundary: 20
+\Max Force Fit Boundary: 80
+\Modulus Fit Model: Hertzian (Spherical)
+\ScanAsyst Setup: Allow
+\ScanAsyst Auto Control: On
+\ScanAsyst Auto Gain: On
+\ScanAsyst Auto Setpoint: On
+\ScanAsyst Auto Scan Rate: On
+\ScanAsyst Auto Z Limit: On
+\ScanAsyst Noise Threshold: 1
+\ScanAsyst AutoConfig Frames: 1
+\Scan Target Threshold: 0.005
+\Scan Acceptable Threshold: 0.1
+\Scan Max Optimizing Time: 30
+\Perfusion Cell Temperature: 
+\FalseDefl Scan DitheringBits: 3
+\Scan Single Frame Number: 1
+\Idle Depolarize Warning Time: 7200
+\Idle Depolarize Withdraw Time: 18000
+\Idle Depolarize Threshold: 0.05
+\Auto Adjust Rounding: No
+\Peak Current Average Region: 1
+\I2C Test: Off
+\PFT Freq: 2 kHz
+\Tip Drive Noise Threshold: 0.2
+\Tip Drive PFT Amplitude: 100
+\SyncDistQNM Filter Factor: 1
+\Use Freq Based QNM Calibration: Off
+\Sync Distance QNM 8K: 0
+\Sync Distance QNM 4K: 0
+\Sync Distance QNM 2K: 0
+\Sync Distance QNM 1K: 0
+\Sync Distance QNM 0.5K: 0
+\Sync Distance QNM 0.25K : 0
+\Sync Distance QNM 0.125K: 0
+\PFT Amplitude Sens 8K: 0
+\PFT Amplitude Sens 4K: 0
+\PFT Amplitude Sens 2K: 0
+\PFT Amplitude Sens 1K: 0
+\PFT Amplitude Sens 0.5K: 0
+\PFT Amplitude Sens 0.25K: 0
+\PFT Amplitude Sens 0.125K: 0
+\ScanAsyst Min. Setpoint: 0.02
+\ScanAsyst Gain Factor: 0
+\ScanAsyst Gain Threshold: 100
+\PeakForce Capture: Never
+\Reduced Z Delay: 2
+\Z Auto Center Boundary: 0
+\EOL Capture Enable: Off
+\EOL Capture Trigger Position: End of Trace
+\EOL Capture Time Interval: 20
+\EOL Caputre Ramp Option: None
+\EOL Capture Ramp Delay: 0.8
+\EOL Capture Camera Source: Internal
+\External captured frame path: 
+\EOL Capture File Reading Timeout: 8
+\EOL Capture Output: Show
+\NanoTrack Path Simulation: Off
+\PseudoRT Path Simulation: Off
+\NanoTrack Max Row Shift: 10
+\NanoTrack Max Col Shift: 10
+\NanoTrack Channel: 1
+\NanoTrack Min Correlation: 0.8
+\Scan Park Lift Height: 500
+\Adaptive Interleave: Never
+\Z Slew Rate Limit: 0
+\Touch Calibration Sweep Range: 400
+\Touch Calibration Force Setpoint: 0.2
+\@InterleaveList: S [InterleaveOffMode] "Disabled"
+\@LinearizeList: S [LinearizeOffMode] "modeLinearizeOff"
+\@Meter Display: S [] "Off While Scanning"
+\@FPGA Z Feedback: S [] "On"
+\@MicroscopeList: S [AFMMode] "Contact"
+\@LPDeflection: S [LPFilterOn] "Enabled"
+\@LP TM Deflection: S [LPFilterOn] "Enabled"
+\@LP Current: S [LPFilterOn] "Enabled"
+\@LP Vertical Deflection: S [LPFilterOn] "Enabled"
+\@Low Pass Frequency: S [LPFilterOn] "Enabled"
+\@LP Friction: S [] "Enabled"
+\@LP TM Friction: S [] "Enabled"
+\@PicoAnglerPollOnOff: S [PicoAnglerPollOff] "Disabled"
+\@ThermalTuneMaxFreq: S [ThermalTuneData500K] "1 - 100 KHz"
+\@TipBiasCntrlList: S [TipBiasCntrlGround] "Ground"
+\@Sample Bias Control: S [] "Ground"
+\@HSADCMuxOnOff: S [HSADCMuxOff] "modeHSADCMuxOff"
+\@HsdcChanADataType: S [HsdcDataTypeDeflection] "Vertical Deflection"
+\@HsdcChanBDataType: S [HsdcDataTypeLateral] "Lateral Deflection"
+\@FastScan List: S [FastScanOff] "Disabled"
+\@FastZFeedback List: S [DigitalZFastScan] "Digital"
+\@TR Mode: S [] "Disabled"
+\@VerticalGainControlList: S [] "Disabled"
+\@SCM Feedback: S [] ""
+\@4:HsdcChanCDataType: S [HsdcDataTypeOff] "Off"
+\@3:HsdcChanCDataType: S [HsdcDataTypeOff] "Off"
+\@4:HsdcChanDDataType: S [HsdcDataTypeHeight] "Height"
+\@3:HsdcChanDDataType: S [HsdcDataTypeOff] "Off"
+\@4:HsdcTriggerChan: S [HsdcDataTypeHeight] "Height"
+\@3:HsdcTriggerChan: S [HsdcDataTypeHeight] "Height"
+\@4:SPMFeedbackList: S [SPMFb] "Deflection"
+\@3:SPMFeedbackList: S [SPMFb] "Deflection"
+\@4:DDS1RoutingTappingMode: S [] "Null"
+\@5:DDS1RoutingTappingMode: S [] "Null"
+\@4:DDS1RoutingFastScanAsystMode: S [] ""
+\@5:DDS1RoutingFastScanAsystMode: S [] ""
+\@4:Drive1Routing: S [] "Null"
+\@3:Drive1Routing: S [] "Null"
+\@4:Drive1Monitor: S [] "Not Available"
+\@3:Drive1Monitor: S [] "Not Available"
+\@4:MainLockInEnableContactMode: S [LockIn1Disabled] "Disabled"
+\@3:MainLockInEnableContactMode: S [LockIn1Disabled] "Disabled"
+\@4:MainLockInEnableFastScanAsystMode: S [] ""
+\@5:MainLockInEnableFastScanAsystMode: S [] ""
+\@4:MainLockInEnableNonContactMode: S [] ""
+\@5:MainLockInEnableNonContactMode: S [] ""
+\@4:LockIn1SourceTappingMode: S [] "Disabled"
+\@5:LockIn1SourceTappingMode: S [] "Vertical"
+\@4:LockIn1SourceFastScanAsystMode: S [] "Disabled"
+\@5:LockIn1SourceFastScanAsystMode: S [] ""
+\@4:MainLockInSource: S [] "Disabled"
+\@3:MainLockInSource: S [] "Disabled"
+\@4:Zmod: S [] ""
+\@5:Zmod: S [] ""
+\@4:LateralGainControl: S [LateralGainDisabled] "Disabled"
+\@3:LateralGainControl: S [LateralGainDisabled] "Disabled"
+\@2:InputFbList: S [] ""
+\@3:InputFbList: S [] ""
+\@4:TR Mode: S [] "Disabled"
+\@5:TR Mode: S [] "Disabled"
+\@4:TRCouplingCheck: S [] ""
+\@5:TRCouplingCheck: S [] ""
+\@4:LockIn2DDS2Enable: S [LockIn2Disabled] "Disabled"
+\@3:LockIn2DDS2Enable: S [LockIn2Disabled] "Disabled"
+\@4:DDS2HarmonicList: S [] "1"
+\@5:DDS2HarmonicList: S [] "1"
+\@4:LockIn2Source: S [] "Disabled"
+\@3:LockIn2Source: S [] "Disabled"
+\@4:Drive2Routing: S [] "Null"
+\@3:Drive2Routing: S [] "Null"
+\@4:Drive2Monitor: S [] "Not Available"
+\@3:Drive2Monitor: S [] "Not Available"
+\@4:PRLockInTypeList: S [] ""
+\@5:PRLockInTypeList: S [] ""
+\@4:PiezoACBiasCtrlList: S [] ""
+\@5:PiezoACBiasCtrlList: S [] ""
+\@4:VerticalGainControlList: S [] "Enabled"
+\@5:VerticalGainControlList: S [] "Enabled"
+\@4:SCM Feedback: S [] ""
+\@5:SCM Feedback: S [] ""
+\@4:TUNAList: S [TUNAOffMode] "Disabled"
+\@5:TUNAList: S [TUNAOffMode] "Disabled"
+\@4:Drive3RoutingSoftHarmoniX: S [] ""
+\@5:Drive3RoutingSoftHarmoniX: S [] ""
+\@4:Drive3RoutingSoftHarmoniXRamp: S [] ""
+\@5:Drive3RoutingSoftHarmoniXRamp: S [DDS3ToAppMod] "Application Module"
+\@4:Drive3Routing: S [] "Null"
+\@3:Drive3Routing: S [] "Null"
+\@4:Drive3Monitor: S [] "Not Available"
+\@3:Drive3Monitor: S [] "Not Available"
+\@4:LockIn3EnableList: S [LockIn3Disabled] "Disabled"
+\@3:LockIn3EnableList: S [LockIn3Disabled] "Disabled"
+\@4:LockIn3SourceSoftHarmoniX: S [] "Disabled"
+\@5:LockIn3SourceSoftHarmoniX: S [] "Vertical"
+\@4:LockIn3SourceNonSoftHarmoniX: S [] "Disabled"
+\@3:LockIn3SourceNonSoftHarmoniX: S [] "Disabled"
+\@Sens. AFMSetDeflSens: V 55.33262 nm/V
+\@Sens. TMSetDeflSens: V 13.83311 nm/V
+\@Sens. DeflSens: V 46.11034 nm/V
+\@Sens. AmplSens: V 35.75750 nm/V
+\@Sens. DeflectionIn1BSens: V 1.000000 
+\@Sens. FVModulusSens: V 1.000000 Pa/Arb
+\@Sens. FVLogModulusSens: V 1.000000 log(Pa)/log(Arb)
+\@Sens. FVForceSens: V 1.000000 nN/Arb
+\@Sens. FVStiffnessSens: V 1.000000 N/m*Arb
+\@Sens. ECBiasSens: V 1000.000 mV/V
+\@Sens. AFMSetFastScanSens: V 1.000000 V/V
+\@Sens. ZsensSens: V 906.4730 nm/V
+\@Sens. ZPicoSens: V 1000.000 nm/V
+\@Sens. LSPRDataSensitivity: V 1.000000 
+\@Sens. LSPRAmplitudeSensitivity: V 1.000000 
+\@Sens. HSPRDataSensitivity: V 1.000000 
+\@Sens. HSPRAmplitudeSensitivity: V 1.000000 
+\@Sens. tunaSens: V 10.00000 pA/V
+\@Sens. biassens: V 1.000000 V/V
+\@Sens. testsens: V 1.000000 V/V
+\@Sens. Amplitude Error: V 35.75750 nm/V
+\@Sens. Phase: V 1.000000 
+\@Sens. Phase Error: V 1.000000 
+\@Sens. Friction: V 1.000000 
+\@Sens. TM Deflection: V 35.75750 nm/V
+\@Sens. TM Friction: V 1.000000 
+\@Sens. Inphase: V 1.000000 
+\@Sens. Quadrature: V 1.000000 
+\@Sens. Amplitude1: V 1.000000 
+\@Sens. Raw Deflection: V 1.000000 
+\@Sens. Raw Deflection Gain: V 1.000000 
+\@Sens. Counter 1: V 1.000000 
+\@Sens. Counter 2: V 1.000000 
+\@Sens. Freq. 1: V 1.000000 
+\@Sens. Freq. 2: V 1.000000 
+\@Sens. Fast Z Analog: V 1.000000 
+\@Sens. Fast Z: V 1.000000 
+\@Sens. Fast RMS: V 1.000000 
+\@Sens. Fast Deflection Analog: V 1.000000 
+\@Sens. Fast Deflection Error: V 1.000000 
+\@Sens. Frequency: V 1.000000 
+\@Sens. Potential: V 1.000000 
+\@Sens. Potential (HV): V 1.000000 
+\@Sens. dCdZ: V 1.000000 
+\@Sens. TR Amplitude: V 1.000000 
+\@Sens. TR Amplitude Error: V 1.000000 
+\@Sens. TR Phase: V 1.000000 
+\@Sens. Amplitude2: V 1.000000 
+\@Sens. HS PR Phase: V 1.000000 
+\@Sens. MFM Amplitude: V 1.000000 
+\@Sens. MFM Phase: V 1.000000 
+\@Sens. dC/dV Amplitude: V 1.000000 
+\@Sens. dC/dV Amplitude Error: V 1.000000 
+\@Sens. dC/dV I: V 1.000000 
+\@Sens. dC/dV Q: V 1.000000 
+\@Sens. dC/dV Phase: V 1.000000 
+\@Sens. Feedback Bias: V 1.000000 
+\@Sens. Log(Resistance): V 1.000000 
+\@Sens. Input1: V 1.000000 
+\@Sens. Input2: V 1.000000 
+\@Sens. Input3: V 1.000000 
+\@Sens. DriveAmplitude3Sens: V 265.9800 nm/V
+\@Sens. ForceDeflSens: V 0.8333300 
+\@Sens. ForceSens: V 1.000000 
+\@Sens. DissipationSens: V 1.000000 
+\@Sens. DeformationSens: V 1402.500 nm/V
+\@Sens. StiffnessSens: V 1.000000 
+\@Sens. LogStiffnessSens: V 1.000000 
+\@Sens. SneddonModulusSens: V 1.000000 
+\@Sens. LogSneddonModulusSens: V 1.000000 
+\@Offset PotentialInputOffset: V [Sens. Potential] (0.0003051758 V/LSB)       0 V
+\@Sample period: V (0.1000000 us/LSB) 12.00000 us
+\@Z center: V [Sens. Zsens] (0.006713867 V/LSB) 55.00000 V
+\@1:ZLimit: V [Sens. Zsens] (0.006713867 V/LSB) 440.0000 V
+\@1:ZLimitRamp: V [Sens. Zsens] (0.006713867 V/LSB) 330.0000 V
+\@1:AmplitudeLimit1: V (0.0000009313226 mV/LSB) 2000.000 mV
+\@1:TRAmplitudeLimit: V (0.0000009313226 mV/LSB) 2500.000 mV
+\@1:SCMAmplitudeLimit: V (0.0000009313226 mV/LSB) 4000.000 mV
+\@2:AmplitudeLimit1LockIn1and2: V (0.0000009313226 mV/LSB) 4000.000 mV
+\@2:AmplitudeLimit1LockIn1: V (0.0000009313226 mV/LSB) 4000.000 mV
+\@2:AmplitudeLimit1LockIn2: V (0.0000009313226 mV/LSB) 4000.000 mV
+\@2:DeflectionLimitLockIn3LSADC1: V (0.00000000572205 V/LSB) 24.57600 V
+\@2:DeflectionLimit: V (0.00000000572205 V/LSB) 24.57600 V
+\@2:TMDeflectionLimitLockIn3LSADC1: V (0.00000000572205 V/LSB) 24.57600 V
+\@2:TMDeflectionLimit: V (0.00000000572205 V/LSB) 24.57600 V
+\@2:HSADC2GainLockIn2and1: V (0.0000009313226 mV/LSB) 4000.000 mV
+\@2:HSADC2GainLockIn2: V (0.0000009313226 mV/LSB) 4000.000 mV
+\@2:HSADC2GainLockIn1: V (0.0000009313226 mV/LSB) 4000.000 mV
+\@2:LSADC2Gain: V (0.00000000572205 V/LSB) 24.57600 V
+\@2:LSADC9Gain: V (0.00000000572205 V/LSB) 24.57600 V
+\@Lift Start Height: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@Lift Scan Height: V [Sens. Zsens] (0.006713765 V/LSB) 4.506534 V
+\@Drive height: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@2:SoftHarmoniXSetpoint: V [Sens. ForceDeflSens] (0.0003750000 V/LSB)       0 V
+\@3:SoftHarmoniXSetpoint: V [Sens. ForceDeflSens] (0.0003750000 V/LSB)       0 V
+\@2:AFMSetDeflection: V [Sens. AFMSetDeflSens] (0.0003051746 V/LSB) 2.999866 V
+\@3:AFMSetDeflection: V [Sens. AFMSetDeflSens] (0.0003051746 V/LSB) 0.5000000 V
+\@2:TMSetAmplitude: V [Sens. AmplSens] (0.06103516 mV/LSB) 357.7896 mV
+\@3:TMSetAmplitude: V [Sens. AmplSens] (0.06103516 mV/LSB)       0 mV
+\@2:TMSetDeflection: V [Sens. TMSetDeflSens] (0.001220702 V/LSB)       0 V
+\@3:TMSetDeflection: V [Sens. TMSetDeflSens] (0.001220702 V/LSB)       0 V
+\@2:TMSetFastScan: V (0.0003662109 V/LSB)       0 V
+\@3:TMSetFastScan: V (0.0003662109 V/LSB)       0 V
+\@2:AFMSetFastScanAnalog: V [Sens. AFMSetFastScanSens] (0.0003662109 V/LSB)       0 V
+\@3:AFMSetFastScanAnalog: V [Sens. AFMSetFastScanSens] (0.0003662109 V/LSB)       0 V
+\@2:AFMSetFastScanDigital: V [Sens. AFMSetFastScanSens] (0.0003662109 V/LSB)       0 V
+\@3:AFMSetFastScanDigital: V [Sens. AFMSetFastScanSens] (0.0003662109 V/LSB)       0 V
+\@2:STMSetCurrent: V [Sens. CurrentSens] (0.0003750000 V/LSB) 0.1000000 V
+\@3:STMSetCurrent: V [Sens. CurrentSens] (0.0003750000 V/LSB) 10.00000 V
+\@2:TRSetAmplitude: V (0.01525879 mV/LSB) 270.0000 mV
+\@3:TRSetAmplitude: V (0.01525879 mV/LSB) 270.0000 mV
+\@2:SetTRVertDefl: V (0.0003662109 V/LSB)       0 V
+\@3:SetTRVertDefl: V (0.0003662109 V/LSB)       0 V
+\@2:SECPMSetPotential: V [Sens. SECPMSens] (0.0003750000 V/LSB) 2.000000 V
+\@3:SECPMSetPotential: V [Sens. SECPMSens] (0.0003750000 V/LSB) 2.000000 V
+\@2:TMSetPhase: V (0.005493164 ∫/LSB)       0 ∫
+\@3:TMSetPhase: V (0.005493164 ∫/LSB)       0 ∫
+\@2:DigitalSetPoint: V [Sens. DeflectionIn1BSens] (0.0003750000 V/LSB) 0.2500000 V
+\@3:DigitalSetPoint: V [Sens. DeflectionIn1BSens] (0.0003750000 V/LSB) 0.2500000 V
+\@2:TRSetPhase: V (0.005493164 ∫/LSB)       0 ∫
+\@3:TRSetPhase: V (0.005493164 ∫/LSB)       0 ∫
+\@2:NanoTrenchSetPoint: V (0.0003750000 V/LSB)       0 V
+\@3:NanoTrenchSetPoint: V (0.0003750000 V/LSB)       0 V
+\@2:Sample Bias: V (0.3051758 mV/LSB)       0 mV
+\@3:Sample Bias: V (0.3051758 mV/LSB)       0 mV
+\@2:Tip Bias: V (0.0003662109 V/LSB)       0 V
+\@3:Tip Bias: V (0.0003662109 V/LSB)       0 V
+\@2:Analog2: V (0.0003662109 V/LSB)       0 V
+\@3:Analog2: V (0.0003662109 V/LSB)       0 V
+\@2:CantFrequency: V (0.00001164153 kHz/LSB) 1000.000 kHz
+\@3:CantFrequency: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@2:CantFrequencyContactMode: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@3:CantFrequencyContactMode: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@2:CantDrive: V (0.3051758 mV/LSB) 122.3760 mV
+\@3:CantDrive: V (0.3051758 mV/LSB)       0 mV
+\@2:CantDriveContactMode: V (0.3051758 mV/LSB)       0 mV
+\@3:CantDriveContactMode: V (0.3051758 mV/LSB)       0 mV
+\@2:CantDriveNulled: V (0.3051758 mV/LSB)       0 mV
+\@3:CantDriveNulled: V (0.3051758 mV/LSB)       0 mV
+\@2:DriveDCOffsetTappingMode: V (0.0003051758 V/LSB)       0 V
+\@3:DriveDCOffsetTappingMode: V (0.0003051758 V/LSB)       0 V
+\@2:DriveDCOffsetNonTapping: V (0.0003051758 V/LSB)       0 V
+\@3:DriveDCOffsetNonTapping: V (0.0003051758 V/LSB)       0 V
+\@2:DriveDCOffsetFastScanAsyst: V (0.0003051758 V/LSB)       0 V
+\@3:DriveDCOffsetFastScanAsyst: V (0.0003051758 V/LSB)       0 V
+\@2:ReferenceFrequencyTappingMode: V (0.00001164153 kHz/LSB) 1000.000 kHz
+\@3:ReferenceFrequencyTappingMode: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@2:ReferenceFrequency1: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@3:ReferenceFrequency1: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@2:CantPhase: V (0.005493164 ∫/LSB) -144.3384 ∫
+\@3:CantPhase: V (0.005493164 ∫/LSB)       0 ∫
+\@2:CantPhaseContactMode: V (0.005493164 ∫/LSB)       0 ∫
+\@3:CantPhaseContactMode: V (0.005493164 ∫/LSB)       0 ∫
+\@2:LockInBW1: V (0.001000000 kHz/LSB) 4.221000 kHz
+\@3:LockInBW1: V (0.001000000 kHz/LSB) 0.5000000 kHz
+\@2:LockInBW1ContactMode: V (0.001000000 kHz/LSB) 0.5000000 kHz
+\@3:LockInBW1ContactMode: V (0.001000000 kHz/LSB) 0.5000000 kHz
+\@2:TRCantileverFrequency: V (0.00001164153 kHz/LSB) 1000.000 kHz
+\@3:TRCantileverFrequency: V (0.00001164153 kHz/LSB) 1000.000 kHz
+\@2:ReferenceFrequencyTRMode: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@3:ReferenceFrequencyTRMode: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@2:TROnAnalog3: V (0.0003051758 V/LSB) 10.00000 V
+\@3:TROnAnalog3: V (0.0003051758 V/LSB) 10.00000 V
+\@2:ReferenceFrequency2: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@3:ReferenceFrequency2: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@2:ReferenceFrequency2Harmonic: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@3:ReferenceFrequency2Harmonic: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@2:DrivePhase2: V (0.005493164 ∫/LSB)       0 ∫
+\@3:DrivePhase2: V (0.005493164 ∫/LSB)       0 ∫
+\@2:LockIn2BW: V (0.001000000 kHz/LSB) 0.5000000 kHz
+\@3:LockIn2BW: V (0.001000000 kHz/LSB) 0.5000000 kHz
+\@2:LockIn2BWHarmonic: V (0.001000000 kHz/LSB) 0.2110000 kHz
+\@3:LockIn2BWHarmonic: V (0.001000000 kHz/LSB) 0.2110000 kHz
+\@2:DriveFrequency2: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@3:DriveFrequency2: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@2:DriveAmplitude2: V (0.3051758 mV/LSB)       0 mV
+\@3:DriveAmplitude2: V (0.3051758 mV/LSB)       0 mV
+\@2:Drive2 DC Offset: V (0.0003051758 V/LSB)       0 V
+\@3:Drive2 DC Offset: V (0.0003051758 V/LSB)       0 V
+\@2:PRLowSpeedLockinBW: V (0.001000000 kHz/LSB) 0.3000000 kHz
+\@3:PRLowSpeedLockinBW: V (0.001000000 kHz/LSB) 0.3000000 kHz
+\@2:PRLowSpeedDriveAmplitude: V (0.6103516 mV/LSB) 2000.000 mV
+\@3:PRLowSpeedDriveAmplitude: V (0.6103516 mV/LSB) 2000.000 mV
+\@2:PRLowSpeedDriveFrequency: V (0.0000001164153 kHz/LSB) 15.00000 kHz
+\@3:PRLowSpeedDriveFrequency: V (0.0000001164153 kHz/LSB) 15.00000 kHz
+\@2:PRLowSpeedDrivePhase: V (0.005493164 ∫/LSB)       0 ∫
+\@3:PRLowSpeedDrivePhase: V (0.005493164 ∫/LSB)       0 ∫
+\@2:PRHighSpeedLockinBW: V (0.001000000 kHz/LSB) 0.7500000 kHz
+\@3:PRHighSpeedLockinBW: V (0.001000000 kHz/LSB) 0.7500000 kHz
+\@2:PRHighSpeedDriveAmplitude: V (0.3051758 mV/LSB) 2000.000 mV
+\@3:PRHighSpeedDriveAmplitude: V (0.3051758 mV/LSB) 2000.000 mV
+\@2:PRHighSpeedDriveFrequency: V (0.00001164153 kHz/LSB) 60.00000 kHz
+\@3:PRHighSpeedDriveFrequency: V (0.00001164153 kHz/LSB) 60.00000 kHz
+\@2:PRHighSpeedDrivePhase: V (0.005493164 ∫/LSB)       0 ∫
+\@3:PRHighSpeedDrivePhase: V (0.005493164 ∫/LSB)       0 ∫
+\@2:MFMLockinBW: V (0.001000000 kHz/LSB) 0.2110000 kHz
+\@3:MFMLockinBW: V (0.001000000 kHz/LSB) 0.2110000 kHz
+\@2:MFMDriveAmplitude: V (0.3051758 mV/LSB)       0 mV
+\@3:MFMDriveAmplitude: V (0.3051758 mV/LSB)       0 mV
+\@2:MFMDriveFrequency: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@3:MFMDriveFrequency: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@2:MFMDrivePhase: V (0.005493164 ∫/LSB)       0 ∫
+\@3:MFMDrivePhase: V (0.005493164 ∫/LSB)       0 ∫
+\@2:MFMDriveDCOffset: V (0.0003051758 V/LSB)       0 V
+\@3:MFMDriveDCOffset: V (0.0003051758 V/LSB)       0 V
+\@2:ACBiasAmpl: V (0.3051758 mV/LSB)       0 mV
+\@3:ACBiasAmpl: V (0.3051758 mV/LSB)       0 mV
+\@2:BiasFrequency: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@3:BiasFrequency: V (0.00001164153 kHz/LSB) 0.5000000 kHz
+\@2:SCMLockInBW: V (0.001000000 kHz/LSB) 0.5000000 kHz
+\@3:SCMLockInBW: V (0.001000000 kHz/LSB) 0.5000000 kHz
+\@2:SCMLockInPhase: V (0.005493164 ∫/LSB)       0 ∫
+\@3:SCMLockInPhase: V (0.005493164 ∫/LSB)       0 ∫
+\@2:DCBias: V (0.0003051758 V/LSB)       0 V
+\@3:DCBias: V (0.0003051758 V/LSB)       0 V
+\@2:Capacitance Sensor Frequency: V (0.03204346 MHz/LSB) 880.0000 MHz
+\@3:Capacitance Sensor Frequency: V (0.03204346 MHz/LSB) 880.0000 MHz
+\@2:SCMIgain: V (0.001525879 1/LSB) 10.00000 
+\@3:SCMIgain: V (0.001525879 1/LSB) 10.00000 
+\@2:SCMPgain: V (0.001525879 1/LSB) 10.00000 
+\@3:SCMPgain: V (0.001525879 1/LSB) 10.00000 
+\@2:SCMFeedbackSetpoint: V (0.06103516 mV/LSB) 200.0000 mV
+\@3:SCMFeedbackSetpoint: V (0.06103516 mV/LSB) 200.0000 mV
+\@2:SCMFeedbackUpperLimit: V (0.0003051758 V/LSB) 6.000000 V
+\@3:SCMFeedbackUpperLimit: V (0.0003051758 V/LSB) 6.000000 V
+\@2:DC Test Bias: V [Sens. testsens] (0.0003051758 V/LSB)       0 V
+\@3:DC Test Bias: V [Sens. testsens] (0.0003051758 V/LSB)       0 V
+\@2:DC Sample Bias: V [Sens. biassens] (0.0003051758 V/LSB)       0 V
+\@3:DC Sample Bias: V [Sens. biassens] (0.0003051758 V/LSB)       0 V
+\@2:SampleBiasWithPiezo: V [Sens. biassens] (0.0003051758 V/LSB)       0 V
+\@3:SampleBiasWithPiezo: V [Sens. biassens] (0.0003051758 V/LSB)       0 V
+\@2:Bias Upper Limit: V (0.0003051758 V/LSB)       0 V
+\@3:Bias Upper Limit: V (0.0003051758 V/LSB)       0 V
+\@2:Bias Lower Limit: V (0.0003051758 V/LSB)       0 V
+\@3:Bias Lower Limit: V (0.0003051758 V/LSB)       0 V
+\@2:Feedback Igain: V (0.01525879 1/LSB)       0 
+\@3:Feedback Igain: V (0.01525879 1/LSB)       0 
+\@2:TunaFeedbackSetpoint: V [Sens. tunaSens] (0.0003750000 V/LSB)       0 V
+\@3:TunaFeedbackSetpoint: V [Sens. tunaSens] (0.0003750000 V/LSB)       0 V
+\@2:DriveFrequency3SoftHarmoniX: V (0.0000001164153 kHz/LSB) 1.953125 kHz
+\@3:DriveFrequency3SoftHarmoniX: V (0.0000001164153 kHz/LSB) 0.005000000 kHz
+\@2:DriveFrequency3NonSoftHarmoniX: V (0.0000001164153 kHz/LSB) 0.005000000 kHz
+\@3:DriveFrequency3NonSoftHarmoniX: V (0.0000001164153 kHz/LSB) 0.005000000 kHz
+\@2:DriveAmplitude3SoftHarmoniX: V [Sens. DriveAmplitude3Sens] (0.3051758 mV/LSB) 375.9681 mV
+\@3:DriveAmplitude3SoftHarmoniX: V [Sens. DriveAmplitude3Sens] (0.3051758 mV/LSB)       0 mV
+\@2:DriveAmplitude3NonSoftHarmoniX: V (0.3051758 mV/LSB)       0 mV
+\@3:DriveAmplitude3NonSoftHarmoniX: V (0.3051758 mV/LSB)       0 mV
+\@2:DriveAmplitude3NonSoftHarmoniX2X: V (0.6103516 mV/LSB)       0 mV
+\@3:DriveAmplitude3NonSoftHarmoniX2X: V (0.6103516 mV/LSB)       0 mV
+\@2:Drive3 DC Offset: V (0.0003051758 V/LSB)       0 V
+\@3:Drive3 DC Offset: V (0.0003051758 V/LSB)       0 V
+\@2:ReferenceFrequency3SoftHarmoniX: V (0.0000001164153 kHz/LSB) 1.953125 kHz
+\@3:ReferenceFrequency3SoftHarmoniX: V (0.0000001164153 kHz/LSB) 0.005000000 kHz
+\@2:ReferenceFrequency3NonSoftHarmoniX: V (0.0000001164153 kHz/LSB) 0.005000000 kHz
+\@3:ReferenceFrequency3NonSoftHarmoniX: V (0.0000001164153 kHz/LSB) 0.005000000 kHz
+\@2:LockIn3BWSoftHarmoniX: V (0.001000000 kHz/LSB) 0.005000000 kHz
+\@3:LockIn3BWSoftHarmoniX: V (0.001000000 kHz/LSB) 0.005000000 kHz
+\@2:LockIn3BWNonSoftHarmoniX: V (0.001000000 kHz/LSB) 0.005000000 kHz
+\@3:LockIn3BWNonSoftHarmoniX: V (0.001000000 kHz/LSB) 0.005000000 kHz
+\@2:Analog3: V (0.0003051758 V/LSB)       0 V
+\@3:Analog3: V (0.0003051758 V/LSB)       0 V
+\@2:Analog4: V (0.0003051758 V/LSB)       0 V
+\@3:Analog4: V (0.0003051758 V/LSB)       0 V
+\@2:TR Drive Amplitude: V (0.3051758 mV/LSB)       0 mV
+\@3:TR Drive Amplitude: V (0.3051758 mV/LSB)       0 mV
+\@2:TR Lock-In Phase: V (0.005493164 ∫/LSB)       0 ∫
+\@3:TR Lock-In Phase: V (0.005493164 ∫/LSB)       0 ∫
+\@2:DrivePhase3NonSoftHarmoniX: V (0.005493164 ∫/LSB)       0 ∫
+\@3:DrivePhase3NonSoftHarmoniX: V (0.005493164 ∫/LSB)       0 ∫
+\@2:SSRMSampleBias: V (0.0003051758 V/LSB)       0 V
+\@3:SSRMSampleBias: V (0.0003051758 V/LSB)       0 V
+\@2:TMFbIgain: V (0.3125000 1/LSB) 0.5000000 
+\@3:TMFbIgain: V (0.3125000 1/LSB) 0.5000000 
+\@2:TMFbPgain: V (0.3125000 1/LSB) 5.000000 
+\@3:TMFbPgain: V (0.3125000 1/LSB) 5.000000 
+\@2:AFMFbIgain: V (0.3125000 1/LSB) 0.1000000 
+\@3:AFMFbIgain: V (0.3125000 1/LSB) 2.000000 
+\@2:AFMFbPgain: V (0.3125000 1/LSB) 0.2000000 
+\@3:AFMFbPgain: V (0.3125000 1/LSB) 5.000000 
+\@2:SoftHarmoniXFbIgain: V (0.3125000 1/LSB) 10.00000 
+\@3:SoftHarmoniXFbIgain: V (0.3125000 1/LSB) 10.00000 
+\@2:SoftHarmoniXFbPgain: V (0.3125000 1/LSB)       0 
+\@3:SoftHarmoniXFbPgain: V (0.3125000 1/LSB)       0 
+\@2:STMFbIgain: V (0.3125000 1/LSB) 1.000000 
+\@3:STMFbIgain: V (0.3125000 1/LSB) 1.000000 
+\@2:STMFbPgain: V (0.3125000 1/LSB) 2.000000 
+\@3:STMFbPgain: V (0.3125000 1/LSB)       0 
+\@2:STMESFbIgain: V (0.3125000 1/LSB) 10.00000 
+\@3:STMESFbIgain: V (0.3125000 1/LSB) 10.00000 
+\@2:STMESFbPgain: V (0.3125000 1/LSB)       0 
+\@3:STMESFbPgain: V (0.3125000 1/LSB)       0 
+\@2:DriveAmplitude4SoftHarmoniX: V (0.3051758 mV/LSB) 102.8442 mV
+\@3:DriveAmplitude4SoftHarmoniX: V (0.3051758 mV/LSB)       0 mV
+\@2:BaselineAvgPtsSoftHarmoniX: V (1.000000 1/LSB) 20.00000 
+\@3:BaselineAvgPtsSoftHarmoniX: V (1.000000 1/LSB) 32.00000 
+\@2:DeflLowPassFrequency: V (0.001000000 kHz/LSB) 2.500000 kHz
+\@3:DeflLowPassFrequency: V (0.001000000 kHz/LSB) 2.500000 kHz
+\@2:DeflLowPassFrequencySoftHarmoniX: V (0.001000000 kHz/LSB) 40.00000 kHz
+\@3:DeflLowPassFrequencySoftHarmoniX: V (0.001000000 kHz/LSB) 40.00000 kHz
+\@2:FricLowPassFrequency: V (0.001000000 kHz/LSB) 2.000000 kHz
+\@3:FricLowPassFrequency: V (0.001000000 kHz/LSB) 2.000000 kHz
+\@2:TMDeflLowPassFrequency: V (0.001000000 kHz/LSB) 2.500000 kHz
+\@3:TMDeflLowPassFrequency: V (0.001000000 kHz/LSB) 2.000000 kHz
+\@2:CurrentLowPassFrequency: V (0.001000000 kHz/LSB) 10.00000 kHz
+\@3:CurrentLowPassFrequency: V (0.001000000 kHz/LSB) 10.00000 kHz
+\@2:OtherModesLowPassFrequency: V (0.001000000 kHz/LSB) 2.000000 kHz
+\@3:OtherModesLowPassFrequency: V (0.001000000 kHz/LSB) 2.000000 kHz
+\@2:TMFricLowPassFrequency: V (0.001000000 kHz/LSB) 2.500000 kHz
+\@3:TMFricLowPassFrequency: V (0.001000000 kHz/LSB) 10.00000 kHz
+\@2:FastZTMFbIgain: V (0.03125000 1/LSB) 1.000000 
+\@3:FastZTMFbIgain: V (0.03125000 1/LSB) 1.000000 
+\@2:FastZTMFbPgain: V (0.03125000 1/LSB) 1.000000 
+\@3:FastZTMFbPgain: V (0.03125000 1/LSB)       0 
+\@2:InputIgain: V (0.001525879 1/LSB) 10.00000 
+\@3:InputIgain: V (0.001525879 1/LSB) 10.00000 
+\@2:InputPgain: V (0.001525879 1/LSB) 10.00000 
+\@3:InputPgain: V (0.001525879 1/LSB) 10.00000 
+\@2:TRFbIgain: V (0.3125000 1/LSB) 0.5000000 
+\@3:TRFbIgain: V (0.3125000 1/LSB) 0.5000000 
+\@2:TRFbPgain: V (0.3125000 1/LSB) 5.000000 
+\@3:TRFbPgain: V (0.3125000 1/LSB) 5.000000 
+\@2:VertDeflLowPassFrequency: V (0.001000000 kHz/LSB) 10.00000 kHz
+\@3:VertDeflLowPassFrequency: V (0.001000000 kHz/LSB) 10.00000 kHz
+\@2:TRLockInBW1: V (0.001000000 kHz/LSB) 150.0000 kHz
+\@3:TRLockInBW1: V (0.001000000 kHz/LSB) 150.0000 kHz
+\@2:DrivePhase3SoftHarmoniX: V (0.005493164 ∫/LSB)       0 ∫
+\@3:DrivePhase3SoftHarmoniX: V (0.005493164 ∫/LSB)       0 ∫
+\@2:Output 1 Input Data: S [ImageOff] "Off"
+\@2:Output 2 Input Data: S [ImageOff] "Off"
+\@2:Output 1 Output Data: S [Analog3] "Analog3"
+\@2:Output 2 Output Data: S [Analog3] "Analog3"
+\@LogStiffnessOffset: V [Sens. LogStiffnessSens] (0.0004882813 log(Arb)/LSB) 6.501953 log(Arb)
+\@LogSneddonModulusOffset: V [Sens. LogSneddonModulusSens] (0.0004882813 log(Arb)/LSB) 7.342285 log(Arb)
+\*Ciao force list
+\Scan rate: 2.03451
+\Forward vel.: 78.8568
+\Reverse vel.: 78.8568
+\Velocity Ramp Limit: 3
+\Samps/line: 2048 2048
+\Samps/line. retrace: 2048
+\Ave lines: 1
+\Display mode: Both
+\Trigger mode: Relative
+\Rev. trigger mode: Off
+\Trig slope: Positive
+\Plot start: 0
+\Plot end: 1
+\Auto start: Disable
+\Start mode: Calibrate
+\Modulate Amplitude: 0
+\Hold Type: Z Drive
+\Hold Samples: 0
+\Hold Time: 0.5
+\Reverse delay: 0
+\Indent setpoint: 0.5
+\X Rotate: 0
+\Scratch length: 100 nm
+\Scratch rate: 1
+\Scratch angle: 0
+\Size linked: Off
+\Drop height: 10
+\Columns: 5
+\Rows: 1
+\Column step: 100
+\Row step: 100
+\Capture: Enabled
+\XY Move Tip Mode: Lift and Touch
+\XY Move Lift+ Ratio: 0.2
+\XY Move Lift+ Height: 500
+\Parking Height Limit: 30000
+\force/line: 32
+\Samples / line: 32
+\Z direction: Retract
+\X Type: Height Sensor
+\FV Line Direction: Retrace
+\FV Move Speed: 50
+\FV Move Lift+ Ratio: 0.2
+\Tip factor: 0
+\True resonance: 0
+\Deflection Sensitivity Correction: 1.08
+\Tip type: 100W
+\Unit display: Force
+\PF PGain	: 99.8779
+\PF ITime	: 1.00044
+\Linearization: Enabled
+\Closed Loop: Enabled
+\Polarity: Negative
+\Temperature (Celsius): 21
+\PSD Bin Width : 7.62939
+\Feedback type: None
+\Feedback counts: 0
+\Dark ramp: Disable
+\Dark ramp delay: 300
+\Gain Adjust for ZCL: 0.1
+\Ramp Mod Type: Off
+\Ramp Mod Sens: 10
+\Baseline Fit: 30
+\Baseline Extrapolation: 30
+\Baseline Start: 10
+\Baseline Stop: 50
+\Deflection Baseline Fit: Line Extend
+\PFT Feedback Type: Peak Force
+\PFT Deflection Setpoint: 3
+\PFT Deflection Igain: 50
+\PFT Deflection Pgain: 50
+\@Ramp Position: V [Sens. Zsens] (0.006713867 V/LSB) -9.866286 V
+\@Sample Period: V (0.1000000 us/LSB) 12.00000 us
+\@4:Image Data: S [DeflectionError] "Deflection Error"
+\@4:Trig Threshold Deflection: V [Sens. DeflSens] (0.0003750000 V/LSB) 0.3170654 V
+\@4:Threshold Safety Deflection: V [Sens. DeflSens] (0.0003750000 V/LSB) 0.5000000 V
+\@4:Trig Rev. Threshold Deflection: V [Sens. DeflSens] (0.0003750000 V/LSB)       0 V
+\@4:Threshold Step Deflection: V [Sens. DeflSens] (0.0003750000 V/LSB)       0 V
+\@4:Ramp channel: S [Zsweep] "Z"
+\@4:Ramp Size Zsweep: V [Sens. Zsens] (0.006713765 V/LSB) 19.37984 V
+\@4:Ramp Offset Zsweep: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@4:Ramp Begin Zsweep: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@4:Ramp End Zsweep: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@4:Feedback Value Zsweep: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@4:Z Display Zsweep: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\*Ciao force image list
+\Data offset: 80960
+\Data length: 16384
+\Bytes/pixel: 2
+\Start context: FOL
+\Data type: FORCE
+\Data Type Description: 
+\Do zoffder: 0
+\Plane fit: 0 0 0 0
+\Frame direction: Up
+\Capture start line: 0
+\Color Table Index: 12
+\Relative frame time: 0
+\Samps/line: 2048 2048
+\Scan Line: Main
+\Realtime Planefit: Line
+\Offline Planefit: None
+\Z direction: Retract
+\Spring Constant: 0.0341997
+\Separation Scale: 0
+\Force offset: 0
+\Z magnew force: 1
+\Invert: Normal
+\Time channel: 0
+\Force TMR: 1.285285e-010
+\Scope coupling: DC
+\Smoothing filter: 0
+\Graph function: i
+\STS I range: 15000
+\STS DLI/DLV range: 10
+\STS DLI/DV range: 10
+\STS DI/DV range: 10
+\STS Log(i) range: 10
+\Ave points: 1
+\Force Phase Offset: 0
+\Effective BW: 8333
+\X Data Type: Ramp
+\@4:Image Data: S [DeflectionError] "Deflection Error"
+\@Z magnify: C [4:Z scale] 1 
+\@4:Z scale: V [Sens. DeflSens] (0.0003750000 V/LSB) 2.500000 V
+\@4:Z offset: V [Sens. DeflSens] (0.0003750000 V/LSB) -0.7762273 V
+\@4:Z input offset: V [Sens. DeflSens] (0.0003750000 V/LSB)       0 V
+\@4:FV scale: V [Sens. DeflSens] (0.0003750000 V/LSB) 2.500000 V
+\@4:Volume offset: V [Sens. DeflSens] (0.0003750000 V/LSB)       0 V
+\@4:Ramp channel: S [Zsweep] "Z"
+\@4:Ramp Size: V [Sens. Zsens] (0.006713765 V/LSB) 19.37984 V
+\@4:Ramp Offset: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@4:Ramp Begin: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@4:Ramp End: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@4:Z Display: V [Sens. Zsens] (0.006713765 V/LSB) 0 V
+\*Ciao force image list
+\Data offset: 97344
+\Data length: 16384
+\Bytes/pixel: 2
+\Start context: FOL
+\Data type: FORCE
+\Data Type Description: 
+\Do zoffder: 0
+\Plane fit: 0 0 0 0
+\Frame direction: Up
+\Capture start line: 0
+\Color Table Index: 12
+\Relative frame time: 0
+\Samps/line: 2048 2048
+\Scan Line: Main
+\Realtime Planefit: Line
+\Offline Planefit: None
+\Z direction: Retract
+\Spring Constant: 0.0341997
+\Separation Scale: 0
+\Force offset: 0
+\Z magnew force: 1
+\Invert: Normal
+\Time channel: 0
+\Force TMR: 1.285285e-010
+\Scope coupling: DC
+\Smoothing filter: 0
+\Graph function: i
+\STS I range: 15000
+\STS DLI/DLV range: 10
+\STS DLI/DV range: 10
+\STS DI/DV range: 10
+\STS Log(i) range: 10
+\Ave points: 1
+\Force Phase Offset: 0
+\Effective BW: 8333
+\X Data Type: Ramp
+\@4:Image Data: S [DeflectionError] "Deflection Error"
+\@Z magnify: C [4:Z scale] 1.000000 
+\@4:Z scale: V [Sens. DeflSens] (0.0003750000 V/LSB) 2.500000 V
+\@4:Z offset: V [Sens. DeflSens] (0.0003750000 V/LSB)       0 V
+\@4:Z input offset: V [Sens. DeflSens] (0.0003750000 V/LSB)       0 V
+\@4:FV scale: V [Sens. DeflSens] (0.0003750000 V/LSB) 2.500000 V
+\@4:Volume offset: V [Sens. DeflSens] (0.0003750000 V/LSB)       0 V
+\@4:Ramp channel: S [Zsweep] "Z"
+\@4:Ramp Size: V [Sens. Zsens] (0.006713765 V/LSB) 19.37984 V
+\@4:Ramp Offset: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@4:Ramp Begin: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@4:Ramp End: V [Sens. Zsens] (0.006713765 V/LSB)       0 V
+\@4:Z Display: V [Sens. Zsens] (0.006713765 V/LSB) 0 V
+\*File list end
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         «  √  π  ±  ∞  ®  §  ñ  Ü  z  w  x  j  b  W  R  S  K  E  5  '           
+    ˘
+  ˘
+  Ú
+  Ï
+  ·
+  ‘
+  …
+  ª
+  ∞
+  ©
+  §
+  ü
+  ó
+  è
+  ä
+  Ñ
+  ä
+  ç
+  Ö
+  u
+  m
+  d
+  ]
+  [
+  T
+  H
+  <
+  4
+  1
+  .
+  %
+  
+  
+  
+  ˜	  Î	  Ë	  „	  ⁄	  À	  Ω	  ´	  ≤	  Ω	  ±	  ß	  £	  ¢	  ™	  •	  §	  Ø	  ∞	  Æ	  §	  £	  ¶	  û	  ë	  â	  ë	  §	  ¨	  û	  ç	  z	  ]	  T	  Z	  e	  b	  S	  A	  5	  A	  Y	  c	  b	  ]	  r	  o	  F	  4	  4	  3	  9	  L	  Z	  U	  I	  P	  T	  B	  5	  &	  &	  &	  .	  -	  !	  	  	  ˝  ˚  	  	  	  	  	  	  $	  3	  +	  	  	  	  	  	  	  	  	  ˛  ˚  	  	  	  Ó  Ï  	  	  	   	  	  	   	   	  	  '	  	  Û  Ú  Ó  ‚  È  	  	  	  ˆ  ˜  	  ˙  Ë  È  Ë  Ÿ  »     Ã  “  ≈  π  ∫  •  ñ  ì  ì  ç  ê  î  ì  •  µ  ¢  ì  á  x  Ä  à  ç  å  Ü  Ñ      w  ~  å  ñ  §  ¨  ë  ô  °  ê  É  {  É  Ñ  u  y  v  ä  ™  Œ  À  ±  ê  å  í  ã  }  å  Æ  Ø  ì  å  ò  ¶  £  ´  µ  π  ∑  ±  ë  r  r  w  â  ò  ò  ö  ™  û  Ö  Å  Ñ  n  b  f  b  l  à  ã  ã  í  †  ñ  û  ñ  z  l  e  u  ì  ©  ó  è  ï  ì  c  E  T  a  x  ñ  ö  è  Ñ  É  q  l  a  W  P  :  B  ]  e  ]  S  S  `  h  _  P  V  t  É  w  q  b  c  É  É  n  s  à  é  }  d  [  d  }  ~  j  \  x  {  p  Å  î  è  â  °  π  ≤  •  õ  y  o  }  ç  ´  •  •  ò  Ö  d  ^  l  v  ó  °  î  q  O  P  h  o  [  m  ç  ú  ë  {  c  u  |  é  î  î  ù  ¶  û  ô  å  }  è  §  ß  ù  è  ñ  †  ï  ç  ó  ù  ö  é  Å  â  ó  Å  w  É  ë  é  è  É    Ä  Ñ  ä  á  Ç  ä  ä  ã  å  v  Ñ  é  É  r  g  t  à  ä  y  Å  õ  ñ  v  e  j  Ç  ´  ¨  ¢  á  c  S  Y  q  Ñ  t  i  t  x  w  l  p  u  i  b  o  Ä  g  ;  @  b  w  x  o  Q  I  X  n  í  ¨  ö  É  m  u  Ç  è  å  û  ´  µ  ¨  ö  û  ô  Ä  i  \  O  j  Ä  Å  ï  •  †  ê  Ç  ã  ê  å  x  i  `  [  U  b  }  ä  ä  ~  x  o  É  à  á  î  Ñ  s  j  l  Å  å  ô  ì  á  â  w  ~  â  ê  ã  e  H  6  5  S  v  à  u  }  ¶  ø  …  √  †  ô  ì  ë  ä  î  á  Ä  Ü  ë  Ö  {  ô  ¥  ´  ñ  á  v  y  í  ö  ï  õ  å  w  Å  é  à  Ñ  ë  ö  à  ó  ò  q  [  i  }  ä  ò  ´  õ  ~  x  o  d  r    ä  ö  ï  ñ  é  Ö  â  Ñ  {  b  e  i  c  e  p  v  Ç  Ñ  ã  â  Ä  ä  ó  Ü  r  e  ^  `  a  m  q  o  q  q  i  Ö  ¢  ±  ¡  ª  ö  Ñ  j  Y  \  j  b  q  Ä  t  f  s  ã  §  §  à  u  r  w    ä  ä  ê  x  q  x  j  h  o  ~  y  |  z  Ö  Ö  {  ä  ß  ç  ~  á  u  g  x  k  Z  K  G  U  d  d  r  î  •  ï  y  à  §  ©  ñ  |  q  s  s  ã  ï  â  Ö  ä  y  o  v  ~  t  s  }  |  u  {  à  ä  Ç  |  e  O  \  k  v  {  í  ô  ã  Ç  |  t  i  f  \  ]  d  t  }  y  Ç  î  Ü  v  Ç  ä  z  É  ç  ç  ì  ë  î  ë  Ä  Ä  å  ó  ü  ö  â  k  t  ò  ö  ó  è  å  w  ]  [  f  z    {  ì  í  Ü  {  s  n  l  {  y  s  u  r  q  z  g  `  c  ~  ë  ï  †  ¶  ï  Ä  v  ä  ë  ã  ì  î  |  f  r  z  r  Ñ  á  u  Ç  ï  ò  ó  ©  °  ì  â  É  Ö  y  ~  {  ~  l  a  p  ~  z  r  Ö  Ö  å  å  å  ë  É  Ç  Ü  ò  ≥  ∞  Ü  n  f  q  å  é  n  V  `  z  å  y  `  Q  S  f  Ä  {  i  m  ä  ñ  ç  ï  ñ  }  g  b  n  j  p  k    ì  Ñ  u  v  Ç  è  å  î  ì  í  ñ  è  }  o  é  ì  î  î  ú  ù  Ç  m  s  ä  û  ñ  ä  l  R  [  z  {  v  ã  á  Ä  Ç  ~  å  é  ç  ã  Å  â  å  é  Å  f  ^  r  á  ê  õ  ´  ≥  ê  á  ù  Æ  ´  ñ  å  ï  ü  ô  ò  ß  ©  Ø  ú  ê  ó  Ö  r  Ä  Ö  x  }  |  t  Ä  Æ  ¿  ¬  ™  Ç  Ä  }  a  U  v  ã  â  ç    v  Å  w  ]  c  t  ~    w  Å  â    {  ç  à  f  \  b  q  â  ô  ò  â  {  b  [  K  T  x  â  Ü  ã  ì  ü  â  Ç  â    }  Ö  ì  £  Æ  ñ  w  ã  ù  é  â  â  â  ò  ñ  Ü  u  è  í  v  w  w  á  Ç  u  z  ó  ±  ü  É  ~  ç  ¨  ≠  è  z  h  ~  å  û  ¨  §  Ä  m  s  l  r  Ç  ~  c  e  x  x  v  t  q  s  ó  ®  ì    v  ]  a  i  b  `  \  H  3  D  k  ã  ï  ã  v  |  ç  á  Å  q  a  r  à  ì  ç  ç  á  û  è  |  á  á  â  ö  í  s  o  á  é  Ä  f  N  W  f  k  ^  \  u    s  l  }  o  e  k  l  ï  •  ô  í  ê  à  i  V  j  o  f  ~  î  §  ´  ©  ß  ª  ∏  ï  w  å  ≠  ≤  ≥  Ø  ë  á  ä  à  }  É  w  c  j  ~  ã  Ü    î  ∏  ™  w  e  p  Ñ  ê  Å  Ç  w  }  ú  ∏  ≥  ©  £  à  z  |  é  î  }  l  n  l  É  Ñ  ~    î  è  q  Z  ]  i  r  ~  o  `  k  Ö  ã  É  ã  †  ©  ≤  ô  é  ã  ê  ì    q  s  p  y  Å  w  i  m  Ç  ù  £  ë  u  Ñ  É  v  l  ~  ó  ä  {  {  ô  ñ  é  ì  ó  å  à  ë  ü  ©  ®  ¨  ê  â  ñ  ç  v  }  á  {  j  X  S  Y  X  R  X  Ñ  å  {  Ñ  í  á  u  o  q  _  [  p  m  Å  ä  Ö  ä  å  {  ~  ñ  ¢  Ü  d  e  m  l  p  w  è  °  ä  s  v  Ñ  ó  °  ô  õ  ù  ó  â  å  à  z  x  u  m  s  {  }  è  ù  †  à  è  ï  Ü  t  â  ò  á  ã  ë  ù  ê  ê  í  Ü  Å    w  s  Å  ~  {  à  ö  ä  s  x  Ü  è  ö  ö  õ    e  i  p  r  ~  û  ö  {  X  V  \  g  {  ê  å  Ä  Ä  ~  |  |  y  ~  ö  ó  Ö  {  u  {  ì  ã  {  â  é  è  Å  c  Q  P  _  É  ò    à  ó  ï  ë  î  ñ  ù  ú  Ñ  z  |  r  Ä  ~  r  s  Ä  ù  õ  Ü  Ñ  à  ú  ù  ì  {  i  n  z  à  å  |  y  Ü  ë  ò  ì  Ü  á  Ç  Ö  ~  w  o  p  }  Ç  {  |  v  Ñ  ~  z  |  z  Ä  ì  ö  ï  ç  y  u  Ä  â  Ñ  o  [  b  r  Ñ  ì  Ñ  ã  ê  ã  ç  r  i  Ñ  ≠  ¬  ∫  ß  ä  s  s  v  g  ^  ^  l  Å  Ñ  â  Ö  k  e  p  }    á  ì  ë  ç  Ä  u  v  õ  Æ  û  t  e  y  ó  í  ä  Ñ  à  Ç  |  Ç  é  Ü  â  ù  ú  ì  Ö    å  â  l  `  n  ~  w  {  ~  x  e  t  à  å  Ö  à  á  ï  †  í  â    y  y  }  á  Ä  x  }  å  û  ó  å  å  ñ  é  §  ®  Ç  j  à  â  Ñ  Ñ  ~  q  {  ã  ä  à  ~  q  n  d  ]  d  t  Ö  Ü  ã  ç  y  }  }  Ñ  |  k  k  s  ~  è  ü  ¥  ™  å  á  è  ç  á  }  w  t  t  Ä  ó  ë  ï  ö  ï  ê  ô  î  Ä  l  ~  ö  õ  ë  ê  î  í  ã  ò  ô  ñ  ê  ì  õ  ã  {    m  n  ë  £  ±  ∏  ™  î  à  Ü  ç  ë  ò  †  ë  ê  §  ´  ù  z  p  k  e  m  à  ß  ò  y  x  á  ç  ç  í  x  b  a  r  Ä  Ü  â    o  b  S  g  q  r  ~  Ç  Ü  â  Å    Ñ  Å  Ñ  ï  ó  ê  ê  á  |  á  ù  †  î  â  ä  }  è  ö  ¢  ¢  ê  ê  è  ò  ê  î  ã  t  r  w  r  n  n  Y  Q  x  ã  ê  ë  à  Å  v  _  q      t  m  u  }  É  ç  à  m  u    l  e  }  í  Ñ  h  V  J  J  S  g  |  †  ∂  ≤  £  †  ñ  ñ  å  k  Y  V  W  ]  l  â  ë  Ü  v  m  o  f  Z  d  t  á  }    ã  ü  ¶  è  s  `  o  w  ~  ç  ò  ã  y  Ö  ©  ∂  ©  °  î  Ö  ï  ∞  ¶  à  Ä  ç  ç  í  ≠  ¢  {  m  í  ¢  É    á  å  ï  ò  ô  Ü  x  é  ö  è  î  è  é  õ  û  ô  ö  }  q  †  ©  à  Å  ì  ö  Ö  c  _  b  q  ~  ê  ò  é  Ä  t  i  y  Ç  i  q    Ç  ù  †    i  t  è  °  ú  |  w  w  u  à  †  ¨  ù  Ç  x  t  w  Ä  ä  Ö  ë  î  •  ©  ´  ©  ß  ≥  Æ  ú  ä  ï  ß  †  î  Ü  Ä  ù  ¶  Ö  ^  ]  r  w    á  ~  É  è  x  S  n  Ü  ~  Ñ  å  É  Ä  á  Ñ  Ç  ê  ù  í  y  Ü  ¶  •  í  ê  ò  ô  Å  l  \  i    é  é  x  j  v  x  h  e  c  O  ;  R    ã  x  c  M  I  ]  k  {  ä  â  ã  â  t  t  ó  ∫  π  ú  z  `  M  N  c    ò  ñ  Ä  s  p  n  Ñ  ã  }  x  ä  ã  ä  ô  è  z  p  a  u  â  x  c  _  u  s  o  w  s  Ñ  è  Ü  |  à  ê  Ä  t  }  Ü  ç  ~  d  h  l  _  X  W  [  b  x  à  Ü  z  `  y  ä  Ç    Ç  Ö  ñ  §  é    m  ç  ó  n  V  g  |  y  è  Q  K  G  =  5  .  )  "             ı  Ó  „  €  œ  «  ¡  ∫  ±  ©  ¢  ô  è  Ç  y  t  k  c  ^  X  L  B  7  .  &  !          ˘
+  Ò
+  È
+  ‚
+  €
+  ’
+  Õ
+  ∆
+  ¡
+  ∑
+  Ø
+  ¶
+  ô
+  ê
+  â
+  Ö
+  
+  v
+  o
+  f
+  ^
+  W
+  O
+  J
+  A
+  4
+  /
+  '
+  
+  
+  
+  ˝	  Ò	  Ó	  Ê	  ﬂ	  “	  À	  ¬	  ¥	  ¨	  ®	  ¶	  ú	  î	  è	  à	  	  u	  h	  e	  c	  ^	  [	  R	  H	  ?	  5	  +	  &	  	  	  	  		   	  ˙  Ú  Ê  ‹  ‘  …  ø  ª  ¥  ¨  ¶  ù  ö  ñ  ê  è  é  Ü    u  k  c  b  ]  W  I  ?  6  /  *  )  +  '          ¯  Ì  Ê  ›  ”  …  ƒ  ¡  ∏  ´  °  ô  ò  ë  ä  Ñ  É  Å  |  z  |  t  m  d  ]  T  J  G  >  =  C  K  K  E  :  *  '  &        	                         	  ˝  ¸  ˝  Ù  Ó  Î  Î  Â  ‹  ’  ¡  µ  µ  π  ¥  ®  •  ≠  ®  £  ü  õ  õ  é  ~  }  }  |  à  ê  ë  â  á  É  z  s  y  x  o  h  c  h  b  X  N  S  R  G  =  A  O  M  E  >  3  (               ˛    ˇ  Ï  ‰  €  ÿ  “  ¡  π  ≠  §  ¶  °  ñ  ¨  …  ƒ  ∏  ∏  π  Ø  …    9  M    è  ß  –  ﬂ  Ì  ¸    #  )  0      +  :  $  2  G  I  G  J  P  <  7  C  H  C  2  B  I  ?  2  (             
+    
+      Ì  “  “  ‡  ı  ˆ  Ô  ˜  ﬂ  ∆  …  Õ  ‘  Ô  Û  ˚          ˛  ˇ  Ú  ÷  ﬂ    ˜      Ë  ›  Í  Ò            !       	          ¸                  ˛  ¸  ˜  Ô  ˙  ˆ      ˆ  Ì  ˘  Ú  ˚  ˝  Ù  +  _  k  c  a  w  à  ë  ó  í  í  ô  Ñ  w  _  m  {  r  h  X  R  X  k  z  â  ú  ñ  v  _  m  r  |  Ñ  y  s  t  X  R  a  q  x  ã  ¶  ¬  «  „  Ï  „  Ô  ˘  ‚  ·  ·  Í  ı  ˇ      Ò       ˜  Ë  ˘    ˚  Ì  Ï  “  ∑  æ     Õ  È  ˚  ˛  Ó      ˆ  Î  Û  Ô  „  Â  ˘                 $  !    !  3  7  5  (  %  -  #    .  *          &  1  8  *    ı  ˘  ˛    ˛    %  *  )  .  6  (            ˘            Ï  Ê  ˆ  ¯    &  0  %            Ô  È  ‰  ˆ  ˇ        Ù         Ú      ˙  ﬂ  ‚  Ï  Â  Õ  ›  €  ¬  ”  ›  Â  ·  –  ¿  ∆  ¬  Ã  ·  ‹  “  ›  ‡  Œ  ≈  ◊  ‰  Œ  Ω  µ  ∏  ≠  ô  ñ  ≠  ≠  Æ  ∞  ≠  ß  ¢  ö  Ö  w  {    t  r  w  ã  è  å  °  …  ˛  !  $  %  "              "  &  L  f  {  m  c  f  s  r  X  ;  E  ^  d  W  :  7  >  6  <  D  P  [  k  r  e  Q  M  U  d  r  d  F  6  =  O  W  G  @  3  H  V  K  E  7  =  9  ;  :  ;  P  R  P  E  A  H  `  [  Y  Z  ]  S  H  J  [  r  v  Å  y  ^  :    &  <  ]  U  P  R  Z  `  Y  U  P  u  á  á  t  ^  b  Ñ  ö  ë  É  ~  z  o  d  Y  K  c  _  S  P  7     *  <  M  a  b  ]  U  F  5  ;  H  /  "  F  ^  N  B  0  0  <  9  /  )  3  =  ?  N  o  {  l  j  Ä  o  V  \  x  ë  ~  ]  N  P  c  Z  U  Y  W  M  G  W  m  w  e  M  L  V  Q  [  d  m  y  g  Z  K  ?  =  =  =  D  M  d  u  d  a  \  S  P  F  7  2  -  3  <  G  A  4  :  ?  >  E  D  E  F  V  j  {  i  U  ^  d  P  E  8  .  ;  L  ?  -  '         
+  )  V  b  W  L  3  4  D  >  C  A  P  g  j  U  ]  b  H  C  [  l  d  e  Q  3  B  b  b  p  }  k  n  s  q  o  f  \  \  Y  M  G  G  <  4  H  T  :  .  $     2  ;  J  P  M  J  O  U  M  \  d  ^  [  _  e  _  G  :  D  V  e  y  z  s  j  u  f  h  ë  ´  ™  Ü  W  8  2  F  S  I  <  O  O  C  A  <  2  9  :  D  N  X  _  ^  R  L  =  /  G  l  t  ]  U  Q  _  Z  V  W  e  h  U  @  C  T  ]  X  Q  E  P  i  ]  [  `  ;      0  =  E  <  7  D  M  U  ^  h  n  z  é  å  }  _  U  Y  \  J  H  H  J  V  Q  2  )  8  U  H  F  O  K  G  P  Y  g  _  V  ]  G  7  D  S  Y  `  q  ~  Z  <  F  L  F  Q  d  P  K  I  Q  k  i  _  q  ã  ï  ù  ñ  ï  î  f  8  J  i  _  ;  >  b  l  X  A  1  %  $  *  E  Y  ]  e  a  `  O  R  V  f  m  a  ^  g  ]  h  É  w  d  l  i  J  2  5  .  )          2  X  i  g  `  T  Q  F  5  &  .  I  P  ;  2  8  I  N  F  5      A  a  g  b  W  I  6  3  ;  C  G  ;  4  A  T  _  á  Ä  m  k  a  V  G  3  B  g  n  c  X  P  F  I  `  Ñ  n  b  r  h  F  2  -  <  _  t  q  b  T  Q  ^  g  m  `  F  D  G  J  c  z  r  b  e  h  J  '       *  8  P  \  g  t  e  ;    #  A  R  T  3  *  G  X  T  P  E  =  B  I  a  b  [  Y  J  W  s  n  d  Z  R  E  2  >  U  ^  Y  ?  8  C  Z  v  u  y  e  @  =  >  S  j  z  ê  ¢  û  Ü  g  j  n  k  Y  O  =  3  M  X  D  I  R  F  .  '  -  9  R  g  v  s  U     ˝    A  c  n  i  `  b  s  t  u  X  7  $      ?  L  Y  K  5  3  3  <  =  G  J  Q  M  A  5  ?  I  M  R  h  |  ä  ë  ê  á  w  Ñ  Ö  z  {  n  Y  Z  R  ?  -  8  <  M  ]  T  C  ;  N  R  ]  ]  E  <  D  L  Q  [  T  F  >  <  E  P  R  K  O  S  M  C  E  M  Y  j  f  X  P  L  *  )  F  O  N  L  b  e  ^  V  A  E  O  D  J  e  Y  C  ?  C  E  g  é  ù  à  q  _  :  5  ;  :  A  O  c  p  h  ^  X  i  m  U  =  .  )  >  D  A  E  M  Y  X  P  S  q  {  z  Ö  y  q  q  q  e  \  `  S  S  W  U  T  Z  d  q  v  c  Q  8  =  G  V  S  B  H  G  L  R  ^    á  |  m  h  [  Y  U  T  P  E  D  H  =  E  >  @  C  @  Q  a  ^  {  ç  m  d  `  Y  X  W  _  h  g  Å  Ü  t  p  v  q  b  R  S  ]  c  n  _  M  R  _  V  X  n  }  k  ^  O  8  :  _  _  =  @  ]  H  /  *  B  S  \  v  ã  Ç  h  R  N  L  O  Y  O  X  k  s  p  n  _  P  @  2  "  -  B  V  r  d  Y  M  K  X  _  P  7  D  W  V  V  h  W  G  P  ]  `  Z  S  X  L  F  A  T  ^  Q  Z  c  i  z  q  >  (  +  .  H  N  9  9  [  g  Z  S  Z  Q  R  ]  T  I  V  f  k  c  p  i  C  >  :  8  :  R  M  :  D  R  b  i  i  â  Ç  s  l  \  I  [  f  R  L  G  >  F  Y  [  ]  U  7  *  .  8  E  F  W  f  K  5  H  h  y  n  g  m  a  D  8  >  E  M  e  k  X  N  A  4  2  7  8  7  D  V  S  D  V  e  f  W  T  c  i  W  H  N  K  K  G  C  \  p  ^  Z  i  n  y  j  P  G  K  b  `  W  [  W  d  r  j  F      .  [  L  ?  =  @  ?  ?  G  V  R  P  L  D  7  0  6  O  P  B  5  B  H  I  W  S  B  A  e  w  f  [  ]  d  b  a  X  K  K  C  5  E  P  ^  o  l  u  f  A  9  U  i  o  o  S  :  8  A  R  _  L  <  @  D  T  d  f  c  W  =  '  *  /  0  *  6  B  F  ?  D  X  ^  Y  P  W  J  ?  I  C  B  C  N  Q  C  O  q    É  t  b  W  V  I  6  7  <  5  ?  A  6  0  )  "  0  B  c  i  l  s  d  c  `  I  .        =  [  h  c  X  T  Z  k  f  r  Ç  u  f  f  P  Q  g  \  F  8  %  +  T  m  g  Y  K  S  f  h  \  Q  E        (  >  U  c  X  V  f  l  e  \  Z  k  f  G  A  [  V  V  _  \  d  T  P  I  C  3  C  U  \  =  6  Q  ]  i  a  9  0  %    !  &  1  B  D  ;  D  V  \  c  W  K  A  I  X  T  B  E  S  R  >  4  S  b  U  K  O  I  :  ;  U  Y  ?  :  A  ;  I  R  R  ^  U  W  _  e  b  P  B  J  @  8  >  F  5  !  (  .  <  C  D  @  P  K  <  :  <  @  I  N  Z  c  j  Y  V  [  S  P  i  s  c  \  A  *  7  _  n  k  n  u  `  S  Q  7  /  &  /  4  2  2  >  =  1  *  ?  K  F  Y  s  j  J  -  )  ?  Q  O  S  F  4  3  I  I  =  H  Y  m  c  N  N  U  Z  r  o  N  G  2  A  r  x  p  c  ]  h  q  p  d  e  t  Ä  Å  w  n  q  ä  «  √  π  ±  ∞  ®  §  ñ  Ü  z  w  x  j  b  W  R  S  K  E  5  '           
+    ˘
+  ˘
+  Ú
+  Ï
+  ·
+  ‘
+  …
+  ª
+  ∞
+  ©
+  §
+  ü
+  ó
+  è
+  ä
+  Ñ
+  ä
+  ç
+  Ö
+  u
+  m
+  d
+  ]
+  [
+  T
+  H
+  <
+  4
+  1
+  .
+  %
+  
+  
+  
+  ˜	  Î	  Ë	  „	  ⁄	  À	  Ω	  ´	  ≤	  Ω	  ±	  ß	  £	  ¢	  ™	  •	  §	  Ø	  ∞	  Æ	  §	  £	  ¶	  û	  ë	  â	  ë	  §	  ¨	  û	  ç	  z	  ]	  T	  Z	  e	  b	  S	  A	  5	  A	  Y	  c	  b	  ]	  r	  o	  F	  4	  4	  3	  9	  L	  Z	  U	  I	  P	  T	  B	  5	  &	  &	  &	  .	  -	  !	  	  	  ˝  ˚  	  	  	  	  	  	  $	  3	  +	  	  	  	  	  	  	  	  	  ˛  ˚  	  	  	  Ó  Ï  	  	  	   	  	  	   	   	  	  '	  	  Û  Ú  Ó  ‚  È  	  	  	  ˆ  ˜  	  ˙  Ë  È  Ë  Ÿ  »     Ã  “  ≈  π  ∫  •  ñ  ì  ì  ç  ê  î  ì  •  µ  ¢  ì  á  x  Ä  à  ç  å  Ü  Ñ      w  ~  å  ñ  §  ¨  ë  ô  °  ê  É  {  É  Ñ  u  y  v  ä  ™  Œ  À  ±  ê  å  í  ã  }  å  Æ  Ø  ì  å  ò  ¶  £  ´  µ  π  ∑  ±  ë  r  r  w  â  ò  ò  ö  ™  û  Ö  Å  Ñ  n  b  f  b  l  à  ã  ã  í  †  ñ  û  ñ  z  l  e  u  ì  ©  ó  è  ï  ì  c  E  T  a  x  ñ  ö  è  Ñ  É  q  l  a  W  P  :  B  ]  e  ]  S  S  `  h  _  P  V  t  É  w  q  b  c  É  É  n  s  à  é  }  d  [  d  }  ~  j  \  x  {  p  Å  î  è  â  °  π  ≤  •  õ  y  o  }  ç  ´  •  •  ò  Ö  d  ^  l  v  ó  °  î  q  O  P  h  o  [  m  ç  ú  ë  {  c  u  |  é  î  î  ù  ¶  û  ô  å  }  è  §  ß  ù  è  ñ  †  ï  ç  ó  ù  ö  é  Å  â  ó  Å  w  É  ë  é  è  É    Ä  Ñ  ä  á  Ç  ä  ä  ã  å  v  Ñ  é  É  r  g  t  à  ä  y  Å  õ  ñ  v  e  j  Ç  ´  ¨  ¢  á  c  S  Y  q  Ñ  t  i  t  x  w  l  p  u  i  b  o  Ä  g  ;  @  b  w  x  o  Q  I  X  n  í  ¨  ö  É  m  u  Ç  è  å  û  ´  µ  ¨  ö  û  ô  Ä  i  \  O  j  Ä  Å  ï  •  †  ê  Ç  ã  ê  å  x  i  `  [  U  b  }  ä  ä  ~  x  o  É  à  á  î  Ñ  s  j  l  Å  å  ô  ì  á  â  w  ~  â  ê  ã  e  H  6  5  S  v  à  u  }  ¶  ø  …  √  †  ô  ì  ë  ä  î  á  Ä  Ü  ë  Ö  {  ô  ¥  ´  ñ  á  v  y  í  ö  ï  õ  å  w  Å  é  à  Ñ  ë  ö  à  ó  ò  q  [  i  }  ä  ò  ´  õ  ~  x  o  d  r    ä  ö  ï  ñ  é  Ö  â  Ñ  {  b  e  i  c  e  p  v  Ç  Ñ  ã  â  Ä  ä  ó  Ü  r  e  ^  `  a  m  q  o  q  q  i  Ö  ¢  ±  ¡  ª  ö  Ñ  j  Y  \  j  b  q  Ä  t  f  s  ã  §  §  à  u  r  w    ä  ä  ê  x  q  x  j  h  o  ~  y  |  z  Ö  Ö  {  ä  ß  ç  ~  á  u  g  x  k  Z  K  G  U  d  d  r  î  •  ï  y  à  §  ©  ñ  |  q  s  s  ã  ï  â  Ö  ä  y  o  v  ~  t  s  }  |  u  {  à  ä  Ç  |  e  O  \  k  v  {  í  ô  ã  Ç  |  t  i  f  \  ]  d  t  }  y  Ç  î  Ü  v  Ç  ä  z  É  ç  ç  ì  ë  î  ë  Ä  Ä  å  ó  ü  ö  â  k  t  ò  ö  ó  è  å  w  ]  [  f  z    {  ì  í  Ü  {  s  n  l  {  y  s  u  r  q  z  g  `  c  ~  ë  ï  †  ¶  ï  Ä  v  ä  ë  ã  ì  î  |  f  r  z  r  Ñ  á  u  Ç  ï  ò  ó  ©  °  ì  â  É  Ö  y  ~  {  ~  l  a  p  ~  z  r  Ö  Ö  å  å  å  ë  É  Ç  Ü  ò  ≥  ∞  Ü  n  f  q  å  é  n  V  `  z  å  y  `  Q  S  f  Ä  {  i  m  ä  ñ  ç  ï  ñ  }  g  b  n  j  p  k    ì  Ñ  u  v  Ç  è  å  î  ì  í  ñ  è  }  o  é  ì  î  î  ú  ù  Ç  m  s  ä  û  ñ  ä  l  R  [  z  {  v  ã  á  Ä  Ç  ~  å  é  ç  ã  Å  â  å  é  Å  f  ^  r  á  ê  õ  ´  ≥  ê  á  ù  Æ  ´  ñ  å  ï  ü  ô  ò  ß  ©  Ø  ú  ê  ó  Ö  r  Ä  Ö  x  }  |  t  Ä  Æ  ¿  ¬  ™  Ç  Ä  }  a  U  v  ã  â  ç    v  Å  w  ]  c  t  ~    w  Å  â    {  ç  à  f  \  b  q  â  ô  ò  â  {  b  [  K  T  x  â  Ü  ã  ì  ü  â  Ç  â    }  Ö  ì  £  Æ  ñ  w  ã  ù  é  â  â  â  ò  ñ  Ü  u  è  í  v  w  w  á  Ç  u  z  ó  ±  ü  É  ~  ç  ¨  ≠  è  z  h  ~  å  û  ¨  §  Ä  m  s  l  r  Ç  ~  c  e  x  x  v  t  q  s  ó  ®  ì    v  ]  a  i  b  `  \  H  3  D  k  ã  ï  ã  v  |  ç  á  Å  q  a  r  à  ì  ç  ç  á  û  è  |  á  á  â  ö  í  s  o  á  é  Ä  f  N  W  f  k  ^  \  u    s  l  }  o  e  k  l  ï  •  ô  í  ê  à  i  V  j  o  f  ~  î  §  ´  ©  ß  ª  ∏  ï  w  å  ≠  ≤  ≥  Ø  ë  á  ä  à  }  É  w  c  j  ~  ã  Ü    î  ∏  ™  w  e  p  Ñ  ê  Å  Ç  w  }  ú  ∏  ≥  ©  £  à  z  |  é  î  }  l  n  l  É  Ñ  ~    î  è  q  Z  ]  i  r  ~  o  `  k  Ö  ã  É  ã  †  ©  ≤  ô  é  ã  ê  ì    q  s  p  y  Å  w  i  m  Ç  ù  £  ë  u  Ñ  É  v  l  ~  ó  ä  {  {  ô  ñ  é  ì  ó  å  à  ë  ü  ©  ®  ¨  ê  â  ñ  ç  v  }  á  {  j  X  S  Y  X  R  X  Ñ  å  {  Ñ  í  á  u  o  q  _  [  p  m  Å  ä  Ö  ä  å  {  ~  ñ  ¢  Ü  d  e  m  l  p  w  è  °  ä  s  v  Ñ  ó  °  ô  õ  ù  ó  â  å  à  z  x  u  m  s  {  }  è  ù  †  à  è  ï  Ü  t  â  ò  á  ã  ë  ù  ê  ê  í  Ü  Å    w  s  Å  ~  {  à  ö  ä  s  x  Ü  è  ö  ö  õ    e  i  p  r  ~  û  ö  {  X  V  \  g  {  ê  å  Ä  Ä  ~  |  |  y  ~  ö  ó  Ö  {  u  {  ì  ã  {  â  é  è  Å  c  Q  P  _  É  ò    à  ó  ï  ë  î  ñ  ù  ú  Ñ  z  |  r  Ä  ~  r  s  Ä  ù  õ  Ü  Ñ  à  ú  ù  ì  {  i  n  z  à  å  |  y  Ü  ë  ò  ì  Ü  á  Ç  Ö  ~  w  o  p  }  Ç  {  |  v  Ñ  ~  z  |  z  Ä  ì  ö  ï  ç  y  u  Ä  â  Ñ  o  [  b  r  Ñ  ì  Ñ  ã  ê  ã  ç  r  i  Ñ  ≠  ¬  ∫  ß  ä  s  s  v  g  ^  ^  l  Å  Ñ  â  Ö  k  e  p  }    á  ì  ë  ç  Ä  u  v  õ  Æ  û  t  e  y  ó  í  ä  Ñ  à  Ç  |  Ç  é  Ü  â  ù  ú  ì  Ö    å  â  l  `  n  ~  w  {  ~  x  e  t  à  å  Ö  à  á  ï  †  í  â    y  y  }  á  Ä  x  }  å  û  ó  å  å  ñ  é  §  ®  Ç  j  à  â  Ñ  Ñ  ~  q  {  ã  ä  à  ~  q  n  d  ]  d  t  Ö  Ü  ã  ç  y  }  }  Ñ  |  k  k  s  ~  è  ü  ¥  ™  å  á  è  ç  á  }  w  t  t  Ä  ó  ë  ï  ö  ï  ê  ô  î  Ä  l  ~  ö  õ  ë  ê  î  í  ã  ò  ô  ñ  ê  ì  õ  ã  {    m  n  ë  £  ±  ∏  ™  î  à  Ü  ç  ë  ò  †  ë  ê  §  ´  ù  z  p  k  e  m  à  ß  ò  y  x  á  ç  ç  í  x  b  a  r  Ä  Ü  â    o  b  S  g  q  r  ~  Ç  Ü  â  Å    Ñ  Å  Ñ  ï  ó  ê  ê  á  |  á  ù  †  î  â  ä  }  è  ö  ¢  ¢  ê  ê  è  ò  ê  î  ã  t  r  w  r  n  n  Y  Q  x  ã  ê  ë  à  Å  v  _  q      t  m  u  }  É  ç  à  m  u    l  e  }  í  Ñ  h  V  J  J  S  g  |  †  ∂  ≤  £  †  ñ  ñ  å  k  Y  V  W  ]  l  â  ë  Ü  v  m  o  f  Z  d  t  á  }    ã  ü  ¶  è  s  `  o  w  ~  ç  ò  ã  y  Ö  ©  ∂  ©  °  î  Ö  ï  ∞  ¶  à  Ä  ç  ç  í  ≠  ¢  {  m  í  ¢  É    á  å  ï  ò  ô  Ü  x  é  ö  è  î  è  é  õ  û  ô  ö  }  q  †  ©  à  Å  ì  ö  Ö  c  _  b  q  ~  ê  ò  é  Ä  t  i  y  Ç  i  q    Ç  ù  †    i  t  è  °  ú  |  w  w  u  à  †  ¨  ù  Ç  x  t  w  Ä  ä  Ö  ë  î  •  ©  ´  ©  ß  ≥  Æ  ú  ä  ï  ß  †  î  Ü  Ä  ù  ¶  Ö  ^  ]  r  w    á  ~  É  è  x  S  n  Ü  ~  Ñ  å  É  Ä  á  Ñ  Ç  ê  ù  í  y  Ü  ¶  •  í  ê  ò  ô  Å  l  \  i    é  é  x  j  v  x  h  e  c  O  ;  R    ã  x  c  M  I  ]  k  {  ä  â  ã  â  t  t  ó  ∫  π  ú  z  `  M  N  c    ò  ñ  Ä  s  p  n  Ñ  ã  }  x  ä  ã  ä  ô  è  z  p  a  u  â  x  c  _  u  s  o  w  s  Ñ  è  Ü  |  à  ê  Ä  t  }  Ü  ç  ~  d  h  l  _  X  W  [  b  x  à  Ü  z  `  y  ä  Ç    Ç  Ö  ñ  §  é    m  ç  ó  n  V  g  |  y  è  Q  K  G  =  5  .  )  "             ı  Ó  „  €  œ  «  ¡  ∫  ±  ©  ¢  ô  è  Ç  y  t  k  c  ^  X  L  B  7  .  &  !          ˘
+  Ò
+  È
+  ‚
+  €
+  ’
+  Õ
+  ∆
+  ¡
+  ∑
+  Ø
+  ¶
+  ô
+  ê
+  â
+  Ö
+  
+  v
+  o
+  f
+  ^
+  W
+  O
+  J
+  A
+  4
+  /
+  '
+  
+  
+  
+  ˝	  Ò	  Ó	  Ê	  ﬂ	  “	  À	  ¬	  ¥	  ¨	  ®	  ¶	  ú	  î	  è	  à	  	  u	  h	  e	  c	  ^	  [	  R	  H	  ?	  5	  +	  &	  	  	  	  		   	  ˙  Ú  Ê  ‹  ‘  …  ø  ª  ¥  ¨  ¶  ù  ö  ñ  ê  è  é  Ü    u  k  c  b  ]  W  I  ?  6  /  *  )  +  '          ¯  Ì  Ê  ›  ”  …  ƒ  ¡  ∏  ´  °  ô  ò  ë  ä  Ñ  É  Å  |  z  |  t  m  d  ]  T  J  G  >  =  C  K  K  E  :  *  '  &        	                         	  ˝  ¸  ˝  Ù  Ó  Î  Î  Â  ‹  ’  ¡  µ  µ  π  ¥  ®  •  ≠  ®  £  ü  õ  õ  é  ~  }  }  |  à  ê  ë  â  á  É  z  s  y  x  o  h  c  h  b  X  N  S  R  G  =  A  O  M  E  >  3  (               ˛    ˇ  Ï  ‰  €  ÿ  “  ¡  π  ≠  §  ¶  °  ñ  ¨  …  ƒ  ∏  ∏  π  Ø  …    9  M    è  ß  –  ﬂ  Ì  ¸    #  )  0      +  :  $  2  G  I  G  J  P  <  7  C  H  C  2  B  I  ?  2  (             
+    
+      Ì  “  “  ‡  ı  ˆ  Ô  ˜  ﬂ  ∆  …  Õ  ‘  Ô  Û  ˚          ˛  ˇ  Ú  ÷  ﬂ    ˜      Ë  ›  Í  Ò            !       	          ¸                  ˛  ¸  ˜  Ô  ˙  ˆ      ˆ  Ì  ˘  Ú  ˚  ˝  Ù  +  _  k  c  a  w  à  ë  ó  í  í  ô  Ñ  w  _  m  {  r  h  X  R  X  k  z  â  ú  ñ  v  _  m  r  |  Ñ  y  s  t  X  R  a  q  x  ã  ¶  ¬  «  „  Ï  „  Ô  ˘  ‚  ·  ·  Í  ı  ˇ      Ò       ˜  Ë  ˘    ˚  Ì  Ï  “  ∑  æ     Õ  È  ˚  ˛  Ó      ˆ  Î  Û  Ô  „  Â  ˘                 $  !    !  3  7  5  (  %  -  #    .  *          &  1  8  *    ı  ˘  ˛    ˛    %  *  )  .  6  (            ˘            Ï  Ê  ˆ  ¯    &  0  %            Ô  È  ‰  ˆ  ˇ        Ù         Ú      ˙  ﬂ  ‚  Ï  Â  Õ  ›  €  ¬  ”  ›  Â  ·  –  ¿  ∆  ¬  Ã  ·  ‹  “  ›  ‡  Œ  ≈  ◊  ‰  Œ  Ω  µ  ∏  ≠  ô  ñ  ≠  ≠  Æ  ∞  ≠  ß  ¢  ö  Ö  w  {    t  r  w  ã  è  å  °  …  ˛  !  $  %  "              "  &  L  f  {  m  c  f  s  r  X  ;  E  ^  d  W  :  7  >  6  <  D  P  [  k  r  e  Q  M  U  d  r  d  F  6  =  O  W  G  @  3  H  V  K  E  7  =  9  ;  :  ;  P  R  P  E  A  H  `  [  Y  Z  ]  S  H  J  [  r  v  Å  y  ^  :    &  <  ]  U  P  R  Z  `  Y  U  P  u  á  á  t  ^  b  Ñ  ö  ë  É  ~  z  o  d  Y  K  c  _  S  P  7     *  <  M  a  b  ]  U  F  5  ;  H  /  "  F  ^  N  B  0  0  <  9  /  )  3  =  ?  N  o  {  l  j  Ä  o  V  \  x  ë  ~  ]  N  P  c  Z  U  Y  W  M  G  W  m  w  e  M  L  V  Q  [  d  m  y  g  Z  K  ?  =  =  =  D  M  d  u  d  a  \  S  P  F  7  2  -  3  <  G  A  4  :  ?  >  E  D  E  F  V  j  {  i  U  ^  d  P  E  8  .  ;  L  ?  -  '         
+  )  V  b  W  L  3  4  D  >  C  A  P  g  j  U  ]  b  H  C  [  l  d  e  Q  3  B  b  b  p  }  k  n  s  q  o  f  \  \  Y  M  G  G  <  4  H  T  :  .  $     2  ;  J  P  M  J  O  U  M  \  d  ^  [  _  e  _  G  :  D  V  e  y  z  s  j  u  f  h  ë  ´  ™  Ü  W  8  2  F  S  I  <  O  O  C  A  <  2  9  :  D  N  X  _  ^  R  L  =  /  G  l  t  ]  U  Q  _  Z  V  W  e  h  U  @  C  T  ]  X  Q  E  P  i  ]  [  `  ;      0  =  E  <  7  D  M  U  ^  h  n  z  é  å  }  _  U  Y  \  J  H  H  J  V  Q  2  )  8  U  H  F  O  K  G  P  Y  g  _  V  ]  G  7  D  S  Y  `  q  ~  Z  <  F  L  F  Q  d  P  K  I  Q  k  i  _  q  ã  ï  ù  ñ  ï  î  f  8  J  i  _  ;  >  b  l  X  A  1  %  $  *  E  Y  ]  e  a  `  O  R  V  f  m  a  ^  g  ]  h  É  w  d  l  i  J  2  5  .  )          2  X  i  g  `  T  Q  F  5  &  .  I  P  ;  2  8  I  N  F  5      A  a  g  b  W  I  6  3  ;  C  G  ;  4  A  T  _  á  Ä  m  k  a  V  G  3  B  g  n  c  X  P  F  I  `  Ñ  n  b  r  h  F  2  -  <  _  t  q  b  T  Q  ^  g  m  `  F  D  G  J  c  z  r  b  e  h  J  '       *  8  P  \  g  t  e  ;    #  A  R  T  3  *  G  X  T  P  E  =  B  I  a  b  [  Y  J  W  s  n  d  Z  R  E  2  >  U  ^  Y  ?  8  C  Z  v  u  y  e  @  =  >  S  j  z  ê  ¢  û  Ü  g  j  n  k  Y  O  =  3  M  X  D  I  R  F  .  '  -  9  R  g  v  s  U     ˝    A  c  n  i  `  b  s  t  u  X  7  $      ?  L  Y  K  5  3  3  <  =  G  J  Q  M  A  5  ?  I  M  R  h  |  ä  ë  ê  á  w  Ñ  Ö  z  {  n  Y  Z  R  ?  -  8  <  M  ]  T  C  ;  N  R  ]  ]  E  <  D  L  Q  [  T  F  >  <  E  P  R  K  O  S  M  C  E  M  Y  j  f  X  P  L  *  )  F  O  N  L  b  e  ^  V  A  E  O  D  J  e  Y  C  ?  C  E  g  é  ù  à  q  _  :  5  ;  :  A  O  c  p  h  ^  X  i  m  U  =  .  )  >  D  A  E  M  Y  X  P  S  q  {  z  Ö  y  q  q  q  e  \  `  S  S  W  U  T  Z  d  q  v  c  Q  8  =  G  V  S  B  H  G  L  R  ^    á  |  m  h  [  Y  U  T  P  E  D  H  =  E  >  @  C  @  Q  a  ^  {  ç  m  d  `  Y  X  W  _  h  g  Å  Ü  t  p  v  q  b  R  S  ]  c  n  _  M  R  _  V  X  n  }  k  ^  O  8  :  _  _  =  @  ]  H  /  *  B  S  \  v  ã  Ç  h  R  N  L  O  Y  O  X  k  s  p  n  _  P  @  2  "  -  B  V  r  d  Y  M  K  X  _  P  7  D  W  V  V  h  W  G  P  ]  `  Z  S  X  L  F  A  T  ^  Q  Z  c  i  z  q  >  (  +  .  H  N  9  9  [  g  Z  S  Z  Q  R  ]  T  I  V  f  k  c  p  i  C  >  :  8  :  R  M  :  D  R  b  i  i  â  Ç  s  l  \  I  [  f  R  L  G  >  F  Y  [  ]  U  7  *  .  8  E  F  W  f  K  5  H  h  y  n  g  m  a  D  8  >  E  M  e  k  X  N  A  4  2  7  8  7  D  V  S  D  V  e  f  W  T  c  i  W  H  N  K  K  G  C  \  p  ^  Z  i  n  y  j  P  G  K  b  `  W  [  W  d  r  j  F      .  [  L  ?  =  @  ?  ?  G  V  R  P  L  D  7  0  6  O  P  B  5  B  H  I  W  S  B  A  e  w  f  [  ]  d  b  a  X  K  K  C  5  E  P  ^  o  l  u  f  A  9  U  i  o  o  S  :  8  A  R  _  L  <  @  D  T  d  f  c  W  =  '  *  /  0  *  6  B  F  ?  D  X  ^  Y  P  W  J  ?  I  C  B  C  N  Q  C  O  q    É  t  b  W  V  I  6  7  <  5  ?  A  6  0  )  "  0  B  c  i  l  s  d  c  `  I  .        =  [  h  c  X  T  Z  k  f  r  Ç  u  f  f  P  Q  g  \  F  8  %  +  T  m  g  Y  K  S  f  h  \  Q  E        (  >  U  c  X  V  f  l  e  \  Z  k  f  G  A  [  V  V  _  \  d  T  P  I  C  3  C  U  \  =  6  Q  ]  i  a  9  0  %    !  &  1  B  D  ;  D  V  \  c  W  K  A  I  X  T  B  E  S  R  >  4  S  b  U  K  O  I  :  ;  U  Y  ?  :  A  ;  I  R  R  ^  U  W  _  e  b  P  B  J  @  8  >  F  5  !  (  .  <  C  D  @  P  K  <  :  <  @  I  N  Z  c  j  Y  V  [  S  P  i  s  c  \  A  *  7  _  n  k  n  u  `  S  Q  7  /  &  /  4  2  2  >  =  1  *  ?  K  F  Y  s  j  J  -  )  ?  Q  O  S  F  4  3  I  I  =  H  Y  m  c  N  N  U  Z  r  o  N  G  2  A  r  x  p  c  ]  h  q  p  d  e  t  Ä  Å  w  n  q  ä  

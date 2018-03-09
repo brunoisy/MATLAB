@@ -18,7 +18,7 @@ for filenumber = 1:119
     load(filename)
 
     %%% 1 - We remove all points from start phase
-    start_ind = 1;
+    breakpoint = length(dist);
     thresh = 20;
     for i = 1:length(dist)-3
         if force(i+3) - force(i) > thresh
