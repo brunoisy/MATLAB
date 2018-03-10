@@ -26,7 +26,7 @@ for filenumber = 1:119
             break
         end
     end
-    for i = breakpoint:length(dist-10)
+    for i = breakpoint:(length(dist)-10)
         if force(i) - force(i+10) > 0
             dist = dist(i:end);
             force = force(i:end);

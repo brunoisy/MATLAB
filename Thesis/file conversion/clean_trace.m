@@ -2,7 +2,6 @@ function [ ] = clean_trace(filename, destination, name)
 %CLEAN_TRACE Summary of this function goes here
 %   Detailed explanation goes here
 load(filename)
-
 %%% 1 - We remove all points from start phase
 breakpoint = length(dist);
 
@@ -13,7 +12,7 @@ for i = 1:length(dist)-3
         break
     end
 end
-for i = breakpoint:length(dist-10)
+for i = breakpoint:(length(dist)-10)
     if force(i) - force(i+10) > 0
         dist = dist(i:end);
         force = force(i:end);

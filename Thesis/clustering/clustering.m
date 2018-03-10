@@ -5,10 +5,14 @@ rng(3)
 xlimits = [0, 150];
 ylimits = [-300, 50];
 
-directory = 'data_4';
+directory = 'data_4';%'LmrP Proteoliposomes';
 load(strcat('data/FD profiles/',directory,'.mat'))
 tracenumbers = 1:length(Lcs_lengths(1,:));
 % histogram(Lcs_lengths)
+% xlabel('length(L_c)')
+% ylabel('# of FD profiles')
+% set(gca,'FontSize',22)
+
 
 %%% clustering with RANSAC
 modelLcs = cell(2,4);
@@ -19,8 +23,8 @@ prop_inliers = [0.6, 0.2];
 figure
 hold on
 colors = get(gca, 'colororder');
-for n = 5%3:6
-    for subcluster = 1:2 % number of subclusters to find
+for n = 3:6%5%3:6
+    for subcluster = 1%1:2 % number of subclusters to find
         if subcluster==1
             Lcs_cluster = cell2mat(Lcs(Lcs_lengths == n)')';
         else
@@ -32,9 +36,10 @@ for n = 5%3:6
         [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs_cluster,@fittingfn_clustering,@distfn_clustering,threshs(subcluster,n-2),prop_inliers(subcluster),true);
         modelLcs{subcluster, n-2} = meanLc;
         %%% Plotting
-        subplot(1,2,subcluster)
-%         subplot(2,2,n-2)
+%         subplot(1,2,subcluster)
+        subplot(2,2,n-2)
         hold on
+        set(gca,'FontSize',22)
         title(strcat('clustered FD profile for n = ',int2str(n)))
         
         xlim(xlimits);
