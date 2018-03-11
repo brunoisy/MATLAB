@@ -105,21 +105,21 @@
 
 
 
-function [meanLc, inliers, deltas, MSE] = ransac_clustering2(Lcs, fittingfn, inlier_ratio, feedback)
+function [MSE] = ransac_plop(XY, fittingfn, prop_inliers, feedback)
 
 
 if nargin < 4; feedback = true;        end;
 
-[~, npts] = size(Lcs);
+npts = length(XY);
 
-ninliers = ceil(npts*inlier_ratio);% this is the EXACT number of inliers we want our model to have
+ninliers = ceil(npts*prop_inliers);% this is the EXACT number of inliers we want our model to have
 trialcount = 0;
 bestMSE = Inf;
-bestLc = [];
-bestinliers = [];
+bestLine =[];
 
 
-for ind = 1:npts
+for i=1:1000
+    inliers = XY(:,rand(npts,[1,2]));
     meanLc = Lcs(:,ind);
     [~, ~, SEs] = allign(meanLc, Lcs);
     [~,I] = sort(SEs);
