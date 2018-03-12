@@ -15,24 +15,26 @@ tracenumbers = 1:length(Lcs_lengths);
 
 
 %%% clustering with RANSAC
-meanLcs = cell(1,4);
-inlier_ratio = [.50, .40, .60, .40; 0.10, .10, .10, .10];
+% threshs = [100, 180, 180, 180];
+threshs = [200,80,170,500;200,100,75,100];
+% prop_inliers = [0.10, 0.10];
+prop_inliers = [0.6, 0.2];% minimum! proportion of inliers
 figure
 hold on
 colors = get(gca, 'colororder');
-for n = 3:6%5
+for n = 3:6%5%3:6
     for subcluster = 1%1:2 % number of subclusters to find
         if subcluster==1
             Lcs_cluster = cell2mat(Lcs(Lcs_lengths == n)')';
         else
             outliers = true(1, sum(Lcs_lengths==n));
             outliers(inliers) = false;
-            Lcs_cluster = Lcs_cluster(:,outliers); % potential inliers to this cluster must be outliers of previous cluster
+            Lcs_cluster = Lcs_cluster(:,outliers);
         end
         
-        [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs_cluster,@fittingfn_clustering,inlier_ratio(subcluster,n-2));
+        [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs_cluster,@fittingfn_clustering,@distfn_clustering,threshs(subcluster,n-2),prop_inliers(subcluster),true);
         %%% Plotting
-        %         subplot(1,2,subcluster)
+%         subplot(1,2,subcluster)
         subplot(2,2,n-2)
         hold on
         set(gca,'FontSize',22)
@@ -60,46 +62,7 @@ for n = 3:6%5
             plot(dist+deltas(i), force,'.')
         end
         
-        true_inlier_ratio = length(inliers)/length(Lcs_cluster);
-        text(100,0,strcat('inlier ratio :', num2str(true_inlier_ratio)));
-        meanLcs{n-2} = meanLc;
+        true_prop_inliers = length(inliers)/length(Lcs_cluster);
+        text(100,0,strcat('prop. inliers :', num2str(true_prop_inliers)));
     end
 end
-
-%% plot meanLcs
-figure
-subplot(1,2,1)
-hold on
-for n=3:6
-    meanLc = meanLcs{n-2};
-    plot(repmat(meanLc',2,1), [(7-n)*ones(1,length(meanLc));(7-n+1)*ones(1,length(meanLc))],'Color',colors(n-2,:))
-end
-xlabel('distance(nm)')
-set(gca,'ytick',[1.5, 2.5, 3.5, 4.5])
-set(gca,'YTickLabel',{'n=6','n=5','n=4','n=3'} );
-set(gca,'FontSize',22)
-title('mean cluster FD profiles')
-
-subplot(1,2,2)
-hold on
-meanLc6 = meanLcs{4};
-colors = get(gca, 'colororder');
-plot(repmat(meanLc',2,1), [ones(1,length(meanLc));2*ones(1,length(meanLc))],'Color',colors(4,:))
-
-
-for n=3:5
-    meanLc = meanLcs{n-2};
-    delta = mean(meanLc6(2:1+n)-meanLc);
-    plot(repmat(meanLc'+delta,2,1), [(7-n)*ones(1,length(meanLc));(7-n+1)*ones(1,length(meanLc))],'Color',colors(n-2,:))
-    text(3,7.6-n,'\rightarrow shift','fontsize',18)
-    plot(delta,(7.5-n),'*','Color',colors(n-2,:))
-end
-% legend('n = 3','n = 4','n = 5','n = 6')
-xlabel('distance(nm)')
-set(gca,'ytick',[1.5, 2.5, 3.5, 4.5])
-set(gca,'YTickLabel',{'n=6','n=5','n=4','n=3'} );
-set(gca,'FontSize',22)
-title('alligned mean cluster FD profiles')
-
-
-

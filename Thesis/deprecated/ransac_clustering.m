@@ -105,56 +105,48 @@
 
 
 
-function [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs, fittingfn, inlier_ratio, feedback)
+function [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs, fittingfn, distfn, thresh, prop_inliers, feedback)
 
 
-if nargin < 4; feedback = true;        end;
+if nargin < 6; feedback = true;        end;
 
 [~, npts] = size(Lcs);
 
-ninliers = ceil(npts*inlier_ratio);% this is the EXACT number of inliers we want our model to have
+mininliers = ceil(npts*prop_inliers);% this is the minimum number of inliers for a model to be considered reliable
 trialcount = 0;
 bestMSE = Inf;
-bestLc = [];
 bestinliers = [];
 
 
 for ind = 1:npts
     meanLc = Lcs(:,ind);
-    [~, ~, SEs] = allign(meanLc, Lcs);
-    [~,I] = sort(SEs);
-    inliers = I(1:ninliers);
-    [~, MSE, ~] = allign(meanLc, Lcs(:,inliers));   
     
-    while MSE < bestMSE
+    inliers = feval(distfn, meanLc, Lcs, thresh);
+    meanLc = feval(fittingfn, Lcs(:,inliers));
+    [~, MSE,~] = allign(meanLc, Lcs(:,inliers));
+    ninliers = length(inliers);
+
+    if ninliers > mininliers && MSE < bestMSE
         bestinliers = inliers;
-        bestLc = meanLc;
         bestMSE = MSE;
-        
-        meanLc = feval(fittingfn, Lcs(:,inliers));
-        [~, ~, SEs] = allign(meanLc, Lcs);
-        [~,I] = sort(SEs);
-        inliers = I(1:ninliers);
-        [~, MSE, ~] = allign(meanLc, Lcs(:,inliers));
     end
     
     trialcount = trialcount+1;
     if feedback
         fprintf('trial %d out of %d         \r',trialcount, npts);
     end
-    
 end
 
 if feedback, fprintf('\n'); end
 
-if ~isempty(bestLc)    % We got a solution
+if bestMSE ~= 0   % We got a solution
     inliers = bestinliers;
-    meanLc = bestLc;
+    meanLc = feval(fittingfn, Lcs(:,inliers));
     [deltas, MSE,~] = allign(meanLc, Lcs(:,inliers));
 else
     inliers = [];
     meanLc = 0;
     deltas = 0;
-    MSE = Inf;
+    MSE = 0;
     warning('ransac was unable to find a useful solution');
 end
