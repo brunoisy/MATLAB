@@ -15,7 +15,7 @@ tracenumbers = 1:length(Lcs_lengths);
 
 
 %%% clustering with RANSAC
-meanLcs = cell(1,4);
+% meanLcs = cell(1,4);
 inlier_ratio = [.50, .40, .60, .40; 0.10, .10, .10, .10];
 figure
 hold on
@@ -89,7 +89,7 @@ plot(repmat(meanLc',2,1), [ones(1,length(meanLc));2*ones(1,length(meanLc))],'Col
 
 for n=3:5
     meanLc = meanLcs{n-2};
-    delta = mean(meanLc6(2:1+n)-meanLc);
+    delta = mean(meanLc6(2:1+n)-meanLc)%     meanLc6([2:3,5:2+n])
     plot(repmat(meanLc'+delta,2,1), [(7-n)*ones(1,length(meanLc));(7-n+1)*ones(1,length(meanLc))],'Color',colors(n-2,:))
     text(3,7.6-n,'\rightarrow shift','fontsize',18)
     plot(delta,(7.5-n),'*','Color',colors(n-2,:))

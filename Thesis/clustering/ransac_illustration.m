@@ -26,7 +26,7 @@ plot(X3,Y3,'.')
 n = 200; %number of data points
 variance = zeros(1,n);
 for i = 1:200
-    [~, ~, ~, MSE] = ransac_line(Lcs_cluster,@fittingfn_clustering, prop_inliers);
+    MSE = ransac_line([X1,X2;Y1,Y2],@fittingfn_line, prop_inliers);
     variance(i) = MSE;
 end
 figure

@@ -2,8 +2,8 @@
 %
 % dir = strcat('data/MAT/data_',int2str(ndir),'/');
 % newdir = strcat('data/MAT_clean/data_',int2str(ndir),'/');
-dir1 = 'data/MAT/data_4/';
-newdir = 'data/MAT_clean/data_4/';
+dir1 = 'data/MAT/data_6/';
+newdir = 'data/MAT_clean/data_6/';
 
 % files = dir(dir1);
 % files = files([files.isdir]==false);
@@ -13,7 +13,7 @@ newdir = 'data/MAT_clean/data_4/';
 %     filename = strcat(dir1,'/',filenames{j});
 %     load(filename)
 
-for filenumber = 1:119
+for filenumber = 1:166
     filename = strcat(dir1,'curve_',int2str(filenumber),'.mat');
     load(filename)
 

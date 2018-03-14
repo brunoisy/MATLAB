@@ -1,10 +1,11 @@
-subdirectory = 'LmrP single-NTA membrane/';
+% subdirectory = 'LmrP single-NTA membrane/';
 % subdirectory = 'LmrP single-NTA nanodiscs/';
+subdirectory = 'LmrP Membrane/20170508 single vs tris NTA/';%data 6
 
 k = 0;
 % subsubdirectories = {'tip1','tip2','tip3','tip4','tip5'};
 % subsubdirectories = {'tip1','tip2','tip3'};
-subsubdirectories = {'tip3','tip4','tip5'};
+subsubdirectories = {'LmrP membrane tris-NTA'};
 
 
 for i = 1:length(subsubdirectories)
@@ -27,7 +28,7 @@ for i = 1:length(subsubdirectories)
         
         dist = Text{1}'; % distance in nm
         force = Text{2}'; % force in pN
-        save(strcat('data/MAT/data_4/curve_',int2str(k),'.mat'),'dist','force');
+        save(strcat('data/MAT/data_6/curve_',int2str(k),'.mat'),'dist','force');
 %         name = filenames{j};
 %         names{k} = name(1:end-4)
         %         save(strcat('data/MAT/data_4/',name,'.mat'),'dist','force');

@@ -105,37 +105,34 @@
 
 
 
-function [MSE] = ransac_plop(XY, fittingfn, prop_inliers, feedback)
+function [MSE] = ransac_line(XY, fittingfn, inlier_ratio, feedback)
 
 
 if nargin < 4; feedback = true;        end;
 
 npts = length(XY);
 
-ninliers = ceil(npts*prop_inliers);% this is the EXACT number of inliers we want our model to have
+ninliers = ceil(npts*inlier_ratio);% this is the EXACT number of inliers we want our model to have
 trialcount = 0;
 bestMSE = Inf;
-bestLine =[];
 
 
 for i=1:1000
-    inliers = XY(:,rand(npts,[1,2]));
-    meanLc = Lcs(:,ind);
-    [~, ~, SEs] = allign(meanLc, Lcs);
-    [~,I] = sort(SEs);
-    inliers = I(1:ninliers);
-    [~, MSE, ~] = allign(meanLc, Lcs(:,inliers));   
+    inliers = randi(npts,[1,2]);
+    line = feval(fittingfn, XY(:,inliers));
+    dists = point_to_line(XY',[0, line(2)], [-line(2)/line(1), 0]);
     
+    [~,I] = sort(dists);
+    inliers = I(1:ninliers);
+    MSE = mean(point_to_line(XY(:,inliers)',[0, line(2)], [-line(2)/line(1), 0]).^2);
     while MSE < bestMSE
-        bestinliers = inliers;
-        bestLc = meanLc;
         bestMSE = MSE;
+        line = feval(fittingfn, XY(:,inliers));
+        dists = point_to_line(XY',[0, line(2)], [-line(2)/line(1), 0]);
         
-        meanLc = feval(fittingfn, Lcs(:,inliers));
-        [~, ~, SEs] = allign(meanLc, Lcs);
-        [~,I] = sort(SEs);
+        [~,I] = sort(dists);
         inliers = I(1:ninliers);
-        [~, MSE, ~] = allign(meanLc, Lcs(:,inliers));
+        MSE = mean(point_to_line(XY(:,inliers)',[0, line(2)], [-line(2)/line(1), 0]).^2);
     end
     
     trialcount = trialcount+1;
@@ -147,14 +144,5 @@ end
 
 if feedback, fprintf('\n'); end
 
-if ~isempty(bestLc)    % We got a solution
-    inliers = bestinliers;
-    meanLc = bestLc;
-    [deltas, MSE,~] = allign(meanLc, Lcs(:,inliers));
-else
-    inliers = [];
-    meanLc = 0;
-    deltas = 0;
-    MSE = Inf;
-    warning('ransac was unable to find a useful solution');
+MSE = bestMSE;
 end
