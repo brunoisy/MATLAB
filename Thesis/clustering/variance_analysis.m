@@ -18,7 +18,7 @@ for n=3:6
     
     for i = 1:length(Lcs_cluster(1,:))
         inlier_ratio = inlier_ratios(i);
-        [~, ~, ~, MSE] = ransac_clustering2(Lcs_cluster,@fittingfn_clustering, inlier_ratio);
+        [~, ~, ~, MSE] = ransac_clustering(Lcs_cluster,@fittingfn_clustering, inlier_ratio);
         variance(i) = MSE;
     end
     subplot(2,2,n-2)
@@ -26,7 +26,7 @@ for n=3:6
     set(gca,'FontSize',22)
     title(strcat('variance evolution for n = ',int2str(n)))
     plot(inlier_ratios,variance);
-    xlabel('proportion of inliers to the model');
+    xlabel('inlier ratio');
     ylabel('variance of inliers');
     ylim([0,300]);
 end

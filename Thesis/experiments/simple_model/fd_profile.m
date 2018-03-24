@@ -1,5 +1,4 @@
 function [ F ] = fd_profile(X, Lc, Xunfold)
-addpath('functions')
 
 F = zeros(1,length(X));
 for i = 1:length(Xunfold)

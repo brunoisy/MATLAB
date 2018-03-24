@@ -5,7 +5,7 @@ rng(3)
 xlimits = [0, 150];
 ylimits = [-300, 50];
 
-directory = 'data_4';%'LmrP Proteoliposomes';
+directory = 'data_6';%'LmrP Proteoliposomes';
 load(strcat('data/FD profiles/',directory,'.mat'))
 tracenumbers = 1:length(Lcs_lengths);
 % histogram(Lcs_lengths)
@@ -16,7 +16,7 @@ tracenumbers = 1:length(Lcs_lengths);
 
 %%% clustering with RANSAC
 % meanLcs = cell(1,4);
-inlier_ratio = [.50, .40, .60, .40; 0.10, .10, .10, .10];
+inlier_ratio = [.20, .20, .20, .20];%[.50, .40, .60, .40; 0.10, .10, .10, .10];
 figure
 hold on
 colors = get(gca, 'colororder');
@@ -67,39 +67,39 @@ for n = 3:6%5
 end
 
 %% plot meanLcs
-figure
-subplot(1,2,1)
-hold on
-for n=3:6
-    meanLc = meanLcs{n-2};
-    plot(repmat(meanLc',2,1), [(7-n)*ones(1,length(meanLc));(7-n+1)*ones(1,length(meanLc))],'Color',colors(n-2,:))
-end
-xlabel('distance(nm)')
-set(gca,'ytick',[1.5, 2.5, 3.5, 4.5])
-set(gca,'YTickLabel',{'n=6','n=5','n=4','n=3'} );
-set(gca,'FontSize',22)
-title('mean cluster FD profiles')
-
-subplot(1,2,2)
-hold on
-meanLc6 = meanLcs{4};
-colors = get(gca, 'colororder');
-plot(repmat(meanLc',2,1), [ones(1,length(meanLc));2*ones(1,length(meanLc))],'Color',colors(4,:))
-
-
-for n=3:5
-    meanLc = meanLcs{n-2};
-    delta = mean(meanLc6(2:1+n)-meanLc)%     meanLc6([2:3,5:2+n])
-    plot(repmat(meanLc'+delta,2,1), [(7-n)*ones(1,length(meanLc));(7-n+1)*ones(1,length(meanLc))],'Color',colors(n-2,:))
-    text(3,7.6-n,'\rightarrow shift','fontsize',18)
-    plot(delta,(7.5-n),'*','Color',colors(n-2,:))
-end
-% legend('n = 3','n = 4','n = 5','n = 6')
-xlabel('distance(nm)')
-set(gca,'ytick',[1.5, 2.5, 3.5, 4.5])
-set(gca,'YTickLabel',{'n=6','n=5','n=4','n=3'} );
-set(gca,'FontSize',22)
-title('alligned mean cluster FD profiles')
+% figure
+% subplot(1,2,1)
+% hold on
+% for n=3:6
+%     meanLc = meanLcs{n-2};
+%     plot(repmat(meanLc',2,1), [(7-n)*ones(1,length(meanLc));(7-n+1)*ones(1,length(meanLc))],'Color',colors(n-2,:))
+% end
+% xlabel('distance(nm)')
+% set(gca,'ytick',[1.5, 2.5, 3.5, 4.5])
+% set(gca,'YTickLabel',{'n=6','n=5','n=4','n=3'} );
+% set(gca,'FontSize',22)
+% title('mean cluster FD profiles')
+% 
+% subplot(1,2,2)
+% hold on
+% meanLc6 = meanLcs{4};
+% colors = get(gca, 'colororder');
+% plot(repmat(meanLc',2,1), [ones(1,length(meanLc));2*ones(1,length(meanLc))],'Color',colors(4,:))
+% 
+% 
+% for n=3:5
+%     meanLc = meanLcs{n-2};
+%     delta = mean(meanLc6(2:1+n)-meanLc)%     meanLc6([2:3,5:2+n])
+%     plot(repmat(meanLc'+delta,2,1), [(7-n)*ones(1,length(meanLc));(7-n+1)*ones(1,length(meanLc))],'Color',colors(n-2,:))
+%     text(3,7.6-n,'\rightarrow shift','fontsize',18)
+%     plot(delta,(7.5-n),'*','Color',colors(n-2,:))
+% end
+% % legend('n = 3','n = 4','n = 5','n = 6')
+% xlabel('distance(nm)')
+% set(gca,'ytick',[1.5, 2.5, 3.5, 4.5])
+% set(gca,'YTickLabel',{'n=6','n=5','n=4','n=3'} );
+% set(gca,'FontSize',22)
+% title('alligned mean cluster FD profiles')
 
 
 

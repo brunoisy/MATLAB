@@ -10,11 +10,11 @@
 % subdir = 'data_3/';
 % tracenumbers = 1:135;
 % 
-% subdir = 'data_4/';
-% tracenumbers = 1:119;
+subdir = 'data_4/';
+tracenumbers = 1:119;
 
-subdir = 'data_6/';
-tracenumbers = 1:166;
+% subdir = 'data_6/';
+% tracenumbers = 1:166;
 
 xlimits = [-10, 200];
 ylimits = [-250, 50];

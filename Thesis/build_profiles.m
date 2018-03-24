@@ -3,7 +3,7 @@ addpath('LSQ fit')
 
 subdir = 'data_6';
 directory = strcat('data/MAT_clean/',subdir,'/');
-tracenumbers = 1:100;
+tracenumbers = 1:166;
 
 Lcs = cell(1, length(tracenumbers));
 Lcs_lengths = zeros(1,length(tracenumbers));

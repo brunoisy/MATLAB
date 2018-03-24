@@ -7,20 +7,20 @@ ylimits = [-250, 50];
 
 % subdir = 'data_1/good/';
 % tracenumbers = 1:9;
-% 
+%
 % subdir = 'data_1/bad/';
 % tracenumbers = 1:10;
-% 
+%
 % subdir = 'data_2/';
 % xlimits = [-10, 200];
 % ylimits = [-150, 20];
 % tracenumbers = 1:23;
-% 
+%
 % subdir = 'data_3/';
 % tracenumbers = 1:135;
 
 subdir = 'data_4/';
-tracenumbers = 1:119;
+tracenumbers = 42%1:119;
 
 % subdir = 'data_5/';
 % tracenumbers = 1:170;
@@ -29,7 +29,7 @@ tracenumbers = 1:119;
 
 
 dir = strcat('data/MAT_clean/',subdir);
-colors = get(gca, 'colororder');
+
 
 for tracenumber =   tracenumbers
     trace = strcat(dir,'curve_',int2str(tracenumber),'.mat');
@@ -38,9 +38,11 @@ for tracenumber =   tracenumbers
     
     %%% Plot the initial points
     figure
+    colors = get(gca, 'colororder');
     subplot(1,3,1)
     hold on
     title('Cleaned Trace');
+    set(gca,'FontSize',22)
     
     xlim(xlimits);
     ylim(ylimits);
@@ -55,6 +57,7 @@ for tracenumber =   tracenumbers
     subplot(1,3,2)
     hold on
     title('FD profile - LSQ')
+    set(gca,'FontSize',22)
     
     xlim(xlimits);
     ylim(ylimits);
@@ -77,6 +80,7 @@ for tracenumber =   tracenumbers
     subplot(1,3,3)
     hold on
     title('FD profile - RANSAC')
+    set(gca,'FontSize',22)
     
     xlim(xlimits);
     ylim(ylimits);
@@ -93,7 +97,7 @@ for tracenumber =   tracenumbers
     
     %%% Save Plots
     %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(tracenumber),'.fig'));
-    %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(tracenumber)),'epsc');
-        saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(tracenumber),'.jpg'));
-%         close
+%     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(tracenumber)),'epsc');
+            saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(tracenumber),'.jpg'));
+    %         close
 end
