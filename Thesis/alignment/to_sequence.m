@@ -3,9 +3,8 @@ function seq = to_sequence(Lc)
 %   Detailed explanation goes here
 
 
-Lc = round(Lc/0.36);
-seq = repmat('A',1,Lc(end)-Lc(1)+length(Lc));% a.a. are represented by zeros
-Lc-Lc(1)+1
-seq(Lc-Lc(1)+1) = 'G';% unfolding points are represented by ones
+Lc = floor(Lc/0.36)+1;
+seq = repmat('A',1,Lc(end)+length(Lc));% a.a. are represented by A
+seq(Lc) = 'G';% unfolding points are represented by G
 
 end
