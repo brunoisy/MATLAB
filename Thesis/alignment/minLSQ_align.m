@@ -8,7 +8,7 @@ for delta = -50:.1:50
     shiftedLc = Lc+delta;
     error = 0;
     if length(shiftedLc) <= length(templateLc)
-        for Lci = shiftedLc'
+        for Lci = shiftedLc
             error = error + min(abs(templateLc-Lci))^2;
         end
     else

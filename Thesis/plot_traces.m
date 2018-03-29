@@ -40,7 +40,6 @@ for tracenumber = tracenumbers
     
     trace = strcat(dir2,'curve_',int2str(tracenumber),'.mat');
     load(trace)
-    colors = get(gca, 'colororder');
 
     
     %%% Plot the initial points

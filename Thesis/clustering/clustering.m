@@ -16,11 +16,11 @@ tracenumbers = 1:length(Lcs_lengths);
 
 %%% clustering with RANSAC
 % meanLcs = cell(1,4);
-targetInlierRatio = 1/2*[.20, .20, .20, .20];%[.50, .40, .60, .40; 0.10, .10, .10, .10];
+targetInlierRatio = [.20, .20, .20, .20];%[.50, .40, .60, .40; 0.10, .10, .10, .10];
 figure
 hold on
 colors = get(gca, 'colororder');
-for n = 3:6%5
+for n = 5%3:6%5
     for subcluster = 1%1:2 % number of subclusters to find
         if subcluster==1
             clusterLcs = cell2mat(Lcs(Lcs_lengths == n)')';
