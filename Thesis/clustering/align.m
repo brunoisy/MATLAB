@@ -1,4 +1,4 @@
-function [deltas, MSE, SEs] = allign(meanLc, Lcs)
+function [deltas, MSE, SEs] = align(meanLc, Lcs)
 %DISTFN Summary of this function goes here
 %   Detailed explanation goes here
 

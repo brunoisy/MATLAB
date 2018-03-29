@@ -121,10 +121,10 @@ bestinliers = [];
 
 for ind = 1:npts
     meanLc = Lcs(:,ind);
-    [~, ~, SEs] = allign(meanLc, Lcs);
+    [~, ~, SEs] = align(meanLc, Lcs);
     [~,I] = sort(SEs);
     inliers = I(1:ninliers);
-    [~, MSE, ~] = allign(meanLc, Lcs(:,inliers));   
+    [~, MSE, ~] = align(meanLc, Lcs(:,inliers));   
     
     while MSE < bestMSE
         bestinliers = inliers;
@@ -132,10 +132,10 @@ for ind = 1:npts
         bestMSE = MSE;
         
         meanLc = feval(fittingfn, Lcs(:,inliers));
-        [~, ~, SEs] = allign(meanLc, Lcs);
+        [~, ~, SEs] = align(meanLc, Lcs);
         [~,I] = sort(SEs);
         inliers = I(1:ninliers);
-        [~, MSE, ~] = allign(meanLc, Lcs(:,inliers));
+        [~, MSE, ~] = align(meanLc, Lcs(:,inliers));
     end
     
     trialcount = trialcount+1;
@@ -150,7 +150,7 @@ if feedback, fprintf('\n'); end
 if ~isempty(bestLc)    % We got a solution
     inliers = bestinliers;
     meanLc = bestLc;
-    [deltas, MSE,~] = allign(meanLc, Lcs(:,inliers));
+    [deltas, MSE,~] = align(meanLc, Lcs(:,inliers));
 else
     inliers = [];
     meanLc = 0;

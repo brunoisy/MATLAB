@@ -7,14 +7,16 @@ ncrest = length(Lc);
 
 
 % Plotting
-figure
+fig = figure('units','normalized','outerposition',[0 0 1 1]);
 subplot(2,1,1)
 hold on
+title('Single Molecule Force Spectroscopy')
+
 xlim([0,200]);
 ylim([-1,1]);
 set(gca,'ytick',[])
 set(gca,'FontSize',22)
-    colors = get(gca, 'colororder');
+colors = get(gca, 'colororder');
 
 
 h = zeros(1,ncrest);
@@ -22,7 +24,8 @@ for i = 1:ncrest
     h(i) = plot([0,0],[0,0],'linewidth',5);% ith section
 end
 % plot(0,0,'*') % draw tip?-> draw knot to represent protein!
-h
+h6 = plot([0,10],[0,0],'linewidth',2,'Color','k');
+h7 = plot([10,200],[0,0],'linewidth',10,'Color',[0.5,0.5,0.5]);
 line1 = plot([0,0],[-1,1],'--','Color',colors(7,:));
 
 subplot(2,1,2)
@@ -40,10 +43,11 @@ z=animatedline;
 line2 = plot([0,0],[-150,1],'--','Color',colors(7,:));
 
 % we move tip 1 nm/sec
+F = moviein(200);
 
 set(gca,'nextplot','replacechildren');
 for x = 1:200
-
+    
     n = find(x<Xunfold,1);% number of stretching sections
     if isempty(n)
         n=ncrest;
@@ -65,6 +69,9 @@ for x = 1:200
     for i =1:n
         set(h(i),'XData',[X(i+1),X(i)],'YData',[0,0]);
     end
+    set(h6,'XData',[X(1),X(1)+10],'YData',[0,0]);
+    set(h7,'XData',[X(1)+10,200],'YData',[0,0]);
+    
     
     f = fd(Lc(n),X(1));
     if x >Xunfold(end)
@@ -72,12 +79,14 @@ for x = 1:200
     end
     set(line1,'XData',[x,x],'YData',[-1,1]);
     set(line2, 'XData',[x,x],'YData',[-150,1]);
-    if any(x==Xunfold)
-        pause(0.2)
-    else
-        pause(0.02)
-    end
+    %     if any(x==Xunfold)
+    %         pause(0.2)
+    %     else
+    %         pause(0.02)
+    %     end
     addpoints(z,X(1),f);
-    drawnow;
-    F(x) = getframe;
+    drawnow();
+    F(x) = getframe(fig);
 end
+
+movie2avi(F,'SMFS.avi','fps',15)
