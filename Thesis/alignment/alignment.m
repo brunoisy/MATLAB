@@ -32,7 +32,7 @@ for n = 2:8
         
         totalDelta2 = 0;
         updLc2 = thisLc;
-        scoreMatrix = [1,0,-100,0;0,0,0,0;-100,0,18,0;0,0,0,0;];
+        scoreMatrix = [1,0,-100,0;0,0,0,0;-100,0,27,0;0,0,0,0;];
         for it = 1:5
             thisSeq = to_sequence(updLc2);
             [score, aligner, start] = nwalign(templateSeq, thisSeq,'Alphabet', 'NT','ScoringMatrix',scoreMatrix,'GapOpen',1,'ExtendGap',1,'Glocal',true);
@@ -46,9 +46,18 @@ for n = 2:8
                 totalDelta2 = totalDelta2 + delta;
             end
             %                         updLc2 = updLc2+totalDelta2;
-            load(trace)
-            dist = dist+totalDelta2;
-            [updLc2,~,~,~,~] = LSQ_fit_fd(dist, force);
+            if it < 5
+                load(trace)
+                dist = dist+totalDelta2;
+                [updLc2,~,~,~,~] = LSQ_fit_fd(dist, force);
+            else
+                if aligner1(1) == '-'
+                    updLc2 = updLc2-delta;
+                else
+                    updLc2 = updLc2+delta;
+                end
+                updLc2 = updLc2+delta;
+            end
         end
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -8,6 +8,7 @@ prop_inliers = [.50, .40, .60, .40];
 figure
 hold on
 colors = get(gca, 'colororder');
+
 for n = 3:6
     Lcs_cluster = cell2mat(Lcs(Lcs_lengths == n)')';
     
@@ -19,7 +20,7 @@ for n = 3:6
     set(gca,'FontSize',22)
     title(strcat('distribution of shifts for n = ',int2str(n)))
     for delta = deltas
-        plot([delta,delta],0:1)
+        plot([delta,delta],0:1, 'Color', colors(1,:))
     end
     xlim([-25,30])
     ylim([0,1])
