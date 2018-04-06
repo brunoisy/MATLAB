@@ -5,6 +5,6 @@ function seq = to_sequence(Lc)
 
 Lc = floor(Lc/0.36)+1;
 seq = repmat('A',1,Lc(end)+length(Lc));% a.a. are represented by A
-seq(Lc) = 'G';% unfolding points are represented by G
+seq(Lc) = 'C';% unfolding points are represented by C
 
 end

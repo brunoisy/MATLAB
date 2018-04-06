@@ -10,6 +10,7 @@ colors = get(gca, 'colororder');
 
 subplot(2,2,1)
 hold on
+title('standard')
 set(gca,'FontSize',22)
 xlim([0, 150])
 ylim([0,1])
@@ -28,6 +29,7 @@ end
 
 subplot(2,2,2)
 hold on
+title('1 missing peak')
 set(gca,'FontSize',22)
 xlim([0, 150])
 ylim([0,1])
@@ -43,6 +45,7 @@ end
 
 subplot(2,2,3)
 hold on
+title('2 missing peaks')
 set(gca,'FontSize',22)
 xlim([0, 150])
 ylim([0,1])
@@ -58,6 +61,7 @@ end
 
 subplot(2,2,4)
 hold on
+title('peak doubling')
 set(gca,'FontSize',22)
 xlim([0, 150])
 ylim([0,1])
