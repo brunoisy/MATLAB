@@ -4,7 +4,7 @@ function [ mins ] = find_min(dist, force)
 
 nmin = 0;% # of minimas found
 mins = zeros(2, length(dist));
-hi = 20;% size of half comparison interval...
+hi = 20;%20% size of half comparison interval...
 
 % We find candidate minimas by comparing points to their 2*hi neighbors
 for i=1:length(force)

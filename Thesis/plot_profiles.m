@@ -20,7 +20,7 @@ ylimits = [-250, 50];
 % tracenumbers = 1:135;
 
 subdir = 'data_4/';
-tracenumbers = 42%1:119;
+tracenumbers =45; %1:10%1:119;
 
 % subdir = 'data_5/';
 % tracenumbers = 1:170;
