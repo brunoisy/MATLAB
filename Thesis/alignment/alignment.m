@@ -1,7 +1,7 @@
 addpath('LSQ fit')
 
 directory = 'data_4';
-load(strcat('data/FD profiles/',directory,'.mat'))
+load(strcat('data/FD profiles/',directory,'.mat'),'Lcs','Lcs_lengths')
 tracenumbers = 1:length(Lcs_lengths);
 xlimits = [0, 150];
 ylimits = [-300, 50];
@@ -13,25 +13,22 @@ ylimits = [-300, 50];
 templateLc = [34.4800   54.5995   92.3607  118.0434  140.5817];
 
 
-templateSeq = to_sequence(templateLc);
-% this is the templateLc found for the main cluster in data4
-
 
 for n = 2:8
-    mkdir(strcat('images/retro fitting/exhaustive/n_',int2str(n)))
+    %     mkdir(strcat('images/retro fitting/exhaustive/n_',int2str(n)))
     clusterLcs = cell2mat(Lcs(Lcs_lengths == n)')';
     for i = 1:length(clusterLcs(1,:))
         oktracenumbers = tracenumbers(Lcs_lengths == n);
         tracenumber = oktracenumbers(i);
-%                         if tracenumber == 12
+        %                         if tracenumber == 12
         
         trace = strcat('data/MAT_clean/',directory,'/curve_',int2str(tracenumber),'.mat');
         thisLc = clusterLcs(:,i)';
         
         [delta, npeaks] =  exhaustive_align(templateLc,thisLc,trace);
         load(trace,'dist','force')
-        dist = dist+delta;
-        [updLc1,~,~,~,~] = LSQ_fit_fd(dist, force);
+        
+        [updLc1,~,~,~,~] = LSQ_fit_fd(dist+delta, force);
         
         
         figure('units','normalized','outerposition',[0 0 1 1]);
@@ -50,7 +47,7 @@ for n = 2:8
             templateh = plot(Xfit,Ffit,'Color','r');
         end
         
-        load(trace,'dist','force')
+        
         plot(dist+delta, force,'.','Color','b')
         for j=1:length(updLc1)
             Xfit = linspace(0,updLc1(j),1000);
@@ -60,8 +57,12 @@ for n = 2:8
         
         legend([templateh,Lch],'template FD profile','trace FD profile')
         
-        saveas(gcf, strcat('images/retro fitting/exhaustive/n_',int2str(n),'/curve_',int2str(tracenumber),'.jpg'));
+        if npeaks >1
+            saveas(gcf, strcat('images/retro fitting/exhaustive/aligned/curve_',int2str(tracenumber),'.jpg'));
+        else
+            saveas(gcf, strcat('images/retro fitting/exhaustive/misaligned/curve_',int2str(tracenumber),'.jpg'));            
+        end
         close
-%             end
+        %             end
     end
 end

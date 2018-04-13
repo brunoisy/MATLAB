@@ -6,7 +6,7 @@ xlimits = [0, 150];
 ylimits = [-300, 50];
 
 directory = 'data_4';
-load(strcat('data/FD profiles/',directory,'.mat'))
+load(strcat('data/FD profiles/',directory,'.mat'),'Lcs','Lcs_lengths')
 tracenumbers = 1:length(Lcs_lengths);
 % histogram(Lcs_lengths)
 % xlabel('length(L_c)')

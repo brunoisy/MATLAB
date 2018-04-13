@@ -3,12 +3,12 @@ function [delta, npeaks] = exhaustive_align(templateLc, Lc, trace)
 %   Detailed explanation goes here
 
 
-thresh = 1.5;% nm +-2 = range of 4
+thresh = 1.5;% nm +-1.5 = range of 3
 maxPeaks = 0;
 minError = Inf;
 bestDelta = 0;
 
-for bigDelta = round(6-Lc(1)):2:50 
+for bigDelta = round(6-Lc(1)):2:50
     load(trace,'dist','force')
     dist = dist+bigDelta;
     [upLc,~,~,~,~] = LSQ_fit_fd(dist, force); % could be computed once and for all!
@@ -31,7 +31,12 @@ for bigDelta = round(6-Lc(1)):2:50
         end
     end
 end
+
 npeaks = maxPeaks;
-delta = bestDelta;
+if maxPeaks == 1
+    delta = 0; % we have not managed to align
+else
+    delta = bestDelta;
+end
 
 end
