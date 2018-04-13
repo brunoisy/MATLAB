@@ -1,11 +1,11 @@
-function [Lc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit_fd(dist, force, k, offset, min_thresh, sel_thresh)
+function [Lc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit_permissive(dist, force, k, offset, min_thresh, sel_thresh)
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
 
 if nargin < 6
-    sel_thresh =10; end
+    sel_thresh = 10; end
 if nargin < 5
-    min_thresh = 20; end
+    min_thresh = 12; end
 if nargin < 4
     offset = false; end
 if nargin < 3
@@ -23,7 +23,8 @@ mins = find_min(dist, force, min_thresh);
 
 %%% We find the FD curves going through the minimas, parametrized by Lc,
 %%% and merge Lc's that are too close too each other
-Lc = merge_Lc(find_Lc(mins, x0));
+Lc = find_Lc(mins, x0);
+% Lc = merge_Lc(find_Lc(mins, x0));
 
 
 
@@ -45,6 +46,6 @@ for j = 1:k
     else
         Lc = lsqcurvefit(@(Lc,x) fd_multi([x0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
     end
-    [Lc, Xfirst, Xunfold] = merge_Lc(Lc,Xfirst,Xunfold);
+%     [Lc, Xfirst, Xunfold] = merge_Lc(Lc,Xfirst,Xunfold);
 end
 end

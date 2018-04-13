@@ -16,7 +16,7 @@ tracenumbers = 1:length(Lcs_lengths);
 
 %%% clustering with RANSAC
 % meanLcs = cell(1,4);
-targetInlierRatio = [.20, .20, .15, .20];%[.50, .40, .60, .40; 0.10, .10, .10, .10];
+targetInlierRatio = [.20, .20, .05, .20];%[.50, .40, .60, .40; 0.10, .10, .10, .10];
 figure
 hold on
 colors = get(gca, 'colororder');

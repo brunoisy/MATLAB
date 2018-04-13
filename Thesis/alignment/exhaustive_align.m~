@@ -3,15 +3,15 @@ function [delta, npeaks] = exhaustive_align(templateLc, Lc, trace)
 %   Detailed explanation goes here
 
 
-thresh = 1.5;% nm +-2 = range of 4
+thresh = 2.5;% nm +-2.5=range of 5
 maxPeaks = 0;
 minError = Inf;
 bestDelta = 0;
 
-for bigDelta = round(6-Lc(1)):2:50 
+for bigDelta = 10-Lc(1):2:50 
     load(trace,'dist','force')
     dist = dist+bigDelta;
-    [upLc,~,~,~,~] = LSQ_fit_fd(dist, force); % could be computed once and for all!
+    [upLc,~,~,~,~] = LSQ_fit_fd(dist, force);
     for smallDelta = -1:0.1:1
         shiftedLc = upLc+smallDelta;
         peaks = zeros(1, length(templateLc));

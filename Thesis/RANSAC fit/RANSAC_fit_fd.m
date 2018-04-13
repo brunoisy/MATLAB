@@ -1,4 +1,7 @@
-function [Lc, allInliers] = RANSAC_fit_fd(dist, force)
+function [Lc, allInliers] = RANSAC_fit_fd(dist, force, thresh)
+if nargin < 3
+    thresh = 22;
+end
 
 x = [dist; force];
 free = true(1,length(x));
@@ -12,7 +15,6 @@ start_ind = 0;
 
 
 %%%  We attempt to fit an FD curve to the different crests
-thresh = 22;
 for i = 1:maxnLc
     if ~any(free)
         nLc = i-1;

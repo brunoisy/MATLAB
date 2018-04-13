@@ -23,26 +23,15 @@ for n = 2:8
     for i = 1:length(clusterLcs(1,:))
         oktracenumbers = tracenumbers(Lcs_lengths == n);
         tracenumber = oktracenumbers(i);
-        %         if tracenumber == 1
+%                         if tracenumber == 12
         
         trace = strcat('data/MAT_clean/',directory,'/curve_',int2str(tracenumber),'.mat');
         thisLc = clusterLcs(:,i)';
         
-        totalDelta1 = 0;
-        updLc1 = thisLc;
-        for it = 1:5
-            delta =  exhaustive_align(templateLc,updLc1);
-            totalDelta1 = totalDelta1+delta;
-            load(trace)
-            dist = dist+totalDelta1;
-            %                 if it <= 5
-            %                     [updLc1,~,~,~,~] = LSQ_fit_fd(dist, force);
-            %                 else
-            %                     updLc1 = updLc1+delta;
-            %                 end
-            [updLc1,~,~,~,~] = LSQ_fit_fd(dist, force);
-        end
-        
+        [delta, npeaks] =  exhaustive_align(templateLc,thisLc,trace);
+        load(trace,'dist','force')
+        dist = dist+delta;
+        [updLc1,~,~,~,~] = LSQ_fit_fd(dist, force);
         
         
         figure('units','normalized','outerposition',[0 0 1 1]);
@@ -61,8 +50,8 @@ for n = 2:8
             templateh = plot(Xfit,Ffit,'Color','r');
         end
         
-        load(trace)
-        plot(dist+totalDelta1, force,'.','Color','b')
+        load(trace,'dist','force')
+        plot(dist+delta, force,'.','Color','b')
         for j=1:length(updLc1)
             Xfit = linspace(0,updLc1(j),1000);
             Ffit = fd(updLc1(j), Xfit);
@@ -71,9 +60,8 @@ for n = 2:8
         
         legend([templateh,Lch],'template FD profile','trace FD profile')
         
-        %
-        %             saveas(gcf, strcat('images/retro fitting/exhaustive/n_',int2str(n),'/curve_',int2str(tracenumber),'.jpg'));
-        %             close
-        %         end
+        saveas(gcf, strcat('images/retro fitting/exhaustive/n_',int2str(n),'/curve_',int2str(tracenumber),'.jpg'));
+        close
+%             end
     end
 end

@@ -1,8 +1,10 @@
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
-filename = 'data/MAT_clean/data_2/curve_16.mat';
-xlimits = [0, 140];
-ylimits = [-80, 0];
+filename = 'data/MAT_clean/data_4/curve_12.mat';%'data/MAT_clean/data_2/curve_16.mat';
+% xlimits = [0, 140];
+% ylimits = [-80, 0];
+xlimits = [-10, 150];
+ylimits = [-300, 50];
 
 load('constants.mat')
 load(filename)
@@ -12,7 +14,7 @@ load(filename)
 %%% First step : find local minimas of the FD profile.
 %%% These will help us estimate the position of the crest
 %%% The first estimations are the FD curves going through the minima
-mins   = find_min(dist, force);
+mins   = find_min(dist, force, 20);
 
 %%% We find the FD curves going through the minimas, parametrized by Lc,
 %%% and merge Lc's that are too close
@@ -35,7 +37,6 @@ ylabel('Force (pN)');
 plot(dist, force,'.')
 plot(mins(1,1:end), mins(2,1:end),'*')
 set(gca,'FontSize',22)
-
 
 subplot(1,4,2)
 hold on
@@ -77,7 +78,7 @@ Lc = lsqcurvefit(@(Lc,x) fd_multi([0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
 
 
 %%% Plot of the selected datapoints, and the estimated FD curves
-subplot(1,4,3)
+% subplot(1,4,3)
 hold on
 title('Selected Points')
 xlim(xlimits);
