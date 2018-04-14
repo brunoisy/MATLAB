@@ -22,6 +22,14 @@ for i = 1:length(Lc)
         Xunfold(i) = admissX(end);
         Xsel = [Xsel, X(Xfirst(i)<=X & X<Xunfold(i))];
         Fsel = [Fsel, F(Xfirst(i)<=X & X<Xunfold(i))];
+    else
+        if i==1
+            Xfirst(i)=0;
+            Xunfold(i)=0;
+        else
+            Xfirst(i) = Xunfold(i-1);
+            Xunfold(i) = Xunfold(i-1);
+        end
     end
 end
 end

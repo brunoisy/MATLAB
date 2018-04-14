@@ -43,7 +43,7 @@ for tracenumber =   tracenumbers
     
     
     %%% Plot the LSQ FD profile
-    [Lc, Xsel, Fsel, Xfirst, Xunfold] =  LSQ_fit_fd(dist, force, 2, false, 20, 10);%LSQ_fit_permissive(dist, force);%
+    [Lc, Xsel, Fsel, Xfirst, Xunfold] =  LSQ_fit_fd(dist, force, 2, false, 20, 10);%
     subplot(1,2,1)
     hold on
     title('FD profile - LSQ')
@@ -91,5 +91,6 @@ for tracenumber =   tracenumbers
     %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(tracenumber),'.fig'));
     %     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(tracenumber)),'epsc');
     saveas(gcf, strcat('images/FD fitting/',subdir,'curve_',int2str(tracenumber),'.jpg'));
+
     close
 end

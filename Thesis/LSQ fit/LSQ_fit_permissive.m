@@ -24,7 +24,6 @@ mins = find_min(dist, force, min_thresh);
 
 %%% We find the FD curves going through the minimas, parametrized by Lc,
 %%% and merge Lc's that are too close too each other
-Lc = find_Lc(mins, x0);
 Lc = merge_Lc(find_Lc(mins, x0),zeros(1,length(mins)), zeros(1,length(mins)), merge_thresh);
 
 
