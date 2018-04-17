@@ -12,19 +12,19 @@ tracenumbers = 1:100; %1:10%1:119;
 dir = strcat('data/MAT_clean/',subdir);
 
 
-for tracenumber =  1:5% tracenumbers
+for tracenumber =  tracenumbers
     trace = strcat(dir,'curve_',int2str(tracenumber),'.mat');
     load(trace)
+    dist = dist+deltas(tracenumber);
     
     
     %%% Plot the initial points
     figure('units','normalized','outerposition',[0 0 1 1]);
     colors = get(gca, 'colororder');
     
-    dist = dist+deltas(tracenumber);
     
     %%% Plot the LSQ FD profile
-    [Lc, Xsel, Fsel, Xfirst, Xunfold] =  LSQ_fit_permissive(dist, force, 3, 5, 8, 4);
+    [Lc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit_permissive(dist, force, 4, 4, 20, 10, 3);% LSQ_fit_permissive(dist, force, 4, 5, 10,10, 4);
     hold on
     title('FD profile - LSQ')
     set(gca,'FontSize',22)
@@ -43,8 +43,6 @@ for tracenumber =  1:5% tracenumbers
         plot(Xfit,Ffit,'Color',colors(mod(i,6)+2,:));
     end
     
-    
-%     saveas(gcf, strcat('images/LSQ permissive/curve_',int2str(tracenumber),'.jpg'));
-%     pause(1)
-%     close
+    saveas(gcf, strcat('images/LSQ permissive/curve_',int2str(tracenumber),'.jpg'));
+    close
 end

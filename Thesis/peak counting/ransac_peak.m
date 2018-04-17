@@ -108,9 +108,11 @@ feedback = true;
 maxTrials = 100;
 [~, npts] = size(x);
 
-bestPeak = NaN;  % Sentinel value allowing detection of solution failure.
 trialcount = 0;
-bestinliers = [];
+bestPeak = NaN;  % Sentinel value allowing detection of solution failure.
+bestInliers = [];
+maxInliers = 0;
+minError = Inf;
 
 % ind = randsample(npts,maxTrials);
 
@@ -127,14 +129,17 @@ for i=1:npts
                 break
             end
         end
+        error = var(x(inliers));
                 
         % Find the number of inliers to this model.
         ninliers = length(inliers);
         
-        if ninliers > mininliers && ninliers > length(bestinliers)
-            %will never iterate more than twice
-            bestinliers = inliers;
-            bestPeak = peak;
+%         if ninliers > mininliers && error < minError
+        if ninliers > maxInliers
+            maxInliers = ninliers;
+            bestInliers = inliers;
+            bestPeak = mean(x(inliers));
+            minError = error;
         end
         
         trialcount = trialcount+1;
@@ -149,7 +154,7 @@ if feedback, fprintf('\n'); end
 
 if ~isnan(bestPeak)   % We got a solution
     peak = bestPeak;
-    inliers = bestinliers;
+    inliers = bestInliers;
 else
     peak = [];
     inliers = [];

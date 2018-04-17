@@ -36,7 +36,13 @@ Lc = merge_Lc(find_Lc(mins, x0),zeros(1,length(mins)), zeros(1,length(mins)));
 
 for j = 1:k
     %%% We select all the points that we will try to fit
-    [Xsel, Fsel, Xfirst, Xunfold] = select_points(dist, force, x0, Lc, sel_thresh);
+    [Xfirst, Xunfold] = select_points(dist, force, x0, Lc, sel_thresh, sel_thresh);
+    Xsel = [];
+    Fsel = [];
+    for i = 1:length(Lc)
+        Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<Xunfold(i))];
+        Fsel = [Fsel, force(Xfirst(i)<=dist & dist<Xunfold(i))];
+    end
     
     if offset == true
         x0Lc = lsqcurvefit(@(x0Lc,x) fd_multi(x0Lc,x,Xunfold), [x0, Lc], Xsel,  Fsel);
@@ -46,5 +52,12 @@ for j = 1:k
         Lc = lsqcurvefit(@(Lc,x) fd_multi([x0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
     end
     [Lc, Xfirst, Xunfold] = merge_Lc(Lc,Xfirst,Xunfold);
+    
+    Xsel = [];
+    Fsel = [];
+    for i = 1:length(Lc)
+        Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<Xunfold(i))];
+        Fsel = [Fsel, force(Xfirst(i)<=dist & dist<Xunfold(i))];
+    end
 end
 end

@@ -26,6 +26,7 @@ for i = 1:nmin-1
     end
 end
 Lc = Lc(1:nmin);
+Xfirst = Xfirst(1:nmin);
 Xlast = Xlast(1:nmin);
 end
 
