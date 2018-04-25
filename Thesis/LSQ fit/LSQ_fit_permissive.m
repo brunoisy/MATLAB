@@ -1,19 +1,16 @@
 function [Lc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit_permissive(dist, force, k, min_thresh, sel_threshlo, sel_threshhi, merge_thresh, mininliers)
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
-if nargin <9
-    mininliers = 5;
-end
+if nargin < 8
+    mininliers = 5; end
 if nargin < 7
-    merge_thresh = 10;
-end
+    merge_thresh = 10; end
 if nargin < 6
     sel_threshhi = 10; end
 if nargin < 5
     sel_threshlo = 10; end
 if nargin < 4
     min_thresh = 12; end
-
 if nargin < 3
     k = 2; end
 
@@ -48,10 +45,10 @@ for j = 1:k
     Fsel = [];
     i = 1;
     while(i<=length(Lc))
-        ninliers = sum(Xfirst(i)<=dist & dist<Xunfold(i));
+        ninliers = sum(Xfirst(i)<=dist & dist<=Xunfold(i));
         if ninliers > mininliers
-            Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<Xunfold(i))];
-            Fsel = [Fsel, force(Xfirst(i)<=dist & dist<Xunfold(i))];
+            Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<=Xunfold(i))];
+            Fsel = [Fsel, force(Xfirst(i)<=dist & dist<=Xunfold(i))];
         else
             Lc(i:end-1) = Lc(i+1:end);
             Xunfold(i:end-1) = Xunfold(i+1:end);
@@ -69,8 +66,8 @@ for j = 1:k
         Xsel = [];
         Fsel = [];
         for i = 1:length(Lc)
-            Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<Xunfold(i))];
-            Fsel = [Fsel, force(Xfirst(i)<=dist & dist<Xunfold(i))];
+            Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<=Xunfold(i))];
+            Fsel = [Fsel, force(Xfirst(i)<=dist & dist<=Xunfold(i))];
         end
     else
         Lc = [];

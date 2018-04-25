@@ -17,51 +17,50 @@ updLcs = cell(1,length(Lcs_lengths));
 deltas = zeros(1,length(Lcs_lengths));
 allLcs = [];
 
-for n = 2:8
-    n
-    clusterLcs = cell2mat(Lcs(Lcs_lengths == n)')';
-    for i = 1:length(clusterLcs(1,:))
-        i
-        oktracenumbers = tracenumbers(Lcs_lengths == n);
-        tracenumber = oktracenumbers(i);
-        
-        
-        trace = strcat('data/MAT_clean/',directory,'/curve_',int2str(tracenumber),'.mat');
-        thisLc = clusterLcs(:,i)';
-        
-        [delta, npeaks] =  exhaustive_align(templateLc,thisLc,trace);% if npeaks==1??
-        load(trace,'dist','force')
-        dist = dist+delta;
-        [updLc,~,~,~,~] = LSQ_fit_permissive(dist, force, 4, 4, 20, 10, 3);%LSQ_fit_permissive(dist, force, 2, 5, 8, 4);
-        updLcs{tracenumber} = updLc;
-        deltas(tracenumber) = delta;
-        if ismember(tracenumber, [1:17,19:25,27:43,45:52,54:94,96:100])
-            allLcs = [allLcs, updLc];
-        end
+for tracenumber = tracenumbers
+    trace = strcat('data/MAT_clean/',directory,'/curve_',int2str(tracenumber),'.mat');
+    thisLc = Lcs(:,i)';
+    
+    [delta, npeaks] =  exhaustive_align(templateLc,thisLc,trace);% if npeaks==1??
+    load(trace,'dist','force')
+    dist = dist+delta;
+    [updLc,~,~,~,~] = LSQ_fit_permissive(dist, force, 4, 4, 20, 10, 3);%LSQ_fit_permissive(dist, force, 2, 5, 8, 4);
+    updLcs{tracenumber} = updLc;
+    deltas(tracenumber) = delta;
+    if ismember(tracenumber, [1:17,19:25,27:43,45:52,54:94,96:100])
+        allLcs = [allLcs, updLc];
     end
 end
 allLcs = sort(allLcs);
 save('finalLcs.mat','updLcs','deltas','allLcs')
 
 %%
-allLcs = allLcs(allLcs<160);    
-ninliers = 30;
-N = length(allLcs)-ninliers+1;
-meanLc = zeros(1,N);
-varLc = zeros(1,N);
-for i = 1:N
-    inliers = i:i+ninliers-1;
-    meanLc(i) = mean(allLcs(inliers));
-    varLc(i) = var(allLcs(inliers));
+figure
+hold on
+ninlierss = [20, 30, 40, 50];
+for j = 1:4
+    subplot(2,2,j)
+    allLcs = allLcs(allLcs<160);
+    ninliers = ninlierss(j);
+    N = length(allLcs)-ninliers+1;
+    meanLc = zeros(1,N);
+    varLc = zeros(1,N);
+    for i = 1:N
+        inliers = i:i+ninliers-1;
+        meanLc(i) = mean(allLcs(inliers));
+        varLc(i) = var(allLcs(inliers));
+    end
+    plot(meanLc, varLc)
+    title(strcat("number of inliers : ", int2str(ninliers)));
+    xlabel('cluster template')
+    ylabel('cluster variance')
+    
 end
-plot(meanLc, varLc)
-%%
-
 
 %%
 thresh = 2;
 mininliers = 35;
-npeaks = 7;
+npeaks = 5;
 
 remaining = true(1,length(allLcs));
 main_peaks = zeros(1, npeaks);
@@ -71,6 +70,7 @@ for i = 1:npeaks
     main_peaks(i) = peak;
     remaining(inliers) = false;
 end
+%Lc = 32.9618 53.0813 90.8425 116.5252 139.0635
 main_peaks = sort(main_peaks)
 
 %%
@@ -79,18 +79,24 @@ ylimits = [-300, 50];
 for tracenumber = tracenumbers
     Lc = updLcs{tracenumber};
     filteredLc = [];
-    for Lci = Lc
-        for Lcj = main_peaks
-            if abs(Lci-Lcj)<thresh
-                filteredLc = [filteredLc, Lcj];%Lcj?
-            end
+    
+    for Lcj = main_peaks
+        if min(abs(Lc-Lcj)) < thresh
+            filteredLc = [filteredLc, Lcj];
         end
     end
+    %     for Lci = Lc
+    %         if min(abs(Lc-main_peaks
+    %         for Lcj = main_peaks
+    %             if abs(Lci-Lcj) < thresh
+    %                 filteredLc = [filteredLc, Lcj];%Lcj?
+    %             end
+    %         end
+    %     end
     
     figure('units','normalized','outerposition',[0 0 1 1]);
     colors = get(gca, 'colororder');
     hold on
-    %     title('plop')
     set(gca,'FontSize',22)
     xlim(xlimits);
     ylim(ylimits);
@@ -107,6 +113,5 @@ for tracenumber = tracenumbers
         plot(Xfit,Ffit,'Color','r');
     end
     saveas(gcf, strcat('images/peak counting/curve_',int2str(tracenumber),'.jpg'));
-    %     pause(1)
     close
 end

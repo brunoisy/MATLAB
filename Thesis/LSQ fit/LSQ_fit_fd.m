@@ -40,8 +40,8 @@ for j = 1:k
     Xsel = [];
     Fsel = [];
     for i = 1:length(Lc)
-        Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<Xunfold(i))];
-        Fsel = [Fsel, force(Xfirst(i)<=dist & dist<Xunfold(i))];
+        Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<=Xunfold(i))];
+        Fsel = [Fsel, force(Xfirst(i)<=dist & dist<=Xunfold(i))];
     end
     
     if offset == true
@@ -56,8 +56,8 @@ for j = 1:k
     Xsel = [];
     Fsel = [];
     for i = 1:length(Lc)
-        Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<Xunfold(i))];
-        Fsel = [Fsel, force(Xfirst(i)<=dist & dist<Xunfold(i))];
+        Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<=Xunfold(i))];
+        Fsel = [Fsel, force(Xfirst(i)<=dist & dist<=Xunfold(i))];
     end
 end
 end

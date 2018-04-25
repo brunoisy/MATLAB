@@ -59,24 +59,16 @@ for tracenumber = [1:17,19:25,27:43,45:52,54:94,96:100]
     for i=1:length(templateLc)
         [minDiff, j] = min(abs(Lc-templateLc(i)));
         if minDiff < thresh
-            peakForces{i} = [peakForces{i}, Fmins(j)];
             peakDistances{i} = [peakDistances{i}, Xmins(j)];
+            peakForces{i} = [peakForces{i}, Fmins(j)];
         end
     end
 end
-
 meanPeakForce = zeros(1,5);
-stdPeakForce = zeros(1,5);
 meanPeakDistance = zeros(1,5);
 for i=1:5
-    meanPeakForce(i)= mean(peakForces{i});
-    stdPeakForce(i) = std(peakForces{i});
-    meanPeakDistance(i) = mean(peakDistances{i});
+    
 end
-meanPeakForce
-stdPeakForce
-meanPeakDistance
-meanPeakDistance./templateLc
 
 
 
