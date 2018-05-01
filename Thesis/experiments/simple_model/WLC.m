@@ -4,8 +4,8 @@ load('constants.mat')
 
 
 Lc = [33, 50, 92, 130, 164]; % Example of possible model parameters
-Xunfold = 32;%[28, 40, 77, 105, 133];%0.85*Lcs;
-nCrest = 1;%length(Lc);
+Xunfold = [28, 40, 77, 105, 133];%0.85*Lcs;
+nCrest = length(Lc);
 
 maxDist = 180;
 n = 1024;

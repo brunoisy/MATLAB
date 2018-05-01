@@ -1,13 +1,11 @@
-function [Lc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit_fd(dist, force, k, offset, interval_length, sel_thresh, min_inliers)
+function [Lc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit_fd(dist, force, k, offset, min_thresh, sel_thresh)
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
 
-if nargin < 7
-    min_inliers = 5; end
 if nargin < 6
     sel_thresh = 10; end
 if nargin < 5
-    interval_length = 10; end
+    min_thresh = 20; end
 if nargin < 4
     offset = false; end
 if nargin < 3
@@ -21,12 +19,12 @@ x0 = 0;
 %%% First step : find local minimas of the FD profile.
 %%% These will help us estimate the position of the crest
 %%% The first estimations are the FD curves going through the minima
-mins = find_min(dist, force, interval_length);
+mins = find_min(dist, force, min_thresh);
 
 %%% We find the FD curves going through the minimas, parametrized by Lc,
 %%% and merge Lc's that are too close too each other
-Lc = find_Lc(mins, x0);
-% Lc = merge_Lc(find_Lc(mins, x0),zeros(1,length(mins)), zeros(1,length(mins)));
+% Lc = find_Lc(mins, x0);
+Lc = merge_Lc(find_Lc(mins, x0),zeros(1,length(mins)), zeros(1,length(mins)));
 
 
 
@@ -42,21 +40,9 @@ for j = 1:k
     [Xfirst, Xunfold] = select_points(dist, force, x0, Lc, sel_thresh, sel_thresh);
     Xsel = [];
     Fsel = [];
-      i = 1;
-    while(i<=length(Lc))
-        ninliers = sum(Xfirst(i)<=dist & dist<=Xunfold(i));
-        if ninliers > min_inliers
-            Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<=Xunfold(i))];
-            Fsel = [Fsel, force(Xfirst(i)<=dist & dist<=Xunfold(i))];
-        else
-            Lc(i:end-1) = Lc(i+1:end);
-            Xunfold(i:end-1) = Xunfold(i+1:end);
-            Xfirst(i:end-1) = Xfirst(i+1:end);
-            Lc = Lc(1:end-1);
-            Xunfold = Xunfold(1:end-1);
-            Xfirst = Xfirst(1:end-1);
-        end
-        i=i+1;
+    for i = 1:length(Lc)
+        Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<=Xunfold(i))];
+        Fsel = [Fsel, force(Xfirst(i)<=dist & dist<=Xunfold(i))];
     end
     
     if offset == true
@@ -66,7 +52,7 @@ for j = 1:k
     else
         Lc = lsqcurvefit(@(Lc,x) fd_multi([x0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
     end
-        [Lc, Xfirst, Xunfold] = merge_Lc(Lc,Xfirst,Xunfold);
+    [Lc, Xfirst, Xunfold] = merge_Lc(Lc,Xfirst,Xunfold);
     
     Xsel = [];
     Fsel = [];

@@ -105,7 +105,6 @@
 
 function [peak, inliers] = ransac_peak(x, remaining, thresh, mininliers)
 feedback = true;
-maxTrials = 100;
 [~, npts] = size(x);
 
 trialcount = 0;
@@ -134,9 +133,9 @@ for i=1:npts
         % Find the number of inliers to this model.
         ninliers = length(inliers);
         
-%         if ninliers > mininliers && error < minError
-        if ninliers > maxInliers
-            maxInliers = ninliers;
+        if ninliers > mininliers && error < minError
+%         if ninliers > maxInliers
+%             maxInliers = ninliers;
             bestInliers = inliers;
             bestPeak = mean(x(inliers));
             minError = error;

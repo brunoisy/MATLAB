@@ -1,10 +1,10 @@
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
-filename = 'data/MAT_clean/data_4/curve_12.mat';%'data/MAT_clean/data_2/curve_16.mat';
+filename = 'data/MAT_clean/data_4/curve_11.mat';%4?
 % xlimits = [0, 140];
 % ylimits = [-80, 0];
 xlimits = [-10, 150];
-ylimits = [-300, 50];
+ylimits = [-200, 50];
 
 load('constants.mat')
 load(filename)
@@ -18,14 +18,17 @@ mins   = find_min(dist, force, 20);
 
 %%% We find the FD curves going through the minimas, parametrized by Lc,
 %%% and merge Lc's that are too close
-Lc = merge_Lc(find_Lc(mins, 0));
+Lc = merge_Lc(find_Lc(mins, 0),zeros(1,length(mins)), zeros(1,length(mins)));
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Plot
-figure
-subplot(1,4,1)
+figure('units','normalized','outerposition',[0 0 1 1]);
+colors = get(gca, 'colororder');
+colors = colors([1,2,4,5,6,7],:);%don't like yellow...
+
+% subplot(2,2,1)
 
 hold on
 title('Minima Selection','FontSize',16)
@@ -33,30 +36,32 @@ xlim(xlimits);
 ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
+plot(dist, force,'.','markers',12)
+plot(mins(1,1:end), mins(2,1:end),'.','markers',30);
+set(gca,'FontSize',24)
 
-plot(dist, force,'.')
-plot(mins(1,1:end), mins(2,1:end),'*')
-set(gca,'FontSize',22)
+%%
+% figure('units','normalized','outerposition',[0 0 1 1]);
+subplot(2,2,2)
 
-subplot(1,4,2)
 hold on
-title('FD profile fit to minima')
+title('WLC profile fit to minima')
 xlim(xlimits);
 ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
 set(gca,'FontSize',14)
 
-plot(dist, force,'.')
-plot(mins(1,1:end), mins(2,1:end),'*')
+plot(dist, force,'.','markers',12)
+plot(mins(1,1:end), mins(2,1:end),'.','markers',30);
 
 %%% Plot of the estimated FD curves
 for i = 1:length(Lc)
     Xfit = linspace(0,Lc(i),1000);
     Ffit = fd(Lc(i), Xfit);
-    plot(Xfit, Ffit);
+    plot(Xfit, Ffit,'Color',colors(mod(i,6)+1,:));
 end
-set(gca,'FontSize',22)
+set(gca,'FontSize',24)
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -69,8 +74,13 @@ thresh = 10;% selection threshold
 
 
 %%% We select all the points that we will try to fit
-[Xsel, Fsel, Xfirst, Xunfold] = select_points(dist, force, 0, Lc, thresh);
-
+[Xfirst, Xunfold] = select_points(dist, force, 0, Lc, thresh, thresh);
+Xsel = [];
+Fsel = [];
+for i = 1:length(Lc)
+    Xsel = [Xsel, dist(Xfirst(i)<=dist & dist<=Xunfold(i))];
+    Fsel = [Fsel, force(Xfirst(i)<=dist & dist<=Xunfold(i))];
+end
 
 
 Lc = lsqcurvefit(@(Lc,x) fd_multi([0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
@@ -78,32 +88,34 @@ Lc = lsqcurvefit(@(Lc,x) fd_multi([0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
 
 
 %%% Plot of the selected datapoints, and the estimated FD curves
-% subplot(1,4,3)
+% figure('units','normalized','outerposition',[0 0 1 1]);
+subplot(2,2,3)
+
 hold on
 title('Selected Points')
 xlim(xlimits);
 ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
-set(gca,'FontSize',22)
+set(gca,'FontSize',24)
 
-colors = get(gca, 'colororder');
 for i=1:length(Lc)
     X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
     Y = Fsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
-   
-    plot(X,Y,'.','Color',colors(i+2,:))
+    
+    plot(X,Y,'.','Color',colors(mod(i,6)+1,:),'markers',12)
 end
 
+% figure('units','normalized','outerposition',[0 0 1 1]);
+subplot(2,2,4)
 
-subplot(1,4,4)
 hold on
-title('FD profile fit to min LSQ')
+title('WLC profile fit to min LSQ')
 xlim(xlimits);
 ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
-set(gca,'FontSize',22)
+set(gca,'FontSize',24)
 
 
 for i=1:length(Lc)
@@ -112,6 +124,6 @@ for i=1:length(Lc)
     Xfit = linspace(0,Lc(i),1000);
     Ffit = fd(Lc(i), Xfit);
     
-    plot(X,Y,'.','Color',colors(i+2,:))
-    plot(Xfit,  Ffit,'Color',colors(i+2,:))
+    plot(X,Y,'.','Color',colors(mod(i,6)+1,:),'markers',12)
+    plot(Xfit,  Ffit,'Color',colors(mod(i,6)+1,:))
 end

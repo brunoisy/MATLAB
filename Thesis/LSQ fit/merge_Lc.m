@@ -3,7 +3,7 @@ function [Lc, Xfirst, Xlast] = merge_Lc(Lc,Xfirst, Xlast, merge_thresh)
 %   Detailed explanation goes here
 
 if nargin < 4
-    merge_thresh=10;
+    merge_thresh = 10;
 end
 nmin = length(Lc);
 % if(nargin == 2)
