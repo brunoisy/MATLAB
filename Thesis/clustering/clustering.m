@@ -3,24 +3,24 @@ addpath('RANSAC fit')
 rng(3)
 
 xlimits = [0, 150];
-ylimits = [-300, 50];
+ylimits = [-200, 50];
 
 directory = 'data_4';
 load(strcat('data/FD profiles/',directory,'.mat'),'Lcs','Lcs_lengths')
 tracenumbers = 1:length(Lcs_lengths);
 % histogram(Lcs_lengths)
-% xlabel('length(L_c)')
-% ylabel('# of FD profiles')
-% set(gca,'FontSize',22)
+% xlabel('length(P_{L_c})')
+% ylabel('# of WLC profiles')
+% set(gca,'FontSize',24)
 
-
+%%
 %%% clustering with RANSAC
 % meanLcs = cell(1,4);
-targetInlierRatio = [.20, .20, .05, .20];%[.50, .40, .60, .40; 0.10, .10, .10, .10];
-figure
+targetInlierRatio = [1,1,1,1];%[.20, .20, .05, .20];%[.50, .40, .60, .40; 0.10, .10, .10, .10];
+    figure('units','normalized','outerposition',[0 0 1 1]);
 hold on
 colors = get(gca, 'colororder');
-for n = 5%3:6%5
+for n = 3:6%5%3:6%5
     for subcluster = 1%1:2 % number of subclusters to find
         if subcluster==1
             clusterLcs = cell2mat(Lcs(Lcs_lengths == n)')';
@@ -35,8 +35,8 @@ for n = 5%3:6%5
         %         subplot(1,2,subcluster)
         subplot(2,2,n-2)
         hold on
-        set(gca,'FontSize',22)
-        title(strcat('clustered FD profile for n = ',int2str(n)))
+        set(gca,'FontSize',24)
+        title(strcat('k=',int2str(n)))
         
         xlim(xlimits);
         ylim(ylimits);
@@ -45,7 +45,7 @@ for n = 5%3:6%5
         for i=1:length(templateLc)
             Xfit = linspace(0,templateLc(i),1000);
             Ffit = fd(templateLc(i), Xfit);
-            plot(Xfit,Ffit,'Color',colors(mod(i,7)+1,:));
+            h = plot(Xfit,Ffit,'Color',colors(7,:),'LineWidth',3);
         end
         
         oktracenumbers = tracenumbers(Lcs_lengths == n);% select all traces with the right Lc length
@@ -57,13 +57,13 @@ for n = 5%3:6%5
             tracenumber = oktracenumbers(inliers(i));
             trace = strcat('data/MAT_clean/',directory,'/curve_',int2str(tracenumber),'.mat');
             load(trace)
-            plot(dist+deltas(i), force,'.')
+            plot(dist+deltas(i), force,'.','markers',7)
         end
-        
-        inlierRatio = length(inliers)/length(clusterLcs);
-        text(100,0,strcat('inlier ratio :', num2str(inlierRatio)));
-        templateLcs{n-2} = templateLc;
-        templateLc
+        legend([h], {'WLC profile'})
+%         inlierRatio = length(inliers)/length(clusterLcs);
+%         text(100,0,strcat('inlier ratio :', num2str(inlierRatio)));
+%         templateLcs{n-2} = templateLc;
+%         templateLc
     end
 end
 

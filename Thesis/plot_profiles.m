@@ -54,15 +54,15 @@ for tracenumber =  1:100%3%:5%tracenumbers
     xlabel('Distance (nm)');
     ylabel('Force (pN)');
     plot(dist,force,'.')
-%     for i=1:length(Lc)
-%         X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
-%         F =  Fsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
-%         plot(X,F,'.','Color',colors(mod(i,7)+1,:));
-%         
-%         Xfit = linspace(0,Lc(i),1000);
-%         Ffit = fd(Lc(i), Xfit);
-%         plot(Xfit,Ffit,'Color',colors(mod(i,7)+1,:));
-%     end
+    for i=1:length(Lc)
+        X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
+        F =  Fsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
+        plot(X,F,'.','Color',colors(mod(i,7)+1,:));
+        
+        Xfit = linspace(0,Lc(i),1000);
+        Ffit = fd(Lc(i), Xfit);
+        plot(Xfit,Ffit,'Color',colors(mod(i,7)+1,:));
+    end
     
     
     

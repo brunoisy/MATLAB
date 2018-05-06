@@ -1,6 +1,6 @@
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
-filename = 'data/MAT_clean/data_4/curve_11.mat';%4?
+filename = 'data/MAT_clean/data_4/curve_11.mat';%6 instead?
 % xlimits = [0, 140];
 % ylimits = [-80, 0];
 xlimits = [-10, 150];
@@ -41,8 +41,8 @@ plot(mins(1,1:end), mins(2,1:end),'.','markers',30);
 set(gca,'FontSize',24)
 
 %%
-% figure('units','normalized','outerposition',[0 0 1 1]);
-subplot(2,2,2)
+figure('units','normalized','outerposition',[0 0 1 1]);
+% subplot(2,2,2)
 
 hold on
 title('WLC profile fit to minima')
@@ -59,7 +59,7 @@ plot(mins(1,1:end), mins(2,1:end),'.','markers',30);
 for i = 1:length(Lc)
     Xfit = linspace(0,Lc(i),1000);
     Ffit = fd(Lc(i), Xfit);
-    plot(Xfit, Ffit,'Color',colors(mod(i,6)+1,:));
+    plot(Xfit, Ffit,'Color',colors(mod(i,6)+1,:),'LineWidth',3);
 end
 set(gca,'FontSize',24)
 
@@ -88,8 +88,8 @@ Lc = lsqcurvefit(@(Lc,x) fd_multi([0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
 
 
 %%% Plot of the selected datapoints, and the estimated FD curves
-% figure('units','normalized','outerposition',[0 0 1 1]);
-subplot(2,2,3)
+figure('units','normalized','outerposition',[0 0 1 1]);
+% subplot(2,2,3)
 
 hold on
 title('Selected Points')
@@ -106,8 +106,8 @@ for i=1:length(Lc)
     plot(X,Y,'.','Color',colors(mod(i,6)+1,:),'markers',12)
 end
 
-% figure('units','normalized','outerposition',[0 0 1 1]);
-subplot(2,2,4)
+figure('units','normalized','outerposition',[0 0 1 1]);
+% subplot(2,2,4)
 
 hold on
 title('WLC profile fit to min LSQ')
@@ -125,5 +125,5 @@ for i=1:length(Lc)
     Ffit = fd(Lc(i), Xfit);
     
     plot(X,Y,'.','Color',colors(mod(i,6)+1,:),'markers',12)
-    plot(Xfit,  Ffit,'Color',colors(mod(i,6)+1,:))
+    plot(Xfit,  Ffit,'Color',colors(mod(i,6)+1,:),'LineWidth',3)
 end
