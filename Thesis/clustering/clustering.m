@@ -7,17 +7,17 @@ ylimits = [-200, 50];
 
 directory = 'data_4';
 load(strcat('data/FD profiles/',directory,'.mat'),'Lcs','Lcs_lengths')
-tracenumbers = 1:length(Lcs_lengths);
-% histogram(Lcs_lengths)
-% xlabel('length(P_{L_c})')
-% ylabel('# of WLC profiles')
-% set(gca,'FontSize',24)
+tracenumbers = 1:length(Lcs_lengths);%[1:43,45:52,54:100];
+histogram(Lcs_lengths)
+xlabel('length(P_{L_c})')
+ylabel('# of WLC profiles')
+set(gca,'FontSize',24)
 
 %%
 %%% clustering with RANSAC
 % meanLcs = cell(1,4);
-targetInlierRatio = [1,1,1,1];%[.20, .20, .05, .20];%[.50, .40, .60, .40; 0.10, .10, .10, .10];
-    figure('units','normalized','outerposition',[0 0 1 1]);
+targetInlierRatio = [0.5,0.40,.60,.40];%[.20, .20, .05, .20];%
+figure('units','normalized','outerposition',[0 0 1 1]);
 hold on
 colors = get(gca, 'colororder');
 for n = 3:6%5%3:6%5
@@ -29,14 +29,14 @@ for n = 3:6%5%3:6%5
             outliers(inliers) = false;
             clusterLcs = clusterLcs(:,outliers); % potential inliers to this cluster must be outliers of previous cluster
         end
-        
+        %         [templateLc, inliers, deltas, MSE] = ransac_clustering_old(clusterLcs,@fittingfn_clustering,@distfn_clustering, 50, 0.1);
         [templateLc, inliers, deltas, MSE] = ransac_clustering(clusterLcs,@fittingfn_clustering,targetInlierRatio(subcluster,n-2));
         %%% Plotting
         %         subplot(1,2,subcluster)
         subplot(2,2,n-2)
         hold on
         set(gca,'FontSize',24)
-        title(strcat('k=',int2str(n)))
+        title(['k = ',num2str(n)])
         
         xlim(xlimits);
         ylim(ylimits);
@@ -45,7 +45,7 @@ for n = 3:6%5%3:6%5
         for i=1:length(templateLc)
             Xfit = linspace(0,templateLc(i),1000);
             Ffit = fd(templateLc(i), Xfit);
-            h = plot(Xfit,Ffit,'Color',colors(7,:),'LineWidth',3);
+            h = plot(Xfit,Ffit,'Color',colors(7,:),'LineWidth',2);
         end
         
         oktracenumbers = tracenumbers(Lcs_lengths == n);% select all traces with the right Lc length
@@ -59,11 +59,11 @@ for n = 3:6%5%3:6%5
             load(trace)
             plot(dist+deltas(i), force,'.','markers',7)
         end
-        legend([h], {'WLC profile'})
-%         inlierRatio = length(inliers)/length(clusterLcs);
-%         text(100,0,strcat('inlier ratio :', num2str(inlierRatio)));
-%         templateLcs{n-2} = templateLc;
-%         templateLc
+%                 legend([h], {'WLC profile'})
+        t = text(70,25,['inl. : ',num2str(length(inliers)), '/', num2str(length(clusterLcs)), ' = ', num2str(round(length(inliers)/length(clusterLcs)*100)), '%']);%num2str(inlierRatio)));
+        t.FontSize = 24; 
+        %         templateLcs{n-2} = templateLc;
+        %         templateLc
     end
 end
 
@@ -80,14 +80,14 @@ end
 % set(gca,'YTickLabel',{'n=6','n=5','n=4','n=3'} );
 % set(gca,'FontSize',22)
 % title('mean cluster FD profiles')
-% 
+%
 % subplot(1,2,2)
 % hold on
 % meanLc6 = templateLcs{4};
 % colors = get(gca, 'colororder');
 % plot(repmat(templateLc',2,1), [ones(1,length(templateLc));2*ones(1,length(templateLc))],'Color',colors(4,:))
-% 
-% 
+%
+%
 % for n=3:5
 %     templateLc = templateLcs{n-2};
 %     delta = mean(meanLc6(2:1+n)-templateLc)%     meanLc6([2:3,5:2+n])

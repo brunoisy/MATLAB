@@ -17,13 +17,13 @@ for n = 3:6
     %%% Plotting
     subplot(2,2,n-2)
     hold on
-    set(gca,'FontSize',22)
-    title(strcat('distribution of shifts for n = ',int2str(n)))
+    set(gca,'FontSize',24)
+    title(['k = ',int2str(n)])
     for delta = deltas
-        plot([delta,delta],0:1, 'Color', colors(1,:))
+        plot([delta,delta],0:1, 'Color', colors(1,:),'LineWidth',2)
     end
     xlim([-25,30])
     ylim([0,1])
-    xlabel('shift(nm)');
+    xlabel('offset (nm)');
     set(gca,'ytick',[])
 end

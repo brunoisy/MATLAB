@@ -1,7 +1,9 @@
 function [Lc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit_permissive(dist, force, k, interval_length, sel_threshlo, sel_threshhi, merge_thresh, mininliers)
 % k is the number of lsq+selection steps to apply
-if nargin < 7
+if nargin < 8
     mininliers = 5; end
+if nargin < merge_thresh
+    merge_thresh = 10; end
 if nargin < 6
     sel_threshhi = 10; end
 if nargin < 5
@@ -23,7 +25,7 @@ mins = find_min(dist, force, interval_length);
 
 %%% We find the FD curves going through the minimas, parametrized by Lc,
 %%% and merge Lc's that are too close too each other
-Lc = find_Lc(mins, x0),zeros(1,length(mins));
+Lc = find_Lc(mins, x0);
 
 
 

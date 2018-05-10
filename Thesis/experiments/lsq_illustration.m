@@ -1,6 +1,6 @@
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
-filename = 'data/MAT_clean/data_4/curve_11.mat';%6 instead?
+filename = 'data/MAT_clean/data_4/curve_6.mat';%6 instead? 11
 % xlimits = [0, 140];
 % ylimits = [-80, 0];
 xlimits = [-10, 150];
@@ -59,7 +59,7 @@ plot(mins(1,1:end), mins(2,1:end),'.','markers',30);
 for i = 1:length(Lc)
     Xfit = linspace(0,Lc(i),1000);
     Ffit = fd(Lc(i), Xfit);
-    plot(Xfit, Ffit,'Color',colors(mod(i,6)+1,:),'LineWidth',3);
+    plot(Xfit, Ffit,'Color',colors(mod(i,6)+1,:),'LineWidth',2);
 end
 set(gca,'FontSize',24)
 
@@ -125,5 +125,5 @@ for i=1:length(Lc)
     Ffit = fd(Lc(i), Xfit);
     
     plot(X,Y,'.','Color',colors(mod(i,6)+1,:),'markers',12)
-    plot(Xfit,  Ffit,'Color',colors(mod(i,6)+1,:),'LineWidth',3)
+    plot(Xfit,  Ffit,'Color',colors(mod(i,6)+1,:),'LineWidth',2)
 end

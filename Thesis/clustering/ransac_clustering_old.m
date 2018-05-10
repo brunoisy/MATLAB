@@ -105,7 +105,7 @@
 
 
 
-function [meanLc, inliers, deltas, MSE] = ransac_clustering(Lcs, fittingfn, distfn, thresh, prop_inliers, feedback)
+function [meanLc, inliers, deltas, MSE] = ransac_clustering_old(Lcs, fittingfn, distfn, thresh, prop_inliers, feedback)
 
 
 if nargin < 6; feedback = true;        end;
@@ -123,7 +123,7 @@ for ind = 1:npts
     
     inliers = feval(distfn, meanLc, Lcs, thresh);
     meanLc = feval(fittingfn, Lcs(:,inliers));
-    [~, MSE,~] = allign(meanLc, Lcs(:,inliers));
+    [~, MSE,~] = align(meanLc, Lcs(:,inliers));
     ninliers = length(inliers);
 
     if ninliers > mininliers && MSE < bestMSE
@@ -142,7 +142,7 @@ if feedback, fprintf('\n'); end
 if bestMSE ~= 0   % We got a solution
     inliers = bestinliers;
     meanLc = feval(fittingfn, Lcs(:,inliers));
-    [deltas, MSE,~] = allign(meanLc, Lcs(:,inliers));
+    [deltas, MSE,~] = align(meanLc, Lcs(:,inliers));
 else
     inliers = [];
     meanLc = 0;

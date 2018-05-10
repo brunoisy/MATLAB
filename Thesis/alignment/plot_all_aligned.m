@@ -2,7 +2,7 @@ addpath('LSQ fit')
 
 % % default limits
 xlimits = [-10, 150];
-ylimits = [-300, 50];%[-250, 50];
+ylimits = [-200, 50];%[-250, 50];
 
 
 subdir = 'data_4/';
@@ -13,8 +13,8 @@ dir = strcat('data/MAT_clean/',subdir);
 
 figure('units','normalized','outerposition',[0 0 1 1]);
 hold on
-title('all aligned traces')
-set(gca,'FontSize',22)
+title('aligned FD curves')
+set(gca,'FontSize',24)
 
 xlim(xlimits);
 ylim(ylimits);

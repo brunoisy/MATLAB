@@ -23,9 +23,9 @@ for n=3:6
     end
     subplot(2,2,n-2)
     hold on
-    set(gca,'FontSize',22)
-    title(strcat('variance evolution for n = ',int2str(n)))
-    plot(inlier_ratios,variance);
+    set(gca,'FontSize',24)
+    title(['k = ',int2str(n)])
+    plot(inlier_ratios,variance,'LineWidth',2);
     xlabel('inlier ratio');
     ylabel('variance of inliers');
     ylim([0,300]);

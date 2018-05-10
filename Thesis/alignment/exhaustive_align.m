@@ -11,7 +11,7 @@ bestDelta = 0;
 for bigDelta = round(6-Lc(1)):2:50
     load(trace,'dist','force')
     dist = dist+bigDelta;
-    [upLc,~,~,~,~] = LSQ_fit_fd(dist, force); % could be computed once and for all!
+    [upLc,~,~,~,~] = LSQ_fit(dist, force, 4, 10, 10, 10, 10, 5);% could be computed once and for all!
     for smallDelta = -1:0.1:1
         shiftedLc = upLc+smallDelta;
         peaks = zeros(1, length(templateLc));
