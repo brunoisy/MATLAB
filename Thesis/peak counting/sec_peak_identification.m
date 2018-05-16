@@ -7,10 +7,10 @@ hasPeak1 = [];
 hasPeak2 = [];
 
 for tracenumber = [1:17,19:25,27:43,45:48,50:52,54:94,96:100]%tracenumbers
-    if min(abs(updLcs{tracenumber}-peak1)) < thresh1
+    if min(abs(permLcs{tracenumber}-peak1)) < thresh1
         hasPeak1 = [hasPeak1, tracenumber];
     end
-    if min(abs(updLcs{tracenumber}-peak2)) < thresh2
+    if min(abs(permLcs{tracenumber}-peak2)) < thresh2
         hasPeak2 = [hasPeak2, tracenumber];
     end
 end
@@ -22,9 +22,10 @@ hold on
 title('secondary peak at L_c = 77 nm')
 set(gca,'FontSize',24)
 xlim(xlimits);
-    ylim(ylimits);
+ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
+
 for tracenumber = hasPeak1
     trace = strcat('data/MAT_clean/data_4/curve_',int2str(tracenumber),'.mat');
     load(trace,'dist','force')

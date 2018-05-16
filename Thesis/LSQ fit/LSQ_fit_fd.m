@@ -1,7 +1,9 @@
-function [Lc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit_fd(dist, force, k, offset, interval_length, sel_thresh, min_inliers)
+function [Lc, Xsel, Fsel, Xfirst, Xunfold, x0] = LSQ_fit_fd(dist, force, k, offset, interval_length, sel_thresh, min_inliers, x0)
 % k is the number of lsq+selection steps to apply
 % if offset==true, we apply lsq offset optimization
 
+if nargin < 8
+    x0 = 0; end
 if nargin < 7
     min_inliers = 5; end
 if nargin < 6
@@ -13,7 +15,6 @@ if nargin < 4
 if nargin < 3
     k = 2; end
 
-x0 = 0;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,4 +76,5 @@ for j = 1:k
         Fsel = [Fsel, force(Xfirst(i)<=dist & dist<=Xunfold(i))];
     end
 end
+x0 = -x0; % change of convention...
 end
