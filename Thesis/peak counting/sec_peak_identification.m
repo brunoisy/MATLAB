@@ -1,7 +1,7 @@
-peak1 = 77;
-peak2 = 108;
-thresh1 = 3;
-thresh2 = 3;
+peak1 = 78;
+peak2 = 107;
+thresh1 = 2;
+thresh2 = 2;
 
 hasPeak1 = [];
 hasPeak2 = [];
@@ -19,7 +19,9 @@ xlimits = [-10, 150];
 ylimits = [-200, 50];
 figure
 hold on
-title('secondary peak at L_c = 77 nm')
+colors = get(gca, 'colororder');
+
+title('L_c = 78 nm')
 set(gca,'FontSize',24)
 xlim(xlimits);
 ylim(ylimits);
@@ -29,12 +31,39 @@ ylabel('Force (pN)');
 for tracenumber = hasPeak1
     trace = strcat('data/MAT_clean/data_4/curve_',int2str(tracenumber),'.mat');
     load(trace,'dist','force')
-    plot(dist+deltas(tracenumber), force,'.','markers',4);
+        plot(dist+deltas(tracenumber), force,'.','markers',7);
+    
+    
+    
+%     Lc = permLcs{tracenumber};
+%     for i = 1:length(Lc)
+%         Xfit = linspace(0,Lc(i),1000);
+%         Ffit = fd(Lc(i), Xfit);
+%         h1 = plot(Xfit,Ffit,'Color',colors(1,:),'LineWidth',1);
+%     end
+    
+    
 end
+
+templateLc = [34.4800   54.5995  92.3607  118.0434  140.5817];
+for i=1:length(templateLc)
+    Xfit = linspace(0,templateLc(i),1000);
+    Ffit = fd(templateLc(i), Xfit);
+    h2 = plot(Xfit,Ffit,'Color',colors(7,:),'LineWidth',2);
+end
+
+Xfit = linspace(0,peak1,1000);
+    Ffit = fd(peak1, Xfit);
+plot(Xfit,Ffit,'Color',colors(5,:),'LineWidth',2);
+
+
+
+
+
 
 figure
 hold on
-title('secondary peak at L_c = 108 nm')
+title('L_c = 107 nm')
 
 set(gca,'FontSize',24)
 xlim(xlimits);
@@ -44,5 +73,15 @@ ylabel('Force (pN)');
 for tracenumber = hasPeak2
     trace = strcat('data/MAT_clean/data_4/curve_',int2str(tracenumber),'.mat');
     load(trace,'dist','force')
-    plot(dist+deltas(tracenumber), force,'.','markers',4);
+    plot(dist+deltas(tracenumber), force,'.','markers',7);
 end
+
+for i=1:length(templateLc)
+    Xfit = linspace(0,templateLc(i),1000);
+    Ffit = fd(templateLc(i), Xfit);
+    h2 = plot(Xfit,Ffit,'Color',colors(7,:),'LineWidth',2);
+end
+
+Xfit = linspace(0,peak2,1000);
+    Ffit = fd(peak2, Xfit);
+plot(Xfit,Ffit,'Color',colors(5,:),'LineWidth',2);

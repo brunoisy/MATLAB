@@ -5,7 +5,7 @@
 % -> compare two sets using ttest (can same mean/variance be rejected?)
 
 
-peaks = [34.4800,   54.5995,  77,  92.3607,  118.0434,  140.5817];
+peaks = [34.4800,   54.5995,  78,  92.3607,  118.0434,  140.5817];
 thresh = 2;
 analysedPeak = 2;
 

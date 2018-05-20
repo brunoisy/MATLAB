@@ -8,7 +8,7 @@ maxPeaks = 0;
 minError = Inf;
 bestDelta = 0;
 
-for bigDelta = round(6-Lc(1)):2:50
+for bigDelta = round(6-Lc(1)):2:35
     load(trace,'dist','force')
     dist = dist+bigDelta;
     [upLc,~,~,~,~] = LSQ_fit(dist, force, 4, 10, 10, 10, 10, 5);% could be computed once and for all!

@@ -9,7 +9,7 @@ load(strcat('data/FD profiles/',directory,'.mat'))
 %%% clustering with RANSAC
 figure
 hold on
-for n=3:6
+for n = 3:6
     Lcs_cluster = cell2mat(Lcs(Lcs_lengths == n)')';
     inlier_ratios = (1:length(Lcs_cluster(1,:)))/length(Lcs_cluster(1,:));
     

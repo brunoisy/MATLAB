@@ -7,7 +7,7 @@ x = [dist; force];
 free = true(1,length(x));
 
 maxLc = 220;
-maxnLc = 15;
+maxnLc = 10;
 nLc = 0;
 Lc = zeros(1,maxnLc);
 allInliers = cell(1,maxnLc);
@@ -20,7 +20,7 @@ for i = 1:maxnLc
         nLc = i-1;
         break
     end
-    [~,inliers]     = ransac(x(:,free), @fittingfn, @distfn, thresh, true, 100);
+    [~,inliers]     = ransac(x(:,free), @fittingfn, @distfn, thresh, true, 1000);
     inliers         = start_ind+inliers;
     if isempty(inliers)
         nLc = i-1;

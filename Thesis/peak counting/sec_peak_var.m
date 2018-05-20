@@ -1,6 +1,6 @@
 
-peak1 = 77;
-peak2 = 108;
+peak1 = 78;
+peak2 = 107;
 vars1 = zeros(1,40);
 vars2 = zeros(1,40);
 
@@ -19,21 +19,21 @@ figure
 subplot(1,2,1)
 hold on
 set(gca,'FontSize',24)
-title('L_c = 77')
+title('L_c = 78 nm')
 plot(1:40, vars1,'LineWidth',2)
 xlim([0,40]);
 ylim([0,7]);
 xlabel('number of inliers')
 ylabel('variance of cluster')
-xticks([0,10,20,30,40]);
+% xticks([0,10,20,30,40]);
 
 subplot(1,2,2)
 hold on
 set(gca,'FontSize',24)
-title('L_c = 108')
+title('L_c = 107 nm')
 plot(1:40, vars2,'LineWidth',2)
 xlim([0,40]);
 ylim([0,7]);
 xlabel('number of inliers')
 ylabel('variance of cluster')
-xticks([0,10,20,30,40]);
+% xticks([0,10,20,30,40]);

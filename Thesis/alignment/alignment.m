@@ -17,49 +17,50 @@ for n = 2:7
     for i = 1:length(clusterLcs(1,:))
         oktracenumbers = tracenumbers(Lcs_lengths == n);
         tracenumber = oktracenumbers(i);
-        %         if tracenumber == 15
-        
-        trace = strcat('data/MAT_clean/',directory,'/curve_',int2str(tracenumber),'.mat');
-        thisLc = clusterLcs(:,i)';
-        
-        [delta, npeaks] =  exhaustive_align(templateLc,thisLc,trace);
-        load(trace,'dist','force')
-        
-        [updLc1,~,~,~,~] =  LSQ_fit(dist+delta, force, 4, 7, 10, 10, 5, 5);
-        
-        
-        figure('units','normalized','outerposition',[0 0 1 1]);
-        colors = get(gca, 'colororder');
-        hold on
-        title('aligned curve')
-        set(gca,'FontSize',24)
-        xlim(xlimits);
-        ylim(ylimits);
-        xlabel('Distance (nm)');
-        ylabel('Force (pN)');
-        
-        for j=1:length(templateLc)
-            Xfit = linspace(0,templateLc(j),1000);
-            Ffit = fd(templateLc(j), Xfit);
-            templateh = plot(Xfit,Ffit,'Color','r','LineWidth',2);
+        if tracenumber == 15
+            
+            trace = strcat('data/MAT_clean/',directory,'/curve_',int2str(tracenumber),'.mat');
+            thisLc = clusterLcs(:,i)';
+            
+            [delta, npeaks] =  exhaustive_align(templateLc,thisLc,trace);
+            load(trace,'dist','force')
+            
+            [updLc1,~,~,~,~] =  LSQ_fit(dist+delta, force, 4, 7, 10, 10, 5, 5);
+            
+            
+            figure('units','normalized','outerposition',[0 0 1 1]);
+            colors = get(gca, 'colororder');
+            hold on
+            title('aligned curve')
+            set(gca,'FontSize',24)
+            xlim(xlimits);
+            ylim(ylimits);
+            xlabel('Distance (nm)');
+            ylabel('Force (pN)');
+            
+            for j=1:length(templateLc)
+                Xfit = linspace(0,templateLc(j),1000);
+                Ffit = fd(templateLc(j), Xfit);
+                templateh = plot(Xfit,Ffit,'Color','r','LineWidth',2);
+            end
+            
+            
+            plot(dist+delta, force,'.','Color','b','markers',12)
+            for j=1:length(updLc1)
+                Xfit = linspace(0,updLc1(j),1000);
+                Ffit = fd(updLc1(j), Xfit);
+                Lch = plot(Xfit,Ffit,'Color','b','LineWidth',2);
+            end
+            
+            lgd = legend([templateh,Lch],'template WLC profile','curve WLC profile');
+            set(gca,'FontSize',24)
+            lgd.FontSize = 30;
+            %         if npeaks >1
+            %             saveas(gcf, strcat('images/alignment/aligned/curve_',int2str(tracenumber),'.jpg'));
+            %         else
+            %             saveas(gcf, strcat('images/alignment/misaligned/curve_',int2str(tracenumber),'.jpg'));
+            %         end
+            %         close
         end
-        
-        
-        plot(dist+delta, force,'.','Color','b','markers',12)
-        for j=1:length(updLc1)
-            Xfit = linspace(0,updLc1(j),1000);
-            Ffit = fd(updLc1(j), Xfit);
-            Lch = plot(Xfit,Ffit,'Color','b','LineWidth',2);
-        end
-        
-        lgd = legend([templateh,Lch],'template WLC profile','curve WLC profile');
-        set(gca,'FontSize',24)
-        lgd.FontSize = 30;
-        if npeaks >1
-            saveas(gcf, strcat('images/alignment/aligned/curve_',int2str(tracenumber),'.jpg'));
-        else
-            saveas(gcf, strcat('images/alignment/misaligned/curve_',int2str(tracenumber),'.jpg'));
-        end
-        close
     end
 end
