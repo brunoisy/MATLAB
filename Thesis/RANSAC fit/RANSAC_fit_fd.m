@@ -20,14 +20,14 @@ for i = 1:maxnLc
         nLc = i-1;
         break
     end
-    [~,inliers]     = ransac(x(:,free), @fittingfn, @distfn, thresh, true, 1000);
+    [~,inliers]     = ransac(x(:,free), @fittingfn, @distfn2, thresh, true, 500);
     inliers         = start_ind+inliers;
     if isempty(inliers)
         nLc = i-1;
         break;
     end
     allInliers{i} = inliers;
-    start_ind       = inliers(end);
+    start_ind      = inliers(end);
     
     free(1:start_ind) = false(1,start_ind);
     Lc(i) = fittingfn(x(:,inliers));
