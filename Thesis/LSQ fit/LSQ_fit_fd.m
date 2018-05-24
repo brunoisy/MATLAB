@@ -43,7 +43,7 @@ for j = 1:k
     [Xfirst, Xunfold] = select_points(dist, force, x0, Lc, sel_thresh, sel_thresh);
     Xsel = [];
     Fsel = [];
-      i = 1;
+    i = 1;
     while(i<=length(Lc))
         ninliers = sum(Xfirst(i)<=dist & dist<=Xunfold(i));
         if ninliers > min_inliers
@@ -67,7 +67,7 @@ for j = 1:k
     else
         Lc = lsqcurvefit(@(Lc,x) fd_multi([x0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
     end
-        [Lc, Xfirst, Xunfold] = merge_Lc(Lc,Xfirst,Xunfold);
+    [Lc, Xfirst, Xunfold] = merge_Lc(Lc,Xfirst,Xunfold);
     
     Xsel = [];
     Fsel = [];
@@ -76,5 +76,5 @@ for j = 1:k
         Fsel = [Fsel, force(Xfirst(i)<=dist & dist<=Xunfold(i))];
     end
 end
-x0 = -x0; % change of convention...
+% x0 = -x0; % change of convention...
 end

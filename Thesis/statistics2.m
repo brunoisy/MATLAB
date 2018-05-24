@@ -14,7 +14,7 @@ peakForces2 = [];
 
 
 for tracenumber = [1:17,19:25,27:43,45:52,54:94,96:100]
-    Lc = permLcs{tracenumber};
+    Lc = exhLcs{tracenumber};
     Xmins = allXmins{tracenumber};
     Fmins = allFmins{tracenumber};
     [minDiff, j] = min(abs(Lc-peaks(analysedPeak)));

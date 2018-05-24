@@ -5,6 +5,7 @@ function [Xfirst, Xunfold] = select_points(X, F, x0, Lc, threshlo, threshhi)
 
 margin = 2; %put as args
 thresh = 10;
+x0 = -x0;%uggggly
 
 Xfirst = zeros(1, length(Lc));
 Xunfold = zeros(1, length(Lc));

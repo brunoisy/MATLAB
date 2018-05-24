@@ -56,7 +56,7 @@ for j = 1:k
     end
     
     if ~isempty(Xsel) && ~isempty(Fsel)
-        Lc = lsqcurvefit(@(Lc,x) fd_multi([x0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
+        Lc = lsqcurvefit(@(Lc,x) fd_multi_old([x0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
         [Lc, Xfirst, Xunfold] = merge_Lc(Lc,Xfirst,Xunfold, merge_thresh);
         
         Xsel = [];

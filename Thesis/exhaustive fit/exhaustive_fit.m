@@ -1,18 +1,18 @@
-function [Lcs, firstinliers, lastinliers] = exhaustive_fit_fd(dist, force)
+function [Lcs, firstinliers, lastinliers] = exhaustive_fit(dist, force)
 %EXHAUSTIVE_FIT_FD Summary of this function goes here
 %   Detailed explanation goes here
 
-maxn = 15;
-mininliers = 15;
-margin = 2;
+maxn = 20;
+mininliers = 10;
+margin = 1.5;
 thresh = 7;
 
 Lcs = zeros(1,maxn);
 firstinliers = zeros(1,maxn);
 lastinliers = zeros(1,maxn);
 
-lo = 5;
-hi = 80;
+lo = 0;
+hi = 60;
 prevlastinlier = 0;
 
 i = 1;
@@ -21,7 +21,7 @@ while(i<maxn)
     besterror = Inf;
     bestinliers = [];
     if i==1
-        testLcs = lo:0.5:hi;
+        testLcs = dist(1)+(lo:0.5:hi);
     else
         testLcs = Lcs(i-1)+(lo:0.5:hi);
     end
@@ -70,12 +70,5 @@ while(i<maxn)
         lastinliers = lastinliers(1:i-1);
         break
     end
-    
-    %     for j = prevlastinlier:length(dist)-10 % gets rid of outliers
-    %         if force(j) - force(j+10) > 0
-    %             prevlastinlier = j
-    %             break
-    %         end
-    %     end
     i = i+1;
 end

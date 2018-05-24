@@ -14,7 +14,7 @@ for i=1:n
 end
 % zero if corresponding trace doesn't contain peak, otherwise number of corresponding peak in trace
 for tracenumber = [1:17,19:25,27:43,45:48,50:52,54:94,96:100]
-    Lc = permLcs{tracenumber};
+    Lc = exhLcs{tracenumber};
     Xmins = allXmins{tracenumber};
     Fmins = allFmins{tracenumber};
     for i=1:n
@@ -26,7 +26,7 @@ for tracenumber = [1:17,19:25,27:43,45:48,50:52,54:94,96:100]
     end
 end
 
-instancesPeak    =zeros(1,n);
+instancesPeak    = zeros(1,n);
 meanPeakForce    = zeros(1,n);
 stdPeakForce     = zeros(1,n);
 meanPeakDistance = zeros(1,n);

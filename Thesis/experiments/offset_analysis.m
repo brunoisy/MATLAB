@@ -1,24 +1,37 @@
 addpath('LSQ fit')
-filename = 'data/MAT_clean/data_4/curve_25.mat';
+filename = 'data/MAT_clean/data_4/curve_13.mat';
 load(filename)
 
 xlimits = [-10, 200];
 ylimits = [-200, 50];
 
-x0s = 85:105;
-error = zeros(1,length(x0s));
+deltas = 30:60;
+error = zeros(1,length(deltas));
 
-for i = 1:length(x0s)
-    [Lc, Xsel, Fsel, Xfirst, Xunfold, delta] = LSQ_fit_fd(dist, force, 4, false, 10, 10, 5, -x0s(i));
-    error(i) = sum((Fsel - fd_multi([-x0s(i), Lc],Xsel,Xunfold)).^2)/length(Xsel);
+for i = 1:length(deltas)
+    dist2 = dist+deltas(i);
+    [Lcs, firstinliers, lastinliers] = exhaustive_fit(dist2, force);
+    Xsel = [];
+    Fsel = [];
+    lastselinliers = zeros(1,length(lastinliers));
+    for j = 1:length(firstinliers)
+        Xsel = [Xsel, dist2(firstinliers(j):lastinliers(j))];
+        Fsel = [Fsel, force(firstinliers(j):lastinliers(j))];
+        if j ==1
+            lastselinliers(j) = lastinliers(j)-firstinliers(j)+1;
+        else
+            lastselinliers(j) = lastselinliers(j-1)+1+lastinliers(j)-firstinliers(j);
+        end
+    end
+    error(i) = sum((Fsel - fd_multi([0, Lcs],Xsel,lastselinliers)).^2)/length(Xsel);
 end
 
 
 figure
 hold on
-set(gca,'FontSize',22)
-title('sensitivity of error to offset') 
+set(gca,'FontSize',24)
+title('sensitivity of error to offset')
 xlabel('offset (nm)')
 ylabel('MSE')
-plot(x0s,error,'LineWidth',2)
+plot(deltas,error,'LineWidth',2)
 

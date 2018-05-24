@@ -8,10 +8,16 @@ maxPeaks = 0;
 minError = Inf;
 bestDelta = 0;
 
+if isempty(Lc)
+    delta = 0;
+    npeaks =0;
+    return;
+end
 for bigDelta = round(6-Lc(1)):2:35
     load(trace,'dist','force')
     dist = dist+bigDelta;
-    [upLc,~,~,~,~] = LSQ_fit(dist, force, 4, 10, 10, 10, 10, 5);% could be computed once and for all!
+%     [upLc,~,~,~,~] = LSQ_fit(dist, force, 4, 10, 10, 10, 10, 5);% could be computed once and for all!
+    [upLc, ~,~] = exhaustive_fit(dist, force);
     for smallDelta = -1:0.1:1
         shiftedLc = upLc+smallDelta;
         peaks = zeros(1, length(templateLc));

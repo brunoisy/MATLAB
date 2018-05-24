@@ -16,7 +16,7 @@ xlim(xlimits);
 ylim(ylimits);
 set(gca,'FontSize',22)
 title('WLC profile with fixed origin')
-plot(dist, force,'.','markers',7);
+plot(dist, force,'.','markers',12);
 for i = 1:length(Lc)
     Xfit = linspace(0,Lc(i),1000);
     Ffit = fd(Lc(i), Xfit);

@@ -9,35 +9,39 @@ tracenumbers = 1:length(Lcs_lengths);%18, 26, 95 -  44, 53 %[1:17,19:25,27:43,45
 % 140.5817]
 templateLc = [34.4800   54.5995   92.3607  118.0434  140.5817];
 
-permLcs = cell(1,length(Lcs_lengths));
+exhLcs = cell(1,length(Lcs_lengths));
 allXmins = cell(1,length(tracenumbers));
 allFmins = cell(1,length(tracenumbers));
 deltas = zeros(1,length(Lcs_lengths));
+npeaks = zeros(1,length(Lcs_lengths));
 allLcs = [];
 
-for tracenumber = [1:17,19:25,27:43,45:48,50:52,54:94,96:100]%tracenumbers
+for tracenumber = [1:43,45:52,54:100]
+    tracenumber
     trace = strcat('data/MAT_clean/data_4/curve_',int2str(tracenumber),'.mat');
     thisLc = Lcs{:,tracenumber};
     
-    [delta, npeaks] =  exhaustive_align(templateLc,thisLc,trace);
+    [delta, npeaks(tracenumber)] =  exhaustive_align(templateLc,thisLc,trace);
     load(trace,'dist','force')
-    dist = dist+delta;
-    [permLc, Xsel, Fsel, Xfirst, Xunfold] = LSQ_fit(dist, force, 4, 7, 10, 10, 5, 5);%permissive
-    permLcs{tracenumber} = permLc;
-    
-    deltas(tracenumber) = delta;
-    allLcs = [allLcs, permLc];
-    
-    Xmins = zeros(1,length(permLc));
-    Fmins = zeros(1,length(permLc));
-    for i= 1:length(permLc)
-        Xseli = Xsel(Xfirst(i) < Xsel & Xsel <= Xunfold(i));
-        Fseli = Fsel(Xfirst(i) < Xsel & Xsel <= Xunfold(i));
-        [Fmins(i), I] = min(Fseli);
-        Xmins(i) = Xseli(I);
+    if npeaks(tracenumber) > 1
+        dist = dist+delta;
+        
+        [exhLc, firstinliers, lastinliers] = exhaustive_fit(dist, force);
+        exhLcs{tracenumber} = exhLc;
+        
+        deltas(tracenumber) = delta;
+        allLcs = [allLcs, exhLc];
+        
+        Xmins = zeros(1,length(exhLc));
+        Fmins = zeros(1,length(exhLc));
+        for i= 1:length(exhLc)
+            [Fmins(i), I] = min(force(firstinliers(i):lastinliers(i)));
+            Xmins(i) = dist(firstinliers(i)+I);
+        end
+        allXmins{tracenumber} = Xmins;
+        allFmins{tracenumber} = Fmins;
     end
-    allXmins{tracenumber} = Xmins;
-    allFmins{tracenumber} = Fmins;
 end
 allLcs = sort(allLcs);
-save('alignedWLC.mat','permLcs','allXmins','allFmins','deltas','allLcs')
+save('exhaustive_alignedWLC.mat','exhLcs','allXmins','allFmins','deltas','allLcs','npeaks')
+% save('alignedWLC.mat','exhLcs','allXmins','allFmins','deltas','allLcs')

@@ -31,7 +31,7 @@ for n = 2:7
             figure('units','normalized','outerposition',[0 0 1 1]);
             colors = get(gca, 'colororder');
             hold on
-            title('aligned curve')
+            title('aligned FD curve')
             set(gca,'FontSize',24)
             xlim(xlimits);
             ylim(ylimits);
@@ -41,15 +41,15 @@ for n = 2:7
             for j=1:length(templateLc)
                 Xfit = linspace(0,templateLc(j),1000);
                 Ffit = fd(templateLc(j), Xfit);
-                templateh = plot(Xfit,Ffit,'Color','r','LineWidth',2);
+                templateh = plot(Xfit,Ffit,'Color',colors(2,:),'LineWidth',3);
             end
             
             
-            plot(dist+delta, force,'.','Color','b','markers',12)
+            plot(dist+delta, force,'.','Color',colors(1,:),'markers',12)
             for j=1:length(updLc1)
                 Xfit = linspace(0,updLc1(j),1000);
                 Ffit = fd(updLc1(j), Xfit);
-                Lch = plot(Xfit,Ffit,'Color','b','LineWidth',2);
+                Lch = plot(Xfit,Ffit,'Color',colors(1,:),'LineWidth',2);
             end
             
             lgd = legend([templateh,Lch],'template WLC profile','curve WLC profile');

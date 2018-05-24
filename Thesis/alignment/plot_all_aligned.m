@@ -12,6 +12,8 @@ tracenumbers = 1:100; %1:10%1:119;
 dir = strcat('data/MAT_clean/',subdir);
 
 figure('units','normalized','outerposition',[0 0 1 1]);
+colors = get(gca, 'colororder');
+
 hold on
 title('aligned FD curves')
 set(gca,'FontSize',24)
@@ -21,12 +23,11 @@ ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
 
-for tracenumber =  [1:17,19:25,27:43,45:52,54:94,96:100]
+for tracenumber =  1:100
     trace = strcat(dir,'curve_',int2str(tracenumber),'.mat');
     load(trace)
-    deltas(tracenumber);
-    dist = dist+deltas(tracenumber);
-    
-    plot(dist,force,'b.','markers',1)
-        
+    if npeaks(tracenumber) > 1
+        dist = dist+deltas(tracenumber);
+        plot(dist,force,'.','Color',colors(1,:),'markers',1)
+    end
 end
