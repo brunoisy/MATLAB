@@ -43,5 +43,8 @@ for tracenumber = [1:43,45:52,54:100]
     end
 end
 allLcs = sort(allLcs);
-save('exhaustive_alignedWLC.mat','exhLcs','allXmins','allFmins','deltas','allLcs','npeaks')
+save('exh_aligned_WLC.mat','exhLcs','allXmins','allFmins','deltas','allLcs','npeaks')
 % save('alignedWLC.mat','exhLcs','allXmins','allFmins','deltas','allLcs')
+
+
+

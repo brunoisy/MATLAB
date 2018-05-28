@@ -1,27 +1,23 @@
-% number of times each peak is present
-% average force of each peak
-% presence of next peak conditional on force intensity of current peak
-% ...?
-peaks = [34.4800,   54.5995,  77,  92.3607,  118.0434,  140.5817];
+peaks = [34.4800, 43.5, 54.5995,  77,  92.3607,  118.0434,  140.5817];
 n = length(peaks);
-load('alignedWLC.mat')
-thresh = 2;
+thresh = 1.5;
 peakDistances = cell(1,n);
 peakForces = cell(1,n);
 for i=1:n
     peakDistances{i} = [];
     peakForces{i} = [];
 end
-% zero if corresponding trace doesn't contain peak, otherwise number of corresponding peak in trace
-for tracenumber = [1:17,19:25,27:43,45:48,50:52,54:94,96:100]
-    Lc = exhLcs{tracenumber};
-    Xmins = allXmins{tracenumber};
-    Fmins = allFmins{tracenumber};
-    for i=1:n
-        [minDiff, j] = min(abs(Lc-peaks(i)));
-        if minDiff < thresh
-            peakDistances{i} = [peakDistances{i}, Xmins(j)];
-            peakForces{i} = [peakForces{i}, Fmins(j)];
+for tracenumber = 1:100
+    if npeaks(tracenumber) >=1
+        Lc = exhLcs{tracenumber};
+        Xmins = allXmins{tracenumber};
+        Fmins = allFmins{tracenumber};
+        for i=1:n
+            [minDiff, j] = min(abs(Lc-peaks(i)));
+            if minDiff < thresh
+                peakDistances{i} = [peakDistances{i}, Xmins(j)];
+                peakForces{i} = [peakForces{i}, Fmins(j)];
+            end
         end
     end
 end
@@ -40,8 +36,8 @@ for i=1:n
 end
 
 instancesPeak
-meanPeakForce
-stdPeakForce
-meanPeakDistance
-stdPeakDistance
-meanPeakDistance./peaks
+round(meanPeakForce,2)
+round(stdPeakForce,2)
+round(meanPeakDistance,2)
+round(stdPeakDistance,2)
+round(meanPeakDistance./peaks,2)
