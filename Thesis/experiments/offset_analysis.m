@@ -1,4 +1,3 @@
-addpath('LSQ fit')
 filename = 'data/MAT_clean/data_4/curve_13.mat';
 load(filename)
 

@@ -1,10 +1,10 @@
 rng(3)
 
 directory = 'data_4';%'LmrP Proteoliposomes';
-load(strcat('data/FD profiles/',directory,'.mat'))
+load(strcat('data/FD profiles/',directory,'_old.mat'))
 
 %%% clustering with RANSAC
-prop_inliers = [.50, .40, .60, .40];
+prop_inliers = [.40, .40, .60, .40];
 figure
 hold on
 colors = get(gca, 'colororder');
@@ -24,6 +24,9 @@ for n = 3:6
     end
     xlim([-25,30])
     ylim([0,1])
-    xlabel('offset (nm)');
+
+    if(n==5||n==6)
+    xlabel('shift (nm)');
+    end
     set(gca,'ytick',[])
 end

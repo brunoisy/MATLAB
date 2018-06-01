@@ -17,7 +17,7 @@ for i = 1:length(subsubdirectories)
     
     filenames = {files(:).name};
     for j =1:length(filenames)
-        filename = strcat(directory,'/',filenames{j});
+        filename = strcat(directory,'/',filenames{j})
         k = k + 1;
         comma2point_overwrite(filename)
         

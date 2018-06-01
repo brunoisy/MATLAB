@@ -3,8 +3,8 @@
 filename = 'data/MAT_clean/data_4/curve_6.mat';%6 instead? 11
 % xlimits = [0, 140];
 % ylimits = [-80, 0];
-xlimits = [-10, 150];
-ylimits = [-200, 50];
+xlimits = [0, 110];
+ylimits = [-100, 20];
 
 load('constants.mat')
 load(filename)
@@ -28,28 +28,29 @@ figure('units','normalized','outerposition',[0 0 1 1]);
 colors = get(gca, 'colororder');
 colors = colors([1,2,4,5,6,7],:);%don't like yellow...
 
-% subplot(2,2,1)
+subplot(2,2,1)
 
 hold on
 title('Minima Selection','FontSize',16)
 xlim(xlimits);
 ylim(ylimits);
-xlabel('Distance (nm)');
+% xlabel('Distance (nm)');
+
 ylabel('Force (pN)');
 plot(dist, force,'.','markers',12)
 plot(mins(1,1:end), mins(2,1:end),'.','markers',30);
 set(gca,'FontSize',24)
 
 %%
-figure('units','normalized','outerposition',[0 0 1 1]);
-% subplot(2,2,2)
+% figure('units','normalized','outerposition',[0 0 1 1]);
+subplot(2,2,2)
 
 hold on
-title('WLC profile fit to minima')
+title('Minima WLC profile')
 xlim(xlimits);
 ylim(ylimits);
-xlabel('Distance (nm)');
-ylabel('Force (pN)');
+% xlabel('Distance (nm)');
+% ylabel('Force (pN)');
 set(gca,'FontSize',14)
 
 plot(dist, force,'.','markers',12)
@@ -83,22 +84,23 @@ for i = 1:length(Lc)
 end
 
 
-Lc = lsqcurvefit(@(Lc,x) fd_multi([0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
+Lc = lsqcurvefit(@(Lc,x) fd_multi_old([0,Lc],x,Xunfold), Lc, Xsel,  Fsel);
 [Lc, Xfirst, Xunfold] = merge_Lc(Lc,Xfirst,Xunfold);
 
 
 %%% Plot of the selected datapoints, and the estimated FD curves
-figure('units','normalized','outerposition',[0 0 1 1]);
-% subplot(2,2,3)
+% figure('units','normalized','outerposition',[0 0 1 1]);
+subplot(2,2,3)
 
 hold on
-title('Selected Points')
+title('Identified Peaks')
 xlim(xlimits);
 ylim(ylimits);
 xlabel('Distance (nm)');
 ylabel('Force (pN)');
 set(gca,'FontSize',24)
 
+plot(dist,force,'.','markers',12);
 for i=1:length(Lc)
     X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
     Y = Fsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));
@@ -106,17 +108,18 @@ for i=1:length(Lc)
     plot(X,Y,'.','Color',colors(mod(i,6)+1,:),'markers',12)
 end
 
-figure('units','normalized','outerposition',[0 0 1 1]);
-% subplot(2,2,4)
+% figure('units','normalized','outerposition',[0 0 1 1]);
+subplot(2,2,4)
 
 hold on
-title('WLC profile fit to min LSQ')
+title('Least-Squares WLC profile')
 xlim(xlimits);
 ylim(ylimits);
 xlabel('Distance (nm)');
-ylabel('Force (pN)');
+% ylabel('Force (pN)');
 set(gca,'FontSize',24)
 
+plot(dist,force,'.','markers',12);
 
 for i=1:length(Lc)
     X = Xsel(Xfirst(i)<=Xsel & Xsel<=Xunfold(i));

@@ -12,7 +12,6 @@ if strcmp(filename(end-2:end), 'txt')
     dist = Text{1}'; % distance in nm
     force = Text{2}'; % force in pN
     
-    % name = filenames{j};
     save(strcat(destination,'/',name,'.mat'),'dist','force');
 end
 end

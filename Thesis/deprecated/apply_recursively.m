@@ -1,6 +1,6 @@
 function [] = apply_recursively(fun, directory, destination)
-%REC_LOAD_FILE recursive application of fun to all files in directory and
-%subdirectories
+% This function recursively applies function fun to all files in directory 
+% and its subdirectories, storing the result in
 
 mkdir(destination)
 allfiles = dir(directory);
@@ -15,7 +15,7 @@ for j =1:length(filenames)
     feval(fun, filename, destination, name);
 end
 
-for i = 1:length(subdirs);
+for i = 1:length(subdirs)
     subdir = subdirs(i);
     if ~strcmp(subdir.name,'.') && ~strcmp(subdir.name,'..')
         apply_recursively(fun, strcat(directory, '/', subdir.name), strcat(destination, '/', subdir.name));

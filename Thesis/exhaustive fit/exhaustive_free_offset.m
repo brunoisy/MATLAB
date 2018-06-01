@@ -19,7 +19,7 @@ for k= 1:3%:1:3
         end
     end
 %     Xlast = dist(lastinliers);
-    lastselinliers
+    
     length(Xsel)
     
     deltaLcs = lsqcurvefit(@(deltaLcs,x) fd_multi(deltaLcs,x,lastselinliers), [delta, Lcs], Xsel, Fsel);

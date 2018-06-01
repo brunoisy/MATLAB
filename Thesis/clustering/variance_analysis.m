@@ -4,7 +4,7 @@ addpath('RANSAC fit')
 rng(3)
 
 directory = 'data_4';
-load(strcat('data/FD profiles/',directory,'.mat'))
+load(strcat('data/FD profiles/',directory,'_old.mat'))
 
 %%% clustering with RANSAC
 figure
@@ -26,7 +26,11 @@ for n = 3:6
     set(gca,'FontSize',24)
     title(['k = ',int2str(n)])
     plot(inlier_ratios,variance,'LineWidth',2);
-    xlabel('inlier ratio');
-    ylabel('variance of inliers');
+    if(n==3 || n==5)
+        ylabel('variance');
+    end
+    if(n==5||n==6)
+        xlabel('inlier ratio');
+    end
     ylim([0,300]);
 end

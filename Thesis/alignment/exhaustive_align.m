@@ -1,4 +1,4 @@
-function [delta, npeaks] = exhaustive_align(templateLc, Lc, trace)
+function [delta, npeaks] = exhaustive_align(templateLc, dist, force)
 %MSEALIGN Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -8,16 +8,15 @@ maxPeaks = 0;
 minError = Inf;
 bestDelta = 0;
 
-if isempty(Lc)
-    delta = 0;
-    npeaks =0;
-    return;
-end
-for bigDelta = round(6-Lc(1)):2:35
-    load(trace,'dist','force')
-    dist = dist+bigDelta;
+% if isempty(Lc)
+%     delta = 0;
+%     npeaks =0;
+%     return;
+% end
+for bigDelta = ceil(-dist(1)):0.5:35
+    dist2 = dist+bigDelta;
 %     [upLc,~,~,~,~] = LSQ_fit(dist, force, 4, 10, 10, 10, 10, 5);% could be computed once and for all!
-    [upLc, ~,~] = exhaustive_fit(dist, force);
+    [upLc, ~,~] = exhaustive_fit(dist2, force);
     for smallDelta = -1:0.1:1
         shiftedLc = upLc+smallDelta;
         peaks = zeros(1, length(templateLc));
