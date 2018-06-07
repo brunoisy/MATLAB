@@ -13,7 +13,7 @@ dir = strcat('data/MAT_clean/',subdir);
 
 
 
-for tracenumber = [1:43,45:52,54:100]
+for tracenumber = 15%[1:43,45:52,54:100]
     trace = strcat(dir,'curve_',int2str(tracenumber),'.mat');
     load(trace)
     deltas(tracenumber)
@@ -23,7 +23,7 @@ for tracenumber = [1:43,45:52,54:100]
     figure('units','normalized','outerposition',[0 0 1 1]);
     colors = get(gca, 'colororder');
     hold on
-    title('aligned FD curves')
+    title('aligned FD curve')
     set(gca,'FontSize',24)
     
     xlim(xlimits);
@@ -44,10 +44,10 @@ for tracenumber = [1:43,45:52,54:100]
         Ffit = fd(updLc1(j), Xfit);
         Lch = plot(Xfit,Ffit,'Color',colors(1,:),'LineWidth',2);
     end
-    if npeaks(tracenumber) <= 1
-        saveas(gcf, strcat('images/alignment_exhaustive2/misaligned/curve_',int2str(tracenumber),'.jpg'));
-    else
-        saveas(gcf, strcat('images/alignment_exhaustive2/aligned/curve_',int2str(tracenumber),'.jpg'));
-    end
-    close
+%     if npeaks(tracenumber) <= 1
+%         saveas(gcf, strcat('images/alignment_exhaustive2/misaligned/curve_',int2str(tracenumber),'.jpg'));
+%     else
+%         saveas(gcf, strcat('images/alignment_exhaustive2/aligned/curve_',int2str(tracenumber),'.jpg'));
+%     end
+%     close
 end

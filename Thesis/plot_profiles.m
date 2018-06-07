@@ -1,5 +1,4 @@
-addpath('LSQ fit')
-addpath('RANSAC fit')
+
 addpath('exhaustive fit')
 
 % % default limits
@@ -13,10 +12,10 @@ dir = strcat('data/MAT_clean/',subdir);
 tracenumbers = 1:100;
 
 
-for tracenumber = 1:5%15%[1:52,54:100]%tracenumbers
+for tracenumber = 13% 6:10%1:4%[1:52,54:100]%tracenumbers
     trace = strcat(dir,'curve_',int2str(tracenumber),'.mat');
     load(trace)
-        dist = dist+deltas(tracenumber);
+%     dist = dist+deltas(tracenumber);
     
     %%% Plot the initial points
     figure('units','normalized','outerposition',[0 0 1 1]);
@@ -46,7 +45,26 @@ for tracenumber = 1:5%15%[1:52,54:100]%tracenumbers
     end
     
     %%% Plot the exhaustive FD profile
-    [Lcs, firstinliers, lastinliers] = exhaustive_fit(dist, force);
+%     [Lcs, firstinliers, lastinliers] = exhaustive_fit(dist, force);
+%     subplot(1,2,2)
+%     hold on
+%     title('Exhaustive Fit')
+%     set(gca,'FontSize',24)
+%     
+%     xlim(xlimits);
+%     ylim(ylimits);
+%     xlabel('Distance (nm)');
+%     %     ylabel('Force (pN)');
+%     plot(dist, force,'.','markers',12)
+%     for i=1:length(Lcs)
+%         plot(dist(firstinliers(i):lastinliers(i)), force(firstinliers(i):lastinliers(i)),'.','Color',colors(mod(i,6)+2,:),'markers',12)
+%         
+%         Xfit = linspace(0,Lcs(i),1000);
+%         Ffit = fd(Lcs(i), Xfit);
+%         plot(Xfit,Ffit,'Color',colors(mod(i,6)+2,:), 'LineWidth',2);
+%     end
+%     
+    [Lcs, firstinliers, lastinliers, delta] = exhaustive_free_offset(dist, force);
     subplot(1,2,2)
     hold on
     title('Exhaustive Fit')
@@ -55,10 +73,10 @@ for tracenumber = 1:5%15%[1:52,54:100]%tracenumbers
     xlim(xlimits);
     ylim(ylimits);
     xlabel('Distance (nm)');
-%     ylabel('Force (pN)');
-    plot(dist, force,'.','markers',12)
+    %     ylabel('Force (pN)');
+    plot(dist+delta, force,'.','markers',12)
     for i=1:length(Lcs)
-        plot(dist(firstinliers(i):lastinliers(i)), force(firstinliers(i):lastinliers(i)),'.','Color',colors(mod(i,6)+2,:),'markers',12)
+        plot(dist(firstinliers(i):lastinliers(i))+delta, force(firstinliers(i):lastinliers(i)),'.','Color',colors(mod(i,6)+2,:),'markers',12)
         
         Xfit = linspace(0,Lcs(i),1000);
         Ffit = fd(Lcs(i), Xfit);
@@ -66,11 +84,11 @@ for tracenumber = 1:5%15%[1:52,54:100]%tracenumbers
     end
     
     
-   
+    
     
     
     %%% Save Plots
-%     saveas(gcf, strcat('images/LSQ - Exhaustive fit/curve_',int2str(tracenumber),'.jpg'));
-%             saveas(gcf, strcat('images/LSQ - Exhaustive fit - post align/curve_',int2str(tracenumber),'.jpg'));
+%         saveas(gcf, strcat('images/LSQ - Exhaustive fit/curve_',int2str(tracenumber),'.jpg'));
+%     saveas(gcf, strcat('images/LSQ - Exhaustive fit - post align2/curve_',int2str(tracenumber),'.jpg'));
 %     close
 end

@@ -4,7 +4,7 @@ load(filename)
 xlimits = [-10, 200];
 ylimits = [-200, 50];
 
-deltas = 30:60;
+deltas = 20:50;
 error = zeros(1,length(deltas));
 
 for i = 1:length(deltas)

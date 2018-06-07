@@ -12,8 +12,7 @@ if nargin < 3
 end
 
 
-mkdir(dest_directory);
-
+mkdir(dest_directory)
 allfiles = dir(source_directory);
 subdirs = allfiles([allfiles.isdir]);
 files = allfiles(~[allfiles.isdir]);% files that are not directories
@@ -32,19 +31,11 @@ for j = 1:length(filenames)
     force = Text{2}'; % force in pN
     
     if numbered_curves
-        save(strcat(dest_directory,'/',int2str(j),'.mat'),'dist','force');
+        save(strcat(dest_directory,'/curve_',int2str(j),'.mat'),'dist','force');
     else
         name = filenames{j};
         name = name(1:end-4); % cutting out ".txt"
-        save(strcat(dest_directory,'/curve_',name,'.mat'),'dist','force');
+        save(strcat(dest_directory,'/',name,'.mat'),'dist','force');
     end
 end
-
-for i = 1:length(subdirs)
-    subdir = subdirs(i);
-    if ~strcmp(subdir.name,'.') && ~strcmp(subdir.name,'..')
-        load_files(strcat(directory, '/', subdir.name), strcat(destination, '/', subdir.name), numbered_curves);
-    end
-end
-
 end

@@ -4,8 +4,8 @@ function [Lcs, firstinliers, lastinliers] = exhaustive_fit(dist, force)
 
 maxn = 20;
 mininliers = 10;
-margin = 1.5;
-thresh = 7;
+margin = 3;%1.5;
+thresh = 0;%7;
 
 Lcs = zeros(1,maxn);
 firstinliers = zeros(1,maxn);

@@ -1,8 +1,7 @@
 function [] = preprocess_FD_curves(source_directory, dest_directory)
 
 
-mkdir(dest_directory);
-
+mkdir(dest_directory)
 allfiles = dir(source_directory);
 subdirs = allfiles([allfiles.isdir]);
 files = allfiles(~[allfiles.isdir]);% files that are not directories
@@ -55,13 +54,4 @@ for j = 1:length(filenames)
     name = name(1:end-4); % cutting out ".txt"
     save(strcat(dest_directory,'/',name,'.mat'),'dist','force');
 end
-
-for i = 1:length(subdirs)
-    subdir = subdirs(i);
-    if ~strcmp(subdir.name,'.') && ~strcmp(subdir.name,'..')
-        preprocess_FD_curves(strcat(directory, '/', subdir.name), strcat(destination, '/', subdir.name));
-    end
 end
-
-end
-
